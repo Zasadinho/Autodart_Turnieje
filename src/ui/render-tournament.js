@@ -154,7 +154,7 @@
                 <p class="ata-small">Modus-Limits ${modeLimitHelpLinks}: ${escapeHtml(modeLimitSummary)}.</p>
               </aside>
             </div>
-            <p class="ata-small">Bei Moduswechsel gelten die jeweiligen Grenzen sofort.</p>
+            <p class="ata-small">Po zmianie trybu nowe limity zaczynają obowiązywać od razu.</p>
           </form>
         </section>
       `;
