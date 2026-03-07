@@ -481,7 +481,7 @@ autodarts_local_tournament/
 |  |- unit-rules-config.js
 |  `- unit-standings-dra.js
 |- installer/
-|  |- Autodarts Tournament Assistant Loader.user.js
+|  |- Autodarts Turnieje Zasadinho Instalacja.user.js
 |- dist/
 |  |- autodarts-tournament-assistant.user.js
 |- docs/
@@ -505,7 +505,7 @@ Die vollständige Datei- und Verbindungsdoku steht in [docs/codebase-map.md](doc
 - Build-Metadaten: `build/manifest.json`, `build/version.json`
 - Build/QA: `scripts/*.ps1`
 - Runtime-Script: `dist/autodarts-tournament-assistant.user.js`
-- Loader-Script: `installer/Autodarts Tournament Assistant Loader.user.js`
+- Loader-Script: `installer/Autodarts Turnieje Zasadinho Instalacja.user.js`
 
 ### Build und QA
 ```powershell
