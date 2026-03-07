@@ -1,9 +1,9 @@
 ﻿// ==UserScript==
 // @name         Autodarts Tournament Assistant
-// @namespace    https://github.com/thomasasen/autodarts_local_tournament
+// @namespace    https://github.com/Zasadinho/Autodart_Turnieje
 // @version      0.3.3
 // @description  Local tournament manager for play.autodarts.io (KO, Liga, Gruppen + KO)
-// @author       Thomas Asen
+// @author       Zasadinho
 // @license      MIT
 // @match        *://play.autodarts.io/*
 // @run-at       document-start
@@ -12,8 +12,8 @@
 // @grant        GM_xmlhttpRequest
 // @connect      cdn.jsdelivr.net
 // @connect      api.autodarts.io
-// @downloadURL  https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/dist/autodarts-tournament-assistant.user.js
-// @updateURL    https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/dist/autodarts-tournament-assistant.user.js
+// @downloadURL  https://github.com/Zasadinho/Autodart_Turnieje/raw/refs/heads/dart/installer/Autodarts%20Tournament%20Assistant%20Loader.user.js
+// @updateURL    https://github.com/Zasadinho/Autodart_Turnieje/raw/refs/heads/dart/installer/Autodarts%20Tournament%20Assistant%20Loader.user.js
 // ==/UserScript==
 
 (function () {
@@ -35,8 +35,8 @@
   const API_SYNC_INTERVAL_MS = 2500;
   const API_AUTH_NOTICE_THROTTLE_MS = 15000;
   const API_REQUEST_TIMEOUT_MS = 12000;
-  const REPO_BLOB_BASE_URL = "https://github.com/thomasasen/autodarts_local_tournament/blob/main";
-  const README_BASE_URL = "https://github.com/thomasasen/autodarts_local_tournament/blob/main/README.md";
+  const REPO_BLOB_BASE_URL = "https://github.com/Zasadinho/Autodart_Turnieje/blob/dart";
+  const README_BASE_URL = "https://github.com/Zasadinho/Autodart_Turnieje/blob/dart/README.md";
   const README_SETTINGS_URL = `${README_BASE_URL}#einstellungen`;
   const README_INFO_SYMBOLS_URL = `${README_BASE_URL}#info-symbole`;
   const README_TOURNAMENT_MODES_URL = `${README_BASE_URL}#turniermodi`;

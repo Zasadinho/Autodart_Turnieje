@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Autodarts Tournament Assistant Loader
-// @namespace    https://github.com/thomasasen/autodarts_local_tournament
+// @namespace    https://github.com/Zasadinho/Autodart_Turnieje
 // @version      0.1.4
 // @description  Loads the latest Autodarts Tournament Assistant userscript with cache fallback.
-// @author       Thomas Asen
+// @author       Zasadinho
 // @license      MIT
 // @match        *://play.autodarts.io/*
 // @run-at       document-start
@@ -12,8 +12,8 @@
 // @grant        GM_xmlhttpRequest
 // @connect      raw.githubusercontent.com
 // @connect      api.autodarts.io
-// @downloadURL  https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/installer/Autodarts%20Tournament%20Assistant%20Loader.user.js
-// @updateURL    https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/installer/Autodarts%20Tournament%20Assistant%20Loader.user.js
+// @downloadURL  https://github.com/Zasadinho/Autodart_Turnieje/raw/refs/heads/dart/installer/Autodarts%20Tournament%20Assistant%20Loader.user.js
+// @updateURL    https://github.com/Zasadinho/Autodart_Turnieje/raw/refs/heads/dart/installer/Autodarts%20Tournament%20Assistant%20Loader.user.js
 // ==/UserScript==
 
 (function () {
@@ -25,7 +25,7 @@
   const CACHE_META_KEY = "ata:loader:cache:meta:v1";
   const REQUEST_TIMEOUT_MS = 10_000;
 
-  const REMOTE_SOURCE_URL = "https://raw.githubusercontent.com/thomasasen/autodarts_local_tournament/main/dist/autodarts-tournament-assistant.user.js";
+  const REMOTE_SOURCE_URL = "https://raw.githubusercontent.com/Zasadinho/Autodart_Turnieje/dart/dist/autodarts-tournament-assistant.user.js";
 
   const MENU_ITEM_ID = "ata-loader-menu-item";
   const MENU_LABEL = "xLokales Turnier";
