@@ -1,4 +1,4 @@
-# Autodarts Tournament Assistant
+# Autodarts Turnieje Zasadinho
 
 Lokales Turniermanagement direkt in `https://play.autodarts.io` als Userscript.
 
@@ -52,7 +52,7 @@ Falls Tampermonkey nicht in `play.autodarts.io` injiziert:
 - Tampermonkey-FAQ: https://www.tampermonkey.net/faq.php#Q209
 
 Alternative ohne Loader (direkt das Runtime-Skript):
-- `https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/dist/autodarts-tournament-assistant.user.js`
+- `https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/dist/autodarts-turnieje-asystent.user.js`
 
 ![Sidebar-Eintrag xLokales Turnier](assets/ss_autodarts-menu-xLokales-Turnier.png)
 
@@ -483,7 +483,7 @@ autodarts_local_tournament/
 |- installer/
 |  |- Autodarts Turnieje Zasadinho Instalacja.user.js
 |- dist/
-|  |- autodarts-tournament-assistant.user.js
+|  |- autodarts-turnieje-asystent.user.js
 |- docs/
 |  |- architecture.md
 |  |- codebase-map.md
@@ -504,7 +504,7 @@ Die vollständige Datei- und Verbindungsdoku steht in [docs/codebase-map.md](doc
 - Quellcode: `src/*`
 - Build-Metadaten: `build/manifest.json`, `build/version.json`
 - Build/QA: `scripts/*.ps1`
-- Runtime-Script: `dist/autodarts-tournament-assistant.user.js`
+- Runtime-Script: `dist/autodarts-turnieje-asystent.user.js`
 - Loader-Script: `installer/Autodarts Turnieje Zasadinho Instalacja.user.js`
 
 ### Build und QA

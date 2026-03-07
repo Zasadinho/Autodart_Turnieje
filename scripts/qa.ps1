@@ -15,7 +15,7 @@ $encodingScript = Resolve-RepoPath "scripts/qa-encoding.ps1"
 $rulesScript = Resolve-RepoPath "scripts/qa-regelcheck.ps1"
 $domainTestScript = Resolve-RepoPath "scripts/test-domain.ps1"
 $runtimeContractScript = Resolve-RepoPath "scripts/test-runtime-contract.ps1"
-$distPath = Resolve-RepoPath "dist/autodarts-tournament-assistant.user.js"
+$distPath = Resolve-RepoPath "dist/autodarts-turnieje-asystent.user.js"
 
 & $buildScript
 & $architectureScript

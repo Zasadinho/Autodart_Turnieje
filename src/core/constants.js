@@ -1,7 +1,7 @@
 ﻿// Auto-generated module split from dist source.
 // ==UserScript==
-// @name         Autodarts Tournament Assistant
-// @namespace    https://github.com/thomasasen/autodarts_local_tournament
+// @name         Autodarts Turnieje Zasadinho
+// @namespace    https://github.com/Zasadinho/Autodart_Turnieje
 // @version      __ATA_APP_VERSION__
 // @description  Local tournament manager for play.autodarts.io (KO, Liga, Gruppen + KO)
 // @author       Thomas Asen
@@ -13,8 +13,8 @@
 // @grant        GM_xmlhttpRequest
 // @connect      cdn.jsdelivr.net
 // @connect      api.autodarts.io
-// @downloadURL  https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/dist/autodarts-tournament-assistant.user.js
-// @updateURL    https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/dist/autodarts-tournament-assistant.user.js
+// @downloadURL  https://github.com/Zasadinho/Autodart_Turnieje/raw/refs/heads/dart/installer/Autodarts%20Turnieje%20Zasadinho%20Instalacja.user.js
+// @updateURL    https://github.com/Zasadinho/Autodart_Turnieje/raw/refs/heads/dart/installer/Autodarts%20Turnieje%20Zasadinho%20Instalacja.user.js
 // ==/UserScript==
 
 (function () {

@@ -37,8 +37,8 @@ const GLOBALS_CONTRACT = Object.freeze({
 });
 
 // ==UserScript==
-// @name         Autodarts Tournament Assistant
-// @namespace    https://github.com/thomasasen/autodarts_local_tournament
+// @name         Autodarts Turnieje Zasadinho
+// @namespace    https://github.com/Zasadinho/Autodart_Turnieje
 // @version      0.3.3
 // @description  Local tournament manager for play.autodarts.io (KO, Liga, Gruppen + KO)
 // @author       Thomas Asen
@@ -50,8 +50,8 @@ const GLOBALS_CONTRACT = Object.freeze({
 // @grant        GM_xmlhttpRequest
 // @connect      cdn.jsdelivr.net
 // @connect      api.autodarts.io
-// @downloadURL  https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/dist/autodarts-tournament-assistant.user.js
-// @updateURL    https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/dist/autodarts-tournament-assistant.user.js
+// @downloadURL  https://github.com/Zasadinho/Autodart_Turnieje/raw/refs/heads/dart/installer/Autodarts%20Turnieje%20Zasadinho%20Instalacja.user.js
+// @updateURL    https://github.com/Zasadinho/Autodart_Turnieje/raw/refs/heads/dart/installer/Autodarts%20Turnieje%20Zasadinho%20Instalacja.user.js
 // ==/UserScript==
 
 (function () {
@@ -73,8 +73,8 @@ const GLOBALS_CONTRACT = Object.freeze({
   const API_SYNC_INTERVAL_MS = 2500;
   const API_AUTH_NOTICE_THROTTLE_MS = 15000;
   const API_REQUEST_TIMEOUT_MS = 12000;
-  const REPO_BLOB_BASE_URL = "https://github.com/thomasasen/autodarts_local_tournament/blob/main";
-  const README_BASE_URL = "https://github.com/thomasasen/autodarts_local_tournament/blob/main/README.md";
+  const REPO_BLOB_BASE_URL = "https://github.com/Zasadinho/Autodart_Turnieje/blob/dart";
+  const README_BASE_URL = "https://github.com/Zasadinho/Autodart_Turnieje/blob/dart/README.md";
   const README_SETTINGS_URL = `${README_BASE_URL}#einstellungen`;
   const README_INFO_SYMBOLS_URL = `${README_BASE_URL}#info-symbole`;
   const README_TOURNAMENT_MODES_URL = `${README_BASE_URL}#turniermodi`;
@@ -9212,7 +9212,7 @@ const GLOBALS_CONTRACT = Object.freeze({
       <style>${buildStyles()}</style>
       <div class="ata-root" data-open="${state.drawerOpen ? "1" : "0"}">
         <div class="ata-overlay" data-action="close-drawer"></div>
-        <aside class="ata-drawer" role="dialog" aria-modal="true" aria-label="Autodarts Tournament Assistant" tabindex="-1">
+        <aside class="ata-drawer" role="dialog" aria-modal="true" aria-label="Autodarts Turnieje Zasadinho" tabindex="-1">
           <header class="ata-header">
             <div class="ata-title-wrap">
               <h2>Turnier Assistent</h2>

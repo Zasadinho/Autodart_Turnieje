@@ -31,7 +31,7 @@ if (Test-Path $tempRoot) {
 }
 New-Item -ItemType Directory -Path $tempRoot | Out-Null
 
-$distPath = Resolve-RepoPath "dist/autodarts-tournament-assistant.user.js"
+$distPath = Resolve-RepoPath "dist/autodarts-turnieje-asystent.user.js"
 $runtimeContractPath = Resolve-RepoPath "tests/contracts/runtime-api-contract.js"
 $globalsContractPath = Resolve-RepoPath "tests/contracts/globals-contract.js"
 $htmlPath = Join-Path $tempRoot "runtime-contract.html"

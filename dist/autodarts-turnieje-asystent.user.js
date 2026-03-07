@@ -1,5 +1,5 @@
 ﻿// ==UserScript==
-// @name         Autodarts Tournament Assistant
+// @name         Autodarts Turnieje Zasadinho
 // @namespace    https://github.com/Zasadinho/Autodart_Turnieje
 // @version      0.3.3
 // @description  Local tournament manager for play.autodarts.io (KO, Liga, Gruppen + KO)
@@ -9174,7 +9174,7 @@
       <style>${buildStyles()}</style>
       <div class="ata-root" data-open="${state.drawerOpen ? "1" : "0"}">
         <div class="ata-overlay" data-action="close-drawer"></div>
-        <aside class="ata-drawer" role="dialog" aria-modal="true" aria-label="Autodarts Tournament Assistant" tabindex="-1">
+        <aside class="ata-drawer" role="dialog" aria-modal="true" aria-label="Autodarts Turnieje Zasadinho" tabindex="-1">
           <header class="ata-header">
             <div class="ata-title-wrap">
               <h2>Turnier Assistent</h2>

@@ -44,7 +44,7 @@ foreach ($file in $filesToCheck) {
   }
 }
 
-$distPath = Resolve-RepoPath "dist/autodarts-tournament-assistant.user.js"
+$distPath = Resolve-RepoPath "dist/autodarts-turnieje-asystent.user.js"
 if (Test-Path $distPath) {
   $dist = Get-Content $distPath -Raw -Encoding utf8
   if (-not ($dist -match 'N(\\u00e4|\\x{00E4})chstes Match')) {

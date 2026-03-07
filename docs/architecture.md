@@ -4,7 +4,7 @@ Diese Datei erklärt die Architektur auf hoher Ebene.
 Die vollständige Ordner- und Dateikarte inklusive Build-/Runtime-Verbindungen steht in [codebase-map.md](codebase-map.md).
 
 ## Überblick
-Der Assistent ist in fachliche Schichten aufgeteilt und wird weiterhin als einzelnes Userscript ausgeliefert (`dist/autodarts-tournament-assistant.user.js`).
+Der Assistent ist in fachliche Schichten aufgeteilt und wird weiterhin als einzelnes Userscript ausgeliefert (`dist/autodarts-turnieje-asystent.user.js`).
 
 - `src/core`: Konstanten, State, Utilities, Events, Logging
 - `src/domain`: fachliche Turnierregeln, pure Match-/KO-/Standings-/Zeitprognose-Logik

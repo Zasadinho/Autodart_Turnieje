@@ -3,7 +3,7 @@ param(
   [string]$VersionPath = "build/version.json",
   [string]$CssPath = "src/ui/styles/main.css",
   [string]$LogoPath = "assets/pdc_logo.png",
-  [string]$OutputPath = "dist/autodarts-tournament-assistant.user.js"
+  [string]$OutputPath = "dist/autodarts-turnieje-asystent.user.js"
 )
 
 $ErrorActionPreference = "Stop"

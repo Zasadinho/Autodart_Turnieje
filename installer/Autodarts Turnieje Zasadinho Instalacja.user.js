@@ -2,7 +2,7 @@
 // @name         Autodarts Turnieje Zasadinho Instalacja
 // @namespace    https://github.com/Zasadinho/Autodart_Turnieje
 // @version      0.1.4
-// @description  Loads the latest Autodarts Tournament Assistant userscript with cache fallback.
+// @description  Loads the latest Autodarts Turnieje Zasadinho userscript with cache fallback.
 // @author       Zasadinho
 // @license      MIT
 // @match        *://play.autodarts.io/*
@@ -25,7 +25,7 @@
   const CACHE_META_KEY = "ata:loader:cache:meta:v1";
   const REQUEST_TIMEOUT_MS = 10_000;
 
-  const REMOTE_SOURCE_URL = "https://raw.githubusercontent.com/Zasadinho/Autodart_Turnieje/dart/dist/autodarts-tournament-assistant.user.js";
+  const REMOTE_SOURCE_URL = "https://raw.githubusercontent.com/Zasadinho/Autodart_Turnieje/dart/dist/autodarts-turnieje-asystent.user.js";
 
   const MENU_ITEM_ID = "ata-loader-menu-item";
   const MENU_LABEL = "xLokales Turnier";
@@ -147,7 +147,7 @@
 
     const checks = [
       /\/\/\s*==UserScript==/i,
-      /\/\/\s*@name\s+Autodarts Tournament Assistant\b/i,
+      /\/\/\s*@name\s+Autodarts Turnieje Zasadinho\b/i,
       /__ATA_RUNTIME_BOOTSTRAPPED/,
     ];
 

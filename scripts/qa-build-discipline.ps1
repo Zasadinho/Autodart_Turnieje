@@ -10,7 +10,7 @@ function Resolve-RepoPath([string]$RelativePath) {
 
 $versionPath = Resolve-RepoPath "build/version.json"
 $constantsPath = Resolve-RepoPath "src/core/constants.js"
-$distPath = Resolve-RepoPath "dist/autodarts-tournament-assistant.user.js"
+$distPath = Resolve-RepoPath "dist/autodarts-turnieje-asystent.user.js"
 
 $versionConfig = Get-Content $versionPath -Raw -Encoding utf8 | ConvertFrom-Json
 $appVersion = [string]$versionConfig.appVersion
