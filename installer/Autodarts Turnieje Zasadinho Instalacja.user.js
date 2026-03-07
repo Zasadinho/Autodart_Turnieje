@@ -28,7 +28,7 @@
   const REMOTE_SOURCE_URL = "https://raw.githubusercontent.com/Zasadinho/Autodart_Turnieje/dart/dist/autodarts-turnieje-asystent.user.js";
 
   const MENU_ITEM_ID = "ata-loader-menu-item";
-  const MENU_LABEL = "xLokales Turnier";
+  const MENU_LABEL = "Lokalny Turniej";
   const MENU_ICON = "\uD83C\uDFC6";
   const TOGGLE_EVENT = "ata:toggle-request";
   const READY_EVENT = "ata:ready";

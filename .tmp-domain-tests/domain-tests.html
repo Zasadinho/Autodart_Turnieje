@@ -8,7 +8,7 @@
     <script>
 // ==UserScript==
 // @name         Autodarts Turnieje Zasadinho
-// @namespace    https://github.com/thomasasen/autodarts_local_tournament
+// @namespace    https://github.com/Zasadinho/Autodart_Turnieje
 // @version      __ATA_APP_VERSION__
 // @description  Local tournament manager for play.autodarts.io (KO, Liga, Gruppen + KO)
 // @author       Thomas Asen
@@ -1107,7 +1107,7 @@
 
     return {
       id: normalizeText(rawTournament.id || uuid("tournament")),
-      name: normalizeText(rawTournament.name || "Lokales Turnier"),
+      name: normalizeText(rawTournament.name || "Lokalny Turniej"),
       mode,
       ko: mode === "ko"
         ? normalizeTournamentKoMeta(rawTournament.ko, KO_DRAW_MODE_SEEDED, fallbackKoDrawLocked)

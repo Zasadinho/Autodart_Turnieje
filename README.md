@@ -1,6 +1,6 @@
 # Autodarts Turnieje Zasadinho
 
-Lokales Turniermanagement direkt in `https://play.autodarts.io` als Userscript.
+Lokalny Turniej direkt in `https://play.autodarts.io` als Userscript.
 
 Der Assistent erweitert die Autodarts-Oberfläche um einen eigenen Bereich für:
 - Turnieranlage (KO, Liga, Gruppenphase + KO)
@@ -46,7 +46,7 @@ Installationsablauf im Stil von "Schnellstart (empfohlen)" aus den Theme-Skripte
 2. Loader installieren (empfohlen):
    - `https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/installer/Autodarts%20Tournament%20Assistant%20Loader.user.js`
 3. `https://play.autodarts.io` neu laden.
-4. Im linken Menü auf **xLokales Turnier** klicken.
+4. Im linken Menü auf **Lokalny Turniej** klicken.
 
 Falls Tampermonkey nicht in `play.autodarts.io` injiziert:
 - Tampermonkey-FAQ: https://www.tampermonkey.net/faq.php#Q209
@@ -153,7 +153,7 @@ Tab: `Turnier`
 | `Bull-Modus` | `25/50`, `50/50` | Wertung der Bull-Segmente | Muss mit Hausregeln/Turnierkontext konsistent sein |
 | `Max Runden` | `15`, `20`, `50`, `80` | Upper bound für Matchdauer in der Lobby | Verhindert hängende/zu lange Matches |
 | `Spielmodus` | fix `Legs (First to N aus Best of)` | Nicht umstellbar in der UI | Verhindert inkonsistente Kombinationen im lokalen Flow |
-| `Lobby` | fix `Privat` | Sichtbarkeit der API-Lobby | Lokales Turnier bleibt bewusst privat/sicher |
+| `Lobby` | fix `Privat` | Sichtbarkeit der API-Lobby | Lokalny Turniej bleibt bewusst privat/sicher |
 | `Preset` | Auswahlfeld + Button `Preset anwenden` | Setzt alle Preset-relevanten Turnierfelder konsistent | Offizielle und kompatible Profile bleiben klar getrennt |
 | `KO-Erstrunde zufällig mischen` | Checkbox `ON/OFF` | `open_draw` oder `seeded` in Runde 1 | Transparente Entscheidung zwischen Zufall und Setzlogik |
 | `Teilnehmer` | Je Spieler eine Zeile | Teilnehmerliste inkl. Reihenfolge | Reihenfolge ist bei `seeded` zugleich Seed-Reihenfolge |
