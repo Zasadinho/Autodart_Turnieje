@@ -58,11 +58,11 @@
       } else if (!isByeCompletion && auto.status !== "completed") {
         statusLine = autoStatus;
       }
-      const matchCellText = `Runde ${match.round} / Spiel ${match.number}`;
-      const matchCellHelpText = "Runde = Turnierrunde, Spiel = Paarung innerhalb dieser Runde.";
-      const legsP1HelpText = `Hier die Anzahl gewonnener Legs von ${player1} eintragen (nicht Punkte pro Wurf). Ziel: ${legsToWin} Legs f\u00fcr den Matchgewinn.`;
-      const legsP2HelpText = `Hier die Anzahl gewonnener Legs von ${player2} eintragen (nicht Punkte pro Wurf). Ziel: ${legsToWin} Legs f\u00fcr den Matchgewinn.`;
-      const saveHelpText = `Speichert Legs f\u00fcr ${player1} vs ${player2}. Sieger wird automatisch aus den Legs bestimmt. Sieger muss ${legsToWin} Legs erreichen.`;
+      const matchCellText = `Runda ${match.round} / Mecz ${match.number}`;
+      const matchCellHelpText = "Runda = runda turniejowa, mecz = para zawodników w tej rundzie.";
+      const legsP1HelpText = `Tutaj wpisz liczbę wygranych legów przez ${player1} (nie punkty za rzut). Cel: ${legsToWin} legów do zwycięstwa w meczu.`;
+      const legsP2HelpText = `Tutaj wpisz liczbę wygranych legów przez ${player2} (nie punkty za rzut). Cel: ${legsToWin} legów do zwycięstwa w meczu.`;
+      const saveHelpText = `Zapisuje liczbę legów dla meczu ${player1} vs ${player2}. Zwycięzca zostanie określony automatycznie na podstawie legów. Aby wygrać, trzeba zdobyć ${legsToWin} legów.`;
       const rowClasses = [
         "ata-match-card",
         isCompleted ? "ata-row-completed" : "",

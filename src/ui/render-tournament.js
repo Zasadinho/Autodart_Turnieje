@@ -210,7 +210,7 @@
 
     return `
       <section class="ata-card tournamentCard">
-        ${renderSectionHeading("Aktives Turnier", activeTournamentHeadingLinks)}
+        ${renderSectionHeading("Aktywny turniej", activeTournamentHeadingLinks)}
         <p class="ata-tournament-title">
           <b>${escapeHtml(tournament.name)}</b>
           <span class="ata-tournament-mode-pill">${escapeHtml(modeLabel)}</span>
@@ -221,20 +221,20 @@
             <div class="ata-info-tag-cloud">${primaryTagsHtml}</div>
           </div>
           <div class="ata-meta-block">
-            <div class="ata-meta-heading">Spiel-Setup (X01)</div>
+            <div class="ata-meta-heading">Ustawienia meczu (X01)</div>
             <div class="ata-info-tag-cloud">${x01TagsHtml}</div>
           </div>
           <div class="ata-meta-block">
-            <div class="ata-meta-heading">Uczestnicyfeld <span class="ata-player-chip-count">(${participantsCount})</span></div>
+            <div class="ata-meta-heading">Lista uczestników <span class="ata-player-chip-count">(${participantsCount})</span></div>
             <div class="ata-player-chip-cloud">${participantsHtml}</div>
           </div>
         </div>
       </section>
       <section class="ata-card tournamentCard">
-        <h3>Turnier zur\u00fccksetzen</h3>
-        <p class="ata-small">Dieser Schritt l\u00f6scht alle Spielst\u00e4nde. Bitte vorher exportieren.</p>
+        <h3>Resetuj turniej</h3>
+        <p class="ata-small">Ten krok usunie wszystkie wyniki meczów. Proszę wcześniej wykonać eksport.</p>
         <div class="ata-actions">
-          <button type="button" class="ata-btn ata-btn-danger" data-action="reset-tournament">Turnier l\u00f6schen</button>
+          <button type="button" class="ata-btn ata-btn-danger" data-action="reset-tournament">Usuń turniej</button>
         </div>
       </section>
     `;

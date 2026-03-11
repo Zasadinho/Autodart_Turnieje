@@ -75,7 +75,7 @@
       </section>
       <section class="ata-card tournamentCard">
         ${renderSectionHeading("Turnierzeit-Prognose", [
-          { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Erkl\u00e4rung zur Turnierzeit-Prognose \u00f6ffnen", title: "README: Utwórz turniej" },
+          { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Otwórz objaśnienie prognozy czasu turnieju", title: "README: Utwórz turniej" },
           { href: README_SETTINGS_URL, kind: "tech", label: "Einstellungen-Dokumentation \u00f6ffnen", title: "README: Einstellungen" },
         ])}
         <div class="ata-field">
@@ -88,7 +88,7 @@
         <p class="ata-small"><strong>Schnell:</strong> z\u00fcgige Abl\u00e4ufe. <strong>Normal:</strong> ausgewogener Standard. <strong>Langsam:</strong> konservativer f\u00fcr gemischte Felder und l\u00e4ngere Wechselzeiten.</p>
       </section>
       <section class="ata-card tournamentCard">
-        ${renderSectionHeading("KO Draw-Lock (aktives Turnier)", [
+        ${renderSectionHeading("Blokada losowania KO (aktywny turniej)", [
           { href: DRA_GUI_RULE_DRAW_LOCK_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zu Draw-Lock \u00f6ffnen", title: "DRA-Regeln in der GUI: Draw-Lock" },
         ])}
         <div class="ata-toggle">

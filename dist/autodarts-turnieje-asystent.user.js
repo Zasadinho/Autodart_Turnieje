@@ -9111,8 +9111,8 @@
 
   function renderTournamentDurationEstimate(estimate) {
     const helpLinks = renderInfoLinks([
-      { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Erkl\u00e4rung zur Turnierzeit-Prognose \u00f6ffnen", title: "README: Utwórz turniej" },
-      { href: README_SETTINGS_URL, kind: "tech", label: "Einstellungen f\u00fcr das Zeitprofil \u00f6ffnen", title: "README: Einstellungen" },
+      { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Otwórz objaśnienie prognozy czasu turnieju", title: "README: Utwórz turniej" },
+      { href: README_SETTINGS_URL, kind: "tech", label: "Otwórz ustawienia profilu czasowego", title: "README: Einstellungen" },
     ]);
     const estimateReason = normalizeText(estimate?.reason || "");
 
@@ -9124,7 +9124,7 @@
             ${helpLinks}
           </div>
           <div class="ata-estimate-value ata-estimate-value-pending">Noch nicht berechenbar</div>
-          <p class="ata-small">${escapeHtml(estimateReason || "Die Sch\u00e4tzung startet, sobald die Konfiguration f\u00fcr den gew\u00e4hlten Modus g\u00fcltig ist.")}</p>
+          <p class="ata-small">${escapeHtml(estimateReason || "„Szacowanie rozpocznie się, gdy konfiguracja dla wybranego trybu będzie prawidłowa.")}</p>
           <p class="ata-small">Annahme: Single-Board-Flow auf einem Board.</p>
         </section>
       `;
@@ -9417,7 +9417,7 @@
 
     return `
       <section class="ata-card tournamentCard">
-        ${renderSectionHeading("Aktives Turnier", activeTournamentHeadingLinks)}
+        ${renderSectionHeading("Aktywny turniej", activeTournamentHeadingLinks)}
         <p class="ata-tournament-title">
           <b>${escapeHtml(tournament.name)}</b>
           <span class="ata-tournament-mode-pill">${escapeHtml(modeLabel)}</span>
@@ -9428,20 +9428,20 @@
             <div class="ata-info-tag-cloud">${primaryTagsHtml}</div>
           </div>
           <div class="ata-meta-block">
-            <div class="ata-meta-heading">Spiel-Setup (X01)</div>
+            <div class="ata-meta-heading">Ustawienia meczu (X01)</div>
             <div class="ata-info-tag-cloud">${x01TagsHtml}</div>
           </div>
           <div class="ata-meta-block">
-            <div class="ata-meta-heading">Uczestnicyfeld <span class="ata-player-chip-count">(${participantsCount})</span></div>
+            <div class="ata-meta-heading">Lista uczestników <span class="ata-player-chip-count">(${participantsCount})</span></div>
             <div class="ata-player-chip-cloud">${participantsHtml}</div>
           </div>
         </div>
       </section>
       <section class="ata-card tournamentCard">
-        <h3>Turnier zur\u00fccksetzen</h3>
-        <p class="ata-small">Dieser Schritt l\u00f6scht alle Spielst\u00e4nde. Bitte vorher exportieren.</p>
+        <h3>Resetuj turniej</h3>
+        <p class="ata-small">Ten krok usunie wszystkie wyniki meczów. Proszę wcześniej wykonać eksport.</p>
         <div class="ata-actions">
-          <button type="button" class="ata-btn ata-btn-danger" data-action="reset-tournament">Turnier l\u00f6schen</button>
+          <button type="button" class="ata-btn ata-btn-danger" data-action="reset-tournament">Usuń turniej</button>
         </div>
       </section>
     `;
@@ -9506,11 +9506,11 @@
       } else if (!isByeCompletion && auto.status !== "completed") {
         statusLine = autoStatus;
       }
-      const matchCellText = `Runde ${match.round} / Spiel ${match.number}`;
-      const matchCellHelpText = "Runde = Turnierrunde, Spiel = Paarung innerhalb dieser Runde.";
-      const legsP1HelpText = `Hier die Anzahl gewonnener Legs von ${player1} eintragen (nicht Punkte pro Wurf). Ziel: ${legsToWin} Legs f\u00fcr den Matchgewinn.`;
-      const legsP2HelpText = `Hier die Anzahl gewonnener Legs von ${player2} eintragen (nicht Punkte pro Wurf). Ziel: ${legsToWin} Legs f\u00fcr den Matchgewinn.`;
-      const saveHelpText = `Speichert Legs f\u00fcr ${player1} vs ${player2}. Sieger wird automatisch aus den Legs bestimmt. Sieger muss ${legsToWin} Legs erreichen.`;
+      const matchCellText = `Runda ${match.round} / Mecz ${match.number}`;
+      const matchCellHelpText = "Runda = runda turniejowa, mecz = para zawodników w tej rundzie.";
+      const legsP1HelpText = `Tutaj wpisz liczbę wygranych legów przez ${player1} (nie punkty za rzut). Cel: ${legsToWin} legów do zwycięstwa w meczu.`;
+      const legsP2HelpText = `Tutaj wpisz liczbę wygranych legów przez ${player2} (nie punkty za rzut). Cel: ${legsToWin} legów do zwycięstwa w meczu.`;
+      const saveHelpText = `Zapisuje liczbę legów dla meczu ${player1} vs ${player2}. Zwycięzca zostanie określony automatycznie na podstawie legów. Aby wygrać, trzeba zdobyć ${legsToWin} legów.`;
       const rowClasses = [
         "ata-match-card",
         isCompleted ? "ata-row-completed" : "",
@@ -9983,7 +9983,7 @@
       </section>
       <section class="ata-card tournamentCard">
         ${renderSectionHeading("Turnierzeit-Prognose", [
-          { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Erkl\u00e4rung zur Turnierzeit-Prognose \u00f6ffnen", title: "README: Utwórz turniej" },
+          { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Otwórz objaśnienie prognozy czasu turnieju", title: "README: Utwórz turniej" },
           { href: README_SETTINGS_URL, kind: "tech", label: "Einstellungen-Dokumentation \u00f6ffnen", title: "README: Einstellungen" },
         ])}
         <div class="ata-field">
@@ -9996,7 +9996,7 @@
         <p class="ata-small"><strong>Schnell:</strong> z\u00fcgige Abl\u00e4ufe. <strong>Normal:</strong> ausgewogener Standard. <strong>Langsam:</strong> konservativer f\u00fcr gemischte Felder und l\u00e4ngere Wechselzeiten.</p>
       </section>
       <section class="ata-card tournamentCard">
-        ${renderSectionHeading("KO Draw-Lock (aktives Turnier)", [
+        ${renderSectionHeading("Blokada losowania KO (aktywny turniej)", [
           { href: DRA_GUI_RULE_DRAW_LOCK_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zu Draw-Lock \u00f6ffnen", title: "DRA-Regeln in der GUI: Draw-Lock" },
         ])}
         <div class="ata-toggle">

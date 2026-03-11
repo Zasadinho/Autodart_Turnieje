@@ -76,8 +76,8 @@
 
   function renderTournamentDurationEstimate(estimate) {
     const helpLinks = renderInfoLinks([
-      { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Erkl\u00e4rung zur Turnierzeit-Prognose \u00f6ffnen", title: "README: Utwórz turniej" },
-      { href: README_SETTINGS_URL, kind: "tech", label: "Einstellungen f\u00fcr das Zeitprofil \u00f6ffnen", title: "README: Einstellungen" },
+      { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Otwórz objaśnienie prognozy czasu turnieju", title: "README: Utwórz turniej" },
+      { href: README_SETTINGS_URL, kind: "tech", label: "Otwórz ustawienia profilu czasowego", title: "README: Einstellungen" },
     ]);
     const estimateReason = normalizeText(estimate?.reason || "");
 
@@ -89,7 +89,7 @@
             ${helpLinks}
           </div>
           <div class="ata-estimate-value ata-estimate-value-pending">Noch nicht berechenbar</div>
-          <p class="ata-small">${escapeHtml(estimateReason || "Die Sch\u00e4tzung startet, sobald die Konfiguration f\u00fcr den gew\u00e4hlten Modus g\u00fcltig ist.")}</p>
+          <p class="ata-small">${escapeHtml(estimateReason || "„Szacowanie rozpocznie się, gdy konfiguracja dla wybranego trybu będzie prawidłowa.")}</p>
           <p class="ata-small">Annahme: Single-Board-Flow auf einem Board.</p>
         </section>
       `;

@@ -73,7 +73,7 @@ Screenshot-Kontext:
 
 ### GUI-Stellen
 - Einstellungen > KO-Draw sperren (Standard)
-- Einstellungen > KO Draw-Lock (aktives Turnier)
+- Einstellungen > Blokada losowania KO (aktywny turniej)
 
 ### DRA-Referenz (Kapitel/Punkt/Seite)
 - `6.12.1`, Seite `18`
