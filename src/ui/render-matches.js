@@ -195,7 +195,7 @@
 
     return `
       <section class="ata-card tournamentCard ata-matches-card">
-        ${renderSectionHeading(„Prowadzenie wyników”, resultHeadingLinks)}
+        ${renderSectionHeading("Prowadzenie wyników", resultHeadingLinks)}
         <p class="ata-small">API-Halbautomatik: mecz można uruchomić jednym kliknięciem, wynik synchronizuje się automatycznie. Ręczne wprowadzanie pozostaje aktywne jako fallback.${renderInfoLinks([
           { href: README_API_AUTOMATION_URL, kind: "tech", label: "Voraussetzungen und Ablauf öffnen", title: "README: API-Halbautomatik" },
         ])}</p>
