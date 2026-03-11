@@ -9177,7 +9177,7 @@
         <aside class="ata-drawer" role="dialog" aria-modal="true" aria-label="Autodarts Turnieje Zasadinho" tabindex="-1">
           <header class="ata-header">
             <div class="ata-title-wrap">
-              <h2>Turnier Assistent</h2>
+              <h2>Asystent Turnieju</h2>
               <p>Lokalne zarządzanie dla trybu pucharowego, ligi i fazy grupowej. <span class="ata-version">v${escapeHtml(APP_VERSION)}</span></p>
             </div>
             <button type="button" class="ata-close-btn" data-action="close-drawer" aria-label="Schlie\u00dfen">Schlie\u00dfen</button>
@@ -9253,7 +9253,7 @@
               <div class="ata-create-main">
                 <div class="ata-grid-3 ata-grid-3-tight">
                   <div class="ata-field">
-                    <label for="ata-name">Turniername</label>
+                    <label for="ata-name">Nazwa turnieju</label>
                     <input id="ata-name" name="name" type="text" placeholder="z. B. Freitagsturnier" value="${escapeHtml(draft.name)}" required>
                   </div>
                   <div class="ata-field">

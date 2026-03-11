@@ -22,7 +22,7 @@
         <aside class="ata-drawer" role="dialog" aria-modal="true" aria-label="Autodarts Turnieje Zasadinho" tabindex="-1">
           <header class="ata-header">
             <div class="ata-title-wrap">
-              <h2>Turnier Assistent</h2>
+              <h2>Asystent Turnieju</h2>
               <p>Lokalne zarządzanie dla trybu pucharowego, ligi i fazy grupowej. <span class="ata-version">v${escapeHtml(APP_VERSION)}</span></p>
             </div>
             <button type="button" class="ata-close-btn" data-action="close-drawer" aria-label="Schlie\u00dfen">Schlie\u00dfen</button>
