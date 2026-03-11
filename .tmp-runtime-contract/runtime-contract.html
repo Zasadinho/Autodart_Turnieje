@@ -5957,12 +5957,12 @@ const GLOBALS_CONTRACT = Object.freeze({
       const deterministic = toSignature(openDrawMatches) === toSignature(repeatedOpenDrawMatches);
       const byeCount = openDrawMatches.filter((match) => isByeMatchResult(match)).length;
       record(
-        "KO Open Draw: deterministisch mit expliziten Byes",
+        "KO Open Draw: przydzielonymi wolnymi losami",
         deterministic && byeCount > 0,
         `matches=${openDrawMatches.length}, byes=${byeCount}, deterministic=${deterministic}`,
       );
     } catch (error) {
-      record("KO Open Draw: deterministisch mit expliziten Byes", false, String(error?.message || error));
+      record("KO Open Draw: przydzielonymi wolnymi losami", false, String(error?.message || error));
     }
 
     try {
@@ -5972,12 +5972,12 @@ const GLOBALS_CONTRACT = Object.freeze({
       const expectedTotalMatches = structure.rounds.reduce((sum, roundDef) => sum + roundDef.virtualMatches.length, 0);
       const byeCount = matches.filter((match) => isByeMatchResult(match)).length;
       record(
-        "KO 6: vollständiger 8er-Baum mit 2 Byes",
+        "KO 6: pełne drzewo dla 8 zawodników z 2 wolnymi losami",
         matches.length === expectedTotalMatches && expectedTotalMatches === 7 && byeCount === 2,
         `matches=${matches.length}, expected=${expectedTotalMatches}, byes=${byeCount}`,
       );
     } catch (error) {
-      record("KO 6: vollständiger 8er-Baum mit 2 Byes", false, String(error?.message || error));
+      record("KO 6: pełne drzewo dla 8 zawodników z 2 wolnymi losami", false, String(error?.message || error));
     }
 
     try {
@@ -5986,26 +5986,26 @@ const GLOBALS_CONTRACT = Object.freeze({
       const matches = buildKoMatchesFromStructure(structure);
       const byeCount = matches.filter((match) => isByeMatchResult(match)).length;
       record(
-        "KO 8: 7 Match-Knoten von Start an vorhanden",
+        "KO 8: od startu istnieje 7 meczów w drzewie",
         matches.length === 7 && byeCount === 0,
         `matches=${matches.length}, byes=${byeCount}`,
       );
     } catch (error) {
-      record("KO 8: 7 Match-Knoten von Start an vorhanden", false, String(error?.message || error));
+      record("KO 8: od startu istnieje 7 meczów w drzewie", false, String(error?.message || error));
     }
 
     try {
       const presetChecks = validateCreatePresetDefinitions();
       const europeanTourPreset = getCreatePresetDefinition(X01_PRESET_PDC_EUROPEAN_TOUR_OFFICIAL);
       record(
-        "Preset-Schema: European Tour + Basic vollständig validiert",
+        "Schematy: European Tour + Basic w pełni zwalidowany",
         presetChecks.every((entry) => entry.ok)
           && europeanTourPreset?.apply?.bestOfLegs === 11
           && europeanTourPreset?.apply?.startScore === 501,
         presetChecks.map((entry) => `${entry.id}:${entry.ok ? "ok" : entry.issues.join("/")}`).join(", "),
       );
     } catch (error) {
-      record("Preset-Schema: European Tour + Basic vollständig validiert", false, String(error?.message || error));
+      record("Schematy: European Tour + Basic w pełni zwalidowany", false, String(error?.message || error));
     }
 
     try {
@@ -6032,12 +6032,12 @@ const GLOBALS_CONTRACT = Object.freeze({
         lobbyVisibility: "private",
       });
       record(
-        "Preset-Setup: European Tour Official erfordert KO + Best of 11 + 501/SI/DO",
+        "„Ustawienie Presetu: European Tour Official wymaga KO + Best of 11 + 501/SI/DO",
         compliant && !wrongBestOf,
         `official=${compliant}, wrongBestOf=${wrongBestOf}`,
       );
     } catch (error) {
-      record("Preset-Setup: European Tour Official erfordert KO + Best of 11 + 501/SI/DO", false, String(error?.message || error));
+      record("„Ustawienie Presetu: European Tour Official wymaga KO + Best of 11 + 501/SI/DO", false, String(error?.message || error));
     }
 
     {
@@ -6050,7 +6050,7 @@ const GLOBALS_CONTRACT = Object.freeze({
         const createForm = state.shadowRoot?.getElementById("ata-create-form");
         const presetSelect = createForm?.querySelector("#ata-preset-select");
         if (!(createForm instanceof HTMLFormElement) || !(presetSelect instanceof HTMLSelectElement)) {
-          throw new Error("Create form or preset select missing.");
+          throw new Error("Nie wybrano formularza ani presetu.");
         }
         presetSelect.value = X01_PRESET_PDC_EUROPEAN_TOUR_OFFICIAL;
         applySelectedPresetToCreateForm(createForm);
@@ -6061,7 +6061,7 @@ const GLOBALS_CONTRACT = Object.freeze({
         const basicDraft = normalizeCreateDraft(readCreateDraftInput(new FormData(createForm)), state.store.settings);
 
         record(
-          "Preset-UI: Auswahl + Anwenden setzt alle Formularfelder konsistent",
+          "Preset UI: wybranie i zastosowanie presetu uzupełnia wszystkie pola formularza zgodnie z konfiguracją",
           europeanTourDraft.x01Preset === X01_PRESET_PDC_EUROPEAN_TOUR_OFFICIAL
             && europeanTourDraft.mode === "ko"
             && europeanTourDraft.bestOfLegs === 11
@@ -6072,7 +6072,7 @@ const GLOBALS_CONTRACT = Object.freeze({
           `et=${europeanTourDraft.bestOfLegs}/${europeanTourDraft.x01Preset}, basic=${basicDraft.bestOfLegs}/${basicDraft.x01Preset}`,
         );
       } catch (error) {
-        record("Preset-UI: Auswahl + Anwenden setzt alle Formularfelder konsistent", false, String(error?.message || error));
+        record("Preset UI: wybranie i zastosowanie presetu uzupełnia wszystkie pola formularza zgodnie z konfiguracją", false, String(error?.message || error));
       } finally {
         state.store.tournament = previousTournament;
         state.store.ui.createDraft = previousDraft || createDefaultCreateDraft(state.store.settings);
@@ -6098,7 +6098,7 @@ const GLOBALS_CONTRACT = Object.freeze({
       });
       const payload = buildLobbyCreatePayload(tournament);
       record(
-        "Turnieranlage -> Matchstart-Payload übernimmt X01 + Best-of konsistent",
+        "Tworzenie turnieju -> payload startu meczu przejmuje X01 + Best of w sposób spójny",
         payload?.variant === X01_VARIANT
           && payload?.isPrivate === true
           && payload?.bullOffMode === "Official"
@@ -6111,7 +6111,7 @@ const GLOBALS_CONTRACT = Object.freeze({
         `legs=${payload?.legs}, settings=${JSON.stringify(payload?.settings || {})}`,
       );
     } catch (error) {
-      record("Turnieranlage -> Matchstart-Payload übernimmt X01 + Best-of konsistent", false, String(error?.message || error));
+      record("Tworzenie turnieju -> payload startu meczu przejmuje X01 + Best of w sposób spójny", false, String(error?.message || error));
     }
 
     try {
