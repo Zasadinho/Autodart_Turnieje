@@ -5485,7 +5485,7 @@
     }
 
     persistKoMigrationBackup(backupSnapshot, "ko-engine-v3-migration").catch((error) => {
-      logWarn("storage", "KO migration backup write failed.", error);
+      logWarn("storage", "Błąd zapisu kopii zapasowej migracji KO.", error);
     });
   }
 
@@ -5584,7 +5584,7 @@
 
   function importTournamentPayload(rawObject) {
     if (!rawObject || typeof rawObject !== "object") {
-      return { ok: false, message: "JSON ist leer oder ungültig." };
+      return { ok: false, message: "JSON jest pusty lub nieprawidłowy." };
     }
 
     let tournament = rawObject.tournament || null;
@@ -5597,7 +5597,7 @@
       state.store.settings.featureFlags.koDrawLockDefault !== false,
     );
     if (!normalizedTournament) {
-      return { ok: false, message: "Turnierdaten konnten nicht validiert werden." };
+      return { ok: false, message: "Nie udało się zweryfikować danych turnieju." };
     }
 
     const participantCountError = getParticipantCountError(normalizedTournament.mode, normalizedTournament.participants.length);
@@ -5778,7 +5778,7 @@
     clearBracketFrameTimeout(state.bracket);
     armBracketFrameTimeout(state.bracket, () => {
       state.bracket.failed = true;
-      state.bracket.lastError = "Turnierbaum-Render-Timeout";
+      state.bracket.lastError = "Przekroczono limit czasu renderowania drzewa turniejowego.";
       syncBracketFallbackVisibility();
       setNotice("error", "Timeout drzewa turniejowego CDN, tryb awaryjny pozostaje aktywny.", 3200);
       logWarn("bracket", "Iframe bracket render timeout.");

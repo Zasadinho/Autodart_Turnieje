@@ -37,7 +37,7 @@
     clearBracketFrameTimeout(state.bracket);
     armBracketFrameTimeout(state.bracket, () => {
       state.bracket.failed = true;
-      state.bracket.lastError = "Turnierbaum-Render-Timeout";
+      state.bracket.lastError = "Przekroczono limit czasu renderowania drzewa turniejowego.";
       syncBracketFallbackVisibility();
       setNotice("error", "Timeout drzewa turniejowego CDN, tryb awaryjny pozostaje aktywny.", 3200);
       logWarn("bracket", "Iframe bracket render timeout.");

@@ -29,7 +29,7 @@
     }
 
     persistKoMigrationBackup(backupSnapshot, "ko-engine-v3-migration").catch((error) => {
-      logWarn("storage", "KO migration backup write failed.", error);
+      logWarn("storage", "Błąd zapisu kopii zapasowej migracji KO.", error);
     });
   }
 

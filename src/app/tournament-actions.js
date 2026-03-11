@@ -45,7 +45,7 @@
 
   function importTournamentPayload(rawObject) {
     if (!rawObject || typeof rawObject !== "object") {
-      return { ok: false, message: "JSON ist leer oder ungültig." };
+      return { ok: false, message: "JSON jest pusty lub nieprawidłowy." };
     }
 
     let tournament = rawObject.tournament || null;
@@ -58,7 +58,7 @@
       state.store.settings.featureFlags.koDrawLockDefault !== false,
     );
     if (!normalizedTournament) {
-      return { ok: false, message: "Turnierdaten konnten nicht validiert werden." };
+      return { ok: false, message: "Nie udało się zweryfikować danych turnieju." };
     }
 
     const participantCountError = getParticipantCountError(normalizedTournament.mode, normalizedTournament.participants.length);
