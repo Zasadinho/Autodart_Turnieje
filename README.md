@@ -337,7 +337,7 @@ Legende für die eingeblendeten Hilfelinks:
   - Ergebnis wird automatisch aus der API übernommen.
 - Warum: weniger manuelle Schritte, geringeres Risiko für Übertragungsfehler.
 
-### Losowo wymieszaj pierwszą rundę KO (Standard)
+### Losowo wymieszaj pierwszą rundę KO (Standard) 
 - Standard: `EIN`.
 - Gilt für neu erstellte KO-Turniere.
 - `EIN` -> `open_draw` (zufällige Reihenfolge in Runde 1).
