@@ -1219,7 +1219,7 @@
     const limits = getModeParticipantLimits(mode);
     const participantCount = Number(count || 0);
     if (participantCount < limits.min || participantCount > limits.max) {
-      return `${limits.label} erfordert ${limits.min}-${limits.max} Teilnehmer.`;
+      return `${limits.label} erfordert ${limits.min}-${limits.max} Uczestnicy.`;
     }
     return "";
   }
@@ -1590,7 +1590,7 @@
       return { ok: false, message: "Match nicht gefunden." };
     }
     if (!match.player1Id || !match.player2Id) {
-      return { ok: false, message: "Match hat noch keine zwei Teilnehmer." };
+      return { ok: false, message: "Match hat noch keine zwei Uczestnicy." };
     }
     if (winnerId && winnerId !== match.player1Id && winnerId !== match.player2Id) {
       return { ok: false, message: "Gewinner passt nicht zum Match." };
@@ -2357,7 +2357,7 @@
     [TOURNAMENT_TIME_PROFILE_NORMAL]: Object.freeze({
       id: TOURNAMENT_TIME_PROFILE_NORMAL,
       label: "Normal",
-      description: "Ausgewogener Standard f\u00fcr lokale Turniere.",
+      description: "Zrównoważony standard dla lokalnych turniejów.",
       legPaceMultiplier: 1.00,
       matchTransitionMinutes: 0.80,
       phaseTransitionMultiplier: 1.00,
@@ -3265,7 +3265,7 @@
     assertEqual(right.rules.tieBreakProfile, TIE_BREAK_PROFILE_PROMOTER_H2H_MINITABLE);
   });
 
-  test("KO engine: 9 Teilnehmer erzeugen genau ein offenes Match in Runde 1", () => {
+  test("KO engine: 9 Uczestnicy erzeugen genau ein offenes Match in Runde 1", () => {
     const tournament = createKoTournament(participantList(9, "K9"));
     const openRoundOne = getMatchesByStage(tournament, MATCH_STAGE_KO)
       .filter((match) => match.round === 1 && match.player1Id && match.player2Id && !isByeMatchResult(match));
@@ -3641,7 +3641,7 @@ test("Tournament duration: invalid participant count stays pending", () => {
   });
 
   assert(!estimate.ready, "Estimate should not be ready below mode minimum.");
-  assertEqual(estimate.reason, "Gruppenphase + KO erfordert 4-16 Teilnehmer.");
+  assertEqual(estimate.reason, "Gruppenphase + KO erfordert 4-16 Uczestnicy.");
 });
 
   test("Rules config: Tie-Break-Profil kann umgestellt werden", () => {

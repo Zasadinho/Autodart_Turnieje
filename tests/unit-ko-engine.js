@@ -1,4 +1,4 @@
-  test("KO engine: 9 Teilnehmer erzeugen genau ein offenes Match in Runde 1", () => {
+  test("KO engine: 9 Uczestnicy erzeugen genau ein offenes Match in Runde 1", () => {
     const tournament = createKoTournament(participantList(9, "K9"));
     const openRoundOne = getMatchesByStage(tournament, MATCH_STAGE_KO)
       .filter((match) => match.round === 1 && match.player1Id && match.player2Id && !isByeMatchResult(match));

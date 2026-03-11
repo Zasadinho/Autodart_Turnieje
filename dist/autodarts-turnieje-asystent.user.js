@@ -2818,7 +2818,7 @@
     const limits = getModeParticipantLimits(mode);
     const participantCount = Number(count || 0);
     if (participantCount < limits.min || participantCount > limits.max) {
-      return `${limits.label} erfordert ${limits.min}-${limits.max} Teilnehmer.`;
+      return `${limits.label} erfordert ${limits.min}-${limits.max} Uczestnicy.`;
     }
     return "";
   }
@@ -3604,7 +3604,7 @@
     [TOURNAMENT_TIME_PROFILE_NORMAL]: Object.freeze({
       id: TOURNAMENT_TIME_PROFILE_NORMAL,
       label: "Normal",
-      description: "Ausgewogener Standard f\u00fcr lokale Turniere.",
+      description: "Zrównoważony standard dla lokalnych turniejów.",
       legPaceMultiplier: 1.00,
       matchTransitionMinutes: 0.80,
       phaseTransitionMultiplier: 1.00,
@@ -4608,7 +4608,7 @@
       return { ok: false, message: "Match nicht gefunden." };
     }
     if (!match.player1Id || !match.player2Id) {
-      return { ok: false, message: "Match hat noch keine zwei Teilnehmer." };
+      return { ok: false, message: "Match hat noch keine zwei Uczestnicy." };
     }
     if (winnerId && winnerId !== match.player1Id && winnerId !== match.player2Id) {
       return { ok: false, message: "Gewinner passt nicht zum Match." };
@@ -5900,12 +5900,12 @@
       const seededRoundOne = seededMatches.filter((match) => match.round === 1);
       const seededOpenRoundOne = seededRoundOne.filter((match) => match.player1Id && match.player2Id && !isByeMatchResult(match));
       record(
-        "KO Seeded: 9 Teilnehmer -> genau 1 offenes R1-Match",
+        "KO Seeded: 9 Uczestnicy -> genau 1 offenes R1-Match",
         seededOpenRoundOne.length === 1,
         `offene R1-Matches: ${seededOpenRoundOne.length}`,
       );
     } catch (error) {
-      record("KO Seeded: 9 Teilnehmer -> genau 1 offenes R1-Match", false, String(error?.message || error));
+      record("KO Seeded: 9 Uczestnicy -> genau 1 offenes R1-Match", false, String(error?.message || error));
     }
 
     try {
@@ -6700,7 +6700,7 @@
       authBlocked,
       apiLabel: hasToken ? (authBlocked ? "API Auth abgelaufen" : "API Auth bereit") : "Brak autoryzacji API",
       boardLabel: hasBoard
-        ? `Board aktiv (${boardPreview})`
+        ? `Aktywna tablica (${boardPreview})`
         : hasBoardValue
           ? `Board-ID ung\u00fcltig (${boardPreview})`
           : "Kein aktives Board",
@@ -7737,7 +7737,7 @@
         disabled: true,
         title: boardId
           ? `Board-ID ung\u00fcltig (${boardId}). Bitte Board in einer manuellen Lobby w\u00e4hlen.`
-          : "Kein Board aktiv. Bitte einmal manuell eine Lobby \u00f6ffnen und Board w\u00e4hlen.",
+          : "Kein Aktywna tablica. Bitte einmal manuell eine Lobby \u00f6ffnen und Board w\u00e4hlen.",
       };
     }
 
@@ -7822,7 +7822,7 @@
 
     const duplicates = getDuplicateParticipantNames(tournament);
     if (duplicates.length) {
-      setNotice("error", "F\u00fcr Auto-Sync m\u00fcssen Teilnehmernamen eindeutig sein.");
+      setNotice("error", "F\u00fcr Auto-Sync m\u00fcssen Uczestnicynamen eindeutig sein.");
       return;
     }
 
@@ -7855,7 +7855,7 @@
     const participant1 = participantById(tournament, match.player1Id);
     const participant2 = participantById(tournament, match.player2Id);
     if (!participant1 || !participant2) {
-      setNotice("error", "Teilnehmerzuordnung im Match ist unvollst\u00e4ndig.");
+      setNotice("error", "Uczestnicyzuordnung im Match ist unvollst\u00e4ndig.");
       return;
     }
 
@@ -9120,7 +9120,7 @@
       return `
         <section class="ata-estimate-card ata-estimate-card-pending">
           <div class="ata-estimate-head">
-            <strong>Voraussichtliche Turnierzeit</strong>
+            <strong>Przewidywany czas trwania turnieju</strong>
             ${helpLinks}
           </div>
           <div class="ata-estimate-value ata-estimate-value-pending">Noch nicht berechenbar</div>
@@ -9135,18 +9135,18 @@
     return `
       <section class="ata-estimate-card">
         <div class="ata-estimate-head">
-          <strong>Voraussichtliche Turnierzeit</strong>
+          <strong>Przewidywany czas trwania turnieju</strong>
           ${helpLinks}
         </div>
-        <div class="ata-estimate-value">ca. ${escapeHtml(formatDurationMinutes(estimate.likelyMinutes))}</div>
+        <div class="ata-estimate-value">ok. ${escapeHtml(formatDurationMinutes(estimate.likelyMinutes))}</div>
         <div class="ata-estimate-meta">
-          <span>${escapeHtml(String(estimate.participantCount))} Teilnehmer</span>
+          <span>${escapeHtml(String(estimate.participantCount))} Uczestnicy</span>
           <span>${escapeHtml(String(estimate.matchCount))} Spiele</span>
-          <span>Durchschnitt ${escapeHtml(formatDurationDecimal(estimate.matchMinutes))} min/Spiel</span>
+          <span>Średnia ${escapeHtml(formatDurationDecimal(estimate.matchMinutes))} min/Spiel</span>
           <span>Profil ${escapeHtml(estimate.profile.label)}</span>
         </div>
         <div class="ata-estimate-range">
-          Realistisch: ${escapeHtml(formatDurationMinutes(estimate.lowMinutes))} - ${escapeHtml(formatDurationMinutes(estimate.highMinutes))}
+          Realistycznie: ${escapeHtml(formatDurationMinutes(estimate.lowMinutes))} - ${escapeHtml(formatDurationMinutes(estimate.highMinutes))}
         </div>
         <p class="ata-small">${escapeHtml(estimate.profile.description)}</p>
         <p class="ata-small">Basis: ${escapeHtml(setupSummary)}.</p>
@@ -9180,7 +9180,7 @@
               <h2>Asystent Turnieju</h2>
               <p>Lokalne zarządzanie dla trybu pucharowego, ligi i fazy grupowej. <span class="ata-version">v${escapeHtml(APP_VERSION)}</span></p>
             </div>
-            <button type="button" class="ata-close-btn" data-action="close-drawer" aria-label="Schlie\u00dfen">Schlie\u00dfen</button>
+            <button type="button" class="ata-close-btn" data-action="close-drawer" aria-label="Zamknij">Zamknij</button>
           </header>
           <nav class="ata-tabs">${tabs}</nav>
           ${runtimeStatusHtml}
@@ -9242,7 +9242,7 @@
         { href: DRA_GUI_RULE_OPEN_DRAW_URL, kind: "rule", label: "DRA-Regelerklärung zu Open Draw öffnen", title: "DRA-Regeln in der GUI: Open Draw" },
       ]);
       const modeLimitHelpLinks = renderInfoLinks([
-        { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "DRA-Regelerklärung zu Limits öffnen", title: "DRA-Regeln in der GUI: Teilnehmerlimits" },
+        { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "DRA-Regelerklärung zu Limits öffnen", title: "DRA-Regeln in der GUI: Uczestnicylimits" },
       ]);
       return `
         <section class="ata-card tournamentCard">
@@ -9348,14 +9348,14 @@
               </div>
               <aside class="ata-create-side">
                 <div class="ata-field">
-                  <label for="ata-participants">Teilnehmer (eine Zeile pro Person)</label>
+                  <label for="ata-participants">Uczestnicy (jedna linia na osobę)</label>
                   <textarea id="ata-participants" name="participants" placeholder="Max Mustermann&#10;Erika Musterfrau">${escapeHtml(draft.participantsText)}</textarea>
                 </div>
                 <div id="ata-create-duration-estimate">
                   ${renderTournamentDurationEstimate(durationEstimate)}
                 </div>
                 <div class="ata-actions">
-                  <button type="button" class="ata-btn ata-btn-sm" data-action="shuffle-participants">Teilnehmer mischen</button>
+                  <button type="button" class="ata-btn ata-btn-sm" data-action="shuffle-participants">Uczestnicy mischen</button>
                   <button type="submit" class="ata-btn ata-btn-primary">Turnier anlegen</button>
                 </div>
                 <p class="ata-small">Modus-Limits ${modeLimitHelpLinks}: ${escapeHtml(modeLimitSummary)}.</p>
@@ -9432,7 +9432,7 @@
             <div class="ata-info-tag-cloud">${x01TagsHtml}</div>
           </div>
           <div class="ata-meta-block">
-            <div class="ata-meta-heading">Teilnehmerfeld <span class="ata-player-chip-count">(${participantsCount})</span></div>
+            <div class="ata-meta-heading">Uczestnicyfeld <span class="ata-player-chip-count">(${participantsCount})</span></div>
             <div class="ata-player-chip-cloud">${participantsHtml}</div>
           </div>
         </div>
@@ -10035,10 +10035,10 @@
       </section>
       <section class="ata-card tournamentCard">
         ${renderSectionHeading("Regelbasis und Limits", [
-          { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zu Limits \u00f6ffnen", title: "DRA-Regeln in der GUI: Teilnehmerlimits" },
+          { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zu Limits \u00f6ffnen", title: "DRA-Regeln in der GUI: Uczestnicylimits" },
         ])}
         <p class="ata-small">Aktive Modus-Limits: ${escapeHtml(modeLimitSummary)}.</p>
-        <p class="ata-small">Die DRA-Regeln setzen kein fixes globales Teilnehmermaximum. Die Grenzen oben sind bewusst f\u00fcr faire Turnierdauer und stabile Darstellung gesetzt.</p>
+        <p class="ata-small">Die DRA-Regeln setzen kein fixes globales Uczestnicymaximum. Die Grenzen oben sind bewusst f\u00fcr faire Turnierdauer und stabile Darstellung gesetzt.</p>
       </section>
       <section class="ata-card tournamentCard">
         ${renderSectionHeading("Storage", [
@@ -10565,14 +10565,14 @@
     }
     const participants = parseParticipantLines(participantField.value);
     if (participants.length < 2) {
-      setNotice("info", "Mindestens zwei Teilnehmer zum Mischen eingeben.", 2200);
+      setNotice("info", "Mindestens zwei Uczestnicy zum Mischen eingeben.", 2200);
       return;
     }
     const shuffledNames = shuffleArray(participants.map((participant) => participant.name));
     participantField.value = shuffledNames.join("\n");
     updateCreateDraftFromForm(form, true);
     refreshCreateFormDurationEstimate(form);
-    setNotice("success", "Teilnehmer wurden zuf\u00e4llig gemischt.", 1800);
+    setNotice("success", "Uczestnicy wurden zuf\u00e4llig gemischt.", 1800);
   }
 
 

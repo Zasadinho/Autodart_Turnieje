@@ -944,7 +944,7 @@
     const limits = getModeParticipantLimits(mode);
     const participantCount = Number(count || 0);
     if (participantCount < limits.min || participantCount > limits.max) {
-      return `${limits.label} erfordert ${limits.min}-${limits.max} Teilnehmer.`;
+      return `${limits.label} erfordert ${limits.min}-${limits.max} Uczestnicy.`;
     }
     return "";
   }

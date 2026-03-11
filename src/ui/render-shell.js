@@ -25,7 +25,7 @@
               <h2>Asystent Turnieju</h2>
               <p>Lokalne zarządzanie dla trybu pucharowego, ligi i fazy grupowej. <span class="ata-version">v${escapeHtml(APP_VERSION)}</span></p>
             </div>
-            <button type="button" class="ata-close-btn" data-action="close-drawer" aria-label="Schlie\u00dfen">Schlie\u00dfen</button>
+            <button type="button" class="ata-close-btn" data-action="close-drawer" aria-label="Zamknij">Zamknij</button>
           </header>
           <nav class="ata-tabs">${tabs}</nav>
           ${runtimeStatusHtml}

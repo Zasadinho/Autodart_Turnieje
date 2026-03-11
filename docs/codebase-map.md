@@ -347,7 +347,7 @@ Die Tabellen unten beschreiben pro Datei:
 |---|---|---|---|
 | `src/core/constants.js` | technischer Einstieg des Bundles | Userscript-Header, IIFE-Start, globale Keys, URLs, Konfiguration, feste Optionen und Begriffe | `build/manifest.json`, alle folgenden `src/*`-Dateien, `src/runtime/bootstrap.js` |
 | `src/core/state.js` | zentraler Laufzeitzustand | hält Drawer-, Tab-, Notice-, Bracket-, API-, Observer- und Store-State | `src/core/utils.js`, `src/data/normalization.js`, `src/data/storage.js`, `src/ui/handlers.js` |
-| `src/core/utils.js` | Querschnitts-Helfer | Sanitizing, HTML-Escaping, IDs, Zufall, Teilnehmer-Parsing und Routing-Key | `src/data/normalization.js`, `src/domain/*`, `src/ui/*`, `src/infra/*`, `src/runtime/*` |
+| `src/core/utils.js` | Querschnitts-Helfer | Sanitizing, HTML-Escaping, IDs, Zufall, Uczestnicy-Parsing und Routing-Key | `src/data/normalization.js`, `src/domain/*`, `src/ui/*`, `src/infra/*`, `src/runtime/*` |
 | `src/core/logging.js` | Debug- und Fehlerlogging | `logDebug`, `logWarn`, `logError` mit ATA-Präfixen | `src/data/storage.js`, `src/domain/ko-engine.js`, `src/infra/*`, `src/runtime/*`, `src/ui/handlers.js` |
 | `src/core/events.js` | Cleanup- und Lifecycle-Utilities | registriert Cleanup-Funktionen, Listener, Intervalle und Observer zentral | `src/infra/route-hooks.js`, `src/runtime/bootstrap.js`, `src/runtime/lifecycle.js`, `src/runtime/public-api.js` |
 
@@ -444,7 +444,7 @@ Hier liegt die eigentliche Turnierlogik. Wenn sich eine fachliche Regel ändert,
 
 ### `tests/fixtures/*.json`
 - `group-deadlock-playoff.json`: Referenzfall für nicht auflösbare Gruppen-Gleichstände
-- `ko-seeded-9.json`: Referenzfall für KO-Seeding mit 9 Teilnehmern und genau einem offenen Match in Runde 1
+- `ko-seeded-9.json`: Referenzfall für KO-Seeding mit 9 Uczestnicyn und genau einem offenen Match in Runde 1
 - `migration-v2-to-v3.json`: Referenzfall für KO-Migration auf Engine v3
 
 Diese Dateien sind keine aktive Logik, aber wichtig, um fachliche Spezialfälle reproduzierbar zu halten.

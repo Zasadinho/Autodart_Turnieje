@@ -515,14 +515,14 @@
     }
     const participants = parseParticipantLines(participantField.value);
     if (participants.length < 2) {
-      setNotice("info", "Mindestens zwei Teilnehmer zum Mischen eingeben.", 2200);
+      setNotice("info", "Mindestens zwei Uczestnicy zum Mischen eingeben.", 2200);
       return;
     }
     const shuffledNames = shuffleArray(participants.map((participant) => participant.name));
     participantField.value = shuffledNames.join("\n");
     updateCreateDraftFromForm(form, true);
     refreshCreateFormDurationEstimate(form);
-    setNotice("success", "Teilnehmer wurden zuf\u00e4llig gemischt.", 1800);
+    setNotice("success", "Uczestnicy wurden zuf\u00e4llig gemischt.", 1800);
   }
 
 

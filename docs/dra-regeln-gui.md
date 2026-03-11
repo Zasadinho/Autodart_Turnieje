@@ -91,7 +91,7 @@ Screenshot-Kontext:
 - [DRA-RULE_BOOK.pdf#page=18](DRA-RULE_BOOK.pdf#page=18)
 
 <a id="dra-gui-rule-participant-limits"></a>
-## Teilnehmerlimits
+## Uczestnicylimits
 
 ### GUI-Stellen
 - Turnier > Modus-Limits
@@ -135,7 +135,7 @@ Screenshot-Kontext:
 
 ### Warum wichtig
 - Verhindert Missverständnis "Ghost-Spieler" vs. echtes Freilos.
-- Sichert faire Bracket-Mathematik bei Teilnehmerzahlen ohne 2er-Potenz.
+- Sichert faire Bracket-Mathematik bei Uczestnicyzahlen ohne 2er-Potenz.
 
 ### Nachprüfen im PDF
 - [DRA-RULE_BOOK.pdf#page=4](DRA-RULE_BOOK.pdf#page=4)

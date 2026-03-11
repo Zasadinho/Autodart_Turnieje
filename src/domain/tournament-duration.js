@@ -50,7 +50,7 @@
     [TOURNAMENT_TIME_PROFILE_NORMAL]: Object.freeze({
       id: TOURNAMENT_TIME_PROFILE_NORMAL,
       label: "Normal",
-      description: "Ausgewogener Standard f\u00fcr lokale Turniere.",
+      description: "Zrównoważony standard dla lokalnych turniejów.",
       legPaceMultiplier: 1.00,
       matchTransitionMinutes: 0.80,
       phaseTransitionMultiplier: 1.00,

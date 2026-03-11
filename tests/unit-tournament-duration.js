@@ -207,5 +207,5 @@ test("Tournament duration: invalid participant count stays pending", () => {
   });
 
   assert(!estimate.ready, "Estimate should not be ready below mode minimum.");
-  assertEqual(estimate.reason, "Gruppenphase + KO erfordert 4-16 Teilnehmer.");
+  assertEqual(estimate.reason, "Gruppenphase + KO erfordert 4-16 Uczestnicy.");
 });

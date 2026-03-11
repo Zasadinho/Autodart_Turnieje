@@ -45,7 +45,7 @@
       return { ok: false, message: "Match nicht gefunden." };
     }
     if (!match.player1Id || !match.player2Id) {
-      return { ok: false, message: "Match hat noch keine zwei Teilnehmer." };
+      return { ok: false, message: "Match hat noch keine zwei Uczestnicy." };
     }
     if (winnerId && winnerId !== match.player1Id && winnerId !== match.player2Id) {
       return { ok: false, message: "Gewinner passt nicht zum Match." };

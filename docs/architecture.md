@@ -62,7 +62,7 @@ Der Assistent ist in fachliche Schichten aufgeteilt und wird weiterhin als einze
 - Details zur Formel und zur externen Kalibrierung stehen in `docs/tournament-duration.md`.
 - Die Turnierzeit-Prognose lebt als pure Domain-Logik in `src/domain/tournament-duration.js`.
 - Grundlage der Schätzung:
-  - Modus und Teilnehmerzahl
+  - Modus und Uczestnicyzahl
   - erwartete Legs pro Match aus `Best of`
   - X01-Setup (`Startscore`, `In`, `Out`, `Bull-off`, `Tryb bulla`, `Max Rund`)
   - globales Zeitprofil (`fast | normal | slow`)

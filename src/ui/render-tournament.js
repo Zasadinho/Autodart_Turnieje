@@ -35,7 +35,7 @@
         { href: DRA_GUI_RULE_OPEN_DRAW_URL, kind: "rule", label: "DRA-Regelerklärung zu Open Draw öffnen", title: "DRA-Regeln in der GUI: Open Draw" },
       ]);
       const modeLimitHelpLinks = renderInfoLinks([
-        { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "DRA-Regelerklärung zu Limits öffnen", title: "DRA-Regeln in der GUI: Teilnehmerlimits" },
+        { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "DRA-Regelerklärung zu Limits öffnen", title: "DRA-Regeln in der GUI: Uczestnicylimits" },
       ]);
       return `
         <section class="ata-card tournamentCard">
@@ -141,14 +141,14 @@
               </div>
               <aside class="ata-create-side">
                 <div class="ata-field">
-                  <label for="ata-participants">Teilnehmer (eine Zeile pro Person)</label>
+                  <label for="ata-participants">Uczestnicy (jedna linia na osobę)</label>
                   <textarea id="ata-participants" name="participants" placeholder="Max Mustermann&#10;Erika Musterfrau">${escapeHtml(draft.participantsText)}</textarea>
                 </div>
                 <div id="ata-create-duration-estimate">
                   ${renderTournamentDurationEstimate(durationEstimate)}
                 </div>
                 <div class="ata-actions">
-                  <button type="button" class="ata-btn ata-btn-sm" data-action="shuffle-participants">Teilnehmer mischen</button>
+                  <button type="button" class="ata-btn ata-btn-sm" data-action="shuffle-participants">Uczestnicy mischen</button>
                   <button type="submit" class="ata-btn ata-btn-primary">Turnier anlegen</button>
                 </div>
                 <p class="ata-small">Modus-Limits ${modeLimitHelpLinks}: ${escapeHtml(modeLimitSummary)}.</p>
@@ -225,7 +225,7 @@
             <div class="ata-info-tag-cloud">${x01TagsHtml}</div>
           </div>
           <div class="ata-meta-block">
-            <div class="ata-meta-heading">Teilnehmerfeld <span class="ata-player-chip-count">(${participantsCount})</span></div>
+            <div class="ata-meta-heading">Uczestnicyfeld <span class="ata-player-chip-count">(${participantsCount})</span></div>
             <div class="ata-player-chip-cloud">${participantsHtml}</div>
           </div>
         </div>

@@ -772,7 +772,7 @@
         disabled: true,
         title: boardId
           ? `Board-ID ung\u00fcltig (${boardId}). Bitte Board in einer manuellen Lobby w\u00e4hlen.`
-          : "Kein Board aktiv. Bitte einmal manuell eine Lobby \u00f6ffnen und Board w\u00e4hlen.",
+          : "Kein Aktywna tablica. Bitte einmal manuell eine Lobby \u00f6ffnen und Board w\u00e4hlen.",
       };
     }
 
@@ -857,7 +857,7 @@
 
     const duplicates = getDuplicateParticipantNames(tournament);
     if (duplicates.length) {
-      setNotice("error", "F\u00fcr Auto-Sync m\u00fcssen Teilnehmernamen eindeutig sein.");
+      setNotice("error", "F\u00fcr Auto-Sync m\u00fcssen Uczestnicynamen eindeutig sein.");
       return;
     }
 
@@ -890,7 +890,7 @@
     const participant1 = participantById(tournament, match.player1Id);
     const participant2 = participantById(tournament, match.player2Id);
     if (!participant1 || !participant2) {
-      setNotice("error", "Teilnehmerzuordnung im Match ist unvollst\u00e4ndig.");
+      setNotice("error", "Uczestnicyzuordnung im Match ist unvollst\u00e4ndig.");
       return;
     }
 

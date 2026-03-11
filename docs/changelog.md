@@ -20,9 +20,9 @@
   - neue Dokumentation `docs/tournament-duration.md` mit Formel, Parametern und Benchmark-Basis
 - Turnierzeit-Prognose ergänzt:
   - neue pure Domain-Datei `src/domain/tournament-duration.js`
-  - Live-Schätzung in der Turnieranlage unter `Teilnehmer`
-  - Berechnung berücksichtigt Modus, Teilnehmerzahl, `Best of`, `Punkty startowe`, `In`, `Out`, `Bull-off`, `Tryb bulla` und `Max Rund`
-  - Ausgabe als Hauptwert plus realistische Spannweite
+  - Live-Schätzung in der Turnieranlage unter `Uczestnicy`
+  - Berechnung berücksichtigt Modus, Uczestnicyzahl, `Best of`, `Punkty startowe`, `In`, `Out`, `Bull-off`, `Tryb bulla` und `Max Rund`
+  - Ausgabe als Hauptwert plus Realistyczniee Spannweite
 - Neue globale Einstellung:
   - `settings.tournamentTimeProfile` mit `fast | normal | slow`
   - Select im Tab `Einstellungen` zur Kalibrierung lokaler Spielgeschwindigkeit
@@ -120,7 +120,7 @@
 
 ## 0.2.17
 - Turnierformular (`Utwórz nowy turniej`) visuell und strukturell optimiert:
-  - kompakte Zwei-Zonen-Ansicht (Konfiguration links, Teilnehmer + Aktionen rechts), damit die Inhalte auf Desktop besser auf eine Bildschirmansicht passen
+  - kompakte Zwei-Zonen-Ansicht (Konfiguration links, Uczestnicy + Aktionen rechts), damit die Inhalte auf Desktop besser auf eine Bildschirmansicht passen
   - Preset-Button verkleinert (`PDC Zastosuj preset`) und besser in die Formularlogik integriert
   - Feldreihenfolge angepasst (`Bull-off` vor `Bull mode`).
 - Lokale Lobby-Härtung:
@@ -173,7 +173,7 @@
     - `randomize ON` -> `open_draw`
     - `randomize OFF` -> `seeded`
   - PDC/DRA-konforme Bye-Verteilung über Standard-Seed-Placement
-  - Fehlerfall bei 9 Teilnehmern behoben (kein `Seed 1 vs Seed 2` in Runde 1 mehr).
+  - Fehlerfall bei 9 Uczestnicyn behoben (kein `Seed 1 vs Seed 2` in Runde 1 mehr).
 - Legacy-KO-Turniere werden beim Laden auf Engine v2 migriert:
   - vor Migration wird automatisch ein Backup geschrieben (`ata:tournament:ko-migration-backups:v2`).
 - Match-Metadaten erweitert um `match.meta.resultKind`:
@@ -185,7 +185,7 @@
 - Interne Struktur klarer getrennt in Datenhaltung, Turnierlogik und Präsentation (inkrementell in `dist`).
 
 ## 0.2.12
-- Teilnehmer-Limits auf regelbasierte, modusabhängige Grenzen umgestellt:
+- Uczestnicy-Limits auf regelbasierte, modusabhängige Grenzen umgestellt:
   - `ko`: `2..128`
   - `league`: `2..16`
   - `groups_ko`: `4..16`
@@ -197,7 +197,7 @@
 - Bracket-Renderer auf `brackets-viewer@1.9.0` vereinheitlicht; GoJS-Anteil entfernt.
 - Bracket-iframe visuell auf Autodarts-Look angepasst (größere Schrift, bessere Proportionen, volle Breiten-/Scrollnutzung).
 - Doppelte/unerwünschte interne Bracket-Überschrift ausgeblendet.
-- KO-Payload defensiv gehärtet: Unbekannte Teilnehmer-IDs werden nicht mehr als valide Opponents übernommen.
+- KO-Payload defensiv gehärtet: Unbekannte Uczestnicy-IDs werden nicht mehr als valide Opponents übernommen.
 - HTML-Fallback im Tab `View` jetzt standardmäßig verborgen und nur bei Renderfehler/Timeout sichtbar.
 - Diverse UI-Texte korrigiert (u. a. Umlaute bei Fehlermeldungen).
 

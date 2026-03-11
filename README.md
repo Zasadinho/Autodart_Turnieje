@@ -83,9 +83,9 @@ Nach Installation ist links im Hauptmenü der neue Eintrag sichtbar. Darüber ö
 - Turnieranlage:
   - KO-Erstrunde als Hybrid-Draw (`seeded` oder `open_draw`)
   - Preset-Auswahl mit offiziellem European-Tour-Format, Basic-Kompatibilitätsprofil und Custom-Status
-  - Kompaktes Formular-Layout (Konfiguration + Teilnehmerbereich)
-  - Live-Prognose für die voraussichtliche Turnierzeit
-  - Teilnehmerliste kann per Button gemischt werden
+  - Kompaktes Formular-Layout (Konfiguration + Uczestnicybereich)
+  - Live-Prognose für die Przewidywany czas trwania turnieju
+  - Uczestnicyliste kann per Button gemischt werden
   - Formularentwurf bleibt erhalten (z. B. beim Moduswechsel)
 - Import/Export:
   - JSON-Datei exportieren
@@ -107,7 +107,7 @@ Nach Installation ist links im Hauptmenü der neue Eintrag sichtbar. Darüber ö
   - Bei nicht voller 2er-Potenz erhalten Top-Seeds Freilose.
   - Beispiel mit 9 Spielern im 16er-Baum: Nur Seed 8 vs Seed 9 spielt in Runde 1.
 - KO-Matches werden pro Turnierast freigeschaltet:
-  - Ein Match ist spielbar, sobald beide Teilnehmer feststehen.
+  - Ein Match ist spielbar, sobald beide Uczestnicy feststehen.
   - Bei Runde > 1 müssen die direkten Vorgänger-Matches abgeschlossen sein.
 - Nur Runde-1-Byes dürfen automatisch als abgeschlossen gesetzt werden.
 - Freilose werden im Tab `Spiele` explizit als `Freilos (Bye)` markiert.
@@ -138,7 +138,7 @@ Tab: `Turnier`
 ### Pflichtfelder
 - Turniername
 - Modus
-- Teilnehmer (eine Zeile pro Person)
+- Uczestnicy (jedna linia na osobę)
 
 ### Feld- und Auswahlinhalte (inkl. Warum)
 | Feld | Optionen / Eingaben | Was es steuert | Warum das wichtig ist |
@@ -156,8 +156,8 @@ Tab: `Turnier`
 | `Lobby` | fix `Privat` | Sichtbarkeit der API-Lobby | Lokalny Turniej bleibt bewusst privat/sicher |
 | `Preset` | Auswahlfeld + Button `Zastosuj preset` | Setzt alle Preset-relevanten Turnierfelder konsistent | Offizielle und kompatible Profile bleiben klar getrennt |
 | `Losowo wymieszaj pierwszą rundę KO` | Checkbox `ON/OFF` | `open_draw` oder `seeded` in Runde 1 | Transparente Entscheidung zwischen Zufall und Setzlogik |
-| `Teilnehmer` | Je Spieler eine Zeile | Teilnehmerliste inkl. Reihenfolge | Reihenfolge ist bei `seeded` zugleich Seed-Reihenfolge |
-| `Teilnehmer mischen` | Button | Mischt Teilnehmertextliste | Praktisch für spontane Auslosung vor Start |
+| `Uczestnicy` | Je Spieler eine Zeile | Uczestnicyliste inkl. Reihenfolge | Reihenfolge ist bei `seeded` zugleich Seed-Reihenfolge |
+| `Uczestnicy mischen` | Button | Mischt Uczestnicytextliste | Praktisch für spontane Auslosung vor Start |
 
 ### Preset-Katalog
 - Bei Neuanlage ist standardmäßig `PDC European Tour (Official)` aktiv.
@@ -186,21 +186,21 @@ Tab: `Turnier`
 - Bei manuellen Änderungen an Preset-relevanten Feldern springt der Preset-Status auf `Indywidualny`.
 - Legacy-Drafts und Legacy-Turniere mit der alten Preset-ID `pdc_standard` werden automatisch auf `PDC 501 / Double Out (Basic)` abgebildet, damit gespeicherte `Best of 5`-Turniere nicht still auf `Best of 11` umspringen.
 
-### Voraussichtliche Turnierzeit
+### Przewidywany czas trwania turnieju
 - Details zur Formel, zu den Faktoren und zur Benchmark-Basis: [docs/tournament-duration.md](docs/tournament-duration.md)
-- In der rechten Spalte unter `Teilnehmer` wird eine Live-Prognose angezeigt.
+- In der rechten Spalte unter `Uczestnicy` wird eine Live-Prognose angezeigt.
 - Die Berechnung aktualisiert sich bei jeder Änderung im Formular:
-  - Teilnehmerzahl und Modus
+  - Uczestnicyzahl und Modus
   - `Best of Legs`
   - `Punkty startowe`
   - `In mode`, `Out mode`
   - `Bull-off`, `Tryb bulla`
   - `Max Rund`
 - Die Schätzung zeigt:
-  - Hauptwert `ca. Xh Ym`
-  - realistische Spannweite
+  - Hauptwert `ok. Xh Ym`
+  - Realistyczniee Spannweite
   - Anzahl geplanter Spiele
-  - durchschnittliche Matchdauer
+  - Średnialiche Matchdauer
 - Annahme:
   - Single-Board-Flow auf einem Board
 - Die globale Kalibrierung erfolgt über das Zeitprofil im Tab `Einstellungen`.
@@ -209,14 +209,14 @@ Beispiel der Live-Zeitprognose im Turnierformular:
 
 ![Live-Zeitprognose für ein Turnier](assets/ss_Turnier_Zeitprognose.png)
 
-Die Anzeige bündelt Teilnehmerzahl, geplante Spielanzahl, durchschnittliche Matchdauer, aktives Zeitprofil und eine realistische Spannweite in einem kompakten Überblick.
+Die Anzeige bündelt Uczestnicyzahl, geplante Spielanzahl, Średnialiche Matchdauer, aktives Zeitprofil und eine Realistyczniee Spannweite in einem kompakten Überblick.
 
 ### Nach dem Anlegen
 Im aktiven Turnier siehst du die wichtigsten Tags sofort:
 - Format (`KO`, `Liga`, `Gruppenphase + KO`)
 - `Best of`, `First to`, `Punkty startowe`
 - Bei KO: `Open Draw`/`Gesetzter Draw`, `Draw-Lock aktiv/aus`
-- X01-Zusammenfassung und Teilnehmerchips
+- X01-Zusammenfassung und Uczestnicychips
 
 ![Aktives Turnier nach Anlage](assets/ss_Turnier_angelegt.png)
 
@@ -360,7 +360,7 @@ Legende für die eingeblendeten Hilfelinks:
   - `Langsam`
 - Das Profil wirkt als globaler Kalibrierungsfaktor für die Live-Prognose im Tab `Turnier`.
 - Unabhängig vom Profil bleiben die fachlichen Einflussgrößen erhalten:
-  - Modus und Teilnehmerzahl
+  - Modus und Uczestnicyzahl
   - `Best of Legs`
   - `Punkty startowe`
   - `In` / `Out`
@@ -397,7 +397,7 @@ Priorisierung für Limits in diesem Projekt:
     [DRA-RULE_BOOK.pdf#page=4](docs/DRA-RULE_BOOK.pdf#page=4)
   - Turnierformat KO / Round Robin: `6.8.1`, `6.8.2` (Seite 17):
     [DRA-RULE_BOOK.pdf#page=17](docs/DRA-RULE_BOOK.pdf#page=17)
-  - Teilnehmer und Veranstalter-Ermessen: `6.10.1`, `6.10.5.2` (Seiten 17-18):
+  - Uczestnicy und Veranstalter-Ermessen: `6.10.1`, `6.10.5.2` (Seiten 17-18):
     [DRA-RULE_BOOK.pdf#page=18](docs/DRA-RULE_BOOK.pdf#page=18)
   - Draw bleibt bestehen: `6.12.1` (Seite 18):
     [DRA-RULE_BOOK.pdf#page=18](docs/DRA-RULE_BOOK.pdf#page=18)
@@ -412,7 +412,7 @@ Priorisierung für Limits in diesem Projekt:
 | `groups_ko` | `4..16` | Mindestens 4 für zwei Gruppen mit anschliessender KO-Phase; Obergrenze aus Spielanzahl/Bedienbarkeit. |
 
 Hinweise:
-- Zusätzliches technisches Hard-Cap: `128` Teilnehmer.
+- Zusätzliches technisches Hard-Cap: `128` Uczestnicy.
 - Die GUI verlinkt Regelhintergründe über das `Regel-Icon` auf [docs/dra-regeln-gui.md](docs/dra-regeln-gui.md).
 
 ### Warum diese Regeln für Spieler relevant sind
@@ -436,7 +436,7 @@ Hinweise:
 ### API-Start/Sync funktioniert nicht
 - Login prüfen (Token vorhanden?).
 - Feature-Flag aktiv?
-- Eindeutige Teilnehmernamen verwenden.
+- Eindeutige Uczestnicynamen verwenden.
 - Bei mehreren offenen Matches mit derselben Paarung wird absichtlich nicht automatisch übernommen (`Mehrdeutige Zuordnung`), um falsche Ergebnisse zu vermeiden.
 
 ### Bracket wird nicht gerendert
@@ -534,7 +534,7 @@ powershell -ExecutionPolicy Bypass -File scripts/test-runtime-contract.ps1
   - `ko`: `2..128`
   - `league`: `2..16`
   - `groups_ko`: `4..16`
-- Technisches Hard-Cap: `128` Teilnehmer
+- Technisches Hard-Cap: `128` Uczestnicy
 - API-Halbautomatik basiert auf in der Praxis verwendeten Endpunkten (Inference)
 - DOM-Autodetect bleibt best-effort
 

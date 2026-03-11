@@ -28,7 +28,7 @@ Diese Dokumentation beschreibt die Berechnungsgrundlage der Live-Prognose in `sr
 | `x01Preset` | Ist nur ein Alias für die konkreten X01-Felder. |
 | `randomizeKoRound1`, `koDrawLocked` | Ändern die Strukturtransparenz, aber nicht die Matchanzahl. |
 | `lobbyVisibility` | Ist organisatorisch relevant, aber kein deterministischer Zeitfaktor. |
-| Teilnehmer-Reihenfolge | Beeinflusst Seeding, aber nicht die Zahl der Matches oder Legs. |
+| Uczestnicy-Reihenfolge | Beeinflusst Seeding, aber nicht die Zahl der Matches oder Legs. |
 | `rules.tieBreakProfile` | Kann nur in Sonderfällen zu Playoffs führen; das ist vor Turnierstart nicht deterministisch planbar. |
 | Mehrere Boards | Das Produkt modelliert bewusst nur `singleBoard = true`. |
 | Indywidualnye Spieler-Stats | Vor Turnierstart nicht verlässlich verfügbar; dafür existiert das globale Zeitprofil. |
@@ -135,7 +135,7 @@ Das folgt direkt aus Organisatoren-Praxis: nicht nur die Wurfstärke, sondern au
 - Quelle: https://www.aboutthedarts.com/how-to/calculate-the-time-required-for-your-darts-tournament/
 - Der Rechner trennt explizit zwischen:
   - Anzahl Boards
-  - durchschnittlicher Dauer eines Legs
+  - Średnialicher Dauer eines Legs
   - Zeit zwischen Matches
 - Das bestätigt zwei Kernannahmen dieser App:
   - `singleBoard = true` muss explizit in die Formel eingebaut sein

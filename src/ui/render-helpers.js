@@ -85,7 +85,7 @@
       return `
         <section class="ata-estimate-card ata-estimate-card-pending">
           <div class="ata-estimate-head">
-            <strong>Voraussichtliche Turnierzeit</strong>
+            <strong>Przewidywany czas trwania turnieju</strong>
             ${helpLinks}
           </div>
           <div class="ata-estimate-value ata-estimate-value-pending">Noch nicht berechenbar</div>
@@ -100,18 +100,18 @@
     return `
       <section class="ata-estimate-card">
         <div class="ata-estimate-head">
-          <strong>Voraussichtliche Turnierzeit</strong>
+          <strong>Przewidywany czas trwania turnieju</strong>
           ${helpLinks}
         </div>
-        <div class="ata-estimate-value">ca. ${escapeHtml(formatDurationMinutes(estimate.likelyMinutes))}</div>
+        <div class="ata-estimate-value">ok. ${escapeHtml(formatDurationMinutes(estimate.likelyMinutes))}</div>
         <div class="ata-estimate-meta">
-          <span>${escapeHtml(String(estimate.participantCount))} Teilnehmer</span>
+          <span>${escapeHtml(String(estimate.participantCount))} Uczestnicy</span>
           <span>${escapeHtml(String(estimate.matchCount))} Spiele</span>
-          <span>Durchschnitt ${escapeHtml(formatDurationDecimal(estimate.matchMinutes))} min/Spiel</span>
+          <span>Średnia ${escapeHtml(formatDurationDecimal(estimate.matchMinutes))} min/Spiel</span>
           <span>Profil ${escapeHtml(estimate.profile.label)}</span>
         </div>
         <div class="ata-estimate-range">
-          Realistisch: ${escapeHtml(formatDurationMinutes(estimate.lowMinutes))} - ${escapeHtml(formatDurationMinutes(estimate.highMinutes))}
+          Realistycznie: ${escapeHtml(formatDurationMinutes(estimate.lowMinutes))} - ${escapeHtml(formatDurationMinutes(estimate.highMinutes))}
         </div>
         <p class="ata-small">${escapeHtml(estimate.profile.description)}</p>
         <p class="ata-small">Basis: ${escapeHtml(setupSummary)}.</p>

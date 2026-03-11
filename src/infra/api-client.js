@@ -86,7 +86,7 @@
       authBlocked,
       apiLabel: hasToken ? (authBlocked ? "API Auth abgelaufen" : "API Auth bereit") : "Brak autoryzacji API",
       boardLabel: hasBoard
-        ? `Board aktiv (${boardPreview})`
+        ? `Aktywna tablica (${boardPreview})`
         : hasBoardValue
           ? `Board-ID ung\u00fcltig (${boardPreview})`
           : "Kein aktives Board",
