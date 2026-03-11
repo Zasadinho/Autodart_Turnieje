@@ -2,7 +2,7 @@
   function renderMatchesTab() {
     const tournament = state.store.tournament;
     if (!tournament) {
-      return `<section class="ata-card tournamentCard"><h3>Keine Turnierdaten</h3><p>Bitte zuerst ein Turnier erstellen.</p></section>`;
+      return `<section class="ata-card tournamentCard"><h3>Brak danych turniejowych</h3><p>Najpierw utwórz turniej.</p></section>`;
     }
 
     const activeStartedMatch = findActiveStartedMatch(tournament);

@@ -72,7 +72,7 @@ Screenshot-Kontext:
 ## Draw-Lock
 
 ### GUI-Stellen
-- Einstellungen > KO-Draw sperren (Standard)
+- Einstellungen > Zablokuj drabinkę KO (domyślnie)
 - Einstellungen > Blokada losowania KO (aktywny turniej)
 
 ### DRA-Referenz (Kapitel/Punkt/Seite)
@@ -147,9 +147,9 @@ Screenshot-Kontext:
 ## Tie-Break
 
 ### GUI-Stellen
-- Einstellungen > Promoter Tie-Break-Profil
-- Turnierbaum > Liga-Tabelle / Gruppentabellen
-- Turnierbaum > Gruppenentscheidung offen
+- Einstellungen > Profil Tie-Break promotora
+- Turnierbaum > Tabela ligowa / Gruppentabellen
+- Turnierbaum > Brak rozstrzygnięcia w grupie
 
 ### DRA-Referenz (Kapitel/Punkt/Seite)
 - `6.16.1`, Seite `20`
@@ -158,7 +158,7 @@ Screenshot-Kontext:
 - DRA erlaubt Tie-Breaks nach Ermessen des Veranstalters.
 - Die App bildet dieses Ermessen als wählbares Profil ab:
   - `Promoter H2H + Mini-Tabelle` (empfohlen)
-  - `Promoter Punkte + LegDiff`
+  - `Promotor: punkty + różnica legów`
 - Falls ein Gleichstand damit nicht auflösbar ist:
   - Status `Playoff erforderlich`
   - KO-Qualifikation bleibt bis zur Entscheidung blockiert
@@ -174,7 +174,7 @@ Screenshot-Kontext:
 
 Liga-Ansicht mit Tabelle, Spielplan und sichtbarer Tie-Break-Spalte:
 
-![Liga-Tabelle und Spielplan im Turnierbaum](../assets/ss_Turnierbaum_Liga.png)
+![Tabela ligowa und Spielplan im Turnierbaum](../assets/ss_Turnierbaum_Liga.png)
 
 Gruppenphase + KO mit Gruppentabellen und nachgelagertem KO-Turnierbaum:
 

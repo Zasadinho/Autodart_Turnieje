@@ -159,7 +159,7 @@
   function renderViewTab() {
     const tournament = state.store.tournament;
     if (!tournament) {
-      return `<section class="ata-card tournamentCard"><h3>Keine Turnierdaten</h3><p>Bitte zuerst ein Turnier erstellen.</p></section>`;
+      return `<section class="ata-card tournamentCard"><h3>Brak danych turniejowych</h3><p>Najpierw utwórz turniej.</p></section>`;
     }
 
     let html = "";
@@ -167,7 +167,7 @@
 
     if (tournament.mode === "league") {
       const standings = standingsForMatches(tournament, getMatchesByStage(tournament, MATCH_STAGE_LEAGUE));
-      html += renderStandingsTable(standings, "Liga-Tabelle", [
+      html += renderStandingsTable(standings, "Tabela ligowa", [
         { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "Otwórz wyjaśnienie zasad DRA dotyczących tie-breaka", title: "Zasady DRA w GUI: tie-break" },
       ]);
       html += renderLeagueSchedule(tournament);
@@ -187,7 +187,7 @@
       if (blockedGroups.length) {
         html += `
           <section class="ata-card tournamentCard">
-            ${renderSectionHeading("Gruppenentscheidung offen", [
+            ${renderSectionHeading("Brak rozstrzygnięcia w grupie", [
               { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "Otwórz wyjaśnienie zasad DRA dotyczących tie-breaka", title: "Zasady DRA w GUI: tie-break" },
             ])}
             <p class="ata-small">KO-Qualifikation ist blockiert, bis folgende DRA-Entscheidungen geklärt sind:</p>
@@ -202,8 +202,8 @@
     if (tournament.mode === "ko" || tournament.mode === "groups_ko") {
       html += `
         <section class="ata-card tournamentCard">
-          ${renderSectionHeading("KO-Turnierbaum", [
-            { href: DRA_GUI_RULE_BYE_URL, kind: "rule", label: "DRA-Regelerklärung zu Freilosen öffnen", title: "DRA-Regeln in der GUI: Freilos (Bye)" },
+          ${renderSectionHeading("Drabinka KO", [
+            { href: DRA_GUI_RULE_BYE_URL, kind: "rule", label: "Otwórz wyjaśnienie zasad DRA dotyczących wolnych losów", title: "Zasady DRA w GUI: wolny los" },
           ])}
           <div class="ata-bracket-dock" id="ata-bracket-dock">
             <div class="ata-bracket-shell">

@@ -14,11 +14,11 @@
   - Schema-Selfcheck für alle Preset-Definitionen
   - Golden-Test für `PDC European Tour (Official)`
   - Runtime-Selbsttest für Preset-Auswahl + Apply im Formular
-- Turnierzeit-Prognose nachkalibriert:
+- Prognoza czasu trwania turnieju nachkalibriert:
   - Zeitprofil beeinflusst jetzt auch Match-/Phasenübergänge statt nur die Leg-Geschwindigkeit
   - Score-Faktoren für kurze und lange X01-Distanzen näher an externen Richtwerten ausgerichtet
   - neue Dokumentation `docs/tournament-duration.md` mit Formel, Parametern und Benchmark-Basis
-- Turnierzeit-Prognose ergänzt:
+- Prognoza czasu trwania turnieju ergänzt:
   - neue pure Domain-Datei `src/domain/tournament-duration.js`
   - Live-Schätzung in der Turnieranlage unter `Uczestnicy`
   - Berechnung berücksichtigt Modus, Uczestnicyzahl, `Best of`, `Punkty startowe`, `In`, `Out`, `Bull-off`, `Tryb bulla` und `Max Rund`
@@ -209,7 +209,7 @@
 - Persistenter Automationsstatus pro Match in `match.meta.auto` (abwärtskompatibel).
 - Userscript-Metadaten erweitert um `GM_xmlhttpRequest` und `@connect api.autodarts.io`.
 - Loader-Metadaten erweitert um `@connect api.autodarts.io` für API-Zugriffe im Loader-Kontext.
-- Settings-Text aktualisiert: `Automatischer Lobby-Start + API-Sync` ist jetzt funktional.
+- Settings-Text aktualisiert: `Automatyczny start lobby + synchronizacja API` ist jetzt funktional.
 
 ## 0.1.2
 - Alle Loader- und Script-Metadaten auf das korrekte Repo `thomasasen/autodarts_local_tournament` umgestellt (`namespace`, `downloadURL`, `updateURL`, RAW-Quelle).

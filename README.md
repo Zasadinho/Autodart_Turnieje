@@ -226,7 +226,7 @@ Tab: `Spiele`
 ### Voraussetzungen
 - Gültiger Autodarts-Login (Auth-Token)
 - Aktives Board in Autodarts
-- Feature-Flag `Automatischer Lobby-Start + API-Sync` aktiv
+- Feature-Flag `Automatyczny start lobby + synchronizacja API` aktiv
 
 ### Ablauf
 1. Match in `Spiele` über `Match starten` auslösen.
@@ -330,7 +330,7 @@ Legende für die eingeblendeten Hilfelinks:
 - Prefix z. B. `[ATA][api]`, `[ATA][bracket]`, `[ATA][storage]`.
 - Sinnvoll für Fehlersuche bei API oder Renderproblemen.
 
-### Automatischer Lobby-Start + API-Sync
+### Automatyczny start lobby + synchronizacja API
 - Standard: `AUS`.
 - Wenn aktiv:
   - `Match starten` erstellt Lobby, fügt Spieler hinzu, startet Match.
@@ -351,7 +351,7 @@ Legende für die eingeblendeten Hilfelinks:
 - Im Tab `Einstellungen` kann das aktive KO-Turnier bei Bedarf explizit entsperrt werden.
 - Warum: Verhindert unfaire oder versehentliche Nachauslosung während laufendem Turnier.
 
-### Turnierzeit-Prognose
+### Prognoza czasu trwania turnieju
 - Details zur Berechnungsgrundlage: [docs/tournament-duration.md](docs/tournament-duration.md)
 - Das Profil kalibriert sowohl die Leg-Geschwindigkeit als auch die Zeit zwischen Matches und Turnierphasen.
 - Zeitprofil:
@@ -368,14 +368,14 @@ Legende für die eingeblendeten Hilfelinks:
   - `Max Rund`
 - Warum: lokale Felder spielen unterschiedlich schnell; das Profil erlaubt eine saubere Anpassung, ohne die eigentliche Turnierlogik zu verändern.
 
-### Promoter Tie-Break-Profil
+### Profil Tie-Break promotora
 - `Promoter H2H + Mini-Tabelle` (empfohlen):
   - Punkte (`2` Sieg, `1` Unentschieden, `0` Niederlage)
   - Direktvergleich bei genau 2 Punktgleichen
   - Teilgruppen-Leg-Differenz bei 3+ Punktgleichen
   - danach Gesamt-Leg-Differenz und Legs gewonnen
   - bei weiterem Gleichstand: `Playoff erforderlich`
-- `Promoter Punkte + LegDiff`:
+- `Promotor: punkty + różnica legów`:
   - vereinfachte, legacy-kompatible Sortierung
   - Reihenfolge: Punkte -> Gesamt-Leg-Differenz -> Legs gewonnen
 

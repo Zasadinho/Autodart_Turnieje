@@ -1,4 +1,4 @@
-# Turnierzeit-Prognose
+# Prognoza czasu trwania turnieju
 
 Diese Dokumentation beschreibt die Berechnungsgrundlage der Live-Prognose in `src/domain/tournament-duration.js`.
 

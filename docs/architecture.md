@@ -60,7 +60,7 @@ Der Assistent ist in fachliche Schichten aufgeteilt und wird weiterhin als einze
 
 ## Zeitprognose
 - Details zur Formel und zur externen Kalibrierung stehen in `docs/tournament-duration.md`.
-- Die Turnierzeit-Prognose lebt als pure Domain-Logik in `src/domain/tournament-duration.js`.
+- Die Prognoza czasu trwania turnieju lebt als pure Domain-Logik in `src/domain/tournament-duration.js`.
 - Grundlage der Schätzung:
   - Modus und Uczestnicyzahl
   - erwartete Legs pro Match aus `Best of`

@@ -77,7 +77,7 @@
   function renderTournamentDurationEstimate(estimate) {
     const helpLinks = renderInfoLinks([
       { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Otwórz objaśnienie prognozy czasu turnieju", title: "README: Utwórz turniej" },
-      { href: README_SETTINGS_URL, kind: "tech", label: "Otwórz ustawienia profilu czasowego", title: "README: Einstellungen" },
+      { href: README_SETTINGS_URL, kind: "tech", label: "Otwórz ustawienia profilu czasowego", title: "README: Ustawienia" },
     ]);
     const estimateReason = normalizeText(estimate?.reason || "");
 

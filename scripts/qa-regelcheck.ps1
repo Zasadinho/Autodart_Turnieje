@@ -18,7 +18,7 @@ if (-not (Test-Path $distFull)) {
 $dist = Get-Content $distFull -Raw -Encoding utf8
 
 $checks = @(
-  @{ Rule = "Promoter Tie-Break-Profil vorhanden"; Pattern = "TIE_BREAK_PROFILE_PROMOTER_H2H_MINITABLE" },
+  @{ Rule = "Profil Tie-Break promotora vorhanden"; Pattern = "TIE_BREAK_PROFILE_PROMOTER_H2H_MINITABLE" },
   @{ Rule = "Legacy-Mapping auf Promoter-Profil vorhanden"; Pattern = "mapLegacyTieBreakModeToProfile" },
   @{ Rule = "Direktvergleich bei 2 punktgleichen Spielern"; Pattern = "bucketRows\.length === 2" },
   @{ Rule = "Teilgruppen-Logik bei 3\+ punktgleichen Spielern"; Pattern = "miniLegDiffById" },
