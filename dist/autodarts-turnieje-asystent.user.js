@@ -4627,20 +4627,20 @@
     }
 
     if (p1Legs === p2Legs) {
-      return { ok: false, message: "Ung\u00fcltiges Ergebnis: Bei Best-of ist kein Gleichstand m\u00f6glich." };
+      return { ok: false, message: "Nieprawidłowy wynik: w systemie Best‑of remis nie jest możliwy." };
     }
 
     if (!derivedWinnerId) {
       return {
         ok: false,
-        message: `Ung\u00fcltiges Ergebnis: Ein Spieler muss genau ${legsToWin} Legs erreichen (Best-of ${sanitizeBestOf(tournament.bestOfLegs)}).`,
+        message: `Nieprawidłowy wynik: zawodnik musi zdobyć dokładnie ${legsToWin} legów. (Best-of ${sanitizeBestOf(tournament.bestOfLegs)}).`,
       };
     }
 
     if (winnerId && winnerId !== derivedWinnerId) {
       return {
         ok: false,
-        message: "Ung\u00fcltiges Ergebnis: Gewinner muss aus den Legs abgeleitet werden.",
+        message: "Nieprawidłowy wynik: zwycięzca musi wynikać z liczby zdobytych legów.",
       };
     }
 
@@ -4693,15 +4693,15 @@
 
   function getMatchEditability(tournament, match) {
     if (!tournament || !match) {
-      return { editable: false, reason: "Match nicht verf\u00fcgbar." };
+      return { editable: false, reason: "Mecz niedostępny." };
     }
 
     if (match.status === STATUS_COMPLETED) {
-      return { editable: false, reason: "Match ist bereits abgeschlossen." };
+      return { editable: false, reason: "Mecz został już zakończony." };
     }
 
     if (!match.player1Id || !match.player2Id) {
-      return { editable: false, reason: "Paarung steht noch nicht fest." };
+      return { editable: false, reason: "Pojedynek nie jest jeszcze ustalony." };
     }
 
     if (match.stage === MATCH_STAGE_KO) {
@@ -4709,7 +4709,7 @@
       if (blockingMatch) {
         return {
           editable: false,
-          reason: `Vorg\u00e4nger-Match Runde ${blockingMatch.round} / Spiel ${blockingMatch.number} muss zuerst abgeschlossen werden.`,
+          reason: `Poprzedni mecz: runda ${blockingMatch.round} / gra ${blockingMatch.number} musi zostać najpierw zakończony.`,
         };
       }
     }
@@ -10643,7 +10643,7 @@
     const p1Legs = clampInt(legsP1Input.value, 0, 0, 99);
     const p2Legs = clampInt(legsP2Input.value, 0, 0, 99);
     if (p1Legs === p2Legs) {
-      setNotice("error", "Ung\u00fcltiges Ergebnis: Bei Best-of ist kein Gleichstand m\u00f6glich.");
+      setNotice("error", "Nieprawidłowy wynik: w systemie Best‑of remis nie jest możliwy.");
       return;
     }
 

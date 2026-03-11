@@ -593,7 +593,7 @@
     const p1Legs = clampInt(legsP1Input.value, 0, 0, 99);
     const p2Legs = clampInt(legsP2Input.value, 0, 0, 99);
     if (p1Legs === p2Legs) {
-      setNotice("error", "Ung\u00fcltiges Ergebnis: Bei Best-of ist kein Gleichstand m\u00f6glich.");
+      setNotice("error", "Nieprawidłowy wynik: w systemie Best‑of remis nie jest możliwy.");
       return;
     }
 
