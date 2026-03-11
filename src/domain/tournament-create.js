@@ -514,10 +514,10 @@
     const errors = [];
 
     if (!normalizeText(config.name)) {
-      errors.push("Bitte einen Turniernamen eingeben.");
+      errors.push("Proszę wprowadzić nazwę turnieju.");
     }
     if (!["ko", "league", "groups_ko"].includes(config.mode)) {
-      errors.push("Ungültiger Modus.");
+      errors.push("Nieprawidłowy tryb.");
     }
     const participantCountError = getParticipantCountError(config.mode, config.participants.length);
     if (participantCountError) {

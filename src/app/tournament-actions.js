@@ -80,7 +80,7 @@
   function setTournamentTieBreakProfile(profile) {
     const tournament = state.store.tournament;
     if (!tournament) {
-      return { ok: false, message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, message: "Brak aktywnego turnieju." };
     }
 
     const result = applyTournamentTieBreakProfile(tournament, profile);
@@ -96,7 +96,7 @@
   function setTournamentKoDrawLocked(drawLocked) {
     const tournament = state.store.tournament;
     if (!tournament) {
-      return { ok: false, message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, message: "Brak aktywnego turnieju." };
     }
 
     const result = applyTournamentKoDrawLocked(tournament, drawLocked);

@@ -2909,7 +2909,7 @@
 
   function applyTournamentTieBreakProfile(tournament, profile) {
     if (!tournament) {
-      return { ok: false, message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, message: "Brak aktywnego turnieju." };
     }
     const nextProfile = normalizeTieBreakProfile(profile, TIE_BREAK_PROFILE_PROMOTER_H2H_MINITABLE);
     const currentProfile = normalizeTieBreakProfile(
@@ -2929,10 +2929,10 @@
 
   function applyTournamentKoDrawLocked(tournament, drawLocked) {
     if (!tournament) {
-      return { ok: false, message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, message: "Brak aktywnego turnieju." };
     }
     if (tournament.mode !== "ko") {
-      return { ok: false, message: "Draw-Lock ist nur im KO-Modus verfügbar." };
+      return { ok: false, message: "Blokada drabinki jest dostępna tylko w trybie pucharowym (KO)." };
     }
     const nextDrawLocked = Boolean(drawLocked);
     const currentDrawLocked = tournament?.ko?.drawLocked !== false;
@@ -3461,10 +3461,10 @@
     const errors = [];
 
     if (!normalizeText(config.name)) {
-      errors.push("Bitte einen Turniernamen eingeben.");
+      errors.push("Proszę wprowadzić nazwę turnieju.");
     }
     if (!["ko", "league", "groups_ko"].includes(config.mode)) {
-      errors.push("Ungültiger Modus.");
+      errors.push("Nieprawidłowy tryb.");
     }
     const participantCountError = getParticipantCountError(config.mode, config.participants.length);
     if (participantCountError) {
@@ -3595,7 +3595,7 @@
     [TOURNAMENT_TIME_PROFILE_FAST]: Object.freeze({
       id: TOURNAMENT_TIME_PROFILE_FAST,
       label: "Schnell",
-      description: "F\u00fcr z\u00fcgige Felder mit wenig Verz\u00f6gerung zwischen den Matches.",
+      description: "Dla szybkich pól gry z niewielkimi przerwami między meczami.",
       legPaceMultiplier: 0.88,
       matchTransitionMinutes: 0.55,
       phaseTransitionMultiplier: 0.90,
@@ -4600,7 +4600,7 @@
 
   function applyMatchResultToTournament(tournament, matchId, winnerId, legs, source, stats = null) {
     if (!tournament) {
-      return { ok: false, message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, message: "Brak aktywnego turnieju." };
     }
 
     const match = findMatch(tournament, matchId);
@@ -5522,7 +5522,7 @@
   function updateMatchResult(matchId, winnerId, legs, source, stats = null) {
     const tournament = state.store.tournament;
     if (!tournament) {
-      return { ok: false, message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, message: "Brak aktywnego turnieju." };
     }
 
     const result = applyMatchResultToTournament(tournament, matchId, winnerId, legs, source, stats);
@@ -5619,7 +5619,7 @@
   function setTournamentTieBreakProfile(profile) {
     const tournament = state.store.tournament;
     if (!tournament) {
-      return { ok: false, message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, message: "Brak aktywnego turnieju." };
     }
 
     const result = applyTournamentTieBreakProfile(tournament, profile);
@@ -5635,7 +5635,7 @@
   function setTournamentKoDrawLocked(drawLocked) {
     const tournament = state.store.tournament;
     if (!tournament) {
-      return { ok: false, message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, message: "Brak aktywnego turnieju." };
     }
 
     const result = applyTournamentKoDrawLocked(tournament, drawLocked);
@@ -7196,7 +7196,7 @@
       return { ok: false, reasonCode: "not_found", message: "Keine Lobby-ID erkannt." };
     }
     if (!tournament) {
-      return { ok: false, reasonCode: "error", message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, reasonCode: "error", message: "Brak aktywnego turnieju." };
     }
     if (!state.store.settings.featureFlags.autoLobbyStart) {
       return { ok: false, reasonCode: "error", message: "Auto-Lobby ist deaktiviert." };

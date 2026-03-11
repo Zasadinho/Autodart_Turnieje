@@ -231,7 +231,7 @@
       return { ok: false, reasonCode: "not_found", message: "Keine Lobby-ID erkannt." };
     }
     if (!tournament) {
-      return { ok: false, reasonCode: "error", message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, reasonCode: "error", message: "Brak aktywnego turnieju." };
     }
     if (!state.store.settings.featureFlags.autoLobbyStart) {
       return { ok: false, reasonCode: "error", message: "Auto-Lobby ist deaktiviert." };

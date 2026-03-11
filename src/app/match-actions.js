@@ -3,7 +3,7 @@
   function updateMatchResult(matchId, winnerId, legs, source, stats = null) {
     const tournament = state.store.tournament;
     if (!tournament) {
-      return { ok: false, message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, message: "Brak aktywnego turnieju." };
     }
 
     const result = applyMatchResultToTournament(tournament, matchId, winnerId, legs, source, stats);

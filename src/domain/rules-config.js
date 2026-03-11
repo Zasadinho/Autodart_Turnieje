@@ -1,7 +1,7 @@
 ﻿// Auto-generated module split from dist source.
   function applyTournamentTieBreakProfile(tournament, profile) {
     if (!tournament) {
-      return { ok: false, message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, message: "Brak aktywnego turnieju." };
     }
     const nextProfile = normalizeTieBreakProfile(profile, TIE_BREAK_PROFILE_PROMOTER_H2H_MINITABLE);
     const currentProfile = normalizeTieBreakProfile(
@@ -21,10 +21,10 @@
 
   function applyTournamentKoDrawLocked(tournament, drawLocked) {
     if (!tournament) {
-      return { ok: false, message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, message: "Brak aktywnego turnieju." };
     }
     if (tournament.mode !== "ko") {
-      return { ok: false, message: "Draw-Lock ist nur im KO-Modus verfügbar." };
+      return { ok: false, message: "Blokada drabinki jest dostępna tylko w trybie pucharowym (KO)." };
     }
     const nextDrawLocked = Boolean(drawLocked);
     const currentDrawLocked = tournament?.ko?.drawLocked !== false;

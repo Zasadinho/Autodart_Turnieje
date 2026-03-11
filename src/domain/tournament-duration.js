@@ -41,7 +41,7 @@
     [TOURNAMENT_TIME_PROFILE_FAST]: Object.freeze({
       id: TOURNAMENT_TIME_PROFILE_FAST,
       label: "Schnell",
-      description: "F\u00fcr z\u00fcgige Felder mit wenig Verz\u00f6gerung zwischen den Matches.",
+      description: "Dla szybkich pól gry z niewielkimi przerwami między meczami.",
       legPaceMultiplier: 0.88,
       matchTransitionMinutes: 0.55,
       phaseTransitionMultiplier: 0.90,

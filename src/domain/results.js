@@ -37,7 +37,7 @@
 
   function applyMatchResultToTournament(tournament, matchId, winnerId, legs, source, stats = null) {
     if (!tournament) {
-      return { ok: false, message: "Kein aktives Turnier vorhanden." };
+      return { ok: false, message: "Brak aktywnego turnieju." };
     }
 
     const match = findMatch(tournament, matchId);
