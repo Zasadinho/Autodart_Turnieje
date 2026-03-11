@@ -59,7 +59,7 @@
     [TOURNAMENT_TIME_PROFILE_SLOW]: Object.freeze({
       id: TOURNAMENT_TIME_PROFILE_SLOW,
       label: "Langsam",
-      description: "F\u00fcr gemischte Felder oder langsamere Board-Wechsel.",
+      description: "Dla mieszanych pól gry lub wolniejszych zmian stanowisk.",
       legPaceMultiplier: 1.15,
       matchTransitionMinutes: 1.15,
       phaseTransitionMultiplier: 1.15,

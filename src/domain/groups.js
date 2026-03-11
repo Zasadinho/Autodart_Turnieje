@@ -8,7 +8,7 @@
       const groupResolution = complete && rows.some((row) => row.tiebreakState === "playoff_required")
         ? {
           status: "playoff_required",
-          reason: "Playoff erforderlich: Gleichstand nach DRA-Tie-Break.",
+          reason: "Wymagana dogrywka: remis po tie‑breaku DRA.",
         }
         : {
           status: "resolved",

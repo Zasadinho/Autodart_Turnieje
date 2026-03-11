@@ -3613,7 +3613,7 @@
     [TOURNAMENT_TIME_PROFILE_SLOW]: Object.freeze({
       id: TOURNAMENT_TIME_PROFILE_SLOW,
       label: "Langsam",
-      description: "F\u00fcr gemischte Felder oder langsamere Board-Wechsel.",
+      description: "Dla mieszanych pól gry lub wolniejszych zmian stanowisk.",
       legPaceMultiplier: 1.15,
       matchTransitionMinutes: 1.15,
       phaseTransitionMultiplier: 1.15,
@@ -4028,7 +4028,7 @@
       const groupResolution = complete && rows.some((row) => row.tiebreakState === "playoff_required")
         ? {
           status: "playoff_required",
-          reason: "Playoff erforderlich: Gleichstand nach DRA-Tie-Break.",
+          reason: "Wymagana dogrywka: remis po tie‑breaku DRA.",
         }
         : {
           status: "resolved",
@@ -4605,13 +4605,13 @@
 
     const match = findMatch(tournament, matchId);
     if (!match) {
-      return { ok: false, message: "Match nicht gefunden." };
+      return { ok: false, message: "Nie znaleziono meczu." };
     }
     if (!match.player1Id || !match.player2Id) {
-      return { ok: false, message: "Match hat noch keine zwei Uczestnicy." };
+      return { ok: false, message: "Mecz nie ma jeszcze dwóch uczestników." };
     }
     if (winnerId && winnerId !== match.player1Id && winnerId !== match.player2Id) {
-      return { ok: false, message: "Gewinner passt nicht zum Match." };
+      return { ok: false, message: "Zwycięzca nie pasuje do tego meczu." };
     }
 
     const legsToWin = getLegsToWin(tournament.bestOfLegs);
@@ -4622,7 +4622,7 @@
     if (p1Legs > legsToWin || p2Legs > legsToWin) {
       return {
         ok: false,
-        message: `Ung\u00fcltiges Ergebnis: Pro Spieler sind maximal ${legsToWin} Legs m\u00f6glich (Best-of ${sanitizeBestOf(tournament.bestOfLegs)}).`,
+        message: `Nieprawidłowy wynik: na zawodnika przypada maksymalnie ${legsToWin} legów. (Best-of ${sanitizeBestOf(tournament.bestOfLegs)}).`,
       };
     }
 
@@ -7799,7 +7799,7 @@
 
     const match = findMatch(tournament, matchId);
     if (!match) {
-      setNotice("error", "Match nicht gefunden.");
+      setNotice("error", "Nie znaleziono meczu.");
       return;
     }
 
@@ -10625,7 +10625,7 @@
     }
     const match = findMatch(tournament, matchId);
     if (!match) {
-      setNotice("error", "Match nicht gefunden.");
+      setNotice("error", "Nie znaleziono meczu.");
       return;
     }
     const editability = getMatchEditability(tournament, match);

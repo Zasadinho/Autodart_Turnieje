@@ -834,7 +834,7 @@
 
     const match = findMatch(tournament, matchId);
     if (!match) {
-      setNotice("error", "Match nicht gefunden.");
+      setNotice("error", "Nie znaleziono meczu.");
       return;
     }
 
