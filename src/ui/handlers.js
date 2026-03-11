@@ -424,7 +424,7 @@
       syncCreateFormDependencies(form);
       updateCreateDraftFromForm(form, true);
       refreshCreateFormDurationEstimate(form);
-      setNotice("info", "Individuelles Preset bleibt aktiv; Felder wurden nicht überschrieben.", 2400);
+      setNotice("info", "Indywidualnyes Preset bleibt aktiv; Felder wurden nicht überschrieben.", 2400);
       return;
     }
     const apply = preset.apply;

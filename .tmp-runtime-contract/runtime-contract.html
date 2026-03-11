@@ -1999,7 +1999,7 @@ const GLOBALS_CONTRACT = Object.freeze({
 
 
   function getCreatePresetLabel(presetId) {
-    return getCreatePresetDefinition(presetId)?.label || "Individuell";
+    return getCreatePresetDefinition(presetId)?.label || "Indywidualny";
   }
 
 
@@ -6736,7 +6736,7 @@ const GLOBALS_CONTRACT = Object.freeze({
       boardId: boardId || "",
       autoEnabled,
       authBlocked,
-      apiLabel: hasToken ? (authBlocked ? "API Auth abgelaufen" : "API Auth bereit") : "API Auth fehlt",
+      apiLabel: hasToken ? (authBlocked ? "API Auth abgelaufen" : "API Auth bereit") : "Brak autoryzacji API",
       boardLabel: hasBoard
         ? `Board aktiv (${boardPreview})`
         : hasBoardValue
@@ -9260,7 +9260,7 @@ const GLOBALS_CONTRACT = Object.freeze({
         ...getCreatePresetCatalog().map((preset) => (
           `<option value="${preset.id}" ${draft.x01Preset === preset.id ? "selected" : ""}>${escapeHtml(preset.label)}</option>`
         )),
-        `<option value="${X01_PRESET_CUSTOM}" ${draft.x01Preset === X01_PRESET_CUSTOM ? "selected" : ""}>Individuell / Manuell</option>`,
+        `<option value="${X01_PRESET_CUSTOM}" ${draft.x01Preset === X01_PRESET_CUSTOM ? "selected" : ""}>Indywidualny / Manuell</option>`,
       ].join("");
       const bullModeDisabled = draft.x01BullOffMode === "Off";
       const bullModeDisabledAttr = bullModeDisabled ? "disabled" : "";
@@ -9379,10 +9379,10 @@ const GLOBALS_CONTRACT = Object.freeze({
                   </div>
                   <input id="ata-randomize-ko" name="randomizeKoRound1" type="checkbox" ${randomizeChecked}>
                 </div>
-                <p class="ata-small ata-create-help">PDC European Tour (Official): KO, Best of 11 Legs (First to 6), 501, Straight In, Double Out, Bull 25/50. Bull-off Normal und Max Rund 50 bleiben technische AutoDarts-Werte.</p>
-                <p class="ata-small ata-create-help">PDC 501 / Double Out (Basic): kompatibler Ersatz für das frühere irreführende „PDC-Standard“-Preset. Ehrlich benannt, aber kein offizielles PDC-Eventformat.</p>
-                <p class="ata-small ata-create-help">PDC World Championship im echten Set-Format wird bewusst nicht als offizielles Preset angeboten, weil AutoDarts hier nur Legs / First to N unterstützt.</p>
-                <p class="ata-small ata-create-help">Bull-off = Off deaktiviert Tryb bulla automatisch (schreibgesch\u00fctzt).</p>
+                <p class="ata-small ata-create-help">PDC European Tour (Official): KO, Best of 11 Legs (First to 6), 501, Straight In, Double Out, Bull 25/50. Bull-off Normal und Max Rund 50 pozostają technicznymi wartościami AutoDarts.</p>
+                <p class="ata-small ata-create-help">PDC 501 / Double Out (Basic): kompatybilny zamiennik wcześniejszego, mylącego presetu ‘PDC‑Standard’. Nazwany uczciwie, ale nie jest oficjalnym formatem turniejowym PDC.</p>
+                <p class="ata-small ata-create-help">PDC World Championship w prawdziwym formacie setowym nie jest celowo oferowany jako oficjalny preset, ponieważ AutoDarts obsługuje tutaj wyłącznie legi / First to N.</p>
+                <p class="ata-small ata-create-help">Bull-off = Off automatycznie dezaktywuje tryb bulla (pole staje się tylko do odczytu)..</p>
               </div>
               <aside class="ata-create-side">
                 <div class="ata-field">
@@ -10512,7 +10512,7 @@ const GLOBALS_CONTRACT = Object.freeze({
       syncCreateFormDependencies(form);
       updateCreateDraftFromForm(form, true);
       refreshCreateFormDurationEstimate(form);
-      setNotice("info", "Individuelles Preset bleibt aktiv; Felder wurden nicht überschrieben.", 2400);
+      setNotice("info", "Indywidualnyes Preset bleibt aktiv; Felder wurden nicht überschrieben.", 2400);
       return;
     }
     const apply = preset.apply;

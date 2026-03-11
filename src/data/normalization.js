@@ -87,7 +87,7 @@
 
 
   function getCreatePresetLabel(presetId) {
-    return getCreatePresetDefinition(presetId)?.label || "Individuell";
+    return getCreatePresetDefinition(presetId)?.label || "Indywidualny";
   }
 
 

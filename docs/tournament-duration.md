@@ -31,7 +31,7 @@ Diese Dokumentation beschreibt die Berechnungsgrundlage der Live-Prognose in `sr
 | Teilnehmer-Reihenfolge | Beeinflusst Seeding, aber nicht die Zahl der Matches oder Legs. |
 | `rules.tieBreakProfile` | Kann nur in Sonderfällen zu Playoffs führen; das ist vor Turnierstart nicht deterministisch planbar. |
 | Mehrere Boards | Das Produkt modelliert bewusst nur `singleBoard = true`. |
-| Individuelle Spieler-Stats | Vor Turnierstart nicht verlässlich verfügbar; dafür existiert das globale Zeitprofil. |
+| Indywidualnye Spieler-Stats | Vor Turnierstart nicht verlässlich verfügbar; dafür existiert das globale Zeitprofil. |
 
 ## Formel
 1. `legsToWin = ceil(bestOfLegs / 2)`
@@ -166,6 +166,6 @@ Das folgt direkt aus Organisatoren-Praxis: nicht nur die Wurfstärke, sondern au
 - Keine Playoff-Sonderfälle aus Tie-Break-Stillständen.
 - Keine Einplanung von Einwurf-/Practice-Fenstern je Match.
 - Keine Parallelisierung auf mehreren Boards.
-- Keine individuelle Spielerform oder Average-basierte Dynamik.
+- Keine Indywidualnye Spielerform oder Average-basierte Dynamik.
 
 Für diese Fälle bleibt die Prognose absichtlich konservativ und zeigt zusätzlich eine Spannweite statt nur eines Einzelwerts.

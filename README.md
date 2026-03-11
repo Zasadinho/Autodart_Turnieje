@@ -168,7 +168,7 @@ Tab: `Turnier`
 |---|---|---|
 | `PDC European Tour (Official)` | `KO`, `Best of 11`, `501`, `Straight In`, `Double Out`, `Bull 25/50`, `Bull-off Normal`, `Max Rund 50`, `Lobby privat` | Offizielles Default-Rundenformat. `Bull-off Normal` und `Max Rund 50` sind AutoDarts-/Technikwerte; `Max Rund` ist **keine** PDC-Fachregel. |
 | `PDC 501 / Double Out (Basic)` | `KO`, `Best of 5`, `501`, `Straight In`, `Double Out`, `Bull 25/50`, `Bull-off Normal`, `Max Rund 50`, `Lobby privat` | Ehrlich benanntes Kompatibilitätsprofil für das frühere irreführende `PDC Standard`. **Kein** offizielles PDC-Eventformat. |
-| `Individuell / Manuell` | aktuelle Formularwerte | Status nach manuellen Änderungen an Preset-Feldern. |
+| `Indywidualny / Manuell` | aktuelle Formularwerte | Status nach manuellen Änderungen an Preset-Feldern. |
 
 ### Nicht enthaltene PDC-Formate
 - `PDC World Championship` wird bewusst **nicht** als offizielles Preset ausgeliefert.
@@ -183,7 +183,7 @@ Tab: `Turnier`
   - der Modus gewechselt wird
   - die UI neu gerendert wird
 - Wenn `Bull-off = Off`, wird `Bull mode` automatisch read-only deaktiviert.
-- Bei manuellen Änderungen an Preset-relevanten Feldern springt der Preset-Status auf `Individuell`.
+- Bei manuellen Änderungen an Preset-relevanten Feldern springt der Preset-Status auf `Indywidualny`.
 - Legacy-Drafts und Legacy-Turniere mit der alten Preset-ID `pdc_standard` werden automatisch auf `PDC 501 / Double Out (Basic)` abgebildet, damit gespeicherte `Best of 5`-Turniere nicht still auf `Best of 11` umspringen.
 
 ### Voraussichtliche Turnierzeit

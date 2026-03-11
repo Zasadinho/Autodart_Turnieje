@@ -8,7 +8,7 @@
   - `Max Rund 50` wird in UI/Doku explizit als technisches AutoDarts-Limit beschrieben, nicht als PDC-Regel
 - Turnierformular für Presets erweitert:
   - Auswahlfeld + `Zastosuj preset` statt hart verdrahtetem Einzelbutton
-  - Preset-Status bleibt konsistent und springt bei manuellen Änderungen sauber auf `Individuell`
+  - Preset-Status bleibt konsistent und springt bei manuellen Änderungen sauber auf `Indywidualny`
   - Hinweis ergänzt, dass `PDC World Championship` wegen fehlender Set-Unterstützung bewusst nicht als offizielles Preset enthalten ist
 - QA für Presets ergänzt:
   - Schema-Selfcheck für alle Preset-Definitionen

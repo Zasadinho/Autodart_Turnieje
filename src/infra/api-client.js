@@ -84,7 +84,7 @@
       boardId: boardId || "",
       autoEnabled,
       authBlocked,
-      apiLabel: hasToken ? (authBlocked ? "API Auth abgelaufen" : "API Auth bereit") : "API Auth fehlt",
+      apiLabel: hasToken ? (authBlocked ? "API Auth abgelaufen" : "API Auth bereit") : "Brak autoryzacji API",
       boardLabel: hasBoard
         ? `Board aktiv (${boardPreview})`
         : hasBoardValue
