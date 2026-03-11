@@ -60,7 +60,7 @@
         </div>
         <div class="ata-toggle">
           <div>
-            <strong>KO-Erstrunde zuf\u00e4llig mischen (Standard) ${koDrawHelpLinks}</strong>
+            <strong>Losowo wymieszaj pierwszą rundę KO (Standard) ${koDrawHelpLinks}</strong>
             <div class="ata-small">Standard: EIN. Neue KO-Turniere nutzen damit Open Draw (zuf\u00e4llige Reihenfolge, PDC-konforme Freilose).</div>
           </div>
           <input type="checkbox" id="ata-setting-randomize-ko" data-action="toggle-randomize-ko" ${randomizeKoEnabled}>
@@ -75,7 +75,7 @@
       </section>
       <section class="ata-card tournamentCard">
         ${renderSectionHeading("Turnierzeit-Prognose", [
-          { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Erkl\u00e4rung zur Turnierzeit-Prognose \u00f6ffnen", title: "README: Turnier anlegen" },
+          { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Erkl\u00e4rung zur Turnierzeit-Prognose \u00f6ffnen", title: "README: Utwórz turniej" },
           { href: README_SETTINGS_URL, kind: "tech", label: "Einstellungen-Dokumentation \u00f6ffnen", title: "README: Einstellungen" },
         ])}
         <div class="ata-field">

@@ -23,7 +23,7 @@
         ? `<input type="hidden" id="ata-x01-bullmode-hidden" name="x01BullMode" value="${escapeHtml(draft.x01BullMode)}">`
         : "";
       const createHeadingLinks = [
-        { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Erklärung zur Turniererstellung öffnen", title: "README: Turnier anlegen" },
+        { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Erklärung zur Turniererstellung öffnen", title: "README: Utwórz turniej" },
         { href: README_INFO_SYMBOLS_URL, kind: "tech", label: "Legende der Info-Symbole öffnen", title: "README: Info-Symbole" },
       ];
       const modeHelpLinks = renderInfoLinks([
@@ -110,7 +110,7 @@
                   </div>
                   <div class="ata-field">
                     <label for="ata-match-mode">Tryb gry</label>
-                    <span id="ata-match-mode" class="ata-field-readonly">Legs (First to N aus Best of)</span>
+                    <span id="ata-match-mode" class="ata-field-readonly">Legs (First to N (na podstawie Best of))</span>
                   </div>
                   <div class="ata-field">
                     <label for="ata-lobby-fixed">Lobby</label>
@@ -129,7 +129,7 @@
                 </div>
                 <div class="ata-toggle ata-toggle-compact">
                   <div>
-                    <strong>KO-Erstrunde zuf\u00e4llig mischen ${drawHelpLinks}</strong>
+                    <strong>Losowo wymieszaj pierwszą rundę KO ${drawHelpLinks}</strong>
                     <div class="ata-small">Open Draw przy włączonym przełączniku, w przeciwnym razie rozstawiony Draw.</div>
                   </div>
                   <input id="ata-randomize-ko" name="randomizeKoRound1" type="checkbox" ${randomizeChecked}>
@@ -148,8 +148,8 @@
                   ${renderTournamentDurationEstimate(durationEstimate)}
                 </div>
                 <div class="ata-actions">
-                  <button type="button" class="ata-btn ata-btn-sm" data-action="shuffle-participants">Uczestnicy mischen</button>
-                  <button type="submit" class="ata-btn ata-btn-primary">Turnier anlegen</button>
+                  <button type="button" class="ata-btn ata-btn-sm" data-action="shuffle-participants">Uczestnicy losowo</button>
+                  <button type="submit" class="ata-btn ata-btn-primary">Utwórz turniej</button>
                 </div>
                 <p class="ata-small">Modus-Limits ${modeLimitHelpLinks}: ${escapeHtml(modeLimitSummary)}.</p>
               </aside>

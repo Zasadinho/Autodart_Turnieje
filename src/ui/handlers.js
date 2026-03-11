@@ -522,7 +522,7 @@
     participantField.value = shuffledNames.join("\n");
     updateCreateDraftFromForm(form, true);
     refreshCreateFormDurationEstimate(form);
-    setNotice("success", "Uczestnicy wurden zuf\u00e4llig gemischt.", 1800);
+    setNotice("success", "Uczestnicy zostali losowo wymieszani.", 1800);
   }
 
 

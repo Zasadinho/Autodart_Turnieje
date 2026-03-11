@@ -15,7 +15,7 @@ Der Assistent erweitert die Autodarts-Oberfläche um einen eigenen Bereich für:
 3. [Erste Orientierung in Autodarts](#erste-orientierung-in-autodarts)
 4. [Funktionen](#funktionen)
 5. [Turniermodi](#turniermodi)
-6. [Turnier anlegen](#turnier-anlegen)
+6. [Utwórz turniej](#turnier-anlegen)
 7. [API-Halbautomatik](#api-halbautomatik)
 8. [Turnierbaum](#turnierbaum)
 9. [Import und Export](#import-und-export)
@@ -130,7 +130,7 @@ Nach Installation ist links im Hauptmenü der neue Eintrag sichtbar. Darüber ö
   - `B1 vs A2`
 - Das Finale folgt nach den Halbfinals.
 
-## Turnier anlegen
+## Utwórz turniej
 Tab: `Turnier`
 
 ![Utwórz nowy turniej](assets/ss_Turnier_anlage-neu.png)
@@ -152,12 +152,12 @@ Tab: `Turnier`
 | `Bull-off` | `Off`, `Normal`, `Official` | Startreihenfolge-/Bull-off-Verhalten für Lobby | Legt fest, wie Anstöße entschieden werden |
 | `Tryb bulla` | `25/50`, `50/50` | Wertung der Bull-Segmente | Muss mit Hausregeln/Turnierkontext konsistent sein |
 | `Max Rund` | `15`, `20`, `50`, `80` | Upper bound für Matchdauer in der Lobby | Verhindert hängende/zu lange Matches |
-| `Tryb gry` | fix `Legs (First to N aus Best of)` | Nicht umstellbar in der UI | Verhindert inkonsistente Kombinationen im lokalen Flow |
-| `Lobby` | fix `Privat` | Sichtbarkeit der API-Lobby | Lokalny Turniej bleibt bewusst privat/sicher |
+| `Tryb gry` | fix `Legs (First to N (na podstawie Best of))` | Nicht umstellbar in der UI | Verhindert inkonsistente Kombinationen im lokalen Flow |
+| `Lobby` | fix `Prywatny` | Sichtbarkeit der API-Lobby | Lokalny Turniej bleibt bewusst privat/sicher |
 | `Preset` | Auswahlfeld + Button `Zastosuj preset` | Setzt alle Preset-relevanten Turnierfelder konsistent | Offizielle und kompatible Profile bleiben klar getrennt |
 | `Losowo wymieszaj pierwszą rundę KO` | Checkbox `ON/OFF` | `open_draw` oder `seeded` in Runde 1 | Transparente Entscheidung zwischen Zufall und Setzlogik |
 | `Uczestnicy` | Je Spieler eine Zeile | Uczestnicyliste inkl. Reihenfolge | Reihenfolge ist bei `seeded` zugleich Seed-Reihenfolge |
-| `Uczestnicy mischen` | Button | Mischt Uczestnicytextliste | Praktisch für spontane Auslosung vor Start |
+| `Uczestnicy losowo` | Button | Mischt Uczestnicytextliste | Praktisch für spontane Auslosung vor Start |
 
 ### Preset-Katalog
 - Bei Neuanlage ist standardmäßig `PDC European Tour (Official)` aktiv.
