@@ -9140,9 +9140,9 @@
         </div>
         <div class="ata-estimate-value">ok. ${escapeHtml(formatDurationMinutes(estimate.likelyMinutes))}</div>
         <div class="ata-estimate-meta">
-          <span>${escapeHtml(String(estimate.participantCount))} Uczestnicy</span>
-          <span>${escapeHtml(String(estimate.matchCount))} Spiele</span>
-          <span>Średnia ${escapeHtml(formatDurationDecimal(estimate.matchMinutes))} min/Spiel</span>
+          <span>Uczestników: ${escapeHtml(String(estimate.participantCount))}</span>
+          <span>Meczy: ${escapeHtml(String(estimate.matchCount))}</span>
+          <span>Średnia ${escapeHtml(formatDurationDecimal(estimate.matchMinutes))} min/Mecz</span>
           <span>Profil ${escapeHtml(estimate.profile.label)}</span>
         </div>
         <div class="ata-estimate-range">
