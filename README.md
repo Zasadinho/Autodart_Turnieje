@@ -237,8 +237,8 @@ Tab: `Spiele`
 
 ### Ergebnisführung: Sortierung und Status verstehen
 Sortiersegmente im Tab `Spiele`:
-- `Spielbar zuerst`: priorisiert live/spielbare Paarungen für schnellen Ablauf.
-- `Runde/Spiel`: strikte Reihenfolge nach Turnierstruktur.
+- `Rozgrywane jako pierwsze`: priorisiert live/spielbare Paarungen für schnellen Ablauf.
+- `Runda/Mecz`: strikte Reihenfolge nach Turnierstruktur.
 - `Status`: gruppiert nach offen/abgeschlossen/Freilos.
 
 Wichtige Markierungen:
@@ -530,7 +530,7 @@ powershell -ExecutionPolicy Bypass -File scripts/test-runtime-contract.ps1
 - `src/runtime/*` nur noch für Bootstrap-/Wiring
 
 ## Limitationen
-- Modus-Limits:
+- Limity trybu:
   - `ko`: `2..128`
   - `league`: `2..16`
   - `groups_ko`: `4..16`

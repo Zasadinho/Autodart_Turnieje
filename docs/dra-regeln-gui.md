@@ -94,7 +94,7 @@ Screenshot-Kontext:
 ## Uczestnicylimits
 
 ### GUI-Stellen
-- Turnier > Modus-Limits
+- Turnier > Limity trybu
 - Einstellungen > Regelbasis und Limits
 
 ### DRA-Referenz (Kapitel/Punkt/Seite)

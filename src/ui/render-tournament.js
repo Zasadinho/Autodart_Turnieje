@@ -151,7 +151,7 @@
                   <button type="button" class="ata-btn ata-btn-sm" data-action="shuffle-participants">Uczestnicy losowo</button>
                   <button type="submit" class="ata-btn ata-btn-primary">Utwórz turniej</button>
                 </div>
-                <p class="ata-small">Modus-Limits ${modeLimitHelpLinks}: ${escapeHtml(modeLimitSummary)}.</p>
+                <p class="ata-small">Limity trybu ${modeLimitHelpLinks}: ${escapeHtml(modeLimitSummary)}.</p>
               </aside>
             </div>
             <p class="ata-small">Po zmianie trybu nowe limity zaczynają obowiązywać od razu.</p>

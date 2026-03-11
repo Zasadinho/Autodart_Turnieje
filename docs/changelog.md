@@ -189,7 +189,7 @@
   - `ko`: `2..128`
   - `league`: `2..16`
   - `groups_ko`: `4..16`
-- Validierung für Turniererstellung und Import auf die neuen Modus-Limits umgestellt.
+- Validierung für Turniererstellung und Import auf die neuen Limity trybu umgestellt.
 - GUI-Hinweise im Tab `Turnier` und `Einstellungen` erweitert, inklusive Link auf `README.md#regelbasis-und-limits`.
 - Dokumentation aktualisiert (`README.md`, `docs/architecture.md`) mit Regelbasis und Begründung.
 

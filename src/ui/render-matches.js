@@ -8,8 +8,8 @@
     const activeStartedMatch = findActiveStartedMatch(tournament);
     const sortMode = sanitizeMatchesSortMode(state.store?.ui?.matchesSortMode, MATCH_SORT_MODE_READY_FIRST);
     const sortOptions = [
-      { id: MATCH_SORT_MODE_READY_FIRST, label: "Spielbar zuerst" },
-      { id: MATCH_SORT_MODE_ROUND, label: "Runde/Spiel" },
+      { id: MATCH_SORT_MODE_READY_FIRST, label: "Rozgrywane jako pierwsze" },
+      { id: MATCH_SORT_MODE_ROUND, label: "Runda/Mecz" },
       { id: MATCH_SORT_MODE_STATUS, label: "Status" },
     ];
 
@@ -183,11 +183,11 @@
       { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "DRA-Regelerklärung zum Tie-Break öffnen", title: "DRA-Regeln in der GUI: Tie-Break" },
     ];
     const nextMatchHelpLinks = renderInfoLinks([
-      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Ablauf der Ergebnisführung öffnen", title: "README: API-Halbautomatik und Ergebnisführung" },
+      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Otwórz przebieg prowadzenia wyników", title: "README: Półautomatyzacja API i prowadzenie wyników" },
       { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Turniermodus-Kontext öffnen", title: "README: Turniermodi" },
     ]);
     const nextHintHtml = suggestedNextMatchId
-      ? `<p class="ata-small ata-next-hint">Hinweis: Die Markierung "Nächstes Match" zeigt die empfohlene nächste Paarung (PDC: Next Match) ${nextMatchHelpLinks}.</p>`
+      ? `<p class="ata-small ata-next-hint">Uwaga: oznaczenie ‘Następny mecz’ wskazuje rekomendowaną kolejną parę (PDC: Next Match). ${nextMatchHelpLinks}.</p>`
       : "";
     const sortButtonsHtml = sortOptions.map((option) => `
       <button type="button" class="ata-segmented-btn" data-action="set-matches-sort" data-sort-mode="${option.id}" data-active="${sortMode === option.id ? "1" : "0"}">${escapeHtml(option.label)}</button>
@@ -195,8 +195,8 @@
 
     return `
       <section class="ata-card tournamentCard ata-matches-card">
-        ${renderSectionHeading("Ergebnisführung", resultHeadingLinks)}
-        <p class="ata-small">API-Halbautomatik: Match per Klick starten, Ergebnis wird automatisch synchronisiert. Manuelle Eingabe bleibt als Fallback aktiv. ${renderInfoLinks([
+        ${renderSectionHeading(„Prowadzenie wyników”, resultHeadingLinks)}
+        <p class="ata-small">➡️ „Półautomatyzacja API: mecz można uruchomić jednym kliknięciem, wynik synchronizuje się automatycznie. Ręczne wprowadzanie pozostaje aktywne jako fallback.${renderInfoLinks([
           { href: README_API_AUTOMATION_URL, kind: "tech", label: "Voraussetzungen und Ablauf öffnen", title: "README: API-Halbautomatik" },
         ])}</p>
         <div class="ata-matches-toolbar">

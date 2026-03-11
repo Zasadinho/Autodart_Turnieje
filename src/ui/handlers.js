@@ -424,7 +424,7 @@
       syncCreateFormDependencies(form);
       updateCreateDraftFromForm(form, true);
       refreshCreateFormDurationEstimate(form);
-      setNotice("info", "Indywidualnyes Preset bleibt aktiv; Felder wurden nicht überschrieben.", 2400);
+      setNotice("info", "Indywidualny preset pozostaje aktywny; pola nie zostały nadpisane.", 2400);
       return;
     }
     const apply = preset.apply;
@@ -554,7 +554,7 @@
       setNotice("error", result.message || "Turnier konnte nicht erstellt werden.");
       return;
     }
-    setNotice("success", "Turnier wurde erstellt.");
+    setNotice("success", "Turniej został utworzony.");
   }
 
 

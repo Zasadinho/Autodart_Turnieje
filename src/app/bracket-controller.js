@@ -39,7 +39,7 @@
       state.bracket.failed = true;
       state.bracket.lastError = "Turnierbaum-Render-Timeout";
       syncBracketFallbackVisibility();
-      setNotice("error", "CDN-Turnierbaum-Timeout, Fallback bleibt aktiv.", 3200);
+      setNotice("error", "Timeout drzewa turniejowego CDN, tryb awaryjny pozostaje aktywny.", 3200);
       logWarn("bracket", "Iframe bracket render timeout.");
     }, 7000);
 
