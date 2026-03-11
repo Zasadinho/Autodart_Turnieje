@@ -312,7 +312,7 @@
         nodes.forEach(function (node) {
           var value = String(node.textContent || "").trim();
           if (/^(bye|tbd)$/i.test(value)) {
-            node.textContent = "\\u2205 offen";
+            node.textContent = "\Puste";
             node.classList.add("ata-open-slot");
           }
         });

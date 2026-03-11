@@ -886,10 +886,10 @@
 
   function participantNameById(tournament, participantId) {
     if (!participantId) {
-      return "\u2205 offen";
+      return "Puste";
     }
     const participant = participantById(tournament, participantId);
-    return participant ? participant.name : "\u2205 offen";
+    return participant ? participant.name : "Puste";
   }
 
 

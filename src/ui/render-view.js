@@ -109,13 +109,13 @@
             const player2IsWinner = Boolean(winnerId) && normalizeText(match.player2Id) === winnerId;
             const player1Classes = [
               "ata-bracket-player",
-              player1Name === "\u2205 offen" ? "ata-open-slot" : "",
+              player1Name === "Puste" ? "ata-open-slot" : "",
               player1IsWinner ? "is-winner" : "",
               (isCompleted && !isBye && !player1IsWinner && normalizeText(match.player1Id)) ? "is-loser" : "",
             ].filter(Boolean).join(" ");
             const player2Classes = [
               "ata-bracket-player",
-              player2Name === "\u2205 offen" ? "ata-open-slot" : "",
+              player2Name === "Puste" ? "ata-open-slot" : "",
               player2IsWinner ? "is-winner" : "",
               (isCompleted && !isBye && !player2IsWinner && normalizeText(match.player2Id)) ? "is-loser" : "",
             ].filter(Boolean).join(" ");

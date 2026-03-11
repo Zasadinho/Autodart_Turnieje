@@ -26,7 +26,7 @@
       const player1 = participantNameById(tournament, match.player1Id);
       const player2 = participantNameById(tournament, match.player2Id);
       const winner = participantNameById(tournament, match.winnerId);
-      const isOpenSlot = (name) => name === "\u2205 offen";
+      const isOpenSlot = (name) => name === "Puste";
       const playability = getMatchEditability(tournament, match);
       const editable = playability.editable;
       const auto = ensureMatchAutoMeta(match);
@@ -197,7 +197,7 @@
       <section class="ata-card tournamentCard ata-matches-card">
         ${renderSectionHeading("Prowadzenie wyników", resultHeadingLinks)}
         <p class="ata-small">API-Halbautomatik: mecz można uruchomić jednym kliknięciem, wynik synchronizuje się automatycznie. Ręczne wprowadzanie pozostaje aktywne jako fallback.${renderInfoLinks([
-          { href: README_API_AUTOMATION_URL, kind: "tech", label: "Voraussetzungen und Ablauf öffnen", title: "README: API półautomatyka" },
+          { href: README_API_AUTOMATION_URL, kind: "tech", label: "Otwórz wymagania i przebieg", title: "README: API półautomatyka" },
         ])}</p>
         <div class="ata-matches-toolbar">
           <div class="ata-segmented" role="group" aria-label="Match-Sortierung">${sortButtonsHtml}</div>

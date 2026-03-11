@@ -2760,10 +2760,10 @@
 
   function participantNameById(tournament, participantId) {
     if (!participantId) {
-      return "\u2205 offen";
+      return "Puste";
     }
     const participant = participantById(tournament, participantId);
-    return participant ? participant.name : "\u2205 offen";
+    return participant ? participant.name : "Puste";
   }
 
 
@@ -5120,7 +5120,7 @@
         nodes.forEach(function (node) {
           var value = String(node.textContent || "").trim();
           if (/^(bye|tbd)$/i.test(value)) {
-            node.textContent = "\\u2205 offen";
+            node.textContent = "\Puste";
             node.classList.add("ata-open-slot");
           }
         });
@@ -9474,7 +9474,7 @@
       const player1 = participantNameById(tournament, match.player1Id);
       const player2 = participantNameById(tournament, match.player2Id);
       const winner = participantNameById(tournament, match.winnerId);
-      const isOpenSlot = (name) => name === "\u2205 offen";
+      const isOpenSlot = (name) => name === "Puste";
       const playability = getMatchEditability(tournament, match);
       const editable = playability.editable;
       const auto = ensureMatchAutoMeta(match);
@@ -9645,7 +9645,7 @@
       <section class="ata-card tournamentCard ata-matches-card">
         ${renderSectionHeading("Prowadzenie wyników", resultHeadingLinks)}
         <p class="ata-small">API-Halbautomatik: mecz można uruchomić jednym kliknięciem, wynik synchronizuje się automatycznie. Ręczne wprowadzanie pozostaje aktywne jako fallback.${renderInfoLinks([
-          { href: README_API_AUTOMATION_URL, kind: "tech", label: "Voraussetzungen und Ablauf öffnen", title: "README: API półautomatyka" },
+          { href: README_API_AUTOMATION_URL, kind: "tech", label: "Otwórz wymagania i przebieg", title: "README: API półautomatyka" },
         ])}</p>
         <div class="ata-matches-toolbar">
           <div class="ata-segmented" role="group" aria-label="Match-Sortierung">${sortButtonsHtml}</div>
@@ -9766,13 +9766,13 @@
             const player2IsWinner = Boolean(winnerId) && normalizeText(match.player2Id) === winnerId;
             const player1Classes = [
               "ata-bracket-player",
-              player1Name === "\u2205 offen" ? "ata-open-slot" : "",
+              player1Name === "Puste" ? "ata-open-slot" : "",
               player1IsWinner ? "is-winner" : "",
               (isCompleted && !isBye && !player1IsWinner && normalizeText(match.player1Id)) ? "is-loser" : "",
             ].filter(Boolean).join(" ");
             const player2Classes = [
               "ata-bracket-player",
-              player2Name === "\u2205 offen" ? "ata-open-slot" : "",
+              player2Name === "Puste" ? "ata-open-slot" : "",
               player2IsWinner ? "is-winner" : "",
               (isCompleted && !isBye && !player2IsWinner && normalizeText(match.player2Id)) ? "is-loser" : "",
             ].filter(Boolean).join(" ");
