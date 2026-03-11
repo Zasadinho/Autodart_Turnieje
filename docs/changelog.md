@@ -5,9 +5,9 @@
   - neues Default-Preset `PDC European Tour (Official)` (`KO`, `Best of 11`, `501`, `Straight In`, `Double Out`, `Bull 25/50`)
   - bisheriges irreführendes `PDC Standard` wird nicht mehr als offizielles Preset geführt
   - Legacy-ID `pdc_standard` wird kompatibel auf `PDC 501 / Double Out (Basic)` normalisiert
-  - `Max Runden 50` wird in UI/Doku explizit als technisches AutoDarts-Limit beschrieben, nicht als PDC-Regel
+  - `Max Rund 50` wird in UI/Doku explizit als technisches AutoDarts-Limit beschrieben, nicht als PDC-Regel
 - Turnierformular für Presets erweitert:
-  - Auswahlfeld + `Preset anwenden` statt hart verdrahtetem Einzelbutton
+  - Auswahlfeld + `Zastosuj preset` statt hart verdrahtetem Einzelbutton
   - Preset-Status bleibt konsistent und springt bei manuellen Änderungen sauber auf `Individuell`
   - Hinweis ergänzt, dass `PDC World Championship` wegen fehlender Set-Unterstützung bewusst nicht als offizielles Preset enthalten ist
 - QA für Presets ergänzt:
@@ -21,7 +21,7 @@
 - Turnierzeit-Prognose ergänzt:
   - neue pure Domain-Datei `src/domain/tournament-duration.js`
   - Live-Schätzung in der Turnieranlage unter `Teilnehmer`
-  - Berechnung berücksichtigt Modus, Teilnehmerzahl, `Best of`, `Startpunkte`, `In`, `Out`, `Bull-off`, `Bull-Modus` und `Max Runden`
+  - Berechnung berücksichtigt Modus, Teilnehmerzahl, `Best of`, `Punkty startowe`, `In`, `Out`, `Bull-off`, `Tryb bulla` und `Max Rund`
   - Ausgabe als Hauptwert plus realistische Spannweite
 - Neue globale Einstellung:
   - `settings.tournamentTimeProfile` mit `fast | normal | slow`
@@ -121,7 +121,7 @@
 ## 0.2.17
 - Turnierformular (`Utwórz nowy turniej`) visuell und strukturell optimiert:
   - kompakte Zwei-Zonen-Ansicht (Konfiguration links, Teilnehmer + Aktionen rechts), damit die Inhalte auf Desktop besser auf eine Bildschirmansicht passen
-  - Preset-Button verkleinert (`PDC Preset anwenden`) und besser in die Formularlogik integriert
+  - Preset-Button verkleinert (`PDC Zastosuj preset`) und besser in die Formularlogik integriert
   - Feldreihenfolge angepasst (`Bull-off` vor `Bull mode`).
 - Lokale Lobby-Härtung:
   - Lobby ist nicht mehr wählbar im Formular
@@ -132,7 +132,7 @@
 - Turnierformular im Tab `Turnier` auf 3-Spalten-Layout umgestellt, damit die X01-Einstellungen auf normalen Monitoren kompakter sichtbar sind.
 - X01-Preset-Handling umgebaut:
   - Preset-Auswahlfeld entfernt
-  - neuer Button `PDC Preset anwenden` setzt die PDC-Defaults direkt in die Formularfelder
+  - neuer Button `PDC Zastosuj preset` setzt die PDC-Defaults direkt in die Formularfelder
   - manuelle X01-Änderungen markieren den Preset-Status automatisch als `Custom`.
 - Formularabhängigkeiten erweitert:
   - bei `Bull-off = Off` wird `Bull mode` read-only deaktiviert
@@ -145,8 +145,8 @@
 ## 0.2.15
 - X01-Matchanlage für API-Start erweitert:
   - Turnier-Neuanlage enthält jetzt X01-Parameter aus der Autodarts-Lobbyoberfläche:
-    - Startscore, In mode, Out mode, Bull mode, Bull-off, Max Runden, Lobby-Sichtbarkeit
-  - Spielmodus bleibt bewusst `Legs` und wird aus `Best-of Legs` als `First to N` abgeleitet
+    - Startscore, In mode, Out mode, Bull mode, Bull-off, Max Rund, Lobby-Sichtbarkeit
+  - Tryb gry bleibt bewusst `Legs` und wird aus `Best-of Legs` als `First to N` abgeleitet
   - `Match starten` übernimmt diese Werte konsistent in den Lobby-Create-Payload.
 - PDC-Preset für Neuanlage eingeführt:
   - Standard ist `PDC Standard` (501, Straight In, Double Out, 25/50, Bull-off Normal, Max Rounds 50, Lobby privat)

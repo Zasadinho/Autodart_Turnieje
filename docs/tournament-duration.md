@@ -17,7 +17,7 @@ Diese Dokumentation beschreibt die Berechnungsgrundlage der Live-Prognose in `sr
 | `x01InMode` | Ja | Erhöht oder reduziert die Schwierigkeit des Leg-Starts. |
 | `x01OutMode` | Ja | Erhöht oder reduziert die Schwierigkeit des Checkouts. |
 | `x01BullOffMode` | Ja | Fügt Bull-off-Zeit pro Match hinzu. |
-| `x01BullMode` | Ja, wenn `Bull-off != Off` | In der App ist `Bull-Modus` dann fachlich relevant und wird mit einem kleinen Faktor bewertet. |
+| `x01BullMode` | Ja, wenn `Bull-off != Off` | In der App ist `Tryb bulla` dann fachlich relevant und wird mit einem kleinen Faktor bewertet. |
 | `x01MaxRounds` | Ja | Wirkt vor allem auf die obere Spannweite, nicht auf den Normalfall. |
 | `tournamentTimeProfile` | Ja | Kalibriert Wurfgeschwindigkeit und Verzögerung zwischen Matches/Phasen. |
 
@@ -103,11 +103,11 @@ Die Staffelung ist bewusst stärker als zuvor. Hintergrund: externe Timing-Guide
 | `In` | `1.00` | `1.06` | `1.10` |
 | `Out` | `0.93` | `1.00` | `1.05` |
 
-### Bull-off und Bull-Modus
+### Bull-off und Tryb bulla
 | Feld | Wert | Faktor / Minuten |
 |---|---|---|
-| `Bull-Modus` | `25/50` | `1.00` |
-| `Bull-Modus` | `50/50` | `0.98` |
+| `Tryb bulla` | `25/50` | `1.00` |
+| `Tryb bulla` | `50/50` | `0.98` |
 | `Bull-off` | `Off` | `+0.00 min` |
 | `Bull-off` | `Normal` | `+0.40 min` |
 | `Bull-off` | `Official` | `+0.65 min` |

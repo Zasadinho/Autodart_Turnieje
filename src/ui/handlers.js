@@ -388,7 +388,7 @@
     const disableBullMode = normalizeText(bullOffSelect.value) === "Off";
     bullModeSelect.disabled = disableBullMode;
     bullModeSelect.title = disableBullMode
-      ? "Bull-Modus ist bei Bull-off = Off ohne Wirkung und daher schreibgesch\u00fctzt."
+      ? "Tryb bulla ist bei Bull-off = Off ohne Wirkung und daher schreibgesch\u00fctzt."
       : "";
 
     let hiddenBullMode = form.querySelector("#ata-x01-bullmode-hidden");

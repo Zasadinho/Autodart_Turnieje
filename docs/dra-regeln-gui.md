@@ -49,8 +49,8 @@ Screenshot-Kontext:
 ## Open Draw
 
 ### GUI-Stellen
-- Turnier > KO-Erstrunde zufällig mischen
-- Einstellungen > KO-Erstrunde zufällig mischen (Standard)
+- Turnier > Losowo wymieszaj pierwszą rundę KO
+- Einstellungen > Losowo wymieszaj pierwszą rundę KO (Standard)
 
 ### DRA-Referenz (Kapitel/Punkt/Seite)
 - `6.12.1`, Seite `18`

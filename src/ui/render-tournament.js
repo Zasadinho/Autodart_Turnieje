@@ -62,13 +62,13 @@
                     <input id="ata-bestof" name="bestOfLegs" type="number" min="1" max="21" step="2" value="${draft.bestOfLegs}">
                   </div>
                   <div class="ata-field">
-                    <label for="ata-startscore">Startpunkte</label>
+                    <label for="ata-startscore">Punkty startowe</label>
                     <select id="ata-startscore" name="startScore">
                       ${startScoreOptions}
                     </select>
                   </div>
                   <div class="ata-field">
-                    <label for="ata-x01-inmode">In-Modus</label>
+                    <label for="ata-x01-inmode">In mode</label>
                     <select id="ata-x01-inmode" name="x01InMode">
                       <option value="Straight" ${draft.x01InMode === "Straight" ? "selected" : ""}>Straight</option>
                       <option value="Double" ${draft.x01InMode === "Double" ? "selected" : ""}>Double</option>
@@ -76,7 +76,7 @@
                     </select>
                   </div>
                   <div class="ata-field">
-                    <label for="ata-x01-outmode">Out-Modus</label>
+                    <label for="ata-x01-outmode">Out mode</label>
                     <select id="ata-x01-outmode" name="x01OutMode">
                       <option value="Straight" ${draft.x01OutMode === "Straight" ? "selected" : ""}>Straight</option>
                       <option value="Double" ${draft.x01OutMode === "Double" ? "selected" : ""}>Double</option>
@@ -92,7 +92,7 @@
                     </select>
                   </div>
                   <div class="ata-field">
-                    <label for="ata-x01-bullmode">Bull-Modus</label>
+                    <label for="ata-x01-bullmode">Tryb bulla</label>
                     <select id="ata-x01-bullmode" name="x01BullMode" ${bullModeDisabledAttr}>
                       <option value="25/50" ${draft.x01BullMode === "25/50" ? "selected" : ""}>25/50</option>
                       <option value="50/50" ${draft.x01BullMode === "50/50" ? "selected" : ""}>50/50</option>
@@ -100,7 +100,7 @@
                     ${bullModeHiddenInput}
                   </div>
                   <div class="ata-field">
-                    <label for="ata-x01-maxrounds">Max Runden</label>
+                    <label for="ata-x01-maxrounds">Max Rund</label>
                     <select id="ata-x01-maxrounds" name="x01MaxRounds">
                       <option value="15" ${draft.x01MaxRounds === 15 ? "selected" : ""}>15</option>
                       <option value="20" ${draft.x01MaxRounds === 20 ? "selected" : ""}>20</option>
@@ -109,7 +109,7 @@
                     </select>
                   </div>
                   <div class="ata-field">
-                    <label for="ata-match-mode">Spielmodus</label>
+                    <label for="ata-match-mode">Tryb gry</label>
                     <span id="ata-match-mode" class="ata-field-readonly">Legs (First to N aus Best of)</span>
                   </div>
                   <div class="ata-field">
@@ -122,7 +122,7 @@
                       <select id="ata-preset-select" data-role="preset-select" aria-label="Preset auswählen">
                         ${presetOptions}
                       </select>
-                      <button id="ata-apply-preset" type="button" class="ata-btn ata-btn-sm" data-action="apply-selected-preset">Preset anwenden</button>
+                      <button id="ata-apply-preset" type="button" class="ata-btn ata-btn-sm" data-action="apply-selected-preset">Zastosuj preset</button>
                       <span class="ata-preset-pill">${escapeHtml(presetStatusLabel)}</span>
                     </div>
                   </div>
@@ -130,14 +130,14 @@
                 <div class="ata-toggle ata-toggle-compact">
                   <div>
                     <strong>KO-Erstrunde zuf\u00e4llig mischen ${drawHelpLinks}</strong>
-                    <div class="ata-small">Open Draw bei aktivem Schalter, sonst gesetzter Draw.</div>
+                    <div class="ata-small">Open Draw przy włączonym przełączniku, w przeciwnym razie rozstawiony Draw.</div>
                   </div>
                   <input id="ata-randomize-ko" name="randomizeKoRound1" type="checkbox" ${randomizeChecked}>
                 </div>
-                <p class="ata-small ata-create-help">PDC European Tour (Official): KO, Best of 11 Legs (First to 6), 501, Straight In, Double Out, Bull 25/50. Bull-off Normal und Max Runden 50 bleiben technische AutoDarts-Werte.</p>
+                <p class="ata-small ata-create-help">PDC European Tour (Official): KO, Best of 11 Legs (First to 6), 501, Straight In, Double Out, Bull 25/50. Bull-off Normal und Max Rund 50 bleiben technische AutoDarts-Werte.</p>
                 <p class="ata-small ata-create-help">PDC 501 / Double Out (Basic): kompatibler Ersatz für das frühere irreführende „PDC-Standard“-Preset. Ehrlich benannt, aber kein offizielles PDC-Eventformat.</p>
                 <p class="ata-small ata-create-help">PDC World Championship im echten Set-Format wird bewusst nicht als offizielles Preset angeboten, weil AutoDarts hier nur Legs / First to N unterstützt.</p>
-                <p class="ata-small ata-create-help">Bull-off = Off deaktiviert Bull-Modus automatisch (schreibgesch\u00fctzt).</p>
+                <p class="ata-small ata-create-help">Bull-off = Off deaktiviert Tryb bulla automatisch (schreibgesch\u00fctzt).</p>
               </div>
               <aside class="ata-create-side">
                 <div class="ata-field">
@@ -174,8 +174,8 @@
     const activePresetId = getAppliedCreatePresetId(tournament);
     const x01PresetLabel = getCreatePresetLabel(activePresetId);
     const x01BullModeLabel = x01Settings.bullOffMode === "Off"
-      ? "Bull-Modus deaktiviert"
-      : `Bull-Modus ${x01Settings.bullMode}`;
+      ? "Tryb bulla deaktiviert"
+      : `Tryb bulla ${x01Settings.bullMode}`;
     const legsToWin = getLegsToWin(tournament.bestOfLegs);
     const drawMode = normalizeKoDrawMode(tournament?.ko?.drawMode, KO_DRAW_MODE_SEEDED);
     const drawModeLabel = drawMode === KO_DRAW_MODE_OPEN_DRAW ? "Open Draw" : "Gesetzter Draw";
@@ -183,7 +183,7 @@
     const primaryTags = [
       { text: `Best of ${tournament.bestOfLegs} Legs`, cls: "ata-info-tag ata-info-tag-key" },
       { text: `First to ${legsToWin} Legs`, cls: "ata-info-tag" },
-      { text: `Startpunkte ${tournament.startScore}`, cls: "ata-info-tag" },
+      { text: `Punkty startowe ${tournament.startScore}`, cls: "ata-info-tag" },
       ...(tournament.mode === "ko"
         ? [
           { text: drawModeLabel, cls: "ata-info-tag ata-info-tag-accent" },

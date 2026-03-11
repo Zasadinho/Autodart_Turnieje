@@ -64,7 +64,7 @@ Der Assistent ist in fachliche Schichten aufgeteilt und wird weiterhin als einze
 - Grundlage der Schätzung:
   - Modus und Teilnehmerzahl
   - erwartete Legs pro Match aus `Best of`
-  - X01-Setup (`Startscore`, `In`, `Out`, `Bull-off`, `Bull-Modus`, `Max Runden`)
+  - X01-Setup (`Startscore`, `In`, `Out`, `Bull-off`, `Tryb bulla`, `Max Rund`)
   - globales Zeitprofil (`fast | normal | slow`)
 - Die UI rendert daraus einen Live-Block im Turnierformular.
 - `src/ui/handlers.js` aktualisiert diesen Block gezielt bei jedem Formular-Input, ohne die gesamte Shell neu zu rendern.

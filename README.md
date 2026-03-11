@@ -101,8 +101,8 @@ Nach Installation ist links im Hauptmenü der neue Eintrag sichtbar. Darüber ö
 
 ### KO (`ko`)
 - Hybrid-Draw:
-  - `KO-Erstrunde zufällig mischen = OFF` -> `seeded` (Eingabereihenfolge als Seed 1..n).
-  - `KO-Erstrunde zufällig mischen = ON` -> `open_draw` (deterministisch gemischte Seed-Reihenfolge).
+  - `Losowo wymieszaj pierwszą rundę KO = OFF` -> `seeded` (Eingabereihenfolge als Seed 1..n).
+  - `Losowo wymieszaj pierwszą rundę KO = ON` -> `open_draw` (deterministisch gemischte Seed-Reihenfolge).
 - Bye-Verteilung ist PDC/DRA-konform für gesetzte Draws:
   - Bei nicht voller 2er-Potenz erhalten Top-Seeds Freilose.
   - Beispiel mit 9 Spielern im 16er-Baum: Nur Seed 8 vs Seed 9 spielt in Runde 1.
@@ -146,28 +146,28 @@ Tab: `Turnier`
 | `Turniername` | Freitext | Name für aktive Sitzung/Export | Erleichtert Zuordnung bei mehreren lokalen Events |
 | `Modus` | `KO`, `Liga`, `Gruppenphase + KO` | Spielplanlogik, Tabellenlogik, KO-Pfade | Falscher Modus führt zu falscher Matchanzahl/Fortschrittslogik |
 | `Best of Legs` | Ungerade `1..21` | Matchlänge; intern `First to N` | Definiert Siegbedingung pro Match und Turnierdauer |
-| `Startpunkte` | `121`, `170`, `301`, `501`, `701`, `901` | X01-Basis für jedes Match | Beeinflusst Matchdauer und Schwierigkeitsprofil |
-| `In-Modus` | `Straight`, `Double`, `Master` | Wie ein Leg gestartet wird | Regelt Einstiegsanforderung je Spielstil/Regelwerk |
-| `Out-Modus` | `Straight`, `Double`, `Master` | Wie ein Leg beendet wird | Zentrale Regel für Checkout-Strenge |
+| `Punkty startowe` | `121`, `170`, `301`, `501`, `701`, `901` | X01-Basis für jedes Match | Beeinflusst Matchdauer und Schwierigkeitsprofil |
+| `In mode` | `Straight`, `Double`, `Master` | Wie ein Leg gestartet wird | Regelt Einstiegsanforderung je Spielstil/Regelwerk |
+| `Out mode` | `Straight`, `Double`, `Master` | Wie ein Leg beendet wird | Zentrale Regel für Checkout-Strenge |
 | `Bull-off` | `Off`, `Normal`, `Official` | Startreihenfolge-/Bull-off-Verhalten für Lobby | Legt fest, wie Anstöße entschieden werden |
-| `Bull-Modus` | `25/50`, `50/50` | Wertung der Bull-Segmente | Muss mit Hausregeln/Turnierkontext konsistent sein |
-| `Max Runden` | `15`, `20`, `50`, `80` | Upper bound für Matchdauer in der Lobby | Verhindert hängende/zu lange Matches |
-| `Spielmodus` | fix `Legs (First to N aus Best of)` | Nicht umstellbar in der UI | Verhindert inkonsistente Kombinationen im lokalen Flow |
+| `Tryb bulla` | `25/50`, `50/50` | Wertung der Bull-Segmente | Muss mit Hausregeln/Turnierkontext konsistent sein |
+| `Max Rund` | `15`, `20`, `50`, `80` | Upper bound für Matchdauer in der Lobby | Verhindert hängende/zu lange Matches |
+| `Tryb gry` | fix `Legs (First to N aus Best of)` | Nicht umstellbar in der UI | Verhindert inkonsistente Kombinationen im lokalen Flow |
 | `Lobby` | fix `Privat` | Sichtbarkeit der API-Lobby | Lokalny Turniej bleibt bewusst privat/sicher |
-| `Preset` | Auswahlfeld + Button `Preset anwenden` | Setzt alle Preset-relevanten Turnierfelder konsistent | Offizielle und kompatible Profile bleiben klar getrennt |
-| `KO-Erstrunde zufällig mischen` | Checkbox `ON/OFF` | `open_draw` oder `seeded` in Runde 1 | Transparente Entscheidung zwischen Zufall und Setzlogik |
+| `Preset` | Auswahlfeld + Button `Zastosuj preset` | Setzt alle Preset-relevanten Turnierfelder konsistent | Offizielle und kompatible Profile bleiben klar getrennt |
+| `Losowo wymieszaj pierwszą rundę KO` | Checkbox `ON/OFF` | `open_draw` oder `seeded` in Runde 1 | Transparente Entscheidung zwischen Zufall und Setzlogik |
 | `Teilnehmer` | Je Spieler eine Zeile | Teilnehmerliste inkl. Reihenfolge | Reihenfolge ist bei `seeded` zugleich Seed-Reihenfolge |
 | `Teilnehmer mischen` | Button | Mischt Teilnehmertextliste | Praktisch für spontane Auslosung vor Start |
 
 ### Preset-Katalog
 - Bei Neuanlage ist standardmäßig `PDC European Tour (Official)` aktiv.
-- Das Preset wird über Auswahlfeld + Button `Preset anwenden` auf alle relevanten Turnierfelder angewendet.
-- Der Spielmodus bleibt immer `Legs`; `Best-of Legs` ist führend für die Matchlänge und wird API-seitig als `First to N Legs` umgesetzt.
+- Das Preset wird über Auswahlfeld + Button `Zastosuj preset` auf alle relevanten Turnierfelder angewendet.
+- Der Tryb gry bleibt immer `Legs`; `Best-of Legs` ist führend für die Matchlänge und wird API-seitig als `First to N Legs` umgesetzt.
 
 | Preset | Parameter | Hinweise |
 |---|---|---|
-| `PDC European Tour (Official)` | `KO`, `Best of 11`, `501`, `Straight In`, `Double Out`, `Bull 25/50`, `Bull-off Normal`, `Max Runden 50`, `Lobby privat` | Offizielles Default-Rundenformat. `Bull-off Normal` und `Max Runden 50` sind AutoDarts-/Technikwerte; `Max Runden` ist **keine** PDC-Fachregel. |
-| `PDC 501 / Double Out (Basic)` | `KO`, `Best of 5`, `501`, `Straight In`, `Double Out`, `Bull 25/50`, `Bull-off Normal`, `Max Runden 50`, `Lobby privat` | Ehrlich benanntes Kompatibilitätsprofil für das frühere irreführende `PDC Standard`. **Kein** offizielles PDC-Eventformat. |
+| `PDC European Tour (Official)` | `KO`, `Best of 11`, `501`, `Straight In`, `Double Out`, `Bull 25/50`, `Bull-off Normal`, `Max Rund 50`, `Lobby privat` | Offizielles Default-Rundenformat. `Bull-off Normal` und `Max Rund 50` sind AutoDarts-/Technikwerte; `Max Rund` ist **keine** PDC-Fachregel. |
+| `PDC 501 / Double Out (Basic)` | `KO`, `Best of 5`, `501`, `Straight In`, `Double Out`, `Bull 25/50`, `Bull-off Normal`, `Max Rund 50`, `Lobby privat` | Ehrlich benanntes Kompatibilitätsprofil für das frühere irreführende `PDC Standard`. **Kein** offizielles PDC-Eventformat. |
 | `Individuell / Manuell` | aktuelle Formularwerte | Status nach manuellen Änderungen an Preset-Feldern. |
 
 ### Nicht enthaltene PDC-Formate
@@ -192,10 +192,10 @@ Tab: `Turnier`
 - Die Berechnung aktualisiert sich bei jeder Änderung im Formular:
   - Teilnehmerzahl und Modus
   - `Best of Legs`
-  - `Startpunkte`
-  - `In-Modus`, `Out-Modus`
-  - `Bull-off`, `Bull-Modus`
-  - `Max Runden`
+  - `Punkty startowe`
+  - `In mode`, `Out mode`
+  - `Bull-off`, `Tryb bulla`
+  - `Max Rund`
 - Die Schätzung zeigt:
   - Hauptwert `ca. Xh Ym`
   - realistische Spannweite
@@ -214,7 +214,7 @@ Die Anzeige bündelt Teilnehmerzahl, geplante Spielanzahl, durchschnittliche Mat
 ### Nach dem Anlegen
 Im aktiven Turnier siehst du die wichtigsten Tags sofort:
 - Format (`KO`, `Liga`, `Gruppenphase + KO`)
-- `Best of`, `First to`, `Startpunkte`
+- `Best of`, `First to`, `Punkty startowe`
 - Bei KO: `Open Draw`/`Gesetzter Draw`, `Draw-Lock aktiv/aus`
 - X01-Zusammenfassung und Teilnehmerchips
 
@@ -337,7 +337,7 @@ Legende für die eingeblendeten Hilfelinks:
   - Ergebnis wird automatisch aus der API übernommen.
 - Warum: weniger manuelle Schritte, geringeres Risiko für Übertragungsfehler.
 
-### KO-Erstrunde zufällig mischen (Standard)
+### Losowo wymieszaj pierwszą rundę KO (Standard)
 - Standard: `EIN`.
 - Gilt für neu erstellte KO-Turniere.
 - `EIN` -> `open_draw` (zufällige Reihenfolge in Runde 1).
@@ -362,10 +362,10 @@ Legende für die eingeblendeten Hilfelinks:
 - Unabhängig vom Profil bleiben die fachlichen Einflussgrößen erhalten:
   - Modus und Teilnehmerzahl
   - `Best of Legs`
-  - `Startpunkte`
+  - `Punkty startowe`
   - `In` / `Out`
-  - `Bull-off` / `Bull-Modus`
-  - `Max Runden`
+  - `Bull-off` / `Tryb bulla`
+  - `Max Rund`
 - Warum: lokale Felder spielen unterschiedlich schnell; das Profil erlaubt eine saubere Anpassung, ohne die eigentliche Turnierlogik zu verändern.
 
 ### Promoter Tie-Break-Profil

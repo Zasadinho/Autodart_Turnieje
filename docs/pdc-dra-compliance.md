@@ -43,7 +43,7 @@
   - Default-Rundenformat: `KO`, `Best of 11 Legs (First to 6)`, `501`, `Straight In`, `Double Out`, `Bull 25/50`
 - Technische AutoDarts-Werte bleiben explizit getrennt:
   - `Bull-off Normal` ist die technische Lobby-Abbildung im Tool
-  - `Max Runden 50` ist **kein** PDC-Regelpunkt, sondern nur ein technisches Limit für die Lobby
+  - `Max Rund 50` ist **kein** PDC-Regelpunkt, sondern nur ein technisches Limit für die Lobby
 - Das frühere irreführende `PDC Standard` wurde nicht als offizielles Preset weitergeführt:
   - alte gespeicherte Daten mit `pdc_standard` landen jetzt ehrlich bei `PDC 501 / Double Out (Basic)`
   - damit bleiben ältere `Best of 5`-Entwürfe kompatibel, ohne still auf `Best of 11` umzuschalten
