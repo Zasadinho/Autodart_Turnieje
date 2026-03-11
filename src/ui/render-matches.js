@@ -82,7 +82,7 @@
       const summaryText = isCompleted
         ? (isByeCompletion
           ? `Weiter (Bye): ${winner}`
-          : (isKoFinal ? `Champion: ${winner} (${match.legs.p1}:${match.legs.p2})` : `Sieger: ${winner} (${match.legs.p1}:${match.legs.p2})`))
+          : (isKoFinal ? `Champion: ${winner} (${match.legs.p1}:${match.legs.p2})` : `Zwycięzca: ${winner} (${match.legs.p1}:${match.legs.p2})`))
         : "";
       const advanceClasses = [
         "ata-match-advance-pill",
@@ -149,10 +149,10 @@
         ? `<span class="${escapeHtml(advanceClasses)}">${escapeHtml(summaryText)}</span>`
         : "";
       const nextPillHtml = isSuggestedNext
-        ? `<span class="ata-match-next-pill" title="Empfohlene n\u00e4chste Paarung (PDC: Next Match)">N\u00e4chstes Match</span>`
+        ? `<span class="ata-match-next-pill" title="Empfohlene n\u00e4chste Paarung (PDC: Next Match)">Następny mecz</span>`
         : "";
       const finalPillHtml = isKoFinal
-        ? `<span class="ata-match-final-pill" title="Finale">🏆 Finale</span>`
+        ? `<span class="ata-match-final-pill" title="Finale">🏆 Finał</span>`
         : "";
       const statusLineHtml = statusLine
         ? `<div class="ata-match-note">${escapeHtml(statusLine)}</div>`

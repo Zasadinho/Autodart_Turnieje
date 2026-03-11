@@ -114,7 +114,7 @@
     }
 
     #ata-brackets-viewer .round.ata-final-round h3::after {
-      content: "🏆 Finale";
+      content: "🏆 Finał";
       position: absolute;
       right: 8px;
       top: 6px;
