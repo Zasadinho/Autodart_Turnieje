@@ -19,12 +19,12 @@
       const seededRoundOne = seededMatches.filter((match) => match.round === 1);
       const seededOpenRoundOne = seededRoundOne.filter((match) => match.player1Id && match.player2Id && !isByeMatchResult(match));
       record(
-        "KO Seeded: 9 Uczestnicy -> genau 1 offenes R1-Match",
+        "KO Seeded: 9 uczestników → dokładnie 1 otwarty mecz rundy 1.",
         seededOpenRoundOne.length === 1,
-        `offene R1-Matches: ${seededOpenRoundOne.length}`,
+        `otwarte mecze rundy 1: ${seededOpenRoundOne.length}`,
       );
     } catch (error) {
-      record("KO Seeded: 9 Uczestnicy -> genau 1 offenes R1-Match", false, String(error?.message || error));
+      record("KO Seeded: 9 uczestników → dokładnie 1 otwarty mecz rundy 1.", false, String(error?.message || error));
     }
 
     try {

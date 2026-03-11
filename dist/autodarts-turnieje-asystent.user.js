@@ -5816,17 +5816,17 @@
       state.bracket.failed = false;
       state.bracket.lastError = "";
       syncBracketFallbackVisibility();
-      logDebug("bracket", "Bracket rendered successfully.");
+      logDebug("bracket", "Drzewo turniejowe zostało pomyślnie wyrenderowane.");
       return;
     }
 
     if (data.type === "ata:bracket-error") {
       clearBracketFrameTimeout(state.bracket);
       state.bracket.failed = true;
-      state.bracket.lastError = normalizeText(data.message || "Unbekannter Fehler");
+      state.bracket.lastError = normalizeText(data.message || "Nieznany błąd");
       syncBracketFallbackVisibility();
-      setNotice("error", `Turnierbaum-Fehler: ${state.bracket.lastError}. Fallback aktiv.`, 3600);
-      logWarn("bracket", "Bracket render error.", data);
+      setNotice("error", `Błąd drzewa turniejowego: ${state.bracket.lastError}. Włączono tryb awaryjny.`, 3600);
+      logWarn("bracket", "Błąd renderowania drzewa turniejowego.", data);
     }
   }
 
@@ -5865,7 +5865,7 @@
       try {
         cleanup();
       } catch (error) {
-        logWarn("lifecycle", "Cleanup function failed.", error);
+        logWarn("lifecycle", "Funkcja czyszczenia zakończyła się błędem.", error);
       }
     }
   }
@@ -5900,12 +5900,12 @@
       const seededRoundOne = seededMatches.filter((match) => match.round === 1);
       const seededOpenRoundOne = seededRoundOne.filter((match) => match.player1Id && match.player2Id && !isByeMatchResult(match));
       record(
-        "KO Seeded: 9 Uczestnicy -> genau 1 offenes R1-Match",
+        "KO Seeded: 9 uczestników → dokładnie 1 otwarty mecz rundy 1.",
         seededOpenRoundOne.length === 1,
-        `offene R1-Matches: ${seededOpenRoundOne.length}`,
+        `otwarte mecze rundy 1: ${seededOpenRoundOne.length}`,
       );
     } catch (error) {
-      record("KO Seeded: 9 Uczestnicy -> genau 1 offenes R1-Match", false, String(error?.message || error));
+      record("KO Seeded: 9 uczestników → dokładnie 1 otwarty mecz rundy 1.", false, String(error?.message || error));
     }
 
     try {

@@ -75,17 +75,17 @@
       state.bracket.failed = false;
       state.bracket.lastError = "";
       syncBracketFallbackVisibility();
-      logDebug("bracket", "Bracket rendered successfully.");
+      logDebug("bracket", "Drzewo turniejowe zostało pomyślnie wyrenderowane.");
       return;
     }
 
     if (data.type === "ata:bracket-error") {
       clearBracketFrameTimeout(state.bracket);
       state.bracket.failed = true;
-      state.bracket.lastError = normalizeText(data.message || "Unbekannter Fehler");
+      state.bracket.lastError = normalizeText(data.message || "Nieznany błąd");
       syncBracketFallbackVisibility();
-      setNotice("error", `Turnierbaum-Fehler: ${state.bracket.lastError}. Fallback aktiv.`, 3600);
-      logWarn("bracket", "Bracket render error.", data);
+      setNotice("error", `Błąd drzewa turniejowego: ${state.bracket.lastError}. Włączono tryb awaryjny.`, 3600);
+      logWarn("bracket", "Błąd renderowania drzewa turniejowego.", data);
     }
   }
 

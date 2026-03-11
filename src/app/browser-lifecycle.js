@@ -33,7 +33,7 @@
       try {
         cleanup();
       } catch (error) {
-        logWarn("lifecycle", "Cleanup function failed.", error);
+        logWarn("lifecycle", "Funkcja czyszczenia zakończyła się błędem.", error);
       }
     }
   }
