@@ -177,14 +177,14 @@
       `;
     }).join("");
 
-    const cardsHtml = cards || `<p class="ata-small">Keine Matches vorhanden.</p>`;
+    const cardsHtml = cards || `<p class="ata-small">Brak dostępnych meczów.</p>`;
     const resultHeadingLinks = [
-      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Erklärung zur API-Halbautomatik öffnen", title: "README: API-Halbautomatik" },
-      { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "DRA-Regelerklärung zum Tie-Break öffnen", title: "DRA-Regeln in der GUI: Tie-Break" },
+      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Pokaż objaśnienie półautomatycznej obsługi API", title: "README: API półautomatyka" },
+      { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "Otwórz wyjaśnienie zasad DRA dotyczących tie-breaka", title: "Zasady DRA w GUI: tie-break" },
     ];
     const nextMatchHelpLinks = renderInfoLinks([
-      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Ablauf der Ergebnisführung öffnen", title: "README: API-Halbautomatik und Ergebnisführung" },
-      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Turniermodus-Kontext öffnen", title: "README: Turniermodi" },
+      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Otwórz opis prowadzenia wyników", title: "README: półautomatyka API i prowadzenie wyników" },
+      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Pokaż opis trybów turniejowych", title: "README: Tryby turniejowe" },
     ]);
     const nextHintHtml = suggestedNextMatchId
       ? `<p class="ata-small ata-next-hint">Uwaga: oznaczenie ‘Następny mecz’ wskazuje rekomendowaną kolejną parę (PDC: Next Match). ${nextMatchHelpLinks}.</p>`
@@ -197,7 +197,7 @@
       <section class="ata-card tournamentCard ata-matches-card">
         ${renderSectionHeading("Prowadzenie wyników", resultHeadingLinks)}
         <p class="ata-small">API-Halbautomatik: mecz można uruchomić jednym kliknięciem, wynik synchronizuje się automatycznie. Ręczne wprowadzanie pozostaje aktywne jako fallback.${renderInfoLinks([
-          { href: README_API_AUTOMATION_URL, kind: "tech", label: "Voraussetzungen und Ablauf öffnen", title: "README: API-Halbautomatik" },
+          { href: README_API_AUTOMATION_URL, kind: "tech", label: "Voraussetzungen und Ablauf öffnen", title: "README: API półautomatyka" },
         ])}</p>
         <div class="ata-matches-toolbar">
           <div class="ata-segmented" role="group" aria-label="Match-Sortierung">${sortButtonsHtml}</div>

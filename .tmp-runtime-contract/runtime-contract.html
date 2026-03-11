@@ -9272,7 +9272,7 @@ const GLOBALS_CONTRACT = Object.freeze({
         { href: README_INFO_SYMBOLS_URL, kind: "tech", label: "Legende der Info-Symbole öffnen", title: "README: Info-Symbole" },
       ];
       const modeHelpLinks = renderInfoLinks([
-        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Erklärung der Modi öffnen", title: "README: Turniermodi" },
+        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Erklärung der Modi öffnen", title: "README: Tryby turniejowe" },
         { href: DRA_GUI_RULE_MODE_FORMATS_URL, kind: "rule", label: "DRA-Regelerklärung zu Modus und Format öffnen", title: "DRA-Regeln in der GUI: Modus und Format" },
       ]);
       const drawHelpLinks = renderInfoLinks([
@@ -9447,7 +9447,7 @@ const GLOBALS_CONTRACT = Object.freeze({
     const primaryTagsHtml = primaryTags.map((tag) => `<span class="${tag.cls}">${escapeHtml(tag.text)}</span>`).join("");
     const x01TagsHtml = x01Tags.map((tag) => `<span class="${tag.cls}">${escapeHtml(tag.text)}</span>`).join("");
     const activeTournamentHeadingLinks = [
-      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Turniermodus-Erklärung öffnen", title: "README: Turniermodi" },
+      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Turniermodus-Erklärung öffnen", title: "README: Tryby turniejowe" },
     ];
     const activeFormatHelpLinks = renderInfoLinks([
       { href: DRA_GUI_RULE_MODE_FORMATS_URL, kind: "rule", label: "DRA-Regelerklärung zu Modus und Format öffnen", title: "DRA-Regeln in der GUI: Modus und Format" },
@@ -9663,14 +9663,14 @@ const GLOBALS_CONTRACT = Object.freeze({
       `;
     }).join("");
 
-    const cardsHtml = cards || `<p class="ata-small">Keine Matches vorhanden.</p>`;
+    const cardsHtml = cards || `<p class="ata-small">Brak dostępnych meczów.</p>`;
     const resultHeadingLinks = [
-      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Erklärung zur API-Halbautomatik öffnen", title: "README: API-Halbautomatik" },
-      { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "DRA-Regelerklärung zum Tie-Break öffnen", title: "DRA-Regeln in der GUI: Tie-Break" },
+      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Pokaż objaśnienie półautomatycznej obsługi API", title: "README: API półautomatyka" },
+      { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "Otwórz wyjaśnienie zasad DRA dotyczących tie-breaka", title: "Zasady DRA w GUI: tie-break" },
     ];
     const nextMatchHelpLinks = renderInfoLinks([
-      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Ablauf der Ergebnisführung öffnen", title: "README: API-Halbautomatik und Ergebnisführung" },
-      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Turniermodus-Kontext öffnen", title: "README: Turniermodi" },
+      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Otwórz opis prowadzenia wyników", title: "README: półautomatyka API i prowadzenie wyników" },
+      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Pokaż opis trybów turniejowych", title: "README: Tryby turniejowe" },
     ]);
     const nextHintHtml = suggestedNextMatchId
       ? `<p class="ata-small ata-next-hint">Uwaga: oznaczenie ‘Następny mecz’ wskazuje rekomendowaną kolejną parę (PDC: Next Match). ${nextMatchHelpLinks}.</p>`
@@ -9683,7 +9683,7 @@ const GLOBALS_CONTRACT = Object.freeze({
       <section class="ata-card tournamentCard ata-matches-card">
         ${renderSectionHeading("Prowadzenie wyników", resultHeadingLinks)}
         <p class="ata-small">API-Halbautomatik: mecz można uruchomić jednym kliknięciem, wynik synchronizuje się automatycznie. Ręczne wprowadzanie pozostaje aktywne jako fallback.${renderInfoLinks([
-          { href: README_API_AUTOMATION_URL, kind: "tech", label: "Voraussetzungen und Ablauf öffnen", title: "README: API-Halbautomatik" },
+          { href: README_API_AUTOMATION_URL, kind: "tech", label: "Voraussetzungen und Ablauf öffnen", title: "README: API półautomatyka" },
         ])}</p>
         <div class="ata-matches-toolbar">
           <div class="ata-segmented" role="group" aria-label="Match-Sortierung">${sortButtonsHtml}</div>
@@ -9863,7 +9863,7 @@ const GLOBALS_CONTRACT = Object.freeze({
     if (tournament.mode === "league") {
       const standings = standingsForMatches(tournament, getMatchesByStage(tournament, MATCH_STAGE_LEAGUE));
       html += renderStandingsTable(standings, "Liga-Tabelle", [
-        { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "DRA-Regelerklärung zum Tie-Break öffnen", title: "DRA-Regeln in der GUI: Tie-Break" },
+        { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "Otwórz wyjaśnienie zasad DRA dotyczących tie-breaka", title: "Zasady DRA w GUI: tie-break" },
       ]);
       html += renderLeagueSchedule(tournament);
     } else if (tournament.mode === "groups_ko") {
@@ -9872,7 +9872,7 @@ const GLOBALS_CONTRACT = Object.freeze({
       const blockedGroups = [];
       standingsMap.forEach((entry) => {
         groupCards.push(renderStandingsTable(entry.rows, `Tabelle ${entry.group.name}`, [
-          { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "DRA-Regelerklärung zum Tie-Break öffnen", title: "DRA-Regeln in der GUI: Tie-Break" },
+          { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "Otwórz wyjaśnienie zasad DRA dotyczących tie-breaka", title: "Zasady DRA w GUI: tie-break" },
         ]));
         if (entry.groupResolution?.status === "playoff_required") {
           blockedGroups.push(`${entry.group.name}: ${entry.groupResolution.reason}`);
@@ -9883,7 +9883,7 @@ const GLOBALS_CONTRACT = Object.freeze({
         html += `
           <section class="ata-card tournamentCard">
             ${renderSectionHeading("Gruppenentscheidung offen", [
-              { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "DRA-Regelerklärung zum Tie-Break öffnen", title: "DRA-Regeln in der GUI: Tie-Break" },
+              { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "Otwórz wyjaśnienie zasad DRA dotyczących tie-breaka", title: "Zasady DRA w GUI: tie-break" },
             ])}
             <p class="ata-small">KO-Qualifikation ist blockiert, bis folgende DRA-Entscheidungen geklärt sind:</p>
             <ul class="ata-small">
@@ -9973,11 +9973,11 @@ const GLOBALS_CONTRACT = Object.freeze({
     );
     const tieBreakDisabledAttr = state.store?.tournament ? "" : "disabled";
     const apiSyncHelpLinks = renderInfoLinks([
-      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Erkl\u00e4rung zur API-Halbautomatik \u00f6ffnen", title: "README: API-Halbautomatik" },
+      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Erkl\u00e4rung zur API-Halbautomatik \u00f6ffnen", title: "README: API półautomatyka" },
       { href: README_INFO_SYMBOLS_URL, kind: "tech", label: "Legende der Info-Symbole \u00f6ffnen", title: "README: Info-Symbole" },
     ]);
     const koDrawHelpLinks = renderInfoLinks([
-      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Erkl\u00e4rung zu Turniermodi \u00f6ffnen", title: "README: Turniermodi und Open Draw" },
+      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Erkl\u00e4rung zu Turniermodi \u00f6ffnen", title: "README: Tryby turniejowe und Open Draw" },
       { href: DRA_GUI_RULE_OPEN_DRAW_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zu Open Draw \u00f6ffnen", title: "DRA-Regeln in der GUI: Open Draw" },
     ]);
     const koDrawLockHelpLinks = renderInfoLinks([
@@ -10048,7 +10048,7 @@ const GLOBALS_CONTRACT = Object.freeze({
       </section>
       <section class="ata-card tournamentCard">
         ${renderSectionHeading("Promoter Tie-Break-Profil", [
-          { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zum Tie-Break \u00f6ffnen", title: "DRA-Regeln in der GUI: Tie-Break" },
+          { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zum Tie-Break \u00f6ffnen", title: "Zasady DRA w GUI: tie-break" },
         ])}
         <div class="ata-field">
           <label for="ata-setting-tiebreak">Profil pro Turnier</label>

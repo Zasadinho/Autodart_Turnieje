@@ -27,11 +27,11 @@
     );
     const tieBreakDisabledAttr = state.store?.tournament ? "" : "disabled";
     const apiSyncHelpLinks = renderInfoLinks([
-      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Erkl\u00e4rung zur API-Halbautomatik \u00f6ffnen", title: "README: API-Halbautomatik" },
+      { href: README_API_AUTOMATION_URL, kind: "tech", label: "Erkl\u00e4rung zur API-Halbautomatik \u00f6ffnen", title: "README: API półautomatyka" },
       { href: README_INFO_SYMBOLS_URL, kind: "tech", label: "Legende der Info-Symbole \u00f6ffnen", title: "README: Info-Symbole" },
     ]);
     const koDrawHelpLinks = renderInfoLinks([
-      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Erkl\u00e4rung zu Turniermodi \u00f6ffnen", title: "README: Turniermodi und Open Draw" },
+      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Erkl\u00e4rung zu Turniermodi \u00f6ffnen", title: "README: Tryby turniejowe und Open Draw" },
       { href: DRA_GUI_RULE_OPEN_DRAW_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zu Open Draw \u00f6ffnen", title: "DRA-Regeln in der GUI: Open Draw" },
     ]);
     const koDrawLockHelpLinks = renderInfoLinks([
@@ -102,7 +102,7 @@
       </section>
       <section class="ata-card tournamentCard">
         ${renderSectionHeading("Promoter Tie-Break-Profil", [
-          { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zum Tie-Break \u00f6ffnen", title: "DRA-Regeln in der GUI: Tie-Break" },
+          { href: DRA_GUI_RULE_TIE_BREAK_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zum Tie-Break \u00f6ffnen", title: "Zasady DRA w GUI: tie-break" },
         ])}
         <div class="ata-field">
           <label for="ata-setting-tiebreak">Profil pro Turnier</label>
