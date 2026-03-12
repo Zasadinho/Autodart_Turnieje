@@ -370,7 +370,7 @@
     const draft = normalizeCreateDraft(readCreateDraftInput(formData), state.store.settings);
     const presetId = getAppliedCreatePresetId(draft);
     presetInput.value = presetId;
-    presetBadge.textContent = `Preset aktiv: ${getCreatePresetLabel(presetId)}`;
+    presetBadge.textContent = `Aktywny preset: ${getCreatePresetLabel(presetId)}`;
   }
 
 

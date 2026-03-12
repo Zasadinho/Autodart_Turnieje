@@ -9219,7 +9219,7 @@ if (isAlreadyCompleted) {
       )).join("");
       const durationEstimate = estimateTournamentDurationFromDraft(draft, state.store.settings);
       const activePresetId = getAppliedCreatePresetId(draft);
-      const presetStatusLabel = `Preset aktiv: ${getCreatePresetLabel(activePresetId)}`;
+      const presetStatusLabel = `Aktywny preset: ${getCreatePresetLabel(activePresetId)}`;
       const presetOptions = [
         ...getCreatePresetCatalog().map((preset) => (
           `<option value="${preset.id}" ${draft.x01Preset === preset.id ? "selected" : ""}>${escapeHtml(preset.label)}</option>`
@@ -9232,19 +9232,19 @@ if (isAlreadyCompleted) {
         ? `<input type="hidden" id="ata-x01-bullmode-hidden" name="x01BullMode" value="${escapeHtml(draft.x01BullMode)}">`
         : "";
       const createHeadingLinks = [
-        { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Erklärung zur Turniererstellung öffnen", title: "README: Utwórz turniej" },
-        { href: README_INFO_SYMBOLS_URL, kind: "tech", label: "Legende der Info-Symbole öffnen", title: "README: Info-Symbole" },
+        { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Otwórz wyjaśnienie tworzenia turnieju", title: "README: Utwórz turniej" },
+        { href: README_INFO_SYMBOLS_URL, kind: "tech", label: "Otwórz legendę ikon informacyjnych", title: "README: Info-Symbole" },
       ];
       const modeHelpLinks = renderInfoLinks([
-        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Erklärung der Modi öffnen", title: "README: Tryby turniejowe" },
+        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Otwórz wyjaśnienie trybów", title: "README: Tryby turniejowe" },
         { href: DRA_GUI_RULE_MODE_FORMATS_URL, kind: "rule", label: "Otwórz objaśnienie zasad DRA dotyczących trybu i formatu", title: "Zasady DRA w interfejsie: tryb i format" },
       ]);
       const drawHelpLinks = renderInfoLinks([
-        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Open Draw und Losowanie z rozstawieniem erklärt", title: "README: KO-Modus" },
+        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Wyjaśnienie trybów: Open Draw i losowanie z rozstawieniem", title: "README: Tryb pucharowy (KO)" },
         { href: DRA_GUI_RULE_OPEN_DRAW_URL, kind: "rule", label: "DRA-Regelerklärung zu Open Draw öffnen", title: "Zasady DRA w GUI: Open Draw" },
       ]);
       const modeLimitHelpLinks = renderInfoLinks([
-        { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "DRA-Regelerklärung zu Limits öffnen", title: "Zasady DRA w interfejsie: limity uczestników" },
+        { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "Otwórz wyjaśnienie zasad DRA dotyczących limitów", title: "Zasady DRA w interfejsie: limity uczestników" },
       ]);
       return `
         <section class="ata-card tournamentCard">
@@ -9344,7 +9344,7 @@ if (isAlreadyCompleted) {
                   <input id="ata-randomize-ko" name="randomizeKoRound1" type="checkbox" ${randomizeChecked}>
                 </div>
                 <p class="ata-small ata-create-help">PDC European Tour (Official): KO, Best of 11 Legs (First to 6), 501, Straight In, Double Out, Bull 25/50. Bull-off Normal und Max Rund 50 pozostają technicznymi wartościami AutoDarts.</p>
-                <p class="ata-small ata-create-help">PDC 501 / Double Out (Basic): kompatybilny zamiennik wcześniejszego, mylącego presetu ‘PDC‑Standard’. Nazwany uczciwie, ale nie jest oficjalnym formatem turniejowym PDC.</p>
+                <p class="ata-small ata-create-help">PDC 501 / Double Out (Basic): kompatybilny zamiennik wcześniejszego, mylącego presetu ‘PDC-Standard’. Nazwany uczciwie, ale nie jest oficjalnym formatem turniejowym PDC.</p>
                 <p class="ata-small ata-create-help">PDC World Championship w prawdziwym formacie setowym nie jest celowo oferowany jako oficjalny preset, ponieważ AutoDarts obsługuje tutaj wyłącznie legi / First to N.</p>
                 <p class="ata-small ata-create-help">Bull-off = Off automatycznie dezaktywuje tryb bulla (pole staje się tylko do odczytu)..</p>
               </div>
@@ -9873,14 +9873,14 @@ if (isAlreadyCompleted) {
             </div>
           </div>
           <div class="ata-actions" style="margin-top: 10px;">
-            <button type="button" class="ata-btn" data-action="retry-bracket">Turnierbaum neu laden</button>
+            <button type="button" class="ata-btn" data-action="retry-bracket">Przeładuj drzewko turniejowe</button>
           </div>
-          <p class="ata-small">CDN-Render aktiv. Der HTML-Fallback wird nur bei Fehlern oder Timeout angezeigt.</p>
+          <p class="ata-small">Renderowanie przez CDN jest aktywne. HTML-fallback pojawi się tylko w przypadku błędu lub przekroczenia czasu.</p>
         </section>
       `;
     }
 
-    return html || `<section class="ata-card tournamentCard"><h3>Turnierbaum</h3><p>Keine Daten.</p></section>`;
+    return html || `<section class="ata-card tournamentCard"><h3>Drzewko turniejowe</h3><p>Brak danych.</p></section>`;
   }
 
   function renderIOTab() {
@@ -9888,22 +9888,22 @@ if (isAlreadyCompleted) {
       <section class="ata-card tournamentCard">
         <h3>Export</h3>
         <div class="ata-actions">
-          <button type="button" class="ata-btn ata-btn-primary" data-action="export-file">JSON herunterladen</button>
-          <button type="button" class="ata-btn" data-action="export-clipboard">JSON in Zwischenablage</button>
+          <button type="button" class="ata-btn ata-btn-primary" data-action="export-file">Pobierz JSON</button>
+          <button type="button" class="ata-btn" data-action="export-clipboard">Kopiuj JSON do schowka</button>
         </div>
       </section>
       <section class="ata-card tournamentCard">
         <h3>Import</h3>
         <div class="ata-field">
-          <label for="ata-import-file">Datei importieren</label>
+          <label for="ata-import-file">Importuj plik</label>
           <input id="ata-import-file" type="file" accept=".json,application/json">
         </div>
         <div class="ata-field" style="margin-top: 10px;">
-          <label for="ata-import-text">JSON einf\u00fcgen</label>
+          <label for="ata-import-text">Wklej JSON</label>
           <textarea id="ata-import-text" placeholder="{ ... }"></textarea>
         </div>
         <div class="ata-actions" style="margin-top: 10px;">
-          <button type="button" class="ata-btn" data-action="import-text">Eingef\u00fcgtes JSON importieren</button>
+          <button type="button" class="ata-btn" data-action="import-text">Importuj wklejony JSON</button>
         </div>
       </section>
     `;
@@ -10422,7 +10422,7 @@ if (isAlreadyCompleted) {
     const draft = normalizeCreateDraft(readCreateDraftInput(formData), state.store.settings);
     const presetId = getAppliedCreatePresetId(draft);
     presetInput.value = presetId;
-    presetBadge.textContent = `Preset aktiv: ${getCreatePresetLabel(presetId)}`;
+    presetBadge.textContent = `Aktywny preset: ${getCreatePresetLabel(presetId)}`;
   }
 
 

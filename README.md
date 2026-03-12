@@ -294,8 +294,8 @@ Tab: `Import/Export`
 ![Import-Export-Ansicht](assets/ss_Import-Export.png)
 
 ### Export
-- `JSON herunterladen`
-- `JSON in Zwischenablage`
+- `Pobierz JSON`
+- `Kopiuj JSON do schowka`
 
 ### Import
 - Dateiimport (`.json`)

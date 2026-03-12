@@ -214,14 +214,14 @@
             </div>
           </div>
           <div class="ata-actions" style="margin-top: 10px;">
-            <button type="button" class="ata-btn" data-action="retry-bracket">Turnierbaum neu laden</button>
+            <button type="button" class="ata-btn" data-action="retry-bracket">Przeładuj drzewko turniejowe</button>
           </div>
-          <p class="ata-small">CDN-Render aktiv. Der HTML-Fallback wird nur bei Fehlern oder Timeout angezeigt.</p>
+          <p class="ata-small">Renderowanie przez CDN jest aktywne. HTML-fallback pojawi się tylko w przypadku błędu lub przekroczenia czasu.</p>
         </section>
       `;
     }
 
-    return html || `<section class="ata-card tournamentCard"><h3>Turnierbaum</h3><p>Keine Daten.</p></section>`;
+    return html || `<section class="ata-card tournamentCard"><h3>Drzewko turniejowe</h3><p>Brak danych.</p></section>`;
   }
 
 

@@ -10,7 +10,7 @@
       )).join("");
       const durationEstimate = estimateTournamentDurationFromDraft(draft, state.store.settings);
       const activePresetId = getAppliedCreatePresetId(draft);
-      const presetStatusLabel = `Preset aktiv: ${getCreatePresetLabel(activePresetId)}`;
+      const presetStatusLabel = `Aktywny preset: ${getCreatePresetLabel(activePresetId)}`;
       const presetOptions = [
         ...getCreatePresetCatalog().map((preset) => (
           `<option value="${preset.id}" ${draft.x01Preset === preset.id ? "selected" : ""}>${escapeHtml(preset.label)}</option>`
@@ -23,19 +23,19 @@
         ? `<input type="hidden" id="ata-x01-bullmode-hidden" name="x01BullMode" value="${escapeHtml(draft.x01BullMode)}">`
         : "";
       const createHeadingLinks = [
-        { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Erklärung zur Turniererstellung öffnen", title: "README: Utwórz turniej" },
-        { href: README_INFO_SYMBOLS_URL, kind: "tech", label: "Legende der Info-Symbole öffnen", title: "README: Info-Symbole" },
+        { href: README_TOURNAMENT_CREATE_URL, kind: "tech", label: "Otwórz wyjaśnienie tworzenia turnieju", title: "README: Utwórz turniej" },
+        { href: README_INFO_SYMBOLS_URL, kind: "tech", label: "Otwórz legendę ikon informacyjnych", title: "README: Info-Symbole" },
       ];
       const modeHelpLinks = renderInfoLinks([
-        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Erklärung der Modi öffnen", title: "README: Tryby turniejowe" },
+        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Otwórz wyjaśnienie trybów", title: "README: Tryby turniejowe" },
         { href: DRA_GUI_RULE_MODE_FORMATS_URL, kind: "rule", label: "Otwórz objaśnienie zasad DRA dotyczących trybu i formatu", title: "Zasady DRA w interfejsie: tryb i format" },
       ]);
       const drawHelpLinks = renderInfoLinks([
-        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Open Draw und Losowanie z rozstawieniem erklärt", title: "README: KO-Modus" },
+        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Wyjaśnienie trybów: Open Draw i losowanie z rozstawieniem", title: "README: Tryb pucharowy (KO)" },
         { href: DRA_GUI_RULE_OPEN_DRAW_URL, kind: "rule", label: "DRA-Regelerklärung zu Open Draw öffnen", title: "Zasady DRA w GUI: Open Draw" },
       ]);
       const modeLimitHelpLinks = renderInfoLinks([
-        { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "DRA-Regelerklärung zu Limits öffnen", title: "Zasady DRA w interfejsie: limity uczestników" },
+        { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "Otwórz wyjaśnienie zasad DRA dotyczących limitów", title: "Zasady DRA w interfejsie: limity uczestników" },
       ]);
       return `
         <section class="ata-card tournamentCard">
@@ -135,7 +135,7 @@
                   <input id="ata-randomize-ko" name="randomizeKoRound1" type="checkbox" ${randomizeChecked}>
                 </div>
                 <p class="ata-small ata-create-help">PDC European Tour (Official): KO, Best of 11 Legs (First to 6), 501, Straight In, Double Out, Bull 25/50. Bull-off Normal und Max Rund 50 pozostają technicznymi wartościami AutoDarts.</p>
-                <p class="ata-small ata-create-help">PDC 501 / Double Out (Basic): kompatybilny zamiennik wcześniejszego, mylącego presetu ‘PDC‑Standard’. Nazwany uczciwie, ale nie jest oficjalnym formatem turniejowym PDC.</p>
+                <p class="ata-small ata-create-help">PDC 501 / Double Out (Basic): kompatybilny zamiennik wcześniejszego, mylącego presetu ‘PDC-Standard’. Nazwany uczciwie, ale nie jest oficjalnym formatem turniejowym PDC.</p>
                 <p class="ata-small ata-create-help">PDC World Championship w prawdziwym formacie setowym nie jest celowo oferowany jako oficjalny preset, ponieważ AutoDarts obsługuje tutaj wyłącznie legi / First to N.</p>
                 <p class="ata-small ata-create-help">Bull-off = Off automatycznie dezaktywuje tryb bulla (pole staje się tylko do odczytu)..</p>
               </div>
