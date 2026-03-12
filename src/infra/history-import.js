@@ -602,21 +602,22 @@
     const inlineOutcome = getHistoryInlineOutcome(lobbyId);
 
     let statusText = "";
-    if (isAlreadyCompleted) {
-      statusText = "Ergebnis bereits im Turnier gespeichert.";
-    } else if (!autoEnabled) {
-      statusText = "Auto-Lobby ist deaktiviert. Aktivieren Sie die Funktion im Tab Einstellungen.";
-    } else if (!parsedStats) {
-      statusText = "Statistik konnte nicht vollständig gelesen werden. Beim Klick wird API-Fallback genutzt.";
-    } else if (parsedWinnerName) {
-      statusText = `Import bereit. Sieger laut Statistik: ${parsedWinnerName}.`;
-    } else if (linkedMatchAny && auto?.status === "error") {
-      statusText = `Letzter Sync-Fehler: ${normalizeText(auto.lastError || "Unbekannt") || "Unbekannt"}`;
-    } else if (linkedMatchAny && auto?.status === "started") {
-      statusText = "Match verknüpft. Ergebnis kann jetzt übernommen werden.";
-    } else {
-      statusText = "Kein direkt verknüpftes Match gefunden. Ergebnisübernahme versucht Zuordnung über die Statistik.";
-    }
+if (isAlreadyCompleted) {
+  statusText = "Wynik jest już zapisany w turnieju.";
+} else if (!autoEnabled) {
+  statusText = "Auto-lobby jest wyłączone. Włącz tę funkcję w zakładce Ustawienia.";
+} else if (!parsedStats) {
+  statusText = "Nie udało się w pełni odczytać statystyk. Po kliknięciu zostanie użyty tryb awaryjny API.";
+} else if (parsedWinnerName) {
+  statusText = `Import gotowy. Zwycięzca według statystyk: ${parsedWinnerName}.`;
+} else if (linkedMatchAny && auto?.status === "error") {
+  statusText = `Ostatni błąd synchronizacji: ${normalizeText(auto.lastError || "Nieznany") || "Nieznany"}`;
+} else if (linkedMatchAny && auto?.status === "started") {
+  statusText = "Mecz został powiązany. Można teraz przejąć wynik.";
+} else {
+  statusText = "Nie znaleziono bezpośrednio powiązanego meczu. Przejęcie wyniku spróbuje dopasować mecz na podstawie statystyk.";
+}
+
 
     const primaryLabel = isAlreadyCompleted
       ? "Turnierassistent öffnen"
