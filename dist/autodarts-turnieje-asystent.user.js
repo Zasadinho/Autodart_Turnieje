@@ -6846,7 +6846,7 @@
           reject(createApiError(status, extractApiErrorMessage(status, body), body));
         },
         onerror: () => {
-          reject(createApiError(0, "„Błąd sieci podczas zapytania API.", null));
+          reject(createApiError(0, "Błąd sieci podczas zapytania API.", null));
         },
         ontimeout: () => {
           reject(createApiError(0, "API: timeout zapytania.", null));
