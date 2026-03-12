@@ -7857,7 +7857,7 @@
     const participant1 = participantById(tournament, match.player1Id);
     const participant2 = participantById(tournament, match.player2Id);
     if (!participant1 || !participant2) {
-      setNotice("error", "Uczestnicyzuordnung im Match ist unvollst\u00e4ndig.");
+      setNotice("error", "Teilnehmerzuordnung im Match ist unvollst\u00e4ndig.");
       return;
     }
 
@@ -7994,7 +7994,7 @@
         if (syncOutcome.authError) {
           state.apiAutomation.authBackoffUntil = Date.now() + API_AUTH_NOTICE_THROTTLE_MS;
           if (shouldShowAuthNotice()) {
-            setNotice("error", "Auto-Sync pausiert: Autoryzacja wygasła. Proszę zalogować się ponownie.");
+            setNotice("error", "Auto-Sync pausiert: Auth abgelaufen. Bitte neu einloggen.");
           }
           logWarn("api", "Auto-sync auth error.");
           return;
