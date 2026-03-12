@@ -873,7 +873,7 @@
       return;
     }
 
-    const token = getAuthTokenFromCookie();
+ const token = getAuthTokenFromCookie();
     if (!token) {
       setNotice("error", "Kein Autodarts-Token gefunden. Bitte einloggen und Seite neu laden.");
       return;
@@ -1054,6 +1054,7 @@
       }
     }
   }
+
 
   // Presentation layer: UI rendering and interaction wiring.
 

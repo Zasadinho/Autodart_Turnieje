@@ -7876,188 +7876,187 @@ const GLOBALS_CONTRACT = Object.freeze({
       return;
     }
 
-    const token = getAuthTokenFromCookie();
-if (!token) {
-  setNotice("error", "Nie znaleziono tokenu Autodarts. Zaloguj się i odśwież stronę.");
-  return;
-}
-
-const boardId = getBoardId();
-if (!boardId) {
-  setNotice("error", "Brakuje ID boarda. Otwórz ręcznie lobby i wybierz board.");
-  return;
-}
-if (!isValidBoardId(boardId)) {
-  setNotice("error", `ID boarda jest nieprawidłowe (${boardId}). Wybierz prawdziwy board w ręcznie otwartym lobby.`);
-  return;
-}
-
-const participant1 = participantById(tournament, match.player1Id);
-const participant2 = participantById(tournament, match.player2Id);
-if (!participant1 || !participant2) {
-  setNotice("error", "Przypisanie uczestników w meczu jest niekompletne.");
-  return;
-}
-
-let createdLobbyId = "";
-state.apiAutomation.startingMatchId = match.id;
-renderShell();
-
-try {
-  let lobbyPayload = buildLobbyCreatePayload(tournament);
-  let lobby = null;
-  try {
-    logDebug("api", "Tworzenie lobby z payloadem turniejowym.", {
-      matchId: match.id,
-      legs: lobbyPayload.legs,
-      settings: lobbyPayload.settings,
-    });
-    lobby = await createLobby(lobbyPayload, token);
-  } catch (createError) {
-    const errorStatus = Number(createError?.status || 0);
-    const errorText = normalizeLookup(createError?.message || apiBodyToErrorText(createError?.body) || "");
-    const shouldRetryWithBullFallback = errorStatus === 400 && errorText.includes("bull mode");
-    if (!shouldRetryWithBullFallback) {
-      throw createError;
+const token = getAuthTokenFromCookie();
+    if (!token) {
+      setNotice("error", "Kein Autodarts-Token gefunden. Bitte einloggen und Seite neu laden.");
+      return;
     }
 
-    // Fallback dla wariantów walidacji backendu, które odrzucają wybrane wartości bullMode.
-    lobbyPayload = cloneSerializable(lobbyPayload) || buildLobbyCreatePayload(tournament);
-    if (!lobbyPayload.settings || typeof lobbyPayload.settings !== "object") {
-      lobbyPayload.settings = {};
+    const boardId = getBoardId();
+    if (!boardId) {
+      setNotice("error", "Board-ID fehlt. Bitte einmal manuell eine Lobby \u00f6ffnen und Board ausw\u00e4hlen.");
+      return;
     }
-    lobbyPayload.settings.bullMode = "25/50";
-    logWarn("api", "Ponawianie tworzenia lobby z bullMode 25/50.", {
-      matchId: match.id,
-      legs: lobbyPayload.legs,
-      settings: lobbyPayload.settings,
-    });
-    lobby = await createLobby(lobbyPayload, token);
-  }
-
-  createdLobbyId = normalizeText(lobby?.id || lobby?.uuid || "");
-  if (!createdLobbyId) {
-    throw createApiError(0, "Nie udało się utworzyć lobby (brak ID lobby).", lobby);
-  }
-
-  await addLobbyPlayer(createdLobbyId, participant1.name, boardId, token);
-  await addLobbyPlayer(createdLobbyId, participant2.name, boardId, token);
-  await startLobby(createdLobbyId, token);
-
-  const now = nowIso();
-  auto.provider = API_PROVIDER;
-  auto.lobbyId = createdLobbyId;
-  auto.status = "started";
-  auto.startedAt = auto.startedAt || now;
-  auto.finishedAt = null;
-  auto.lastSyncAt = now;
-  auto.lastError = null;
-  match.updatedAt = now;
-  tournament.updatedAt = now;
-
-  try {
-    await persistStore();
-  } catch (persistError) {
-    schedulePersist();
-    logWarn("storage", "Natychmiastowy zapis przed przekierowaniem do meczu nie powiódł się; zaplanowano ponowną próbę.", persistError);
-  }
-
-  renderShell();
-  setNotice("success", "Mecz uruchomiony. Przekierowanie do meczu.");
-  openMatchPage(createdLobbyId);
-
-} catch (error) {
-  const message = normalizeText(error?.message || apiBodyToErrorText(error?.body) || "Nieznany błąd API.") || "Nieznany błąd API.";
-  const now = nowIso();
-  auto.provider = API_PROVIDER;
-  auto.lobbyId = createdLobbyId || auto.lobbyId || null;
-  auto.status = "error";
-  auto.lastError = message;
-  auto.lastSyncAt = now;
-  match.updatedAt = now;
-  tournament.updatedAt = now;
-  schedulePersist();
-  renderShell();
-  setNotice("error", `Start meczu nie powiódł się: ${message}`);
-  logWarn("api", "Start meczu nie powiódł się.", error);
-} finally {
-  state.apiAutomation.startingMatchId = "";
-  renderShell();
-}
-async function syncPendingApiMatches() {
-  if (state.apiAutomation.syncing) {
-    return;
-  }
-  if (!state.store.settings.featureFlags.autoLobbyStart) {
-    return;
-  }
-  if (Date.now() < state.apiAutomation.authBackoffUntil) {
-    return;
-  }
-
-  const tournament = state.store.tournament;
-  if (!tournament) {
-    return;
-  }
-
-  const syncTargets = tournament.matches.filter((match) => {
-    return isApiSyncCandidateMatch(match, true);
-  });
-
-  if (!syncTargets.length) {
-    return;
-  }
-
-  const token = getAuthTokenFromCookie();
-  if (!token) {
-    state.apiAutomation.authBackoffUntil = Date.now() + API_AUTH_NOTICE_THROTTLE_MS;
-    if (shouldShowAuthNotice()) {
-      setNotice("error", "Auto-Sync wstrzymany: nie znaleziono tokenu autoryzacji. Zaloguj się ponownie.");
+    if (!isValidBoardId(boardId)) {
+      setNotice("error", `Board-ID ist ung\u00fcltig (${boardId}). Bitte in einer manuellen Lobby ein echtes Board ausw\u00e4hlen.`);
+      return;
     }
-    return;
-  }
 
-  state.apiAutomation.syncing = true;
-  let hasMetaUpdates = false;
+    const participant1 = participantById(tournament, match.player1Id);
+    const participant2 = participantById(tournament, match.player2Id);
+    if (!participant1 || !participant2) {
+      setNotice("error", "Uczestnicyzuordnung im Match ist unvollst\u00e4ndig.");
+      return;
+    }
 
-  try {
-    for (const match of syncTargets) {
-      const syncOutcome = await syncApiMatchResult(tournament, match, token, {
-        notifyErrors: false,
-        notifyNotReady: false,
-        includeErrorRetry: true,
-        trigger: "background",
-      });
+    let createdLobbyId = "";
+    state.apiAutomation.startingMatchId = match.id;
+    renderShell();
 
-      if (syncOutcome.authError) {
-        state.apiAutomation.authBackoffUntil = Date.now() + API_AUTH_NOTICE_THROTTLE_MS;
-        if (shouldShowAuthNotice()) {
-          setNotice("error", "Auto-Sync wstrzymany: autoryzacja wygasła. Proszę zalogować się ponownie.");
+    try {
+      let lobbyPayload = buildLobbyCreatePayload(tournament);
+      let lobby = null;
+      try {
+        logDebug("api", "Creating lobby with tournament payload.", {
+          matchId: match.id,
+          legs: lobbyPayload.legs,
+          settings: lobbyPayload.settings,
+        });
+        lobby = await createLobby(lobbyPayload, token);
+      } catch (createError) {
+        const errorStatus = Number(createError?.status || 0);
+        const errorText = normalizeLookup(createError?.message || apiBodyToErrorText(createError?.body) || "");
+        const shouldRetryWithBullFallback = errorStatus === 400 && errorText.includes("bull mode");
+        if (!shouldRetryWithBullFallback) {
+          throw createError;
         }
-        logWarn("api", "Błąd autoryzacji podczas auto‑sync.");
-        return;
+
+        // Fallback for backend validation variants that reject selected bullMode values.
+        lobbyPayload = cloneSerializable(lobbyPayload) || buildLobbyCreatePayload(tournament);
+        if (!lobbyPayload.settings || typeof lobbyPayload.settings !== "object") {
+          lobbyPayload.settings = {};
+        }
+        lobbyPayload.settings.bullMode = "25/50";
+        logWarn("api", "Retrying lobby create with bullMode fallback 25/50.", {
+          matchId: match.id,
+          legs: lobbyPayload.legs,
+          settings: lobbyPayload.settings,
+        });
+        lobby = await createLobby(lobbyPayload, token);
+      }
+      createdLobbyId = normalizeText(lobby?.id || lobby?.uuid || "");
+      if (!createdLobbyId) {
+        throw createApiError(0, "Lobby konnte nicht erstellt werden (keine Lobby-ID).", lobby);
       }
 
-      if (syncOutcome.updated) {
-        hasMetaUpdates = true;
-      }
+      await addLobbyPlayer(createdLobbyId, participant1.name, boardId, token);
+      await addLobbyPlayer(createdLobbyId, participant2.name, boardId, token);
+      await startLobby(createdLobbyId, token);
 
-      if (!syncOutcome.ok && syncOutcome.message && !syncOutcome.recoverable) {
-        logWarn("api", `Auto-sync nie powiódł się dla ${match.id}: ${syncOutcome.message}`);
+      const now = nowIso();
+      auto.provider = API_PROVIDER;
+      auto.lobbyId = createdLobbyId;
+      auto.status = "started";
+      auto.startedAt = auto.startedAt || now;
+      auto.finishedAt = null;
+      auto.lastSyncAt = now;
+      auto.lastError = null;
+      match.updatedAt = now;
+      tournament.updatedAt = now;
+
+      try {
+        await persistStore();
+      } catch (persistError) {
+        schedulePersist();
+        logWarn("storage", "Immediate persist before match redirect failed; scheduled retry.", persistError);
       }
-    }
-  } finally {
-    state.apiAutomation.syncing = false;
-    if (hasMetaUpdates) {
-      if (state.store.tournament) {
-        state.store.tournament.updatedAt = nowIso();
-      }
+      renderShell();
+      setNotice("success", "Match gestartet. Weiterleitung ins Match.");
+      openMatchPage(createdLobbyId);
+    } catch (error) {
+      const message = normalizeText(error?.message || apiBodyToErrorText(error?.body) || "Unbekannter API-Fehler.") || "Unbekannter API-Fehler.";
+      const now = nowIso();
+      auto.provider = API_PROVIDER;
+      auto.lobbyId = createdLobbyId || auto.lobbyId || null;
+      auto.status = "error";
+      auto.lastError = message;
+      auto.lastSyncAt = now;
+      match.updatedAt = now;
+      tournament.updatedAt = now;
       schedulePersist();
+      renderShell();
+      setNotice("error", `Matchstart fehlgeschlagen: ${message}`);
+      logWarn("api", "Match start failed.", error);
+    } finally {
+      state.apiAutomation.startingMatchId = "";
       renderShell();
     }
   }
-}
 
+
+  async function syncPendingApiMatches() {
+    if (state.apiAutomation.syncing) {
+      return;
+    }
+    if (!state.store.settings.featureFlags.autoLobbyStart) {
+      return;
+    }
+    if (Date.now() < state.apiAutomation.authBackoffUntil) {
+      return;
+    }
+
+    const tournament = state.store.tournament;
+    if (!tournament) {
+      return;
+    }
+
+    const syncTargets = tournament.matches.filter((match) => {
+      return isApiSyncCandidateMatch(match, true);
+    });
+
+    if (!syncTargets.length) {
+      return;
+    }
+
+    const token = getAuthTokenFromCookie();
+    if (!token) {
+      state.apiAutomation.authBackoffUntil = Date.now() + API_AUTH_NOTICE_THROTTLE_MS;
+      if (shouldShowAuthNotice()) {
+        setNotice("error", "Auto-Sync pausiert: kein Auth-Token gefunden. Bitte neu einloggen.");
+      }
+      return;
+    }
+
+    state.apiAutomation.syncing = true;
+    let hasMetaUpdates = false;
+
+    try {
+      for (const match of syncTargets) {
+        const syncOutcome = await syncApiMatchResult(tournament, match, token, {
+          notifyErrors: false,
+          notifyNotReady: false,
+          includeErrorRetry: true,
+          trigger: "background",
+        });
+
+        if (syncOutcome.authError) {
+          state.apiAutomation.authBackoffUntil = Date.now() + API_AUTH_NOTICE_THROTTLE_MS;
+          if (shouldShowAuthNotice()) {
+            setNotice("error", "Auto-Sync pausiert: Autoryzacja wygasła. Proszę zalogować się ponownie.");
+          }
+          logWarn("api", "Auto-sync auth error.");
+          return;
+        }
+
+        if (syncOutcome.updated) {
+          hasMetaUpdates = true;
+        }
+
+        if (!syncOutcome.ok && syncOutcome.message && !syncOutcome.recoverable) {
+          logWarn("api", `Auto-sync failed for ${match.id}: ${syncOutcome.message}`);
+        }
+      }
+    } finally {
+      state.apiAutomation.syncing = false;
+      if (hasMetaUpdates) {
+        if (state.store.tournament) {
+          state.store.tournament.updatedAt = nowIso();
+        }
+        schedulePersist();
+        renderShell();
+      }
+    }
+  }
   // Presentation layer: UI rendering and interaction wiring.
 
 // Infrastructure layer: browser integration and Autodarts page coupling.
