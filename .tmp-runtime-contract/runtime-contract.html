@@ -9568,7 +9568,7 @@ if (isAlreadyCompleted) {
       const contextText = `${stageLabel}, ${matchCellText}, ${statusBadgeText}`;
       const summaryText = isCompleted
         ? (isByeCompletion
-          ? `Weiter (Bye): ${winner}`
+          ? `Dalej (wolny los): ${winner}`
           : (isKoFinal ? `Champion: ${winner} (${match.legs.p1}:${match.legs.p2})` : `Zwycięzca: ${winner} (${match.legs.p1}:${match.legs.p2})`))
         : "";
       const advanceClasses = [
@@ -9625,7 +9625,7 @@ if (isAlreadyCompleted) {
               >
             </div>
             <div class="ata-editor-actions">
-              <button type="button" class="ata-btn" data-action="save-match" data-match-id="${escapeHtml(match.id)}" title="${escapeHtml(saveHelpText)}">Speichern</button>
+              <button type="button" class="ata-btn" data-action="save-match" data-match-id="${escapeHtml(match.id)}" title="${escapeHtml(saveHelpText)}">Zapisz</button>
               <button type="button" class="ata-btn ata-btn-primary" data-action="start-match" data-match-id="${escapeHtml(match.id)}" ${startDisabledAttr} ${startTitleAttr}>${escapeHtml(startUi.label)}</button>
             </div>
           </div>
