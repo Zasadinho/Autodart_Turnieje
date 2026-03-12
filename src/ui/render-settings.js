@@ -98,7 +98,7 @@
           </div>
           <input type="checkbox" id="ata-setting-ko-draw-locked" data-action="set-ko-draw-locked" ${activeKoDrawLocked} ${activeKoDrawLockDisabledAttr}>
         </div>
-        <p class="ata-small">Dostępne tylko w trybie KO (Straight Knockout).</p>
+        <p class="ata-small">Dostępne tylko w trybie KO (Pojedyncza eliminacja).</p>
       </section>
       <section class="ata-card tournamentCard">
         ${renderSectionHeading("Profil Tie-Break promotora", [

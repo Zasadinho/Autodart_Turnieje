@@ -22,7 +22,7 @@
 - `groupResolution.status` wird auf `playoff_required` gesetzt, wenn Gleichstände nicht auflösbar sind.
 - KO-Qualifikation wird bis zur manuellen Klärung blockiert.
 
-3. **KO / Straight Knockout**
+3. **KO / Pojedyncza eliminacja**
 - KO-Bracket bleibt Single Elimination.
 - Seeded/Open Draw bleiben verfügbar.
 - Alle KO-Runden werden als Match-Knoten materialisiert (inklusive zukünftiger offener Paarungen).
@@ -33,7 +33,7 @@
 4. **Terminologie (PDC-konform)**
 - Die UI nutzt deutsche Begriffe mit PDC-Bezug, z. B.:
   - `Freilos (Bye)`
-  - `KO (Straight Knockout)`
+  - `KO (Pojedyncza eliminacja)`
   - `Liga (Round Robin)`
   - `Nächstes Match (Next Match)`
 

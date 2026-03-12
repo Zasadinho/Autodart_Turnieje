@@ -1596,7 +1596,7 @@
   const MODE_PARTICIPANT_LIMITS = Object.freeze({
     ko: Object.freeze({ label: "KO", min: 2, max: 128 }),
     league: Object.freeze({ label: "Liga", min: 2, max: 16 }),
-    groups_ko: Object.freeze({ label: "Gruppenphase + KO", min: 4, max: 16 }),
+    groups_ko: Object.freeze({ label: "Faza grupowa + KO", min: 4, max: 16 }),
   });
   const BYE_PLACEHOLDER_TOKENS = new Set([
     "bye",
@@ -4963,7 +4963,7 @@
     }
 
     #ata-brackets-viewer .match[data-match-status="4"] .opponents::after {
-      content: "Abgeschlossen";
+      content: "Zakończono";
       position: absolute;
       top: -11px;
       right: 8px;
@@ -7775,7 +7775,7 @@
 
   function getApiMatchStatusText(match) {
     if (isByeMatchResult(match)) {
-      return "Freilos (Bye): kein API-Sync erforderlich";
+      return "Wolny los: synchronizacja z API nie jest wymagana.";
     }
     const auto = ensureMatchAutoMeta(match);
     if (auto.status === "completed") {
@@ -9235,10 +9235,10 @@
       ];
       const modeHelpLinks = renderInfoLinks([
         { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Erklärung der Modi öffnen", title: "README: Tryby turniejowe" },
-        { href: DRA_GUI_RULE_MODE_FORMATS_URL, kind: "rule", label: "DRA-Regelerklärung zu Modus und Format öffnen", title: "DRA-Regeln in der GUI: Modus und Format" },
+        { href: DRA_GUI_RULE_MODE_FORMATS_URL, kind: "rule", label: "Otwórz objaśnienie zasad DRA dotyczących trybu i formatu", title: "Zasady DRA w interfejsie: tryb i format" },
       ]);
       const drawHelpLinks = renderInfoLinks([
-        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Open Draw und gesetzter Draw erklärt", title: "README: KO-Modus" },
+        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Open Draw und Losowanie z rozstawieniem erklärt", title: "README: KO-Modus" },
         { href: DRA_GUI_RULE_OPEN_DRAW_URL, kind: "rule", label: "DRA-Regelerklärung zu Open Draw öffnen", title: "Zasady DRA w GUI: Open Draw" },
       ]);
       const modeLimitHelpLinks = renderInfoLinks([
@@ -9261,7 +9261,7 @@
                     <select id="ata-mode" name="mode">
                       <option value="ko" ${draft.mode === "ko" ? "selected" : ""}>KO</option>
                       <option value="league" ${draft.mode === "league" ? "selected" : ""}>Liga</option>
-                      <option value="groups_ko" ${draft.mode === "groups_ko" ? "selected" : ""}>Gruppenphase + KO</option>
+                      <option value="groups_ko" ${draft.mode === "groups_ko" ? "selected" : ""}>Faza grupowa + KO</option>
                     </select>
                   </div>
                   <div class="ata-field">
@@ -9368,10 +9368,10 @@
     }
 
     const modeLabel = tournament.mode === "ko"
-      ? "KO (Straight Knockout)"
+      ? "KO (Pojedyncza eliminacja)"
       : tournament.mode === "league"
         ? "Liga (Round Robin)"
-        : "Gruppenphase + KO (Round Robin + Straight Knockout)";
+        : "Faza grupowa + KO (Round Robin + Pojedyncza eliminacja)";
 
     const participantsHtml = tournament.participants.map((participant) => (
       `<span class="ata-player-chip">${escapeHtml(participant.name)}</span>`
@@ -9381,12 +9381,12 @@
     const activePresetId = getAppliedCreatePresetId(tournament);
     const x01PresetLabel = getCreatePresetLabel(activePresetId);
     const x01BullModeLabel = x01Settings.bullOffMode === "Off"
-      ? "Tryb bulla deaktiviert"
+      ? "Wyłączono tryb bulla"
       : `Tryb bulla ${x01Settings.bullMode}`;
     const legsToWin = getLegsToWin(tournament.bestOfLegs);
     const drawMode = normalizeKoDrawMode(tournament?.ko?.drawMode, KO_DRAW_MODE_SEEDED);
-    const drawModeLabel = drawMode === KO_DRAW_MODE_OPEN_DRAW ? "Open Draw" : "Gesetzter Draw";
-    const drawLockLabel = tournament?.ko?.drawLocked !== false ? "Draw-Lock aktiv" : "Draw-Lock aus";
+    const drawModeLabel = drawMode === KO_DRAW_MODE_OPEN_DRAW ? "Open Draw" : "Losowanie z rozstawieniem";
+    const drawLockLabel = tournament?.ko?.drawLocked !== false ? "Draw-Lock włączony" : "Draw-Lock wyłączony";
     const primaryTags = [
       { text: `Best of ${tournament.bestOfLegs} Legs`, cls: "ata-info-tag ata-info-tag-key" },
       { text: `First to ${legsToWin} Legs`, cls: "ata-info-tag" },
@@ -9409,10 +9409,10 @@
     const primaryTagsHtml = primaryTags.map((tag) => `<span class="${tag.cls}">${escapeHtml(tag.text)}</span>`).join("");
     const x01TagsHtml = x01Tags.map((tag) => `<span class="${tag.cls}">${escapeHtml(tag.text)}</span>`).join("");
     const activeTournamentHeadingLinks = [
-      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Turniermodus-Erklärung öffnen", title: "README: Tryby turniejowe" },
+      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Otwórz objaśnienie trybu turniejowego", title: "README: Tryby turniejowe" },
     ];
     const activeFormatHelpLinks = renderInfoLinks([
-      { href: DRA_GUI_RULE_MODE_FORMATS_URL, kind: "rule", label: "DRA-Regelerklärung zu Modus und Format öffnen", title: "DRA-Regeln in der GUI: Modus und Format" },
+      { href: DRA_GUI_RULE_MODE_FORMATS_URL, kind: "rule", label: "Otwórz objaśnienie zasad DRA dotyczących trybu i formatu", title: "Zasady DRA w interfejsie: tryb i format" },
     ]);
 
     return `
@@ -9489,7 +9489,7 @@
         ? `Gruppe ${match.groupId || "?"}`
         : match.stage === MATCH_STAGE_LEAGUE
           ? "Liga (Round Robin)"
-          : "KO (Straight Knockout)";
+          : "KO (Pojedyncza eliminacja)";
       const startUi = getApiMatchStartUi(tournament, match, activeStartedMatch);
       const startDisabledAttr = startUi.disabled ? "disabled" : "";
       const startTitleAttr = startUi.title ? `title="${escapeHtml(startUi.title)}"` : "";
@@ -9522,7 +9522,7 @@
         isBlockedPending ? "ata-row-blocked" : "",
         !editable ? "ata-row-inactive" : "",
       ].filter(Boolean).join(" ");
-      const statusBadgeText = isByeCompletion ? "Freilos (Bye)" : (isCompleted ? "Abgeschlossen" : "Offen");
+      const statusBadgeText = isByeCompletion ? "Wolny los" : (isCompleted ? "Zakończono" : "Otwarte");
       const contextPillClass = isByeCompletion
         ? "ata-match-context-pill ata-match-context-bye"
         : (isCompleted ? "ata-match-context-pill ata-match-context-completed" : "ata-match-context-pill ata-match-context-open");
@@ -9779,7 +9779,7 @@
             const statusBadgeClass = isBye
               ? "ata-match-status ata-match-status-bye"
               : (isCompleted ? "ata-match-status ata-match-status-completed" : "ata-match-status ata-match-status-open");
-            const statusBadgeText = isBye ? "Freilos (Bye)" : (isCompleted ? "Abgeschlossen" : "Offen");
+            const statusBadgeText = isBye ? "Wolny los" : (isCompleted ? "Zakończono" : "Otwarte");
             const statusText = !isCompleted
               ? "Noch nicht abgeschlossen."
                 : isBye
@@ -10006,7 +10006,7 @@
           </div>
           <input type="checkbox" id="ata-setting-ko-draw-locked" data-action="set-ko-draw-locked" ${activeKoDrawLocked} ${activeKoDrawLockDisabledAttr}>
         </div>
-        <p class="ata-small">Dostępne tylko w trybie KO (Straight Knockout).</p>
+        <p class="ata-small">Dostępne tylko w trybie KO (Pojedyncza eliminacja).</p>
       </section>
       <section class="ata-card tournamentCard">
         ${renderSectionHeading("Profil Tie-Break promotora", [

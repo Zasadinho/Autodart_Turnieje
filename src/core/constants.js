@@ -115,7 +115,7 @@
   const MODE_PARTICIPANT_LIMITS = Object.freeze({
     ko: Object.freeze({ label: "KO", min: 2, max: 128 }),
     league: Object.freeze({ label: "Liga", min: 2, max: 16 }),
-    groups_ko: Object.freeze({ label: "Gruppenphase + KO", min: 4, max: 16 }),
+    groups_ko: Object.freeze({ label: "Faza grupowa + KO", min: 4, max: 16 }),
   });
   const BYE_PLACEHOLDER_TOKENS = new Set([
     "bye",

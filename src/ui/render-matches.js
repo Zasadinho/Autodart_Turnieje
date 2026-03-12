@@ -41,7 +41,7 @@
         ? `Gruppe ${match.groupId || "?"}`
         : match.stage === MATCH_STAGE_LEAGUE
           ? "Liga (Round Robin)"
-          : "KO (Straight Knockout)";
+          : "KO (Pojedyncza eliminacja)";
       const startUi = getApiMatchStartUi(tournament, match, activeStartedMatch);
       const startDisabledAttr = startUi.disabled ? "disabled" : "";
       const startTitleAttr = startUi.title ? `title="${escapeHtml(startUi.title)}"` : "";
@@ -74,7 +74,7 @@
         isBlockedPending ? "ata-row-blocked" : "",
         !editable ? "ata-row-inactive" : "",
       ].filter(Boolean).join(" ");
-      const statusBadgeText = isByeCompletion ? "Freilos (Bye)" : (isCompleted ? "Abgeschlossen" : "Offen");
+      const statusBadgeText = isByeCompletion ? "Wolny los" : (isCompleted ? "Zakończono" : "Otwarte");
       const contextPillClass = isByeCompletion
         ? "ata-match-context-pill ata-match-context-bye"
         : (isCompleted ? "ata-match-context-pill ata-match-context-completed" : "ata-match-context-pill ata-match-context-open");

@@ -81,7 +81,7 @@ Der Assistent ist in fachliche Schichten aufgeteilt und wird weiterhin als einze
 - Gruppen-zu-KO-Zuordnung wird blockiert, solange `playoff_required` aktiv ist.
 
 ## KO-Logik
-- KO bleibt `Straight Knockout`.
+- KO bleibt `Pojedyncza eliminacja`.
 - Draw-Modi:
   - `seeded`
   - `open_draw`

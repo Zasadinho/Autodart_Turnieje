@@ -28,10 +28,10 @@
       ];
       const modeHelpLinks = renderInfoLinks([
         { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Erklärung der Modi öffnen", title: "README: Tryby turniejowe" },
-        { href: DRA_GUI_RULE_MODE_FORMATS_URL, kind: "rule", label: "DRA-Regelerklärung zu Modus und Format öffnen", title: "DRA-Regeln in der GUI: Modus und Format" },
+        { href: DRA_GUI_RULE_MODE_FORMATS_URL, kind: "rule", label: "Otwórz objaśnienie zasad DRA dotyczących trybu i formatu", title: "Zasady DRA w interfejsie: tryb i format" },
       ]);
       const drawHelpLinks = renderInfoLinks([
-        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Open Draw und gesetzter Draw erklärt", title: "README: KO-Modus" },
+        { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Open Draw und Losowanie z rozstawieniem erklärt", title: "README: KO-Modus" },
         { href: DRA_GUI_RULE_OPEN_DRAW_URL, kind: "rule", label: "DRA-Regelerklärung zu Open Draw öffnen", title: "Zasady DRA w GUI: Open Draw" },
       ]);
       const modeLimitHelpLinks = renderInfoLinks([
@@ -54,7 +54,7 @@
                     <select id="ata-mode" name="mode">
                       <option value="ko" ${draft.mode === "ko" ? "selected" : ""}>KO</option>
                       <option value="league" ${draft.mode === "league" ? "selected" : ""}>Liga</option>
-                      <option value="groups_ko" ${draft.mode === "groups_ko" ? "selected" : ""}>Gruppenphase + KO</option>
+                      <option value="groups_ko" ${draft.mode === "groups_ko" ? "selected" : ""}>Faza grupowa + KO</option>
                     </select>
                   </div>
                   <div class="ata-field">
@@ -161,10 +161,10 @@
     }
 
     const modeLabel = tournament.mode === "ko"
-      ? "KO (Straight Knockout)"
+      ? "KO (Pojedyncza eliminacja)"
       : tournament.mode === "league"
         ? "Liga (Round Robin)"
-        : "Gruppenphase + KO (Round Robin + Straight Knockout)";
+        : "Faza grupowa + KO (Round Robin + Pojedyncza eliminacja)";
 
     const participantsHtml = tournament.participants.map((participant) => (
       `<span class="ata-player-chip">${escapeHtml(participant.name)}</span>`
@@ -174,12 +174,12 @@
     const activePresetId = getAppliedCreatePresetId(tournament);
     const x01PresetLabel = getCreatePresetLabel(activePresetId);
     const x01BullModeLabel = x01Settings.bullOffMode === "Off"
-      ? "Tryb bulla deaktiviert"
+      ? "Wyłączono tryb bulla"
       : `Tryb bulla ${x01Settings.bullMode}`;
     const legsToWin = getLegsToWin(tournament.bestOfLegs);
     const drawMode = normalizeKoDrawMode(tournament?.ko?.drawMode, KO_DRAW_MODE_SEEDED);
-    const drawModeLabel = drawMode === KO_DRAW_MODE_OPEN_DRAW ? "Open Draw" : "Gesetzter Draw";
-    const drawLockLabel = tournament?.ko?.drawLocked !== false ? "Draw-Lock aktiv" : "Draw-Lock aus";
+    const drawModeLabel = drawMode === KO_DRAW_MODE_OPEN_DRAW ? "Open Draw" : "Losowanie z rozstawieniem";
+    const drawLockLabel = tournament?.ko?.drawLocked !== false ? "Draw-Lock włączony" : "Draw-Lock wyłączony";
     const primaryTags = [
       { text: `Best of ${tournament.bestOfLegs} Legs`, cls: "ata-info-tag ata-info-tag-key" },
       { text: `First to ${legsToWin} Legs`, cls: "ata-info-tag" },
@@ -202,10 +202,10 @@
     const primaryTagsHtml = primaryTags.map((tag) => `<span class="${tag.cls}">${escapeHtml(tag.text)}</span>`).join("");
     const x01TagsHtml = x01Tags.map((tag) => `<span class="${tag.cls}">${escapeHtml(tag.text)}</span>`).join("");
     const activeTournamentHeadingLinks = [
-      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Turniermodus-Erklärung öffnen", title: "README: Tryby turniejowe" },
+      { href: README_TOURNAMENT_MODES_URL, kind: "tech", label: "Otwórz objaśnienie trybu turniejowego", title: "README: Tryby turniejowe" },
     ];
     const activeFormatHelpLinks = renderInfoLinks([
-      { href: DRA_GUI_RULE_MODE_FORMATS_URL, kind: "rule", label: "DRA-Regelerklärung zu Modus und Format öffnen", title: "DRA-Regeln in der GUI: Modus und Format" },
+      { href: DRA_GUI_RULE_MODE_FORMATS_URL, kind: "rule", label: "Otwórz objaśnienie zasad DRA dotyczących trybu i formatu", title: "Zasady DRA w interfejsie: tryb i format" },
     ]);
 
     return `

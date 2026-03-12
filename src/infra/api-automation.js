@@ -810,7 +810,7 @@
 
   function getApiMatchStatusText(match) {
     if (isByeMatchResult(match)) {
-      return "Freilos (Bye): kein API-Sync erforderlich";
+      return "Wolny los: synchronizacja z API nie jest wymagana.";
     }
     const auto = ensureMatchAutoMeta(match);
     if (auto.status === "completed") {

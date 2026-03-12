@@ -33,7 +33,7 @@ $checks = @(
   @{ Rule = "Bye-Ergebnisse werden explizit synchronisiert"; Pattern = "synchronizeStructuralByeMatch" },
   @{ Rule = "Draw-Lock je KO-Turnier vorhanden"; Pattern = "drawLocked" },
   @{ Rule = "Globales Draw-Lock-Default vorhanden"; Pattern = "koDrawLockDefault" },
-  @{ Rule = "PDC-UI-Begriff Straight Knockout"; Pattern = "Straight Knockout" },
+  @{ Rule = "PDC-UI-Begriff Pojedyncza eliminacja"; Pattern = "Pojedyncza eliminacja" },
   @{ Rule = "PDC-UI-Begriff Round Robin"; Pattern = "Round Robin" }
 )
 

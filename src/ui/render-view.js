@@ -122,7 +122,7 @@
             const statusBadgeClass = isBye
               ? "ata-match-status ata-match-status-bye"
               : (isCompleted ? "ata-match-status ata-match-status-completed" : "ata-match-status ata-match-status-open");
-            const statusBadgeText = isBye ? "Freilos (Bye)" : (isCompleted ? "Abgeschlossen" : "Offen");
+            const statusBadgeText = isBye ? "Wolny los" : (isCompleted ? "Zakończono" : "Otwarte");
             const statusText = !isCompleted
               ? "Noch nicht abgeschlossen."
                 : isBye

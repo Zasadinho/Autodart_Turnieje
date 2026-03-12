@@ -108,7 +108,7 @@
 - Gruppen-zu-KO-Auflösung blockiert bei `playoff_required`.
 - PDC-konforme Terminologie in der UI ergänzt:
   - `Freilos (Bye)`
-  - `KO (Straight Knockout)`
+  - `KO (Pojedyncza eliminacja)`
   - `Liga (Round Robin)`
   - `Nächstes Match (Next Match)`.
 - Diagnose-API ergänzt:

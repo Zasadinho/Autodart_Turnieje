@@ -10,7 +10,7 @@ Statuswerte:
 | DRA Rule | Thema | Status | Umsetzung im Code |
 |---|---|---|---|
 | 2 (Definition "Bye"), p.4 | Freilos-Definition | enforced | `src/domain/tournament-create.js` (`buildKoMatchesFromStructure`), `src/domain/ko-engine.js` (`synchronizeStructuralByeMatch`) |
-| 6.8.1, p.17 | Straight Knockout als Grundprinzip | enforced | `src/domain/tournament-create.js` (KO-Struktur), `src/bracket/payload.js` (single elimination payload) |
+| 6.8.1, p.17 | Pojedyncza eliminacja als Grundprinzip | enforced | `src/domain/tournament-create.js` (KO-Struktur), `src/bracket/payload.js` (single elimination payload) |
 | 6.8.2, p.17 | Round Robin zulässig | enforced | `src/domain/tournament-create.js` (`buildLeagueMatches`, Gruppenmatches), `src/domain/standings-dra.js` |
 | 6.10.1 / 6.10.5.2, p.17-18 | Promoter-Discretion / organisatorische Limits | assisted | Projektlimits + Hinweise in `src/ui/render-settings.js`, `README.md` |
 | 6.12.1, p.18 | Draw bleibt bestehen | enforced / assisted | `drawLocked` je Turnier in `src/domain/ko-engine.js`, Default in `settings.featureFlags.koDrawLockDefault`; manuell umschaltbar in `src/ui/render-settings.js` |

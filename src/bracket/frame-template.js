@@ -155,7 +155,7 @@
     }
 
     #ata-brackets-viewer .match[data-match-status="4"] .opponents::after {
-      content: "Abgeschlossen";
+      content: "Zakończono";
       position: absolute;
       top: -11px;
       right: 8px;

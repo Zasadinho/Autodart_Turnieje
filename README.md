@@ -3,7 +3,7 @@
 Lokalny Turniej direkt in `https://play.autodarts.io` als Userscript.
 
 Der Assistent erweitert die Autodarts-Oberfläche um einen eigenen Bereich für:
-- Turnieranlage (KO, Liga, Gruppenphase + KO)
+- Turnieranlage (KO, Liga, Faza grupowa + KO)
 - Ergebnisführung
 - Turnieransicht (Tabelle + Bracket)
 - Import/Export
@@ -122,7 +122,7 @@ Nach Installation ist links im Hauptmenü der neue Eintrag sichtbar. Darüber ö
   - Legs For gesamt
   - Bei weiterem Gleichstand: `Playoff erforderlich`
 
-### Gruppenphase + KO (`groups_ko`)
+### Faza grupowa + KO (`groups_ko`)
 - Zwei Gruppen (`A`, `B`).
 - Top-2 jeder Gruppe qualifizieren sich für KO.
 - Kreuz-Halbfinale:
@@ -144,7 +144,7 @@ Tab: `Turnier`
 | Feld | Optionen / Eingaben | Was es steuert | Warum das wichtig ist |
 |---|---|---|---|
 | `Turniername` | Freitext | Name für aktive Sitzung/Export | Erleichtert Zuordnung bei mehreren lokalen Events |
-| `Modus` | `KO`, `Liga`, `Gruppenphase + KO` | Spielplanlogik, Tabellenlogik, KO-Pfade | Falscher Modus führt zu falscher Matchanzahl/Fortschrittslogik |
+| `Modus` | `KO`, `Liga`, `Faza grupowa + KO` | Spielplanlogik, Tabellenlogik, KO-Pfade | Falscher Modus führt zu falscher Matchanzahl/Fortschrittslogik |
 | `Best of Legs` | Ungerade `1..21` | Matchlänge; intern `First to N` | Definiert Siegbedingung pro Match und Turnierdauer |
 | `Punkty startowe` | `121`, `170`, `301`, `501`, `701`, `901` | X01-Basis für jedes Match | Beeinflusst Matchdauer und Schwierigkeitsprofil |
 | `In mode` | `Straight`, `Double`, `Master` | Wie ein Leg gestartet wird | Regelt Einstiegsanforderung je Spielstil/Regelwerk |
@@ -213,9 +213,9 @@ Die Anzeige bündelt Uczestnicyzahl, geplante Spielanzahl, Średnialiche Matchda
 
 ### Nach dem Anlegen
 Im aktiven Turnier siehst du die wichtigsten Tags sofort:
-- Format (`KO`, `Liga`, `Gruppenphase + KO`)
+- Format (`KO`, `Liga`, `Faza grupowa + KO`)
 - `Best of`, `First to`, `Punkty startowe`
-- Bei KO: `Open Draw`/`Gesetzter Draw`, `Draw-Lock aktiv/aus`
+- Bei KO: `Open Draw`/`Losowanie z rozstawieniem`, `Draw-Lock aktiv/aus`
 - X01-Zusammenfassung und Uczestnicychips
 
 ![Aktives Turnier nach Anlage](assets/ss_Turnier_angelegt.png)
@@ -274,7 +274,7 @@ Tab: `Turnierbaum`
 - Je nach Modus zeigt der Tab unterschiedliche Ansichten:
   - `KO`: klassischer Turnierbaum mit offenen Slots, Freilosen und Finale.
   - `Liga`: Tabelle und vollständiger Spielplan in einer gemeinsamen Ansicht.
-  - `Gruppenphase + KO`: Gruppentabellen oben, KO-Turnierbaum darunter.
+  - `Faza grupowa + KO`: Gruppentabellen oben, KO-Turnierbaum darunter.
 
 ![Turnierbaum direkt nach dem Start](assets/ss_Turnierbaum_neu-gestartet.png)
 ![Turnierbaum nach übernommenen Matchdaten](assets/Turnierbaum_aktualisierter-turnierbaum-nach-uebernahme-der-matchdaten.png)
@@ -284,7 +284,7 @@ Liga-Ansicht mit Tabelle und Spielplan:
 
 ![Liga-Ansicht im Turnierbaum](assets/ss_Turnierbaum_Liga.png)
 
-Gruppenphase + KO mit Gruppentabellen und KO-Turnierbaum:
+Faza grupowa + KO mit Gruppentabellen und KO-Turnierbaum:
 
 ![Gruppenphase plus KO im Turnierbaum](assets/ss_Turnierbaum_Gruppenphaseplusko.png)
 

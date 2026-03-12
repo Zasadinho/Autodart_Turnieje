@@ -30,10 +30,10 @@ Screenshot-Kontext:
 - `6.8.2`, Seite `17`
 
 ### Deutsche Erklärung
-- `6.8.1`: Das Grundprinzip ist KO (Straight Knockout).
+- `6.8.1`: Das Grundprinzip ist KO (Pojedyncza eliminacja).
 - `6.8.2`: Round Robin ist ebenfalls zulässig.
 - In der App bedeutet das:
-  - `KO`, `Liga` und `Gruppenphase + KO` sind regelkonforme Turniermodelle.
+  - `KO`, `Liga` und `Faza grupowa + KO` sind regelkonforme Turniermodelle.
   - Der Modus steuert automatisch Spielplan, Fortschrittslogik und Turnieransicht.
 
 ### Warum wichtig
@@ -176,7 +176,7 @@ Liga-Ansicht mit Tabelle, Spielplan und sichtbarer Tie-Break-Spalte:
 
 ![Tabela ligowa und Spielplan im Turnierbaum](../assets/ss_Turnierbaum_Liga.png)
 
-Gruppenphase + KO mit Gruppentabellen und nachgelagertem KO-Turnierbaum:
+Faza grupowa + KO mit Gruppentabellen und nachgelagertem KO-Turnierbaum:
 
 ![Gruppentabellen und KO-Baum im Turnierbaum](../assets/ss_Turnierbaum_Gruppenphaseplusko.png)
 
