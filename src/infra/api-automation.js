@@ -954,13 +954,13 @@
         await persistStore();
       } catch (persistError) {
         schedulePersist();
-        logWarn("storage", "Immediate persist before match redirect failed; scheduled retry.", persistError);
+        logWarn("storage", "Natychmiastowy zapis przed przekierowaniem do meczu nie powiódł się; zaplanowano ponowną próbę.", persistError);
       }
       renderShell();
-      setNotice("success", "Match gestartet. Weiterleitung ins Match.");
+      setNotice("success", "Mecz uruchomiony. Przekierowanie do meczu.");
       openMatchPage(createdLobbyId);
     } catch (error) {
-      const message = normalizeText(error?.message || apiBodyToErrorText(error?.body) || "Unbekannter API-Fehler.") || "Unbekannter API-Fehler.";
+      const message = normalizeText(error?.message || apiBodyToErrorText(error?.body) || "Nieznany błąd API.") || "Nieznany błąd API.";
       const now = nowIso();
       auto.provider = API_PROVIDER;
       auto.lobbyId = createdLobbyId || auto.lobbyId || null;
@@ -971,8 +971,8 @@
       tournament.updatedAt = now;
       schedulePersist();
       renderShell();
-      setNotice("error", `Matchstart fehlgeschlagen: ${message}`);
-      logWarn("api", "Match start failed.", error);
+      setNotice("error", `Start meczu nie powiódł się: ${message}`);
+      logWarn("api", "Start meczu nie powiódł się.", error);
     } finally {
       state.apiAutomation.startingMatchId = "";
       renderShell();
