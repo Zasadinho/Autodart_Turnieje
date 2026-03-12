@@ -229,7 +229,7 @@ Tab: `Spiele`
 - Feature-Flag `Automatyczny start lobby + synchronizacja API` aktiv
 
 ### Ablauf
-1. Match in `Spiele` über `Match starten` auslösen.
+1. Match in `Spiele` über `Uruchom mecz` auslösen.
 2. Eine Lobby wird mit den Turnier-Settings erstellt (X01-Felder + Legs aus `Best of Legs`), immer als private Lobby.
 3. Spieler werden hinzugefügt und das Match wird gestartet.
 4. Ergebnis wird per API geholt und lokal gespeichert.
@@ -333,7 +333,7 @@ Legende für die eingeblendeten Hilfelinks:
 ### Automatyczny start lobby + synchronizacja API
 - Standard: `AUS`.
 - Wenn aktiv:
-  - `Match starten` erstellt Lobby, fügt Spieler hinzu, startet Match.
+  - `Uruchom mecz` erstellt Lobby, fügt Spieler hinzu, startet Match.
   - Ergebnis wird automatisch aus der API übernommen.
 - Warum: weniger manuelle Schritte, geringeres Risiko für Übertragungsfehler.
 

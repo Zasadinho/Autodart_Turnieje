@@ -84,12 +84,12 @@
       boardId: boardId || "",
       autoEnabled,
       authBlocked,
-      apiLabel: hasToken ? (authBlocked ? "API Auth abgelaufen" : "API Auth bereit") : "Brak autoryzacji API",
+      apiLabel: hasToken ? (authBlocked ? "Uwierzytelnienie API wygasło" : "Uwierzytelnienie API gotowe") : "Brak autoryzacji API",
       boardLabel: hasBoard
         ? `Aktywna tablica (${boardPreview})`
         : hasBoardValue
-          ? `Board-ID ung\u00fcltig (${boardPreview})`
-          : "Kein aktives Board",
+          ? `Board-ID jest nieprawidłowe (${boardPreview})`
+          : "Brak aktywnej tablicy",
       autoLabel: autoEnabled ? "Auto-Lobby ON" : "Auto-Lobby OFF",
     };
   }
@@ -101,7 +101,7 @@
     const boardStateClass = status.hasBoard ? "ata-status-ok" : "ata-status-warn";
     const autoStateClass = status.autoEnabled ? "ata-status-info" : "ata-status-neutral";
     const hint = status.autoEnabled && (!status.hasToken || !status.hasBoard)
-      ? `<span class="ata-runtime-hint">Hinweis: F\u00fcr API-Halbautomatik werden Auth-Token und aktives Board ben\u00f6tigt.</span>`
+      ? `<span class="ata-runtime-hint">Uwaga: półautomatyczny tryb API wymaga tokenu uwierzytelniającego oraz aktywnej tablicy.</span>`
       : "";
     return `
       <div class="ata-runtime-statusbar">
@@ -138,7 +138,7 @@
 
 
   function createApiError(status, message, body) {
-    const error = new Error(String(message || "API request failed."));
+    const error = new Error(String(message || "Błąd żądania API."));
     error.status = Number(status || 0);
     error.body = body;
     return error;
@@ -232,10 +232,10 @@
           reject(createApiError(status, extractApiErrorMessage(status, body), body));
         },
         onerror: () => {
-          reject(createApiError(0, "Netzwerkfehler bei API-Anfrage.", null));
+          reject(createApiError(0, "„Błąd sieci podczas zapytania API.", null));
         },
         ontimeout: () => {
-          reject(createApiError(0, "API-Anfrage Timeout.", null));
+          reject(createApiError(0, "API: timeout zapytania.", null));
         },
       });
     });

@@ -147,7 +147,7 @@
   - Turnier-Neuanlage enthält jetzt X01-Parameter aus der Autodarts-Lobbyoberfläche:
     - Startscore, In mode, Out mode, Bull mode, Bull-off, Max Rund, Lobby-Sichtbarkeit
   - Tryb gry bleibt bewusst `Legs` und wird aus `Best-of Legs` als `First to N` abgeleitet
-  - `Match starten` übernimmt diese Werte konsistent in den Lobby-Create-Payload.
+  - `Uruchom mecz` übernimmt diese Werte konsistent in den Lobby-Create-Payload.
 - PDC-Preset für Neuanlage eingeführt:
   - Standard ist `PDC Standard` (501, Straight In, Double Out, 25/50, Bull-off Normal, Max Rounds 50, Lobby privat)
   - optionaler `Custom`-Modus für abweichende X01-Einstellungen.
@@ -203,7 +203,7 @@
 
 ## 0.2.0
 - API-Halbautomatik umgesetzt:
-  - Matchstart per Button im Tab `Spiele` (`Match starten` / `Zum Match`)
+  - Matchstart per Button im Tab `Spiele` (`Uruchom mecz` / `Zum Match`)
   - automatische Ergebnissynchronisierung über Autodarts-API für gestartete Matches
   - Single-active-match-Regel (ein aktives gestartetes Match gleichzeitig).
 - Persistenter Automationsstatus pro Match in `match.meta.auto` (abwärtskompatibel).

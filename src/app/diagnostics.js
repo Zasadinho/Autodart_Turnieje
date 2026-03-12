@@ -403,12 +403,12 @@
       const rows = standingsForMatches(tournament, tournament.matches, ["A", "B", "C"]);
       const blocked = rows.filter((row) => row.tiebreakState === "playoff_required").length;
       record(
-        "Promoter H2H: Deadlock -> Playoff erforderlich",
+        "Promoter H2H: brak rozstrzygnięcia, wymagany playoff",
         blocked === 3,
         rows.map((row) => `${row.id}:${row.tiebreakState}`).join(", "),
       );
     } catch (error) {
-      record("Promoter H2H: Deadlock -> Playoff erforderlich", false, String(error?.message || error));
+      record("Promoter H2H: brak rozstrzygnięcia, wymagany playoff", false, String(error?.message || error));
     }
 
     try {
@@ -436,12 +436,12 @@
       const candidates = getApiMatchLegCandidatesFromStats(tournament, match, apiStats, "P2");
       const best = candidates[0] || { p1: -1, p2: -1 };
       record(
-        "API Sync: vertauschte Legs-Reihenfolge wird korrigiert",
+        "API Sync: skorygowano zamienioną kolejność legów.",
         best.p1 === 0 && best.p2 === 1,
         `best=${best.p1}:${best.p2}`,
       );
     } catch (error) {
-      record("API Sync: vertauschte Legs-Reihenfolge wird korrigiert", false, String(error?.message || error));
+      record("API Sync: skorygowano zamienioną kolejność legów.", false, String(error?.message || error));
     }
 
     try {
@@ -468,12 +468,12 @@
       };
       const winners = resolveWinnerIdCandidatesFromApiStats(tournament, match, apiStats, 0);
       record(
-        "API Sync: Winner-Index aus matchStats wird bevorzugt",
+        "Synchronizacja API: preferowany jest indeks zwycięzcy z matchStats",
         winners[0] === "P2",
         `first=${winners[0] || "-"}`,
       );
     } catch (error) {
-      record("API Sync: Winner-Index aus matchStats wird bevorzugt", false, String(error?.message || error));
+      record("Synchronizacja API: preferowany jest indeks zwycięzcy z matchStats", false, String(error?.message || error));
     }
 
     try {
@@ -499,12 +499,12 @@
       };
       const recovered = findOpenMatchCandidatesByApiStats(tournament, apiStats);
       record(
-        "API Sync: Recovery erkennt mehrdeutige Match-Zuordnung",
+        "Synchronizacja API: mechanizm odzyskiwania wykrył niejednoznaczne przypisanie meczu",
         recovered.length === 2,
         `candidates=${recovered.length}`,
       );
     } catch (error) {
-      record("API Sync: Recovery erkennt mehrdeutige Match-Zuordnung", false, String(error?.message || error));
+      record("Synchronizacja API: mechanizm odzyskiwania wykrył niejednoznaczne przypisanie meczu", false, String(error?.message || error));
     }
 
     try {
@@ -516,12 +516,12 @@
       };
       const ids = participantIdsByName(tournament, "TANJA");
       record(
-        "History Import: Namens-Matching erkennt Teilnamen",
+        "Import historii: dopasowywanie nazw rozpoznaje częściowe nazwy",
         ids.includes("P1"),
         `ids=${ids.join(",")}`,
       );
     } catch (error) {
-      record("History Import: Namens-Matching erkennt Teilnamen", false, String(error?.message || error));
+      record("Import historii: dopasowywanie nazw rozpoznaje częściowe nazwy", false, String(error?.message || error));
     }
 
     {
@@ -577,7 +577,7 @@
         const outcome = importHistoryStatsTableResult("lobby-history-1", { table });
         const updated = findMatch(tournament, "m-history-lobby");
         record(
-          "History Import: Lobby-Mapping priorisiert + Legs normalisiert",
+          "Import: priorytetowe mapowanie lobby i normalizacja legów",
           Boolean(outcome?.ok)
             && outcome.reasonCode === "completed"
             && updated?.status === STATUS_COMPLETED
@@ -587,7 +587,7 @@
           `reason=${outcome?.reasonCode || "-"}, winner=${updated?.winnerId || "-"}, legs=${updated?.legs?.p1}:${updated?.legs?.p2}`,
         );
       } catch (error) {
-        record("History Import: Lobby-Mapping priorisiert + Legs normalisiert", false, String(error?.message || error));
+        record("Import: priorytetowe mapowanie lobby i normalizacja legów", false, String(error?.message || error));
       } finally {
         state.store.tournament = previousTournament;
       }
@@ -655,7 +655,7 @@
         const matchA = findMatch(tournament, "m-history-a");
         const matchB = findMatch(tournament, "m-history-b");
         record(
-          "History Import: bei Mehrdeutigkeit gewinnt verknüpfte Lobby",
+          "Import historii: przy niejednoznaczności wygrywa powiązane lobby.",
           Boolean(outcome?.ok)
             && matchA?.status === STATUS_PENDING
             && matchB?.status === STATUS_COMPLETED
@@ -663,7 +663,7 @@
           `reason=${outcome?.reasonCode || "-"}, A=${matchA?.status || "-"}, B=${matchB?.status || "-"}:${matchB?.winnerId || "-"}`,
         );
       } catch (error) {
-        record("History Import: bei Mehrdeutigkeit gewinnt verknüpfte Lobby", false, String(error?.message || error));
+        record("Import historii: przy niejednoznaczności wygrywa powiązane lobby.", false, String(error?.message || error));
       } finally {
         state.store.tournament = previousTournament;
       }
@@ -690,7 +690,7 @@
       };
       const migrated = migrateStorage(rawStoreV2);
       record(
-        "Migration: v2 -> v4 setzt Tie-Break-Profil",
+        "Migracja: przejście z v2 do v4 ustawia profil tie-break.",
         migrated.schemaVersion === 4
           && migrated.tournament?.rules?.tieBreakProfile === TIE_BREAK_PROFILE_PROMOTER_H2H_MINITABLE
           && migrated.settings?.tournamentTimeProfile === TOURNAMENT_TIME_PROFILE_NORMAL
@@ -698,7 +698,7 @@
         `schema=${migrated.schemaVersion}, profile=${migrated.tournament?.rules?.tieBreakProfile}`,
       );
     } catch (error) {
-      record("Migration: v2 -> v4 setzt Tie-Break-Profil", false, String(error?.message || error));
+      record("Migracja: przejście z v2 do v4 ustawia profil tie-break.", false, String(error?.message || error));
     }
 
     const passed = results.filter((entry) => entry.ok).length;
