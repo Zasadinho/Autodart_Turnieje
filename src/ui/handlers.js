@@ -388,7 +388,7 @@
     const disableBullMode = normalizeText(bullOffSelect.value) === "Off";
     bullModeSelect.disabled = disableBullMode;
     bullModeSelect.title = disableBullMode
-      ? "Tryb bulla ist bei Bull-off = Off ohne Wirkung und daher schreibgesch\u00fctzt."
+      ? "Tryb bulla nie ma zastosowania przy Bull-off = Off, dlatego pole jest zablokowane."
       : "";
 
     let hiddenBullMode = form.querySelector("#ata-x01-bullmode-hidden");
@@ -450,7 +450,7 @@
     syncCreateFormDependencies(form);
     updateCreateDraftFromForm(form, true);
     refreshCreateFormDurationEstimate(form);
-    setNotice("info", `Preset „${preset.label}“ wurde auf alle Turnierfelder angewendet.`, 2600);
+    setNotice("info", `Preset „${preset.label}“ zostało zastosowane do wszystkich pól turniejowych.`, 2600);
   }
 
 
@@ -515,7 +515,7 @@
     }
     const participants = parseParticipantLines(participantField.value);
     if (participants.length < 2) {
-      setNotice("info", "Mindestens zwei Uczestnicy zum Mischen eingeben.", 2200);
+      setNotice("info", "Podaj minimum dwóch uczestników, aby wykonać miks.", 2200);
       return;
     }
     const shuffledNames = shuffleArray(participants.map((participant) => participant.name));
@@ -551,7 +551,7 @@
 
     const result = createTournamentSession(config);
     if (!result.ok) {
-      setNotice("error", result.message || "Turnier konnte nicht erstellt werden.");
+      setNotice("error", result.message || "Nie udało się utworzyć turnieju.");
       return;
     }
     setNotice("success", "Turniej został utworzony.");
@@ -580,7 +580,7 @@
     }
     const editability = getMatchEditability(tournament, match);
     if (!editability.editable) {
-      setNotice("error", editability.reason || "Match ist nicht freigeschaltet.");
+      setNotice("error", editability.reason || "Mecz nie jest dostępny.");
       return;
     }
     const legsP1Input = getMatchFieldElement(shadow, "legs-p1", matchId);
@@ -593,7 +593,7 @@
     const p1Legs = clampInt(legsP1Input.value, 0, 0, 99);
     const p2Legs = clampInt(legsP2Input.value, 0, 0, 99);
     if (p1Legs === p2Legs) {
-      setNotice("error", "Nieprawidłowy wynik: w systemie Best‑of remis nie jest możliwy.");
+      setNotice("error", "Nieprawidłowy wynik: w systemie Best-of remis nie jest możliwy.");
       return;
     }
 
@@ -605,21 +605,21 @@
     }, "manual");
 
     if (result.ok) {
-      setNotice("success", "Match gespeichert.", 1800);
+      setNotice("success", "Mecz został zapisany.", 1800);
     } else {
-      setNotice("error", result.message || "Match konnte nicht gespeichert werden.");
+      setNotice("error", result.message || "Nie udało się zapisać meczu.");
     }
   }
 
 
   function handleResetTournament() {
-    const confirmed = window.confirm("Soll das Turnier wirklich gel\u00f6scht werden? Dieser Schritt kann nicht r\u00fcckg\u00e4ngig gemacht werden.");
+    const confirmed = window.confirm("Czy na pewno chcesz usunąć turniej? Tego kroku nie można cofnąć.");
     if (!confirmed) {
       return;
     }
 
     resetTournamentSession();
-    setNotice("success", "Turnier wurde gel\u00f6scht.");
+    setNotice("success", "Turniej został usunięty.");
   }
 
 
@@ -644,7 +644,7 @@
     anchor.click();
     anchor.remove();
     URL.revokeObjectURL(url);
-    setNotice("success", "JSON-Datei exportiert.", 2000);
+    setNotice("success", "Plik JSON został wyeksportowany.", 2000);
   }
 
 
@@ -653,10 +653,10 @@
       const payload = exportDataPayload();
       const text = JSON.stringify(payload, null, 2);
       await navigator.clipboard.writeText(text);
-      setNotice("success", "JSON in Zwischenablage kopiert.", 2000);
+      setNotice("success", "Skopiowano JSON do schowka.", 2000);
     } catch (error) {
-      setNotice("error", "Kopieren in Zwischenablage fehlgeschlagen.");
-      logWarn("io", "Clipboard write failed.", error);
+      setNotice("error", "Kopiowanie do schowka nie powiodło się.");
+      logWarn("io", "Nie udało się zapisać do schowka.", error);
     }
   }
 
@@ -667,18 +667,18 @@
       return;
     }
 
-    try {
-      const parsed = JSON.parse(textarea.value);
-      const result = importTournamentPayload(parsed);
-      if (result.ok) {
-        setNotice("success", "JSON erfolgreich importiert.");
-      } else {
-        setNotice("error", result.message || "Import fehlgeschlagen.");
-      }
-    } catch (error) {
-      setNotice("error", "JSON konnte nicht geparst werden.");
-      logWarn("io", "Import parse failed.", error);
-    }
+try {
+  const parsed = JSON.parse(textarea.value);
+  const result = importTournamentPayload(parsed);
+  if (result.ok) {
+    setNotice("success", "JSON został pomyślnie zaimportowany.");
+  } else {
+    setNotice("error", result.message || "Import nie powiódł się.");
+  }
+} catch (error) {
+  setNotice("error", "Nie udało się przetworzyć pliku JSON.");
+  logWarn("io", "Błąd parsowania podczas importu.", error);
+}
   }
 
 
@@ -690,22 +690,22 @@
 
     const reader = new FileReader();
     reader.onload = () => {
-      try {
-        const parsed = JSON.parse(String(reader.result || "{}"));
-        const result = importTournamentPayload(parsed);
-        if (result.ok) {
-          setNotice("success", "Datei erfolgreich importiert.");
-        } else {
-          setNotice("error", result.message || "Datei konnte nicht importiert werden.");
-        }
-      } catch (error) {
-        setNotice("error", "Datei enth\u00e4lt kein g\u00fcltiges JSON.");
-        logWarn("io", "File import parse failed.", error);
-      }
-    };
-    reader.onerror = () => {
-      setNotice("error", "Datei konnte nicht gelesen werden.");
-    };
+try {
+  const parsed = JSON.parse(String(reader.result || "{}"));
+  const result = importTournamentPayload(parsed);
+  if (result.ok) {
+    setNotice("success", "Plik został pomyślnie zaimportowany.");
+  } else {
+    setNotice("error", result.message || "Nie udało się zaimportować pliku.");
+  }
+} catch (error) {
+  setNotice("error", "Plik nie zawiera prawidłowego JSONa.");
+  logWarn("io", "Błąd parsowania pliku podczas importu.", error);
+}
+};
+reader.onerror = () => {
+  setNotice("error", "Nie udało się odczytać pliku.");
+};
     reader.readAsText(file);
   }
 

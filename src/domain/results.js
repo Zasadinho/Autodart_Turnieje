@@ -64,7 +64,7 @@
     }
 
     if (p1Legs === p2Legs) {
-      return { ok: false, message: "Nieprawidłowy wynik: w systemie Best‑of remis nie jest możliwy." };
+      return { ok: false, message: "Nieprawidłowy wynik: w systemie Best-of remis nie jest możliwy." };
     }
 
     if (!derivedWinnerId) {

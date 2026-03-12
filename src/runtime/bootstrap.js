@@ -13,7 +13,7 @@
     setupRuntimeApi();
     addInterval(() => {
       syncPendingApiMatches().catch((error) => {
-        logWarn("api", "Background sync loop failed.", error);
+        logWarn("api", "Błąd podczas synchronizacji w tle.", error);
       });
     }, API_SYNC_INTERVAL_MS);
     addInterval(() => {
@@ -27,11 +27,11 @@
         version: APP_VERSION,
       },
     }));
-    logDebug("runtime", "ATA runtime initialized.");
+    logDebug("runtime", "Środowisko wykonawcze ATA zostało zainicjalizowane.");
   }
 
   init().catch((error) => {
-    logError("runtime", "Initialization failed.", error);
+    logError("runtime", "Inicjalizacja nie powiodła się.", error);
   });
 })();
 
