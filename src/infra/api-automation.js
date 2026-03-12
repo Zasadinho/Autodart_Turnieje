@@ -293,7 +293,6 @@
     if (!openMatch) {
       return { ok: false, reasonCode: "not_found", message: "Nie znaleziono otwartego meczu turniejowego dla tej lobby." };
     }
-}
 
 
     const syncOutcome = await syncApiMatchResult(tournament, openMatch, token, {
