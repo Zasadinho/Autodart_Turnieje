@@ -95,7 +95,7 @@ Screenshot-Kontext:
 
 ### GUI-Stellen
 - Turnier > Limity trybu
-- Einstellungen > Regelbasis und Limits
+- Einstellungen > Podstawa zasad i limity
 
 ### DRA-Referenz (Kapitel/Punkt/Seite)
 - `6.10.1`, Seite `17`
@@ -184,7 +184,7 @@ Gruppenphase + KO mit Gruppentabellen und nachgelagertem KO-Turnierbaum:
 ## DRA-Checkliste (manuelle Entscheidungen)
 
 ### GUI-Stellen
-- Einstellungen > DRA Checkliste (nicht automatisierbar)
+- Einstellungen > Lista kontrolna DRA (nie do zautomatyzowania)
 
 ### DRA-Referenz (Kapitel/Punkt/Seite)
 - `5.14`, Seite `15`

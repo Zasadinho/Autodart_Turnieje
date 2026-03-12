@@ -20,7 +20,7 @@ Der Assistent erweitert die Autodarts-Oberfläche um einen eigenen Bereich für:
 8. [Turnierbaum](#turnierbaum)
 9. [Import und Export](#import-und-export)
 10. [Einstellungen](#einstellungen)
-11. [Regelbasis und Limits](#regelbasis-und-limits)
+11. [Podstawa zasad i limity](#regelbasis-und-limits)
 12. [Troubleshooting](#troubleshooting)
 13. [Entwicklung](#entwicklung)
 14. [Limitationen](#limitationen)
@@ -344,7 +344,7 @@ Legende für die eingeblendeten Hilfelinks:
 - `AUS` -> `seeded` (Eingabereihenfolge als Seed-Rang).
 - Warum: Turnierleitung kann zwischen offener Auslosung und Setzlogik wählen.
 
-### KO Draw-Lock (Standard)
+### KO Blokada Losowania (Standard)
 - Standard: `EIN`.
 - Neue KO-Turniere übernehmen den Initial-Draw unverändert (`drawLocked = true`).
 - Bezug: DRA `6.12.1` (veröffentlichter Draw bleibt bestehen).
@@ -383,7 +383,7 @@ Warum dieses Feld wichtig ist:
 - DRA `6.16.1` erlaubt Tie-Breaks nach Ermessen des Veranstalters.
 - Das Profil erzwingt eine klare, reproduzierbare Reihenfolge statt Ad-hoc-Entscheidung.
 
-## Regelbasis und Limits
+## Podstawa zasad i limity
 Priorisierung für Limits in diesem Projekt:
 1. Offizielle Darts-Regeln
 2. Mathematische Turnierlogik

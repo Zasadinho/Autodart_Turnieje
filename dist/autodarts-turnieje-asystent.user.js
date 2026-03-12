@@ -9242,7 +9242,7 @@
         { href: DRA_GUI_RULE_OPEN_DRAW_URL, kind: "rule", label: "DRA-Regelerklärung zu Open Draw öffnen", title: "Zasady DRA w GUI: Open Draw" },
       ]);
       const modeLimitHelpLinks = renderInfoLinks([
-        { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "DRA-Regelerklärung zu Limits öffnen", title: "DRA-Regeln in der GUI: Uczestnicylimits" },
+        { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "DRA-Regelerklärung zu Limits öffnen", title: "Zasady DRA w interfejsie: limity uczestników" },
       ]);
       return `
         <section class="ata-card tournamentCard">
@@ -10023,26 +10023,26 @@
         <p class="ata-small"><strong>Promotor: punkty + różnica legów:</strong> vereinfachte Sortierung \u00fcber Punkte, Gesamt-Leg-Differenz und Legs gewonnen (legacy-kompatibel).</p>
       </section>
       <section class="ata-card tournamentCard">
-        ${renderSectionHeading("DRA Checkliste (nicht automatisierbar)", [
-          { href: DRA_GUI_RULE_CHECKLIST_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zur Checkliste \u00f6ffnen", title: "DRA-Regeln in der GUI: Checkliste" },
+        ${renderSectionHeading("Lista kontrolna DRA (nie do zautomatyzowania)", [
+          { href: DRA_GUI_RULE_CHECKLIST_URL, kind: "rule", label: "Otwórz objaśnienie zasad DRA dotyczących listy kontrolnej", title: "Zasady DRA w interfejsie: lista kontrolna" },
         ])}
         <ul class="ata-small">
-          <li>Start-/Wurfreihenfolge und Bull-Off-Entscheidungen werden durch den Spielleiter vor Ort best\u00e4tigt.</li>
-          <li>Practice/Anspielzeit und Board-Etikette werden organisatorisch durchgesetzt.</li>
-          <li>Tie-Break-Entscheidungen bei verbleibendem Gleichstand erfolgen als Promoter-Entscheidung.</li>
-          <li>Unklare Sonderf\u00e4lle werden dokumentiert und manuell entschieden, bevor der Turnierfortschritt fortgesetzt wird.</li>
+          <li>Kolejność startu/rzutów oraz decyzje bull off są potwierdzane przez sędziego na miejscu.</li>
+		  <li>Czas na rozgrzewkę/rozpoczęcie oraz zasady zachowania przy tarczy są egzekwowane organizacyjnie.</li>
+		  <li>Decyzje Tie-Break przy utrzymującym się remisie są podejmowane przez promotora.</li>
+		  <li>Niejasne przypadki szczególne są dokumentowane i rozstrzygane ręcznie przed kontynuacją turnieju.</li>
         </ul>
       </section>
       <section class="ata-card tournamentCard">
-        ${renderSectionHeading("Regelbasis und Limits", [
-          { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zu Limits \u00f6ffnen", title: "DRA-Regeln in der GUI: Uczestnicylimits" },
+        ${renderSectionHeading("Podstawa zasad i limity", [
+          { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "Otwórz objaśnienie zasad DRA dotyczących limitów", title: "Zasady DRA w interfejsie: limity uczestników" },
         ])}
-        <p class="ata-small">Aktive Limity trybu: ${escapeHtml(modeLimitSummary)}.</p>
-        <p class="ata-small">Die DRA-Regeln setzen kein fixes globales Uczestnicymaximum. Die Grenzen oben sind bewusst f\u00fcr faire Turnierdauer und stabile Darstellung gesetzt.</p>
+        <p class="ata-small">Aktywne limity trybu: ${escapeHtml(modeLimitSummary)}.</p>
+        <p class="ata-small">Zasady DRA nie określają stałego globalnego maksimum uczestników. Powyższe limity zostały celowo ustalone dla zapewnienia uczciwego czasu trwania turnieju i stabilnego wyświetlania.</p>
       </section>
       <section class="ata-card tournamentCard">
         ${renderSectionHeading("Storage", [
-          { href: README_BASE_URL, kind: "tech", label: "Hinweise zu Storage und Import \u00f6ffnen", title: "README: Import, Migration und Persistenz" },
+          { href: README_BASE_URL, kind: "tech", label: "Otwórz wskazówki dotyczące Storage i importu", title: "README: import, migracja i trwałość danych" },
         ])}
         <p class="ata-small"><code>${escapeHtml(STORAGE_KEY)}</code>, schemaVersion ${STORAGE_SCHEMA_VERSION}</p>
       </section>
@@ -10057,7 +10057,7 @@
       document.documentElement.appendChild(host);
     }
     if (!(host instanceof HTMLElement)) {
-      throw new Error("ATA host element not available.");
+      throw new Error("Element hosta ATA jest niedostępny.");
     }
     state.host = host;
 
@@ -10169,8 +10169,8 @@
           return;
         }
         handleStartMatch(matchId).catch((error) => {
-          logError("api", "Start-match handler failed unexpectedly.", error);
-          setNotice("error", "Matchstart ist unerwartet fehlgeschlagen.");
+          logError("api", "Nieoczekiwany błąd podczas uruchamiania meczu.", error);
+          setNotice("error", "Nieoczekiwany błąd podczas startu meczu.");
         });
       });
     });
@@ -10207,7 +10207,7 @@
       debugToggle.addEventListener("change", () => {
         state.store.settings.debug = debugToggle.checked;
         schedulePersist();
-        setNotice("success", `Debug-Mode ${debugToggle.checked ? "aktiviert" : "deaktiviert"}.`, 1800);
+        setNotice("success", `Debug-Mode ${debugToggle.checked ? "aktywny" : "nieaktywny"}.`, 1800);
       });
     }
 
@@ -10222,7 +10222,7 @@
         setNotice("info", `Auto-Lobby + API-Sync: ${autoLobbyToggle.checked ? "ON" : "OFF"}.`, 2200);
         if (autoLobbyToggle.checked) {
           syncPendingApiMatches().catch((error) => {
-            logWarn("api", "Immediate sync after toggle failed.", error);
+            logWarn("api", "Synchronizacja po przełączeniu zakończyła się błędem.", error);
           });
         }
       });
@@ -10237,7 +10237,7 @@
           randomizeKoRound1: randomizeKoToggle.checked,
         }, state.store.settings);
         schedulePersist();
-        setNotice("info", `KO-Erstrunden-Mix: ${randomizeKoToggle.checked ? "ON" : "OFF"}.`, 2200);
+        setNotice("info", `KO-Pierwsza Runda-Mix: ${randomizeKoToggle.checked ? "ON" : "OFF"}.`, 2200);
         if (state.activeTab === "tournament" && !state.store.tournament) {
           renderShell();
         }
@@ -10249,7 +10249,7 @@
       koDrawLockDefaultToggle.addEventListener("change", () => {
         state.store.settings.featureFlags.koDrawLockDefault = koDrawLockDefaultToggle.checked;
         schedulePersist();
-        setNotice("info", `KO Draw-Lock (Standard): ${koDrawLockDefaultToggle.checked ? "ON" : "OFF"}.`, 2200);
+        setNotice("info", `KO Blokada Losowania (Standard): ${koDrawLockDefaultToggle.checked ? "ON" : "OFF"}.`, 2200);
       });
     }
 
@@ -10262,7 +10262,7 @@
         );
         state.store.settings.tournamentTimeProfile = profileId;
         schedulePersist();
-        setNotice("info", `Turnierzeit-Profil: ${getTournamentTimeProfileMeta(profileId).label}.`, 2200);
+        setNotice("info", `Profil czasu turnieju: ${getTournamentTimeProfileMeta(profileId).label}.`, 2200);
       });
     }
 
@@ -10271,11 +10271,11 @@
       koDrawLockedToggle.addEventListener("change", () => {
         const result = setTournamentKoDrawLocked(koDrawLockedToggle.checked);
         if (!result.ok) {
-          setNotice("error", result.message || "KO Draw-Lock konnte nicht gesetzt werden.");
+          setNotice("error", result.message || "Nie udało się ustawić blokady losowania KO.");
           return;
         }
         if (result.changed) {
-          setNotice("success", `KO Draw-Lock ${koDrawLockedToggle.checked ? "aktiviert" : "deaktiviert"}.`, 1800);
+          setNotice("success", `KO Blokada Losowania ${koDrawLockedToggle.checked ? "aktywny" : "nieaktywny"}.`, 1800);
         }
       });
     }
@@ -10285,11 +10285,11 @@
       tieBreakSelect.addEventListener("change", () => {
         const result = setTournamentTieBreakProfile(tieBreakSelect.value);
         if (!result.ok) {
-          setNotice("error", result.message || "Tie-Break-Profil konnte nicht gesetzt werden.");
+          setNotice("error", result.message || "Nie udało się ustawić profilu tie-break.");
           return;
         }
         if (result.changed) {
-          setNotice("success", "Tie-Break-Profil aktualisiert.", 1800);
+          setNotice("success", "Profil tie-break został zaktualizowany.", 1800);
         }
       });
     }
@@ -10307,7 +10307,7 @@
 
 
   function handleDrawerKeydown(event) {
-    if (event.key === "Escape") {
+    if (event.key === "Wyjście") {
       event.preventDefault();
       closeDrawer();
       return;

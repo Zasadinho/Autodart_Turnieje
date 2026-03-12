@@ -7,7 +7,7 @@
       document.documentElement.appendChild(host);
     }
     if (!(host instanceof HTMLElement)) {
-      throw new Error("ATA host element not available.");
+      throw new Error("Element hosta ATA jest niedostępny.");
     }
     state.host = host;
 
@@ -119,8 +119,8 @@
           return;
         }
         handleStartMatch(matchId).catch((error) => {
-          logError("api", "Start-match handler failed unexpectedly.", error);
-          setNotice("error", "Matchstart ist unerwartet fehlgeschlagen.");
+          logError("api", "Nieoczekiwany błąd podczas uruchamiania meczu.", error);
+          setNotice("error", "Nieoczekiwany błąd podczas startu meczu.");
         });
       });
     });
@@ -157,7 +157,7 @@
       debugToggle.addEventListener("change", () => {
         state.store.settings.debug = debugToggle.checked;
         schedulePersist();
-        setNotice("success", `Debug-Mode ${debugToggle.checked ? "aktiviert" : "deaktiviert"}.`, 1800);
+        setNotice("success", `Debug-Mode ${debugToggle.checked ? "aktywny" : "nieaktywny"}.`, 1800);
       });
     }
 
@@ -172,7 +172,7 @@
         setNotice("info", `Auto-Lobby + API-Sync: ${autoLobbyToggle.checked ? "ON" : "OFF"}.`, 2200);
         if (autoLobbyToggle.checked) {
           syncPendingApiMatches().catch((error) => {
-            logWarn("api", "Immediate sync after toggle failed.", error);
+            logWarn("api", "Synchronizacja po przełączeniu zakończyła się błędem.", error);
           });
         }
       });
@@ -187,7 +187,7 @@
           randomizeKoRound1: randomizeKoToggle.checked,
         }, state.store.settings);
         schedulePersist();
-        setNotice("info", `KO-Erstrunden-Mix: ${randomizeKoToggle.checked ? "ON" : "OFF"}.`, 2200);
+        setNotice("info", `KO-Pierwsza Runda-Mix: ${randomizeKoToggle.checked ? "ON" : "OFF"}.`, 2200);
         if (state.activeTab === "tournament" && !state.store.tournament) {
           renderShell();
         }
@@ -199,7 +199,7 @@
       koDrawLockDefaultToggle.addEventListener("change", () => {
         state.store.settings.featureFlags.koDrawLockDefault = koDrawLockDefaultToggle.checked;
         schedulePersist();
-        setNotice("info", `KO Draw-Lock (Standard): ${koDrawLockDefaultToggle.checked ? "ON" : "OFF"}.`, 2200);
+        setNotice("info", `KO Blokada Losowania (Standard): ${koDrawLockDefaultToggle.checked ? "ON" : "OFF"}.`, 2200);
       });
     }
 
@@ -212,7 +212,7 @@
         );
         state.store.settings.tournamentTimeProfile = profileId;
         schedulePersist();
-        setNotice("info", `Turnierzeit-Profil: ${getTournamentTimeProfileMeta(profileId).label}.`, 2200);
+        setNotice("info", `Profil czasu turnieju: ${getTournamentTimeProfileMeta(profileId).label}.`, 2200);
       });
     }
 
@@ -221,11 +221,11 @@
       koDrawLockedToggle.addEventListener("change", () => {
         const result = setTournamentKoDrawLocked(koDrawLockedToggle.checked);
         if (!result.ok) {
-          setNotice("error", result.message || "KO Draw-Lock konnte nicht gesetzt werden.");
+          setNotice("error", result.message || "Nie udało się ustawić blokady losowania KO.");
           return;
         }
         if (result.changed) {
-          setNotice("success", `KO Draw-Lock ${koDrawLockedToggle.checked ? "aktiviert" : "deaktiviert"}.`, 1800);
+          setNotice("success", `KO Blokada Losowania ${koDrawLockedToggle.checked ? "aktywny" : "nieaktywny"}.`, 1800);
         }
       });
     }
@@ -235,11 +235,11 @@
       tieBreakSelect.addEventListener("change", () => {
         const result = setTournamentTieBreakProfile(tieBreakSelect.value);
         if (!result.ok) {
-          setNotice("error", result.message || "Tie-Break-Profil konnte nicht gesetzt werden.");
+          setNotice("error", result.message || "Nie udało się ustawić profilu tie-break.");
           return;
         }
         if (result.changed) {
-          setNotice("success", "Tie-Break-Profil aktualisiert.", 1800);
+          setNotice("success", "Profil tie-break został zaktualizowany.", 1800);
         }
       });
     }
@@ -257,7 +257,7 @@
 
 
   function handleDrawerKeydown(event) {
-    if (event.key === "Escape") {
+    if (event.key === "Wyjście") {
       event.preventDefault();
       closeDrawer();
       return;

@@ -115,26 +115,26 @@
         <p class="ata-small"><strong>Promotor: punkty + różnica legów:</strong> vereinfachte Sortierung \u00fcber Punkte, Gesamt-Leg-Differenz und Legs gewonnen (legacy-kompatibel).</p>
       </section>
       <section class="ata-card tournamentCard">
-        ${renderSectionHeading("DRA Checkliste (nicht automatisierbar)", [
-          { href: DRA_GUI_RULE_CHECKLIST_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zur Checkliste \u00f6ffnen", title: "DRA-Regeln in der GUI: Checkliste" },
+        ${renderSectionHeading("Lista kontrolna DRA (nie do zautomatyzowania)", [
+          { href: DRA_GUI_RULE_CHECKLIST_URL, kind: "rule", label: "Otwórz objaśnienie zasad DRA dotyczących listy kontrolnej", title: "Zasady DRA w interfejsie: lista kontrolna" },
         ])}
         <ul class="ata-small">
-          <li>Start-/Wurfreihenfolge und Bull-Off-Entscheidungen werden durch den Spielleiter vor Ort best\u00e4tigt.</li>
-          <li>Practice/Anspielzeit und Board-Etikette werden organisatorisch durchgesetzt.</li>
-          <li>Tie-Break-Entscheidungen bei verbleibendem Gleichstand erfolgen als Promoter-Entscheidung.</li>
-          <li>Unklare Sonderf\u00e4lle werden dokumentiert und manuell entschieden, bevor der Turnierfortschritt fortgesetzt wird.</li>
+		  <li>Kolejność startu/rzutów oraz decyzje bull off są potwierdzane przez sędziego na miejscu.</li>
+		  <li>Czas na rozgrzewkę/rozpoczęcie oraz zasady zachowania przy tarczy są egzekwowane organizacyjnie.</li>
+		  <li>Decyzje Tie-Break przy utrzymującym się remisie są podejmowane przez promotora.</li>
+		  <li>Niejasne przypadki szczególne są dokumentowane i rozstrzygane ręcznie przed kontynuacją turnieju.</li>
         </ul>
       </section>
       <section class="ata-card tournamentCard">
-        ${renderSectionHeading("Regelbasis und Limits", [
-          { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "DRA-Regelerkl\u00e4rung zu Limits \u00f6ffnen", title: "DRA-Regeln in der GUI: Uczestnicylimits" },
+        ${renderSectionHeading("Podstawa zasad i limity", [
+          { href: DRA_GUI_RULE_PARTICIPANT_LIMITS_URL, kind: "rule", label: "Otwórz objaśnienie zasad DRA dotyczących limitów", title: "Zasady DRA w interfejsie: limity uczestników" },
         ])}
-        <p class="ata-small">Aktive Limity trybu: ${escapeHtml(modeLimitSummary)}.</p>
-        <p class="ata-small">Die DRA-Regeln setzen kein fixes globales Uczestnicymaximum. Die Grenzen oben sind bewusst f\u00fcr faire Turnierdauer und stabile Darstellung gesetzt.</p>
+        <p class="ata-small">Aktywne limity trybu: ${escapeHtml(modeLimitSummary)}.</p>
+        <p class="ata-small">Zasady DRA nie określają stałego globalnego maksimum uczestników. Powyższe limity zostały celowo ustalone dla zapewnienia uczciwego czasu trwania turnieju i stabilnego wyświetlania.</p>
       </section>
       <section class="ata-card tournamentCard">
         ${renderSectionHeading("Storage", [
-          { href: README_BASE_URL, kind: "tech", label: "Hinweise zu Storage und Import \u00f6ffnen", title: "README: Import, Migration und Persistenz" },
+          { href: README_BASE_URL, kind: "tech", label: "Otwórz wskazówki dotyczące Storage i importu", title: "README: import, migracja i trwałość danych" },
         ])}
         <p class="ata-small"><code>${escapeHtml(STORAGE_KEY)}</code>, schemaVersion ${STORAGE_SCHEMA_VERSION}</p>
       </section>
