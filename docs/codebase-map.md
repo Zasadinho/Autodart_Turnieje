@@ -1,41 +1,42 @@
-# Technische Codebasis-Karte
+# Techniczna mapa kodu
 
-## Zweck und Lesepfad
-Diese Datei ist der technische Lageplan des Repositories. Sie beantwortet drei Fragen:
+## Cel i sposób czytania
+Ten dokument jest technicznym planem repozytorium. Odpowiada na trzy pytania:
 
-1. Wie ist das Projekt in Ordner und Dateien aufgeteilt?
-2. Warum liegt welche Verantwortung genau dort?
-3. Welche Dateien greifen in Build, Runtime und Wartung ineinander?
+1. Jak projekt jest podzielony na foldery i pliki?
+2. Dlaczego dana odpowiedzialność znajduje się właśnie w tym miejscu?
+3. W jaki sposób poszczególne pliki współdziałają podczas budowania, działania i utrzymania projektu?
 
-Empfohlener Lesepfad:
+Zalecana kolejność czytania:
 
-1. Für die grobe Schichtenlogik zuerst [architecture.md](architecture.md)
-2. Für die konkrete Datei- und Verbindungslogik diese Datei
-3. Für Änderungsregeln [refactor-guide.md](refactor-guide.md)
-4. Für DOM-/Selector-Details [selector-strategy.md](selector-strategy.md)
-5. Für Regelbezug [pdc-dra-compliance.md](pdc-dra-compliance.md) und [dra-compliance-matrix.md](dra-compliance-matrix.md)
+1. Do ogólnej logiki warstw najpierw przeczytaj: [architecture.md](architecture.md)
+2. Do konkretnej logiki plików i powiązań: ten dokument
+3. Do zasad wprowadzania zmian: [refactor-guide.md](refactor-guide.md)
+4. Do szczegółów dotyczących DOM i selektorów: [selector-strategy.md](selector-strategy.md)
+5. Do odniesień do reguł: [pdc-dra-compliance.md](pdc-dra-compliance.md) oraz [dra-compliance-matrix.md](dra-compliance-matrix.md)
 
-Der Fokus hier liegt bewusst auf Codeorganisation, Build-Pfad, Runtime-Fluss und den Rollen einzelner Skriptdateien. Diese Datei ist damit die detaillierte Ergänzung zur kürzeren [architecture.md](architecture.md).
 
-## Warum die Aufteilung so ist
-- `src/core`: gemeinsame Primitive, Konstanten, State, Logging und kleine Hilfsfunktionen liegen an einer Stelle, weil das Userscript über eine feste Manifest-Reihenfolge zu einer einzigen Datei gebündelt wird und deshalb eine stabile technische Basis braucht.
-- `src/data`: Persistenz, Normalisierung und Migration sind von UI und Fachlogik getrennt, damit Import, Export, Legacy-Daten und Schemawechsel kontrollierbar bleiben.
-- `src/domain`: fachliche Turnierregeln liegen getrennt von DOM und API, damit KO-, Gruppen-, Liga- und Ergebnislogik nachvollziehbar, testbar und unabhängig von Autodarts-Oberflächenänderungen bleiben.
-- `src/app`: die Orchestrierung zwischen reiner Domain-Logik, Persistenz, UI-Re-Render und Bracket-Steuerung liegt bewusst in einer eigenen Schicht, damit Domain-Funktionen rein bleiben und Seiteneffekte einen klaren Ort haben.
-- `src/infra`: alle externen Autodarts-Abhängigkeiten sind isoliert, damit Änderungen an API-Endpunkten, Auth oder SPA-Routing nicht die Fachlogik durchziehen.
-- `src/ui`: Rendering und Bedienlogik sind getrennt. Die Render-Dateien liefern HTML pro Tab, `handlers.js` ist der UI-Eingang und delegiert fachliche Aktionen in `src/app/*`.
-- `src/bracket`: das Third-Party-Bracket-Rendering ist absichtlich gekapselt, weil es in einem isolierten `iframe` mit eigener Message-Bridge und HTML-Fallback läuft; UI-State und Notices liegen nicht mehr im Bracket-Ordner.
-- `src/runtime`: bleibt nur als Bootstrap-/Wiring-Schicht bestehen; die eigentliche Browser- und Public-API-Logik liegt nach dem Refactor in `src/app/*` und `src/infra/*`.
-- `scripts`, `build`, `installer`, `dist`, `tests`: Entwicklungsworkflow, Build-Artefakte, Loader, ausgeliefertes Bundle und Referenztests bleiben getrennt, damit Quellcode, Tooling und Distribution nicht vermischt werden.
+Skupienie tutaj jest celowo położone na organizacji kodu, ścieżce budowania, przepływie działania oraz rolach poszczególnych plików skryptowych. Ten dokument jest więc szczegółowym uzupełnieniem krótszego pliku [architecture.md](architecture.md).
 
-Die Aufteilung ist also nicht nur optisch modular, sondern trennt bewusst:
+## Dlaczego podział wygląda właśnie tak
+- `src/core`: wspólne prymitywy, stałe, stan, logowanie i małe funkcje pomocnicze znajdują się w jednym miejscu, ponieważ userscript jest bundlowany do jednego pliku według stałej kolejności manifestu i potrzebuje stabilnej technicznej bazy.
+- `src/data`: persystencja, normalizacja i migracje są oddzielone od UI i logiki domenowej, aby import, eksport, dane legacy i zmiany schematu były kontrolowalne.
+- `src/domain`: reguły turniejowe są oddzielone od DOM i API, aby logika KO, grupowa, ligowa i wynikowa była zrozumiała, testowalna i niezależna od zmian w interfejsie Autodarts.
+- `src/app`: orkiestracja między czystą logiką domenową, persystencją, ponownym renderowaniem UI i sterowaniem bracketem znajduje się w osobnej warstwie, aby funkcje domenowe pozostały czyste, a efekty uboczne miały jednoznaczne miejsce.
+- `src/infra`: wszystkie zewnętrzne zależności Autodarts są izolowane, aby zmiany w endpointach API, autoryzacji lub SPA-routing nie przenikały do logiki domenowej.
+- `src/ui`: rendering i logika obsługi są rozdzielone. Pliki renderujące dostarczają HTML dla poszczególnych zakładek, a `handlers.js` jest wejściem UI i deleguje działania domenowe do `src/app/*`.
+- `src/bracket`: renderowanie bracketu z biblioteki zewnętrznej jest celowo enkapsulowane, ponieważ działa w izolowanym `iframe` z własnym message-bridge i fallbackiem HTML; stan UI i komunikaty nie znajdują się już w folderze bracket.
+- `src/runtime`: pozostaje jedynie jako warstwa bootstrap/wiring; właściwa logika przeglądarkowa i publiczne API po refaktorze znajdują się w `src/app/*` oraz `src/infra/*`.
+- `scripts`, `build`, `installer`, `dist`, `tests`: workflow deweloperski, artefakty builda, loader, finalny bundle i testy referencyjne są oddzielone, aby kod źródłowy, narzędzia i dystrybucja nie mieszały się.
 
-- technische Basis von Fachregeln
-- lokale Datenhaltung von externer API
-- HTML-Ausgabe von State-Änderungen
-- Source-of-Truth von generierten Artefakten
+Podział jest więc nie tylko wizualnie modularny, ale świadomie oddziela:
 
-## Repository-Karte
+- techniczną bazę od reguł domenowych
+- lokalną persystencję od zewnętrznego API
+- generowanie HTML od zmian stanu
+- źródło prawdy od artefaktów generowanych
+
+## Mapa repozytorium
 ```text
 autodarts_local_tournament/
 |- src/
@@ -143,17 +144,17 @@ autodarts_local_tournament/
 `- LICENSE
 ```
 
-## Build- und Auslieferungspfad
-Der Build bleibt bewusst einfach: kein npm, kein Bundler-Framework, keine Zwischenpakete. Stattdessen werden die Quellmodule in der Reihenfolge aus `build/manifest.json` gelesen, zu einer Userscript-Datei zusammengeführt und mit eingebettetem CSS sowie eingebettetem PDC-Logo ausgegeben.
+## Ścieżka budowania i dystrybucji
+Proces budowania pozostaje celowo prosty: bez npm, bez bundlerów, bez pakietów pośrednich. Zamiast tego moduły źródłowe są odczytywane w kolejności z `build/manifest.json`, łączone w jeden plik userscriptu i wzbogacane o osadzone CSS oraz osadzone logo PDC.
 
-Praktischer Ablauf:
+Praktyczny przebieg:
 
-1. `build/manifest.json` definiert die Reihenfolge der Quelldateien.
-2. `build/version.json` ist die zentrale Versionsquelle für das Runtime-Bundle.
-3. `scripts/build.ps1` liest diese Dateien, lädt jedes Modul, entfernt alte Split-Marker und fügt die Inhalte zusammen.
-4. Dasselbe Skript injiziert die App-Version sowie `src/ui/styles/main.css` und `assets/pdc_logo.png` direkt ins Bundle.
-5. Das Ergebnis landet als einzige auslieferbare Datei in `dist/autodarts-turnieje-asystent.user.js`.
-6. Der Loader in `installer/Autodarts Turnieje Zasadinho Instalacja.user.js` lädt diese veröffentlichte Dist-Datei remote und nutzt bei Bedarf einen Cache-Fallback.
+1. `build/manifest.json` definiuje kolejność plików źródłowych.
+2. `build/version.json` jest centralnym źródłem wersji dla bundla runtime.
+3. `scripts/build.ps1` odczytuje te pliki, ładuje każdy moduł, usuwa stare znaczniki split i łączy zawartość.
+4. To samo skrypt wstrzykuje wersję aplikacji oraz `src/ui/styles/main.css` i `assets/pdc_logo.png` bezpośrednio do bundla.
+5. Wynik trafia jako jedyny plik do dystrybucji: `dist/autodarts-turnieje-asystent.user.js`.
+6. Loader w `installer/Autodarts Turnieje Zasadinho Instalacja.user.js` ładuje tę opublikowaną dist‑wersję zdalnie i w razie potrzeby korzysta z cache jako fallbacku.
 
 ```mermaid
 flowchart LR
@@ -175,25 +176,25 @@ flowchart LR
   loader -.->|lädt veröffentlichte dist-Datei remote<br/>und nutzt Cache-Fallback| dist
 ```
 
-Wichtig dabei:
+Ważne przy tym:
 
-- `dist/*` ist ein Artefakt, nicht die Quelle der Wahrheit.
-- `constants.js` enthält den Start des Userscripts inklusive Header und IIFE-Beginn.
-- `bootstrap.js` schließt das Gesamtbundle als letzte Datei wieder ab.
-- Wenn ein neues Quellmodul dazukommt, muss nicht nur die Datei existieren, sondern auch die Reihenfolge im Manifest stimmen.
+- `dist/*` to artefakt, a nie źródło prawdy.
+- `constants.js` zawiera początek userscriptu, włącznie z nagłówkiem i początkiem IIFE.
+- `bootstrap.js` domyka cały bundle jako ostatni plik.
+- Jeśli dodajesz nowy moduł źródłowy, musi istnieć nie tylko plik, ale także poprawna kolejność w manifeście.
 
-## Runtime- und Datenfluss
-Zur Laufzeit passiert fachlich mehr als ein einfaches UI-Rendern. Das Userscript lädt Persistenz, rendert ein Shadow-DOM-Interface, überwacht die Single-Page-App von Autodarts, startet optional API-Automation, erkennt History-Seiten und synchronisiert Bracket-Rendering im `iframe`.
+## Przepływ działania (runtime) i danych
+W czasie działania dzieje się więcej niż tylko renderowanie UI. Userscript ładuje persystencję, renderuje interfejs w Shadow DOM, monitoruje single‑page‑app Autodarts, opcjonalnie uruchamia automatyzację API, wykrywa strony historii i synchronizuje renderowanie bracketu w `iframe`.
 
-Die Hauptkette sieht so aus:
+Główny łańcuch wygląda tak:
 
-1. `src/runtime/bootstrap.js` startet `init()`.
-2. `src/app/session-store.js` lädt, migriert und schreibt den gespeicherten Zustand.
-3. `src/ui/handlers.js` erzeugt Host und Shell im Shadow DOM.
-4. `src/app/browser-lifecycle.js`, `src/infra/dom-autodetect.js`, `src/infra/history-import.js` und `src/infra/route-hooks.js` beobachten DOM, SPA-Routen und History-Seiten.
-5. `src/infra/api-automation.js` arbeitet bei aktiviertem Feature-Flag mit `src/infra/api-client.js` gegen die Autodarts-API.
-6. `src/ui/render-view.js` stößt für KO-Ansichten das Bracket-Rendering über `src/app/bracket-controller.js` und `src/bracket/*` an.
-7. `src/app/public-api.js` veröffentlicht `window.__ATA_RUNTIME`, `src/app/diagnostics.js` hält die Runtime-Selbsttests.
+1. `src/runtime/bootstrap.js` uruchamia `init()`.
+2. `src/app/session-store.js` ładuje, migruje i zapisuje przechowywany stan.
+3. `src/ui/handlers.js` tworzy host i shell w Shadow DOM.
+4. `src/app/browser-lifecycle.js`, `src/infra/dom-autodetect.js`, `src/infra/history-import.js` oraz `src/infra/route-hooks.js` obserwują DOM, trasy SPA i strony historii.
+5. `src/infra/api-automation.js` współpracuje z `src/infra/api-client.js` z API Autodarts, jeśli odpowiednia flaga funkcji jest aktywna.
+6. `src/ui/render-view.js` uruchamia dla widoków KO renderowanie bracketu poprzez `src/app/bracket-controller.js` i `src/bracket/*`.
+7. `src/app/public-api.js` udostępnia `window.__ATA_RUNTIME`, a `src/app/diagnostics.js` utrzymuje autotesty runtime.
 
 ```mermaid
 flowchart LR
@@ -296,177 +297,177 @@ flowchart LR
   core --- lifecycle
 ```
 
-Wichtige Querbeziehungen:
+Ważne powiązania krzyżowe:
 
-- `core/utils.js` und `data/normalization.js` sind Querschnittsbausteine, deshalb tauchen sie in vielen Bereichen indirekt wieder auf.
-- `src/app/*` ist der zentrale Knoten zwischen Benutzeraktion, Persistenz, Domain-Logik, Bracket-Steuerung und Re-Render.
-- `domain/ko-engine.js` ist weiterhin der fachliche Motor für Fortschritt, Byes, Draw-Lock und abgeleitete KO-Matches, aber ohne Persistenz-/Logging-Seiteneffekte.
-- `infra/dom-autodetect.js` und `infra/history-import.js` verbinden Autodarts-DOM und History-Seiten mit dem lokalen Turnierzustand.
+- `core/utils.js` oraz `data/normalization.js` to elementy przekrojowe, dlatego pojawiają się pośrednio w wielu miejscach.
+- `src/app/*` jest centralnym węzłem między akcją użytkownika, persystencją, logiką domenową, sterowaniem bracketem i ponownym renderowaniem.
+- `domain/ko-engine.js` pozostaje silnikiem logiki turniejowej dla progresji, byes, blokady losowania i pochodnych meczów KO — ale bez efektów ubocznych związanych z persystencją lub logowaniem.
+- `infra/dom-autodetect.js` i `infra/history-import.js` łączą DOM Autodarts oraz strony historii z lokalnym stanem turnieju.
 
-## Dateikatalog nach Ordnern
-Die Tabellen unten beschreiben pro Datei:
+## Katalog plików według folderów
+Poniższe tabele opisują dla każdego pliku:
 
-- was die Datei besitzt
-- warum sie in diesem Ordner liegt
-- mit welchen Nachbardateien sie hauptsächlich zusammenspielt
+- co plik zawiera
+- dlaczego znajduje się w tym folderze
+- z którymi sąsiednimi plikami współpracuje najczęściej
 
-### Build und Distribution
+### Build i dystrybucja
 
-| Datei | Rolle | Wichtige Inhalte / Hauptfunktionen | Primäre Verbindungen |
+| Plik | Rola | Kluczowa zawartość / główne funkcje | Główne powiązania |
 |---|---|---|---|
-| `build/manifest.json` | Reihenfolgevertrag des Bundles | listet alle `src/*.js`-Module in deterministischer Reihenfolge | `scripts/build.ps1`, `src/core/constants.js`, `src/runtime/bootstrap.js` |
-| `build/version.json` | zentrale Versionsquelle | liefert `APP_VERSION` für Header und Runtime | `scripts/build.ps1`, `src/core/constants.js`, `dist/autodarts-turnieje-asystent.user.js` |
-| `build/domain-test-manifest.json` | Test-Bundle-Vertrag | definiert, welche Dateien in den isolierten Domain-Harness geladen werden | `scripts/test-domain.ps1`, `tests/test-harness.js`, `tests/unit-*.js` |
-| `scripts/build.ps1` | Build-Orchestrierung | liest Manifest und Version, fügt Module zusammen, injiziert Version, bettet CSS und Logo ein, schreibt `dist/*` | `build/manifest.json`, `build/version.json`, `src/ui/styles/main.css`, `assets/pdc_logo.png`, `dist/autodarts-turnieje-asystent.user.js` |
-| `scripts/qa.ps1` | Gesamt-QA | ruft Build, Architektur-QA, Encoding, Regelcheck, Domain-Harness, Runtime-Contract und Build-Disziplin auf | `scripts/build.ps1`, `scripts/qa-architecture.ps1`, `scripts/test-domain.ps1`, `scripts/test-runtime-contract.ps1`, `scripts/qa-build-discipline.ps1` |
-| `scripts/qa-architecture.ps1` | Architektur-Gate | prüft Domain-Reinheit, Runtime-/Bracket-/Storage-Grenzen und UI-Renderer-Regeln | `src/domain/*`, `src/bracket/*`, `src/data/storage.js`, `src/runtime/*`, `src/ui/render-*.js` |
-| `scripts/qa-encoding.ps1` | Zeichensatz- und Terminologie-Prüfung | prüft UTF-8, Mojibake und zentrale UI-Begriffe in Quell-, Dist- und Doku-Dateien | `src/*`, `dist/autodarts-turnieje-asystent.user.js`, `docs/*`, `README.md` |
-| `scripts/qa-regelcheck.ps1` | fachlicher Regex-Check | prüft in `dist/*`, ob zentrale Regelmappings, KO-Logik und Terminologie im Bundle vorkommen | `dist/autodarts-turnieje-asystent.user.js`, Domain-Logik aus `src/domain/*` |
-| `scripts/test-domain.ps1` | isolierter Domain-Harness | baut einen no-deps Test-Bundle für pure Domain-Logik und führt ihn im Headless-Browser aus | `build/domain-test-manifest.json`, `tests/test-harness.js`, `tests/domain-isolation.js`, `tests/unit-*.js` |
-| `scripts/test-runtime-contract.ps1` | Runtime-Contract-Test | lädt `dist/*` im Headless-Browser und prüft `window.__ATA_RUNTIME` plus `runSelfTests()` | `dist/autodarts-turnieje-asystent.user.js`, `tests/contracts/*` |
-| `scripts/qa-build-discipline.ps1` | Build-Disziplin | prüft Placeholder-Nutzung, Versionseinbau und generiertes `dist/*` | `build/version.json`, `src/core/constants.js`, `dist/autodarts-turnieje-asystent.user.js` |
-| `installer/Autodarts Turnieje Zasadinho Instalacja.user.js` | Loader-Skript, nicht App-Logik | lädt die veröffentlichte Dist-Datei remote, validiert sie, cached sie lokal und erzeugt den Menü-Einstieg | `dist/autodarts-turnieje-asystent.user.js`, GitHub Raw URL, Tampermonkey GM APIs |
-| `dist/autodarts-turnieje-asystent.user.js` | generiertes Auslieferungsartefakt | enthält das komplette Userscript als eine Datei; ist Loader-kompatibel und direkt installierbar | `scripts/build.ps1`, `installer/Autodarts Turnieje Zasadinho Instalacja.user.js`, Browser/Tampermonkey |
+| `build/manifest.json` | kontrakt kolejności bundla | wymienia wszystkie moduły `src/*.js` w deterministycznej kolejności | `scripts/build.ps1`, `src/core/constants.js`, `src/runtime/bootstrap.js` |
+| `build/version.json` | centralne źródło wersji | dostarcza `APP_VERSION` dla nagłówka i runtime | `scripts/build.ps1`, `src/core/constants.js`, `dist/autodarts-turnieje-asystent.user.js` |
+| `build/domain-test-manifest.json` | kontrakt testowego bundla | definiuje, które pliki są ładowane do izolowanego domain‑harness | `scripts/test-domain.ps1`, `tests/test-harness.js`, `tests/unit-*.js` |
+| `scripts/build.ps1` | orkiestracja builda | czyta manifest i wersję, łączy moduły, wstrzykuje wersję, osadza CSS i logo, zapisuje `dist/*` | `build/manifest.json`, `build/version.json`, `src/ui/styles/main.css`, `assets/pdc_logo.png`, `dist/autodarts-turnieje-asystent.user.js` |
+| `scripts/qa.ps1` | pełne QA | uruchamia build, QA architektury, encoding, sprawdzanie reguł, domain‑harness, runtime‑contract i dyscyplinę builda | `scripts/build.ps1`, `scripts/qa-architecture.ps1`, `scripts/test-domain.ps1`, `scripts/test-runtime-contract.ps1`, `scripts/qa-build-discipline.ps1` |
+| `scripts/qa-architecture.ps1` | bramka architektury | sprawdza czystość domeny, granice runtime/bracket/storage oraz reguły rendererów UI | `src/domain/*`, `src/bracket/*`, `src/data/storage.js`, `src/runtime/*`, `src/ui/render-*.js` |
+| `scripts/qa-encoding.ps1` | kontrola znaków i terminologii | sprawdza UTF‑8, mojibake i kluczowe pojęcia UI w źródłach, dist i dokumentacji | `src/*`, `dist/autodarts-turnieje-asystent.user.js`, `docs/*`, `README.md` |
+| `scripts/qa-regelcheck.ps1` | fachowy regex‑check | sprawdza w `dist/*`, czy kluczowe mapowania reguł, logika KO i terminologia występują w bundlu | `dist/autodarts-turnieje-asystent.user.js`, logika domenowa z `src/domain/*` |
+| `scripts/test-domain.ps1` | izolowany domain‑harness | buduje testowy bundle bez zależności i uruchamia go w headless‑browser | `build/domain-test-manifest.json`, `tests/test-harness.js`, `tests/domain-isolation.js`, `tests/unit-*.js` |
+| `scripts/test-runtime-contract.ps1` | test kontraktu runtime | ładuje `dist/*` w headless‑browser i sprawdza `window.__ATA_RUNTIME` oraz `runSelfTests()` | `dist/autodarts-turnieje-asystent.user.js`, `tests/contracts/*` |
+| `scripts/qa-build-discipline.ps1` | dyscyplina builda | sprawdza placeholdery, wstrzyknięcie wersji i wygenerowane `dist/*` | `build/version.json`, `src/core/constants.js`, `dist/autodarts-turnieje-asystent.user.js` |
+| `installer/Autodarts Turnieje Zasadinho Instalacja.user.js` | skrypt loadera, nie logika aplikacji | ładuje opublikowaną dist‑wersję zdalnie, waliduje ją, cache’uje i tworzy wpis w menu | `dist/autodarts-turnieje-asystent.user.js`, GitHub Raw URL, Tampermonkey GM APIs |
+| `dist/autodarts-turnieje-asystent.user.js` | wygenerowany artefakt dystrybucyjny | zawiera cały userscript jako jeden plik; kompatybilny z loaderem i gotowy do instalacji | `scripts/build.ps1`, `installer/Autodarts Turnieje Zasadinho Instalacja.user.js`, przeglądarka/Tampermonkey |
 
-### Tests
+### Testy
 
-| Datei | Rolle | Wichtige Inhalte / Hauptfunktionen | Primäre Verbindungen |
+| Plik | Rola | Kluczowa zawartość / główne funkcje | Główne powiązania |
 |---|---|---|---|
-| `tests/contracts/runtime-api-contract.js` | API-Vertrag | hält die erwarteten Runtime-API-Keys und Funktionsnamen fest | `scripts/test-runtime-contract.ps1`, `window.__ATA_RUNTIME` |
-| `tests/contracts/globals-contract.js` | Global-Vertrag | hält die erwarteten ATA-Globals und verbotene neue Keys fest | `scripts/test-runtime-contract.ps1`, Browser-Globalobjekt |
-| `tests/test-harness.js` | minimaler Test-Runner | registriert Tests, Assertions und Ergebnisaggregation für den no-deps Harness | `scripts/test-domain.ps1`, `tests/domain-isolation.js`, `tests/unit-*.js` |
-| `tests/domain-isolation.js` | Isolations-Tests | prüft, dass Domain-Funktionen ohne Runtime-State, DOM-Mocks und Persistenz ausgeführt werden können | `src/domain/*`, `tests/test-harness.js` |
-| `tests/unit-ko-engine.js` | KO-Unit-Tests | prüft Seeded-9, Draw-Lock, Winner-Advancement und KO-Migration v3 | `src/domain/ko-engine.js`, `src/domain/tournament-create.js`, `tests/test-harness.js` |
-| `tests/unit-rules-config.js` | Rules-Unit-Tests | prüft pure Tie-Break- und Draw-Lock-Mutationen | `src/domain/rules-config.js`, `tests/test-harness.js` |
-| `tests/unit-standings-dra.js` | Standings-Unit-Tests | prüft H2H/Mini-Tabelle, Legacy-Profil und `playoff_required` | `src/domain/standings-dra.js`, `tests/test-harness.js` |
-| `tests/selftest-runtime.js` | Browser-Konsole-Helfer | ruft `window.__ATA_RUNTIME.runSelfTests()` auf und formatiert das Ergebnis für `console.table` | `src/app/diagnostics.js`, `dist/autodarts-turnieje-asystent.user.js` |
+| `tests/contracts/runtime-api-contract.js` | kontrakt API | definiuje oczekiwane klucze i nazwy funkcji Runtime API | `scripts/test-runtime-contract.ps1`, `window.__ATA_RUNTIME` |
+| `tests/contracts/globals-contract.js` | kontrakt globali | definiuje oczekiwane globalne ATA oraz zabronione nowe klucze | `scripts/test-runtime-contract.ps1`, globalny obiekt przeglądarki |
+| `tests/test-harness.js` | minimalny test‑runner | rejestruje testy, asercje i agregację wyników dla no‑deps harness | `scripts/test-domain.ps1`, `tests/domain-isolation.js`, `tests/unit-*.js` |
+| `tests/domain-isolation.js` | testy izolacji | sprawdza, że funkcje domenowe działają bez runtime‑state, DOM‑mocków i persystencji | `src/domain/*`, `tests/test-harness.js` |
+| `tests/unit-ko-engine.js` | testy jednostkowe KO | sprawdza Seeded‑9, Draw‑Lock, Winner‑Advancement i KO‑Migration v3 | `src/domain/ko-engine.js`, `src/domain/tournament-create.js`, `tests/test-harness.js` |
+| `tests/unit-rules-config.js` | testy jednostkowe reguł | sprawdza czyste mutacje Tie‑Break i Draw‑Lock | `src/domain/rules-config.js`, `tests/test-harness.js` |
+| `tests/unit-standings-dra.js` | testy jednostkowe klasyfikacji | sprawdza H2H/mini‑tabelę, profil legacy i `playoff_required` | `src/domain/standings-dra.js`, `tests/test-harness.js` |
+| `tests/selftest-runtime.js` | pomocnik konsoli przeglądarki | wywołuje `window.__ATA_RUNTIME.runSelfTests()` i formatuje wynik dla `console.table` | `src/app/diagnostics.js`, `dist/autodarts-turnieje-asystent.user.js` |
 
 ### Core
 
-| Datei | Rolle | Wichtige Inhalte / Hauptfunktionen | Primäre Verbindungen |
+| Plik | Rola | Kluczowa zawartość / główne funkcje | Główne powiązania |
 |---|---|---|---|
-| `src/core/constants.js` | technischer Einstieg des Bundles | Userscript-Header, IIFE-Start, globale Keys, URLs, Konfiguration, feste Optionen und Begriffe | `build/manifest.json`, alle folgenden `src/*`-Dateien, `src/runtime/bootstrap.js` |
-| `src/core/state.js` | zentraler Laufzeitzustand | hält Drawer-, Tab-, Notice-, Bracket-, API-, Observer- und Store-State | `src/core/utils.js`, `src/data/normalization.js`, `src/data/storage.js`, `src/ui/handlers.js` |
-| `src/core/utils.js` | Querschnitts-Helfer | Sanitizing, HTML-Escaping, IDs, Zufall, Uczestnicy-Parsing und Routing-Key | `src/data/normalization.js`, `src/domain/*`, `src/ui/*`, `src/infra/*`, `src/runtime/*` |
-| `src/core/logging.js` | Debug- und Fehlerlogging | `logDebug`, `logWarn`, `logError` mit ATA-Präfixen | `src/data/storage.js`, `src/domain/ko-engine.js`, `src/infra/*`, `src/runtime/*`, `src/ui/handlers.js` |
-| `src/core/events.js` | Cleanup- und Lifecycle-Utilities | registriert Cleanup-Funktionen, Listener, Intervalle und Observer zentral | `src/infra/route-hooks.js`, `src/runtime/bootstrap.js`, `src/runtime/lifecycle.js`, `src/runtime/public-api.js` |
+| `src/core/constants.js` | techniczny punkt wejścia bundla | nagłówek userscriptu, start IIFE, globalne klucze, URL‑e, konfiguracja, stałe opcje i pojęcia | `build/manifest.json`, wszystkie kolejne `src/*`, `src/runtime/bootstrap.js` |
+| `src/core/state.js` | centralny stan runtime | przechowuje stan drawerów, zakładek, powiadomień, bracketu, API, obserwatorów i store | `src/core/utils.js`, `src/data/normalization.js`, `src/data/storage.js`, `src/ui/handlers.js` |
+| `src/core/utils.js` | pomocniki przekrojowe | sanitizacja, HTML‑escaping, ID, losowość, parsowanie uczestników, routing‑key | `src/data/normalization.js`, `src/domain/*`, `src/ui/*`, `src/infra/*`, `src/runtime/*` |
+| `src/core/logging.js` | debug i logowanie błędów | `logDebug`, `logWarn`, `logError` z prefiksami ATA | `src/data/storage.js`, `src/domain/ko-engine.js`, `src/infra/*`, `src/runtime/*`, `src/ui/handlers.js` |
+| `src/core/events.js` | narzędzia lifecycle i cleanup | centralnie rejestruje cleanup, listenery, intervale i obserwatorów | `src/infra/route-hooks.js`, `src/runtime/bootstrap.js`, `src/runtime/lifecycle.js`, `src/runtime/public-api.js` |
 
 ### Data
 
-| Datei | Rolle | Wichtige Inhalte / Hauptfunktionen | Primäre Verbindungen |
+| Plik | Rola | Kluczowa zawartość / główne funkcje | Główne powiązania |
 |---|---|---|---|
-| `src/data/storage.js` | Persistenz-I/O | GM/localStorage-Lesen und -Schreiben ohne Orchestrierung | `src/data/migration.js`, `src/app/session-store.js` |
-| `src/data/normalization.js` | Form- und Store-Normalisierung | Default-Store, Default-Draft, Sanitizer, Turnier-/Match-/KO-Normalisierung, Lookup-Helfer, Limits | `src/core/utils.js`, `src/domain/tournament-create.js`, `src/data/storage.js`, Render- und Domain-Dateien |
-| `src/data/migration.js` | Schema- und Bestandsdaten-Migration | migriert alte Speicherstände, normalisiert Regelobjekte und legt KO-Migrations-Backups an | `src/data/storage.js`, `src/data/normalization.js`, `src/domain/ko-engine.js`, `src/runtime/public-api.js` |
+| `src/data/storage.js` | I/O persystencji | odczyt i zapis GM/localStorage bez orkiestracji | `src/data/migration.js`, `src/app/session-store.js` |
+| `src/data/normalization.js` | normalizacja formatu i store | domyślny store, domyślny draft, sanitizacja, normalizacja turniejów/meczów/KO, helpery lookup, limity | `src/core/utils.js`, `src/domain/tournament-create.js`, `src/data/storage.js`, pliki renderujące i domenowe |
+| `src/data/migration.js` | migracja schematu i danych | migruje stare zapisy, normalizuje obiekty reguł, tworzy backupy migracji KO | `src/data/storage.js`, `src/data/normalization.js`, `src/domain/ko-engine.js`, `src/runtime/public-api.js` |
 
-Die drei Dateien zusammen bilden die Persistenzstrecke:
+Trzy pliki razem tworzą pełny przepływ persystencji:
 
-`lesen -> migrieren -> normalisieren -> im State halten -> speichern`
+`odczyt -> migracja -> normalizacja -> trzymanie w stanie -> zapis`
 
 ### Domain
 
-| Datei | Rolle | Wichtige Inhalte / Hauptfunktionen | Primäre Verbindungen |
+| Plik | Rola | Kluczowa zawartość / główne funkcje | Główne powiązania |
 |---|---|---|---|
-| `src/domain/match-state.js` | gemeinsame Match-Mutationen | `clearMatchResult()` und `assignPlayerSlot()` als reine Match-Helfer | `src/domain/ko-engine.js`, `src/domain/groups.js`, `src/domain/results.js` |
-| `src/domain/rules-config.js` | pure Regel-Mutationen | ändert Tie-Break-Profil und KO-Draw-Lock nur am übergebenen Turnierobjekt | `src/data/normalization.js`, `src/app/tournament-actions.js` |
-| `src/domain/tournament-create.js` | reine Turniererzeugung | Match-Factory, Round-Robin-Pairings, Seed- und Bye-Logik, Gruppenbildung, KO-Struktur, Validation, `createTournament` | `src/data/normalization.js`, `src/domain/ko-engine.js`, `src/app/tournament-actions.js`, `src/app/diagnostics.js` |
-| `src/domain/tournament-duration.js` | pure Zeitprognose | berechnet Matchanzahl, erwartete Legs, Matchdauer und Spannweite für die Turnieranlage ohne DOM-/State-Abhängigkeiten | `src/data/normalization.js`, `src/domain/tournament-create.js`, `src/ui/render-tournament.js`, `src/ui/render-settings.js`, `tests/unit-tournament-duration.js` |
-| `src/domain/standings-dra.js` | Tabellen- und Tie-Break-Motor | berechnet Punkte, Leg-Differenzen, Direktvergleich, Mini-Tabelle und `playoff_required` | `src/data/normalization.js`, `src/domain/groups.js`, `src/ui/render-view.js`, `src/runtime/public-api.js` |
-| `src/domain/groups.js` | Gruppen-zu-KO-Auflösung | berechnet Gruppentabellen pro Gruppe und belegt bei `groups_ko` die KO-Halbfinal-Slots | `src/domain/standings-dra.js`, `src/domain/ko-engine.js`, `src/ui/render-view.js` |
-| `src/domain/ko-engine.js` | fachlicher KO-Motor | Winner-Advancement, Draw-Lock, Byes, KO-Meta-Snapshots, v3-Migration und Ergebnisvalidierung ohne Persistenz-/Logging-Seiteneffekte | `src/data/normalization.js`, `src/domain/groups.js`, `src/domain/tournament-create.js`, `src/domain/match-state.js`, `src/app/derived-state.js` |
-| `src/domain/results.js` | pure Ergebnislogik | offenes Match nach Spielern finden, Legs prüfen, Sieger ableiten, Ergebnisse am übergebenen Turnier speichern, Editierbarkeit bestimmen | `src/domain/tournament-create.js`, `src/domain/ko-engine.js`, `src/app/match-actions.js`, `src/infra/api-automation.js` |
+| `src/domain/match-state.js` | wspólne mutacje meczu | `clearMatchResult()` i `assignPlayerSlot()` jako czyste helpery meczowe | `src/domain/ko-engine.js`, `src/domain/groups.js`, `src/domain/results.js` |
+| `src/domain/rules-config.js` | czyste mutacje reguł | zmienia profil tie-break i KO-draw-lock wyłącznie na przekazanym obiekcie turnieju | `src/data/normalization.js`, `src/app/tournament-actions.js` |
+| `src/domain/tournament-create.js` | czysta logika tworzenia turnieju | fabryka meczów, pairingi round-robin, logika seedów i byes, tworzenie grup, struktura KO, walidacja, `createTournament` | `src/data/normalization.js`, `src/domain/ko-engine.js`, `src/app/tournament-actions.js`, `src/app/diagnostics.js` |
+| `src/domain/tournament-duration.js` | czysta prognoza czasu | oblicza liczbę meczów, oczekiwane legi, czas meczu i zakres czasowy turnieju — bez zależności od DOM lub stanu | `src/data/normalization.js`, `src/domain/tournament-create.js`, `src/ui/render-tournament.js`, `src/ui/render-settings.js`, `tests/unit-tournament-duration.js` |
+| `src/domain/standings-dra.js` | silnik tabeli i tie-breaków | oblicza punkty, różnice legów, bezpośrednie starcia, mini‑tabelę i `playoff_required` | `src/data/normalization.js`, `src/domain/groups.js`, `src/ui/render-view.js`, `src/runtime/public-api.js` |
+| `src/domain/groups.js` | przejście z grup do KO | oblicza tabele grupowe i przy `groups_ko` wypełnia sloty półfinałów KO | `src/domain/standings-dra.js`, `src/domain/ko-engine.js`, `src/ui/render-view.js` |
+| `src/domain/ko-engine.js` | silnik KO | advancement zwycięzców, draw-lock, byes, snapshoty KO, migracja v3 i walidacja wyników — bez efektów ubocznych persystencji/logowania | `src/data/normalization.js`, `src/domain/groups.js`, `src/domain/tournament-create.js`, `src/domain/match-state.js`, `src/app/derived-state.js` |
+| `src/domain/results.js` | czysta logika wyników | wyszukiwanie otwartych meczów, walidacja legów, wyznaczanie zwycięzcy, zapisywanie wyników w przekazanym turnieju, określanie edytowalności | `src/domain/tournament-create.js`, `src/domain/ko-engine.js`, `src/app/match-actions.js`, `src/infra/api-automation.js` |
 
-Hier liegt die eigentliche Turnierlogik. Wenn sich eine fachliche Regel ändert, ist `src/domain/*` fast immer der erste Ort zum Prüfen.
+Tutaj znajduje się właściwa logika turniejowa. Jeśli zmienia się reguła merytoryczna, `src/domain/*` jest prawie zawsze pierwszym miejscem do sprawdzenia.
 
 ### App
 
-| Datei | Rolle | Wichtige Inhalte / Hauptfunktionen | Primäre Verbindungen |
+| Plik | Rola | Kluczowa zawartość / główne funkcje | Główne powiązania |
 |---|---|---|---|
-| `src/app/notifications.js` | Notice-Orchestrierung | zentrale `setNotice()`-Funktion inkl. Timer und Re-Render | `src/ui/render-shell.js`, `src/ui/handlers.js`, `src/infra/*`, `src/app/*` |
-| `src/app/session-store.js` | Session-Store-Orchestrierung | `loadPersistedStore()`, `schedulePersist()`, `persistStore()` | `src/data/storage.js`, `src/data/migration.js`, `src/app/derived-state.js`, `src/runtime/bootstrap.js` |
-| `src/app/derived-state.js` | abgeleiteter Turnierzustand | zentraler Refresh-Workflow für KO-Migration, Gruppen-zu-KO, Bracket-Sync und Results-Index | `src/domain/groups.js`, `src/domain/ko-engine.js`, `src/domain/results.js`, `src/data/migration.js` |
-| `src/app/match-actions.js` | Match-Orchestrierung | stateful Wrapper für `updateMatchResult()` mit Persistenz und Re-Render | `src/domain/results.js`, `src/app/derived-state.js`, `src/app/session-store.js` |
-| `src/app/tournament-actions.js` | Turnier-Orchestrierung | Erstellen, Import, Reset, Tie-Break- und Draw-Lock-Änderungen am aktiven Turnier | `src/domain/tournament-create.js`, `src/domain/rules-config.js`, `src/app/derived-state.js`, `src/ui/handlers.js` |
-| `src/app/match-view-models.js` | UI-nahe Match-ViewModels | Sortierung, Priorisierung und `Nächstes Match` außerhalb des Renderers | `src/domain/results.js`, `src/infra/api-automation.js`, `src/ui/render-matches.js` |
-| `src/app/bracket-controller.js` | Bracket-Orchestrierung | Render-Queue, Timeout, Height-Sync, Fallback-Sichtbarkeit und Fehlermeldungen | `src/bracket/frame-bridge.js`, `src/bracket/payload.js`, `src/ui/render-view.js` |
-| `src/app/browser-lifecycle.js` | Browser-Lifecycle | Cleanup, Event-Bridge und Runtime-nahe UI-Helfer | `src/infra/history-import.js`, `src/app/bracket-controller.js`, `src/runtime/bootstrap.js` |
-| `src/app/diagnostics.js` | Runtime-Diagnostik | `runSelfTests()` für Browser-Konsole und Contract-Test | `src/domain/*`, `src/infra/*`, `src/app/public-api.js`, `scripts/test-runtime-contract.ps1` |
-| `src/app/public-api.js` | Public Runtime API | veröffentlicht `window.__ATA_RUNTIME` und bindet Cleanup daran | `src/app/diagnostics.js`, `src/runtime/bootstrap.js`, Browser-Konsole |
+| `src/app/notifications.js` | orkiestracja powiadomień | centralne `setNotice()` z timerem i re-renderem | `src/ui/render-shell.js`, `src/ui/handlers.js`, `src/infra/*`, `src/app/*` |
+| `src/app/session-store.js` | orkiestracja session-store | `loadPersistedStore()`, `schedulePersist()`, `persistStore()` | `src/data/storage.js`, `src/data/migration.js`, `src/app/derived-state.js`, `src/runtime/bootstrap.js` |
+| `src/app/derived-state.js` | stan turnieju pochodny | centralny workflow odświeżania dla migracji KO, przejścia grup → KO, synchronizacji bracketu i indeksu wyników | `src/domain/groups.js`, `src/domain/ko-engine.js`, `src/domain/results.js`, `src/data/migration.js` |
+| `src/app/match-actions.js` | orkiestracja meczów | stateful wrapper dla `updateMatchResult()` z persystencją i re-renderem | `src/domain/results.js`, `src/app/derived-state.js`, `src/app/session-store.js` |
+| `src/app/tournament-actions.js` | orkiestracja turnieju | tworzenie, import, reset, zmiany tie-break i draw-lock w aktywnym turnieju | `src/domain/tournament-create.js`, `src/domain/rules-config.js`, `src/app/derived-state.js`, `src/ui/handlers.js` |
+| `src/app/match-view-models.js` | view‑modele meczów blisko UI | sortowanie, priorytetyzacja i „Następny mecz” poza rendererem | `src/domain/results.js`, `src/infra/api-automation.js`, `src/ui/render-matches.js` |
+| `src/app/bracket-controller.js` | orkiestracja bracketu | kolejka renderów, timeouty, synchronizacja wysokości, fallback widoczności i obsługa błędów | `src/bracket/frame-bridge.js`, `src/bracket/payload.js`, `src/ui/render-view.js` |
+| `src/app/browser-lifecycle.js` | lifecycle przeglądarki | cleanup, event‑bridge i helpery UI blisko runtime | `src/infra/history-import.js`, `src/app/bracket-controller.js`, `src/runtime/bootstrap.js` |
+| `src/app/diagnostics.js` | diagnostyka runtime | `runSelfTests()` dla konsoli przeglądarki i testu kontraktowego | `src/domain/*`, `src/infra/*`, `src/app/public-api.js`, `scripts/test-runtime-contract.ps1` |
+| `src/app/public-api.js` | publiczne API runtime | udostępnia `window.__ATA_RUNTIME` i podpina cleanup | `src/app/diagnostics.js`, `src/runtime/bootstrap.js`, konsola przeglądarki |
 
 ### Infra
 
-| Datei | Rolle | Wichtige Inhalte / Hauptfunktionen | Primäre Verbindungen |
+| Plik | Rola | Kluczowa zawartość / główne funkcje | Główne powiązania |
 |---|---|---|---|
-| `src/infra/api-client.js` | dünne API-Grundschicht | liest Auth-Token und Board-ID, baut Status-Bar-Infos auf, kapselt HTTP-Requests und Autodarts-Endpunkte | `src/ui/render-shell.js`, `src/infra/api-automation.js`, `src/app/diagnostics.js` |
-| `src/infra/api-automation.js` | Matchstart und Ergebnis-Sync | erstellt Lobbys, fügt Spieler hinzu, startet Matches, synchronisiert API-Ergebnisse und löst Zuordnungsfälle auf | `src/infra/api-client.js`, `src/app/match-actions.js`, `src/app/session-store.js`, `src/app/notifications.js`, `src/ui/handlers.js`, `src/infra/history-import.js` |
-| `src/infra/dom-autodetect.js` | DOM-basierte Autoerkennung | erkennt laufende Matchseiten und versucht Ergebnisübernahme aus der DOM | `src/app/match-actions.js`, `src/app/notifications.js`, `src/runtime/bootstrap.js` |
-| `src/infra/history-import.js` | History-Import | Statistik-Parsen, Match-Zuordnung auf `/history/matches/{id}` und Inline-Import-UI | `src/infra/api-automation.js`, `src/app/match-actions.js`, `src/app/session-store.js`, `src/app/notifications.js` |
-| `src/infra/route-hooks.js` | SPA-Integration | patched `history.pushState` und `replaceState`, reagiert auf Routenwechsel und stößt Re-Render an | `src/core/events.js`, `src/ui/handlers.js`, `src/infra/history-import.js` |
+| `src/infra/api-client.js` | cienka warstwa bazowa API | odczytuje token autoryzacji i ID boarda, buduje informacje paska statusu, kapsułkuje HTTP‑requesty i endpointy Autodarts | `src/ui/render-shell.js`, `src/infra/api-automation.js`, `src/app/diagnostics.js` |
+| `src/infra/api-automation.js` | start meczów i synchronizacja wyników | tworzy lobby, dodaje graczy, startuje mecze, synchronizuje wyniki z API i rozwiązuje przypadki przypisań | `src/infra/api-client.js`, `src/app/match-actions.js`, `src/app/session-store.js`, `src/app/notifications.js`, `src/ui/handlers.js`, `src/infra/history-import.js` |
+| `src/infra/dom-autodetect.js` | automatyczne wykrywanie na podstawie DOM | wykrywa aktywne strony meczowe i próbuje przejąć wynik z DOM | `src/app/match-actions.js`, `src/app/notifications.js`, `src/runtime/bootstrap.js` |
+| `src/infra/history-import.js` | import historii | parsowanie statystyk, przypisywanie meczów na `/history/matches/{id}` i UI importu inline | `src/infra/api-automation.js`, `src/app/match-actions.js`, `src/app/session-store.js`, `src/app/notifications.js` |
+| `src/infra/route-hooks.js` | integracja SPA | patchuje `history.pushState` i `replaceState`, reaguje na zmiany tras i wywołuje re-render | `src/core/events.js`, `src/ui/handlers.js`, `src/infra/history-import.js` |
 
 ### UI
 
-| Datei | Rolle | Wichtige Inhalte / Hauptfunktionen | Primäre Verbindungen |
+| Plik | Rola | Kluczowa zawartość / główne funkcje | Główne powiązania |
 |---|---|---|---|
-| `src/ui/render-shell.js` | äußerer Drawer-Rahmen | rendert Shadow-DOM-Shell, Tabs, Notices und Runtime-Status-Bar | `src/ui/render-tabs.js`, `src/infra/api-client.js`, `src/ui/handlers.js` |
-| `src/ui/render-tabs.js` | Tab-Verteiler | entscheidet, welcher Tab-Renderer für den aktiven Tab ausgeführt wird | `src/ui/render-tournament.js`, `src/ui/render-matches.js`, `src/ui/render-view.js`, `src/ui/render-io.js`, `src/ui/render-settings.js` |
-| `src/ui/render-helpers.js` | UI-Helfer | `renderInfoLinks()`, Abschnitts- und Turnierzeit-Helfer für wiederverwendbare HTML-Bausteine | `src/ui/render-*.js` |
-| `src/ui/render-tournament.js` | Turnieranlage und Turnierübersicht | rendert Neues-Turnier-Formular, Preset-Auswahl mit ehrlichen PDC-Hinweisen, Live-Zeitprognose, aktives Turnier und Reset-Bereich | `src/data/normalization.js`, `src/domain/tournament-duration.js`, `src/ui/render-helpers.js`, `src/ui/handlers.js` |
-| `src/ui/render-matches.js` | Matchliste und Matchaktionen | rendert Editoren, Status und API-Start-Buttons; Sortierung und `Nächstes Match` kommen aus `src/app/match-view-models.js` | `src/app/match-view-models.js`, `src/domain/results.js`, `src/infra/api-automation.js` |
-| `src/ui/render-view.js` | Tabellen- und Bracket-Ansicht | rendert Liga-/Gruppentabellen, Fallback-Bracket und den Einstieg ins iframe-Bracket | `src/domain/standings-dra.js`, `src/domain/groups.js`, `src/domain/ko-engine.js`, `src/bracket/*` |
-| `src/ui/render-io.js` | Import/Export-Tab | rendert Export- und Import-Oberfläche | `src/ui/handlers.js`, `src/data/storage.js` |
-| `src/ui/render-settings.js` | Settings-Tab | rendert Debug-Flag, API-Automation, KO-Defaults, Zeitprofil, Tie-Break-Profil und Storage-Hinweise | `src/data/normalization.js`, `src/domain/tournament-duration.js`, `src/ui/render-helpers.js`, `src/ui/handlers.js` |
-| `src/ui/handlers.js` | UI-Orchestrator | erstellt Host, rendert Shell, bindet Events, liest Formulare, aktualisiert die Live-Zeitprognose und delegiert Turnier-/Match-Aktionen in `src/app/*` | `src/ui/render-shell.js`, `src/app/tournament-actions.js`, `src/app/match-actions.js`, `src/infra/api-automation.js`, `src/app/bracket-controller.js`, `src/domain/tournament-duration.js` |
+| `src/ui/render-shell.js` | zewnętrzna ramka drawera | renderuje shell Shadow DOM, zakładki, powiadomienia i pasek statusu runtime | `src/ui/render-tabs.js`, `src/infra/api-client.js`, `src/ui/handlers.js` |
+| `src/ui/render-tabs.js` | dystrybutor zakładek | decyduje, który renderer zakładki ma zostać uruchomiony | `src/ui/render-tournament.js`, `src/ui/render-matches.js`, `src/ui/render-view.js`, `src/ui/render-io.js`, `src/ui/render-settings.js` |
+| `src/ui/render-helpers.js` | helpery UI | `renderInfoLinks()`, helpery sekcji i czasu turnieju dla wielokrotnego użycia | `src/ui/render-*.js` |
+| `src/ui/render-tournament.js` | tworzenie i przegląd turnieju | renderuje formularz nowego turnieju, wybór presetów z uczciwymi wskazówkami PDC, prognozę czasu na żywo, aktywny turniej i sekcję resetu | `src/data/normalization.js`, `src/domain/tournament-duration.js`, `src/ui/render-helpers.js`, `src/ui/handlers.js` |
+| `src/ui/render-matches.js` | lista meczów i akcje meczowe | renderuje edytory, statusy i przyciski startu API; sortowanie i „Następny mecz” pochodzą z `src/app/match-view-models.js` | `src/app/match-view-models.js`, `src/domain/results.js`, `src/infra/api-automation.js` |
+| `src/ui/render-view.js` | widok tabel i bracketu | renderuje tabele ligowe/grupowe, fallback‑bracket i wejście do bracketu w iframe | `src/domain/standings-dra.js`, `src/domain/groups.js`, `src/domain/ko-engine.js`, `src/bracket/*` |
+| `src/ui/render-io.js` | zakładka import/eksport | renderuje interfejs eksportu i importu | `src/ui/handlers.js`, `src/data/storage.js` |
+| `src/ui/render-settings.js` | zakładka ustawień | renderuje debug‑flag, automatyzację API, domyślne KO, profil czasu, profil tie‑break i wskazówki dot. storage | `src/data/normalization.js`, `src/domain/tournament-duration.js`, `src/ui/render-helpers.js`, `src/ui/handlers.js` |
+| `src/ui/handlers.js` | orkiestrator UI | tworzy host, renderuje shell, wiąże eventy, odczytuje formularze, aktualizuje prognozę czasu i deleguje akcje turniejowe/meczowe do `src/app/*` | `src/ui/render-shell.js`, `src/app/tournament-actions.js`, `src/app/match-actions.js`, `src/infra/api-automation.js`, `src/app/bracket-controller.js`, `src/domain/tournament-duration.js` |
 
-`handlers.js` ist die Datei, in der Bedienung, State-Änderung und Re-Render zusammenlaufen. Die Render-Dateien bleiben dagegen weitgehend beschreibend.
+`handlers.js` to plik, w którym spotykają się obsługa UI, zmiana stanu i re-render. Pliki renderujące pozostają w dużej mierze deklaratywne.
 
 ### Bracket
 
-| Datei | Rolle | Wichtige Inhalte / Hauptfunktionen | Primäre Verbindungen |
+| Plik | Rola | Kluczowa zawartość / główne funkcje | Główne powiązania |
 |---|---|---|---|
-| `src/bracket/payload.js` | Datenadapter für den Viewer | übersetzt interne KO-Matches in das Datenformat des Bracket-Viewers | `src/domain/ko-engine.js`, `src/domain/tournament-create.js`, `src/data/normalization.js`, `src/ui/render-view.js` |
-| `src/bracket/frame-template.js` | isolierter iframe-Renderer | erzeugt das komplette `srcdoc` inklusive CDN-Assets, Styling, PostMessage-Protokoll und Fallbacklogik im Frame | `src/bracket/frame-bridge.js`, externe `brackets-viewer`-Assets |
-| `src/bracket/frame-bridge.js` | low-level Parent-zu-iframe-Brücke | hält Frame-Reset, Timeout-Helfer, Height-Anpassung und PostMessage-Transport ohne UI-State | `src/bracket/frame-template.js`, `src/app/bracket-controller.js` |
+| `src/bracket/payload.js` | adapter danych dla viewer’a | tłumaczy wewnętrzne mecze KO na format danych bracket‑viewera | `src/domain/ko-engine.js`, `src/domain/tournament-create.js`, `src/data/normalization.js`, `src/ui/render-view.js` |
+| `src/bracket/frame-template.js` | izolowany renderer iframe | generuje pełne `srcdoc` z assetami CDN, stylami, protokołem PostMessage i logiką fallbacku | `src/bracket/frame-bridge.js`, zewnętrzne assety `brackets-viewer` |
+| `src/bracket/frame-bridge.js` | niskopoziomowy most parent → iframe | obsługuje reset frame’u, helpery timeoutów, dopasowanie wysokości i transport PostMessage bez stanu UI | `src/bracket/frame-template.js`, `src/app/bracket-controller.js` |
 
 ### Runtime
 
-| Datei | Rolle | Wichtige Inhalte / Hauptfunktionen | Primäre Verbindungen |
+| Plik | Rola | Kluczowa zawartość / główne funkcje | Główne powiązania |
 |---|---|---|---|
-| `src/runtime/lifecycle.js` | Wiring-Platzhalter | bleibt als bewusst leere Runtime-Datei im Manifest, damit Runtime bootstrap-only bleibt | `build/manifest.json`, Architektur-Regeln |
-| `src/runtime/public-api.js` | Wiring-Platzhalter | bleibt als bewusst leere Runtime-Datei im Manifest; die echte API lebt in `src/app/public-api.js` | `build/manifest.json`, Architektur-Regeln |
-| `src/runtime/bootstrap.js` | Startpunkt des Userscripts | lädt Store, rendert UI, installiert Hooks, Browser-Lifecycle und Intervalle, setzt Runtime-Ready-Status | `src/app/session-store.js`, `src/ui/handlers.js`, `src/app/browser-lifecycle.js`, `src/infra/route-hooks.js`, `src/infra/dom-autodetect.js`, `src/app/public-api.js` |
+| `src/runtime/lifecycle.js` | placeholder wiring | pozostaje celowo pustym plikiem runtime w manifeście, aby runtime pozostał wyłącznie bootstrapowy | `build/manifest.json`, reguły architektury |
+| `src/runtime/public-api.js` | placeholder wiring | pozostaje celowo pustym plikiem runtime; właściwe API znajduje się w `src/app/public-api.js` | `build/manifest.json`, reguły architektury |
+| `src/runtime/bootstrap.js` | punkt startowy userscriptu | ładuje store, renderuje UI, instaluje hooki, lifecycle przeglądarki i intervale, ustawia status runtime‑ready | `src/app/session-store.js`, `src/ui/handlers.js`, `src/app/browser-lifecycle.js`, `src/infra/route-hooks.js`, `src/infra/dom-autodetect.js`, `src/app/public-api.js` |
 
-## Unterstützende Dateien und Referenzmaterial
+## Pliki wspierające i materiały referencyjne
 
 ### `src/ui/styles/main.css`
-- enthält das komplette Shadow-DOM-Styling der UI
-- wird nicht separat ausgeliefert, sondern durch `scripts/build.ps1` in das Bundle eingebettet
-- ist deshalb Quellmaterial, aber kein eigener Runtime-Ladepunkt
+- zawiera pełne stylowanie UI w Shadow DOM
+- nie jest dostarczany osobno — `scripts/build.ps1` osadza go bezpośrednio w bundlu
+- dlatego jest materiałem źródłowym, ale nie stanowi osobnego punktu ładowania w runtime
 
 ### `tests/fixtures/*.json`
-- `group-deadlock-playoff.json`: Referenzfall für nicht auflösbare Gruppen-Gleichstände
-- `ko-seeded-9.json`: Referenzfall für KO-Seeding mit 9 Uczestnicyn und genau einem offenen Match in Runde 1
-- `migration-v2-to-v3.json`: Referenzfall für KO-Migration auf Engine v3
+- `group-deadlock-playoff.json`: przypadek referencyjny dla nierozwiązywalnych remisów w grupach
+- `ko-seeded-9.json`: przypadek referencyjny dla KO‑seeding z 9 uczestnikami i dokładnie jednym otwartym meczem w rundzie 1
+- `migration-v2-to-v3.json`: przypadek referencyjny dla migracji KO do silnika v3
 
-Diese Dateien sind keine aktive Logik, aber wichtig, um fachliche Spezialfälle reproduzierbar zu halten.
+Te pliki nie zawierają aktywnej logiki, ale są kluczowe, aby specjalne przypadki domenowe były powtarzalne i testowalne.
 
 ### `assets/*`
-- Screenshots für README und Doku
-- `pdc_logo.png` für das PDC-Badge im Bundle
-- Beispiel-Export `ata-export-*.json` als Referenzmaterial
+- zrzuty ekranu do README i dokumentacji
+- `pdc_logo.png` dla odznaki PDC w bundlu
+- przykładowy eksport `ata-export-*.json` jako materiał referencyjny
 
-Assets erklären das Produkt und speisen zum Teil den Build, tragen aber keine Laufzeitlogik.
+Assets objaśniają produkt i częściowo zasilają proces builda, ale nie zawierają logiki runtime.
 
 ### `docs/DRA-RULE_BOOK.pdf`
-- lokale Regelreferenz im Repository
-- dient als dokumentarische Grundlage für die DRA/PDC-bezogenen Docs
-- ist keine operative Projektdatei
+- lokalna referencja zasad w repozytorium
+- służy jako dokumentacyjna podstawa dla materiałów związanych z DRA/PDC
+- nie jest operacyjnym plikiem projektu
 
-## Pflegehinweise für künftige Änderungen
-- Neue Quellmodule immer auch in `build/manifest.json` eintragen. Die Datei existiert nicht nur dokumentarisch, sondern steuert die tatsächliche Bundle-Reihenfolge.
-- `dist/autodarts-turnieje-asystent.user.js` nicht manuell pflegen. Änderungen gehören in `src/*`, `src/ui/styles/main.css` oder `assets/*`.
-- Neue Fachregeln zuerst in `src/domain/*` verorten, nicht in Render-Dateien oder API-Schichten.
-- Neue Persistenzfelder immer mit Blick auf `src/data/normalization.js` und `src/data/migration.js` einführen.
-- Wenn UI-Hilfelinks, Regelbegriffe oder Doku-Einstiegspunkte geändert werden, auch `README.md`, `docs/architecture.md` und gegebenenfalls `docs/dra-regeln-gui.md` mitprüfen.
-- Bei Änderungen an API- oder DOM-Erkennung zusätzlich `docs/selector-strategy.md` und die `app`-/`infra`-Dateien synchron halten.
+## Wskazówki dotyczące utrzymania i przyszłych zmian
+- Nowe moduły źródłowe zawsze dodawaj również do `build/manifest.json`. Ten plik nie jest tylko dokumentacyjny — steruje realną kolejnością bundla.
+- Nie edytuj ręcznie `dist/autodarts-turnieje-asystent.user.js`. Zmiany należy wprowadzać w `src/*`, `src/ui/styles/main.css` lub `assets/*`.
+- Nowe reguły domenowe zawsze umieszczaj najpierw w `src/domain/*`, a nie w plikach renderujących lub warstwach API.
+- Nowe pola persystencji wprowadzaj z uwzględnieniem `src/data/normalization.js` i `src/data/migration.js`.
+- Jeśli zmieniasz linki pomocy UI, pojęcia reguł lub punkty wejścia dokumentacji, sprawdź również `README.md`, `docs/architecture.md` oraz ewentualnie `docs/dra-regeln-gui.md`.
+- Przy zmianach w API lub wykrywaniu DOM pamiętaj o aktualizacji `docs/selector-strategy.md` oraz synchronizacji plików w `app` i `infra`.
 - Für strukturelle Änderungen immer auch `scripts/qa-architecture.ps1`, `scripts/test-domain.ps1` und `scripts/test-runtime-contract.ps1` ausführen.
 - Für reine Doku-Änderungen reicht in der Regel `scripts/qa-encoding.ps1`; `scripts/qa.ps1` baut zusätzlich `dist/*` neu und ist nur nötig, wenn inhaltlich auch Runtime-Code betroffen ist.
