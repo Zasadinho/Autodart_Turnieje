@@ -79,7 +79,7 @@
           { href: README_SETTINGS_URL, kind: "tech", label: "Otwórz dokumentację ustawień", title: "README: Ustawienia" },
         ])}
         <div class="ata-field">
-          <label for="ata-setting-tournament-time-profile">Zeitprofil</label>
+          <label for="ata-setting-tournament-time-profile">Profil czasowy</label>
           <select id="ata-setting-tournament-time-profile" data-action="set-tournament-time-profile">
             ${tournamentTimeProfileOptions}
           </select>

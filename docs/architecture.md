@@ -1,21 +1,21 @@
-﻿# Architektur
+﻿# Architektura
 
-Diese Datei erklärt die Architektur auf hoher Ebene.
-Die vollständige Ordner- und Dateikarte inklusive Build-/Runtime-Verbindungen steht in [codebase-map.md](codebase-map.md).
+Ten dokument wyjaśnia architekturę na wysokim poziomie.
+Pełna mapa folderów i plików, wraz z powiązaniami build/runtime, znajduje się w [codebase-map.md](codebase-map.md).
 
-## Überblick
-Der Assistent ist in fachliche Schichten aufgeteilt und wird weiterhin als einzelnes Userscript ausgeliefert (`dist/autodarts-turnieje-asystent.user.js`).
+## Przegląd
+Asystent jest podzielony na warstwy domenowe i nadal dostarczany jako pojedynczy userscript (`dist/autodarts-turnieje-asystent.user.js`).
 
-- `src/core`: Konstanten, State, Utilities, Events, Logging
-- `src/domain`: fachliche Turnierregeln, pure Match-/KO-/Standings-/Zeitprognose-Logik
-- `src/data`: Storage-I/O, Normalisierung, Migration
-- `src/bracket`: low-level Bracket-Payload, Iframe-Template und Frame-Transport
-- `src/app`: Orchestrierung zwischen Domain, Persistenz, Bracket und UI
-- `src/infra`: API-Client, API-Automation, DOM-Autodetect, History-Import, Route-Hooks
-- `src/ui`: Rendering, View-Helper, Handler, Styles
-- `src/runtime`: nur Bootstrap-/Wiring-Dateien
+- `src/core`: stałe, stan, utilsy, zdarzenia, logowanie
+- `src/domain`: reguły turniejowe, czysta logika meczów/KO/tabel/czasu
+- `src/data`: I/O storage, normalizacja, migracja
+- `src/bracket`: niskopoziomowy payload bracketu, template iframe i transport frame
+- `src/app`: orkiestracja między domeną, persystencją, bracketem i UI
+- `src/infra`: API‑client, automatyzacja API, autodetekcja DOM, import historii, hooki tras
+- `src/ui`: rendering, helpery widoków, handler, style
+- `src/runtime`: tylko pliki bootstrap/wiring
 
-## Ziel-DAG
+## Docelowy DAG
 - `core -> (none)`
 - `domain -> core`
 - `data -> core, domain`
@@ -25,79 +25,79 @@ Der Assistent ist in fachliche Schichten aufgeteilt und wird weiterhin als einze
 - `ui -> core, app`
 - `runtime -> core, app, infra, ui`
 
-## Build und Distribution
-- Der Build läuft ohne npm/Node über `scripts/build.ps1`.
-- Die Reihenfolge ist deterministisch über `build/manifest.json`.
-- Die Versionsquelle liegt in `build/version.json` und wird beim Build in Header und `APP_VERSION` injiziert.
-- CSS liegt in `src/ui/styles/main.css` und wird beim Build in das Bundle eingebettet.
-- Die Ausgabe bleibt eine einzelne Datei in `dist/` (Loader-kompatibel).
-- `dist/*` bleibt ein generiertes Artefakt und wird nicht manuell gepflegt.
+## Build i dystrybucja
+- Build działa bez npm/Node, przez `scripts/build.ps1`.
+- Kolejność jest deterministyczna dzięki `build/manifest.json`.
+- Źródło wersji znajduje się w `build/version.json` i jest wstrzykiwane do nagłówka oraz `APP_VERSION`.
+- CSS z `src/ui/styles/main.css` jest osadzany w bundlu podczas builda.
+- Wynik to nadal pojedynczy plik w `dist/` (kompatybilny z loaderem).
+- `dist/*` pozostaje artefaktem generowanym i nie jest edytowany ręcznie.
 
 ## Runtime
-- Runtime-Guard: `window.__ATA_RUNTIME_BOOTSTRAPPED`
-- Public API: `window.__ATA_RUNTIME`
+- Strażnik runtime: `window.__ATA_RUNTIME_BOOTSTRAPPED`
+- Publiczne API: `window.__ATA_RUNTIME`
   - `openDrawer`, `closeDrawer`, `toggleDrawer`, `isReady`, `version`
-  - `runSelfTests()` für lokale Diagnose
-- `src/runtime/bootstrap.js` startet den Ablauf.
-- `src/app/public-api.js` veröffentlicht die Runtime-API.
-- `src/app/browser-lifecycle.js`, `src/infra/dom-autodetect.js` und `src/infra/history-import.js` tragen die eigentliche Browser-/DOM-Logik.
+  - `runSelfTests()` do lokalnej diagnostyki
+- `src/runtime/bootstrap.js` uruchamia cały proces.
+- `src/app/public-api.js` publikuje API runtime.
+- `src/app/browser-lifecycle.js`, `src/infra/dom-autodetect.js` i `src/infra/history-import.js` zawierają właściwą logikę przeglądarkową/DOM.
 
-## Datenmodell
-- Storage-Key: `ata:tournament:v1`
+## Model danych
+- Storage‑key: `ata:tournament:v1`
 - `schemaVersion: 4`
-- Neues Regelobjekt pro Turnier:
+- Nowy obiekt reguł na turniej:
   - `tournament.rules.tieBreakProfile: "promoter_h2h_minitable" | "promoter_points_legdiff"`
-- Neues globales Settings-Feld:
+- Nowe globalne pole ustawień:
   - `settings.tournamentTimeProfile: "fast" | "normal" | "slow"`
-- Turnier-Presetlogik:
-  - `ui.createDraft.x01Preset` hält das aktuell aktive Create-Preset
-  - Default ist `pdc_european_tour_official`
-  - Legacy `pdc_standard` wird auf `pdc_501_double_out_basic` normalisiert
-- KO-spezifisch:
+- Logika presetów turniejowych:
+  - `ui.createDraft.x01Preset` przechowuje aktywny preset tworzenia
+  - Domyślny: `pdc_european_tour_official`
+  - Legacy `pdc_standard` normalizowany do `pdc_501_double_out_basic`
+- KO:
   - `settings.featureFlags.koDrawLockDefault: boolean`
   - `tournament.ko.drawLocked: boolean`
   - `tournament.ko.placement: number[]`
 
-## Zeitprognose
-- Details zur Formel und zur externen Kalibrierung stehen in `docs/tournament-duration.md`.
-- Die Prognoza czasu trwania turnieju lebt als pure Domain-Logik in `src/domain/tournament-duration.js`.
-- Grundlage der Schätzung:
-  - Modus und Uczestnicyzahl
-  - erwartete Legs pro Match aus `Best of`
-  - X01-Setup (`Startscore`, `In`, `Out`, `Bull-off`, `Tryb bulla`, `Max Rund`)
-  - globales Zeitprofil (`fast | normal | slow`)
-- Die UI rendert daraus einen Live-Block im Turnierformular.
-- `src/ui/handlers.js` aktualisiert diesen Block gezielt bei jedem Formular-Input, ohne die gesamte Shell neu zu rendern.
+## Prognoza czasu
+- Szczegóły formuły i kalibracji znajdują się w `docs/tournament-duration.md`.
+- Prognoza czasu turnieju żyje jako czysta logika domenowa w `src/domain/tournament-duration.js`.
+- Podstawa szacowania:
+  - tryb i liczba uczestników
+  - oczekiwane legi na mecz z `Best of`
+  - konfiguracja X01 (`Startscore`, `In`, `Out`, `Bull-off`, `Tryb bulla`, `Max Rund`)
+  - globalny profil czasu (`fast | normal | slow`)
+- UI renderuje z tego blok na żywo w formularzu turnieju.
+- `src/ui/handlers.js` aktualizuje ten blok przy każdym wejściu w formularzu, bez pełnego re-renderu shell.
 
-## Regelmodell (DRA/PDC)
-- Standard: `promoter_h2h_minitable` (auch bei Migration von Bestandsdaten).
-- Tie-Break-Reihenfolge (Round Robin):
-  1. Punkte (2 Sieg, 1 Remis, 0 Niederlage)
-  2. Bei 2 Punktgleichen: Direktvergleich
-  3. Bei 3+ Punktgleichen: Leg-Differenz innerhalb der Teilgruppe
-  4. Leg-Differenz gesamt
-  5. Legs gewonnen gesamt
-  6. Bei weiterem Gleichstand: `playoff_required`
-- Gruppen-zu-KO-Zuordnung wird blockiert, solange `playoff_required` aktiv ist.
+## Model reguł (DRA/PDC)
+- Standard: `promoter_h2h_minitable` (również przy migracji danych).
+- Kolejność tie-break (Round Robin):
+  1. Punkty (2 wygrana, 1 remis, 0 porażka)
+  2. Przy 2 równych punktowo: bezpośredni pojedynek
+  3. Przy 3+ równych: różnica legów w podgrupie
+  4. Różnica legów ogólna
+  5. Wygrane legi ogółem
+  6. Jeśli nadal remis: `playoff_required`
+- Przejście grup → KO jest blokowane, dopóki `playoff_required` jest aktywne.
 
-## KO-Logik
-- KO bleibt `Pojedyncza eliminacja`.
-- Draw-Modi:
+## Logika KO
+- KO pozostaje `Pojedyncza eliminacja`.
+- Tryby losowania:
   - `seeded`
   - `open_draw`
-- vollständige Match-Materialisierung über alle Runden:
-  - offene spätere Runden werden als nicht editierbare Slots geführt
-  - Freilose werden als explizite Bye-Matches gespeichert
-- Draw-Lock:
-  - Standardmäßig bleibt der initiale KO-Draw stabil (`drawLocked = true`)
-  - kann pro aktivem KO-Turnier bewusst umgeschaltet werden
+- Pełna materializacja meczów we wszystkich rundach:
+  - otwarte późniejsze rundy są prowadzone jako nieedytowalne sloty
+  - byes są zapisywane jako jawne mecze Bye
+- Draw‑Lock:
+  - domyślnie początkowy KO‑draw pozostaje stabilny (`drawLocked = true`)
+  - można go przełączyć dla aktywnego turnieju KO
 
-## Qualitätssicherung
-- `scripts/qa.ps1`: Orchestrierung
-- `scripts/qa-architecture.ps1`: Layer-Regeln und verbotene Seiteneffekte
-- `scripts/qa-encoding.ps1`: UTF-8/Umlaute/Mojibake
-- `scripts/qa-regelcheck.ps1`: Regelpunkt-zu-Code-Mapping
-- `scripts/test-domain.ps1`: isolierter Domain-Harness ohne npm und ohne Mock-DOM
-- `scripts/test-runtime-contract.ps1`: Runtime-API- und Selftest-Contract gegen `dist/*`
-- `scripts/qa-build-discipline.ps1`: Versionsquelle und generiertes `dist/*`
-- Runtime-Selbsttests: `window.__ATA_RUNTIME.runSelfTests()`
+## Jakość i testy
+- `scripts/qa.ps1`: orkiestracja QA
+- `scripts/qa-architecture.ps1`: reguły warstw i zakazane efekty uboczne
+- `scripts/qa-encoding.ps1`: UTF‑8/umlauty/mojibake
+- `scripts/qa-regelcheck.ps1`: mapowanie reguł → kod
+- `scripts/test-domain.ps1`: izolowany domain‑harness bez npm i bez mock‑DOM
+- `scripts/test-runtime-contract.ps1`: kontrakt Runtime‑API i selftest przeciwko `dist/*`
+- `scripts/qa-build-discipline.ps1`: źródło wersji i generowane `dist/*`
+- Selftest runtime: `window.__ATA_RUNTIME.runSelfTests()`

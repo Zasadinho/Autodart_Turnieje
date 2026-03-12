@@ -1,450 +1,456 @@
 # Autodarts Turnieje Zasadinho
 
-Lokalny Turniej direkt in `https://play.autodarts.io` als Userscript.
+Lokalny turniej bezpośrednio w `https://play.autodarts.io` jako Userscript.
 
-Der Assistent erweitert die Autodarts-Oberfläche um einen eigenen Bereich für:
-- Turnieranlage (KO, Liga, Faza grupowa + KO)
-- Ergebnisführung
-- Turnieransicht (Tabelle + Bracket)
-- Import/Export
-- API-Halbautomatik (Start per Klick + Ergebnis-Sync)
+Asystent rozszerza interfejs Autodarts o własny panel zawierający:
+- tworzenie turnieju (KO, Liga, Faza grupowa + KO)
+- prowadzenie wyników
+- widok turnieju (tabela + drabinka)
+- import/eksport
+- półautomatyczną obsługę API (start jednym kliknięciem + synchronizacja wyników)
 
-## Inhalt
-1. [Dokumentation](#dokumentation)
-2. [Schnellstart (empfohlen)](#schnellstart-empfohlen)
-3. [Erste Orientierung in Autodarts](#erste-orientierung-in-autodarts)
-4. [Funktionen](#funktionen)
-5. [Turniermodi](#turniermodi)
-6. [Utwórz turniej](#turnier-anlegen)
-7. [API-Halbautomatik](#api-halbautomatik)
-8. [Turnierbaum](#turnierbaum)
-9. [Import und Export](#import-und-export)
-10. [Einstellungen](#einstellungen)
-11. [Podstawa zasad i limity](#regelbasis-und-limits)
-12. [Troubleshooting](#troubleshooting)
-13. [Entwicklung](#entwicklung)
-14. [Limitationen](#limitationen)
-15. [Quellen](#quellen)
+## Spis treści
+1. [Dokumentacja](#dokumentacja)
+2. [Szybki start (zalecane)](#szybki-start-zalecane)
+3. [Pierwsze kroki w Autodarts](#pierwsze-kroki-w-autodarts)
+4. [Funkcje](#funkcje)
+5. [Tryby turniejowe](#tryby-turniejowe)
+6. [Utwórz turniej](#utwórz-turniej)
+7. [Półautomatyka API](#półautomatyka-api)
+8. [Drabinka turniejowa](#drabinka-turniejowa)
+9. [Import i eksport](#import-i-eksport)
+10. [Ustawienia](#ustawienia)
+11. [Podstawa zasad i limity](#podstawa-zasad-i-limity)
+12. [Rozwiązywanie problemów](#rozwiązywanie-problemów)
+13. [Rozwój](#rozwój)
+14. [Ograniczenia](#ograniczenia)
+15. [Źródła](#źródła)
 
-## Dokumentation
-Zusätzliche Detaildoku zur Zeitberechnung: [docs/tournament-duration.md](docs/tournament-duration.md)
-| Dokument | Inhalt | Für wen |
+## Dokumentacja
+Dodatkowa dokumentacja dotycząca obliczania czasu:  
+[docs/tournament-duration.md](docs/tournament-duration.md)
+
+| Dokument | Zawartość | Dla kogo |
 |---|---|---|
-| [docs/codebase-map.md](docs/codebase-map.md) | Vollständige technische Codebasis-Karte mit Ordnerlogik, Dateirollen, Build-/Runtime-Fluss und Diagrammen | Entwickler / Maintainer |
-| [docs/architecture.md](docs/architecture.md) | Kompakter Überblick über Schichten, Persistenz, KO-Logik, Runtime und Qualitätsbausteine | Entwickler / technischer Überblick |
-| [docs/refactor-guide.md](docs/refactor-guide.md) | Änderungsregeln, Modulgrenzen und empfohlener Build-/QA-Ablauf | Entwickler bei Änderungen |
-| [docs/selector-strategy.md](docs/selector-strategy.md) | DOM-/Selector-Strategie für die automatische Ergebnisübernahme | Entwickler für Autodetect/API-Debugging |
-| [docs/pdc-dra-compliance.md](docs/pdc-dra-compliance.md) | Überblick, welche PDC/DRA-Regelpunkte fachlich umgesetzt sind | Turnierlogik / Regelbezug |
-| [docs/dra-compliance-matrix.md](docs/dra-compliance-matrix.md) | Detailmatrix zu Regel-Mappings, Tie-Break-Profilen und Migration | Entwickler / Regel-Review |
-| [docs/dra-regeln-gui.md](docs/dra-regeln-gui.md) | GUI-bezogene Regelerklärungen für Info-/Regel-Links in der Oberfläche | Nutzer / Turnierleitung / Entwickler |
-| [docs/changelog.md](docs/changelog.md) | Historie der Releases und Funktionsänderungen | Nutzer / Entwickler |
+| [docs/codebase-map.md](docs/codebase-map.md) | Pełna techniczna mapa kodu: logika folderów, role plików, przepływ build/runtime, diagramy | Deweloperzy / Maintainerzy |
+| [docs/architecture.md](docs/architecture.md) | Kompaktowy przegląd warstw, persystencji, logiki KO, runtime i jakości | Deweloperzy / osoby techniczne |
+| [docs/refactor-guide.md](docs/refactor-guide.md) | Zasady zmian, granice modułów, zalecany proces build/QA | Deweloperzy wprowadzający zmiany |
+| [docs/selector-strategy.md](docs/selector-strategy.md) | Strategia selektorów DOM dla automatycznego przejmowania wyników | Deweloperzy od Autodetect/API |
+| [docs/pdc-dra-compliance.md](docs/pdc-dra-compliance.md) | Przegląd, które punkty PDC/DRA są zaimplementowane | Logika turniejowa / reguły |
+| [docs/dra-compliance-matrix.md](docs/dra-compliance-matrix.md) | Szczegółowa matryca mapowania reguł, profili tie-break i migracji | Deweloperzy / przegląd reguł |
+| [docs/dra-regeln-gui.md](docs/dra-regeln-gui.md) | Wyjaśnienia reguł powiązane z GUI (linki informacyjne w aplikacji) | Użytkownicy / prowadzący turniej / deweloperzy |
+| [docs/changelog.md](docs/changelog.md) | Historia wydań i zmian funkcjonalnych | Użytkownicy / deweloperzy |
 
-## Schnellstart (empfohlen)
-Installationsablauf im Stil von "Schnellstart (empfohlen)" aus den Theme-Skripten:
+## Szybki start (zalecane)
+Instrukcja instalacji w stylu „Szybki start (zalecane)” znanego z motywów Autodarts:
 
-1. Tampermonkey im Browser installieren.
-2. Loader installieren (empfohlen):
-   - `https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/installer/Autodarts%20Tournament%20Assistant%20Loader.user.js`
-3. `https://play.autodarts.io` neu laden.
-4. Im linken Menü auf **Lokalny Turniej** klicken.
+1. Zainstaluj Tampermonkey w swojej przeglądarce.
+2. Zainstaluj Loader (zalecane):
+   - `https://github.com/Zasadinho/Autodart_Turnieje/raw/refs/heads/dart/installer/Autodarts%20Turnieje%20Zasadinho%20Instalacja.user.js`
+3. Odśwież stronę `https://play.autodarts.io`.
+4. W lewym menu kliknij **Lokalny Turniej**.
 
-Falls Tampermonkey nicht in `play.autodarts.io` injiziert:
-- Tampermonkey-FAQ: https://www.tampermonkey.net/faq.php#Q209
+Jeśli Tampermonkey nie wstrzykuje skryptu na `play.autodarts.io`:
+- FAQ Tampermonkey: https://www.tampermonkey.net/faq.php#Q209
 
-Alternative ohne Loader (direkt das Runtime-Skript):
-- `https://github.com/thomasasen/autodarts_local_tournament/raw/refs/heads/main/dist/autodarts-turnieje-asystent.user.js`
+Alternatywa bez Loader’a (bezpośrednio skrypt runtime):
+- `https://github.com/Zasadinho/Autodart_Turnieje/raw/refs/heads/dart/dist/autodarts-turnieje-asystent.user.js`
 
 ![Sidebar-Eintrag xLokales Turnier](assets/ss_autodarts-menu-xLokales-Turnier.png)
 
-## Erste Orientierung in Autodarts
-Nach Installation ist links im Hauptmenü der neue Eintrag sichtbar. Darüber öffnest du den Assistant mit den Tabs:
-- `Turnier`
-- `Spiele`
-- `Turnierbaum`
+## Pierwsze kroki w Autodarts
+Po instalacji w lewym menu głównym pojawi się nowa pozycja. Kliknięcie jej otwiera Asystenta z zakładkami:
+- `Turniej`
+- `Mecze` 
+- `Drabinka` 
 - `Import/Export`
-- `Einstellungen`
+- `Ustawienia` 
 
 ![Assistant-Tabs und Runtime-Status](assets/ss_Turnier_anlage-neu.png)
 
-## Funktionen
-- Turniermodi:
+## Funkcje
+- Tryby turniejowe:
   - `ko`
   - `league`
   - `groups_ko`
-- Ergebnisführung:
-  - Manuelles Speichern pro Match
-  - API-Matchstart per Klick
-  - API-Sync für Ergebnisse
-  - Inline-Button auf `/history/matches/{id}`:
-    `Ergebnis aus Statistik übernehmen & Turnier öffnen`
-- KO-Ansicht:
-  - Bracket via `brackets-viewer` (primär)
-  - HTML-Fallback bei CDN-Fehler/Timeout
-- Turnieranlage:
-  - KO-Erstrunde als Hybrid-Draw (`seeded` oder `open_draw`)
-  - Preset-Auswahl mit offiziellem European-Tour-Format, Basic-Kompatibilitätsprofil und Custom-Status
-  - Kompaktes Formular-Layout (Konfiguration + Uczestnicybereich)
-  - Live-Prognose für die Przewidywany czas trwania turnieju
-  - Uczestnicyliste kann per Button gemischt werden
-  - Formularentwurf bleibt erhalten (z. B. beim Moduswechsel)
-- Import/Export:
-  - JSON-Datei exportieren
-  - JSON in die Zwischenablage kopieren
-  - JSON per Datei oder Text importieren
+- Prowadzenie wyników:
+  - Ręczne zapisywanie wyników każdego meczu
+  - Start meczu przez API jednym kliknięciem
+  - Automatyczna synchronizacja wyników przez API
+  - Przycisk inline na `/history/matches/{id}`:
+    `Przejęcie wyniku ze statystyk & otwórz turniej`
+- Widok KO:
+  - Drabinka przez `brackets-viewer` (domyślnie)
+  - HTML-fallback przy błędzie CDN lub timeout
+- Tworzenie turnieju:
+  - Pierwsza runda KO jako hybrid-draw (`seeded` lub `open_draw`)
+  - Wybór presetów: oficjalny European Tour, profil Basic, tryb własny
+  - Kompaktowy formularz (konfiguracja + lista uczestników)
+  - Live-prognoza **Przewidywanego czasu trwania turnieju**
+  - Lista uczestników może być mieszana jednym kliknięciem
+  - Szkic formularza jest zachowywany (np. przy zmianie trybu)
+- Import/Eksport:
+  - Eksport do pliku JSON
+  - Kopiowanie JSON do schowka
+  - Import z pliku lub wklejonego tekstu JSON
 
-## Turniermodi
-| Modus | Beschreibung | Typischer Einsatz |
+## Tryby turniejowe
+| Tryb | Opis | Typowe zastosowanie |
 |---|---|---|
-| `ko` | Klassischer Single-Elimination-Baum | Schnelles Turnier mit Finalrunde |
-| `league` | Jeder gegen jeden (Round Robin) | Kleine Gruppe mit kompletter Tabelle |
-| `groups_ko` | 2 Gruppen, danach KO-Phase | Kombination aus Gruppenphase und Finalrunde |
+| `ko` | Klasyczna drabinka single-elimination | Szybki turniej z rundą finałową |
+| `league` | Każdy z każdym (Round Robin) | Mała grupa z pełną tabelą |
+| `groups_ko` | 2 grupy, następnie faza KO | Połączenie fazy grupowej i finałowej |
 
 ### KO (`ko`)
 - Hybrid-Draw:
-  - `Losowo wymieszaj pierwszą rundę KO = OFF` -> `seeded` (Eingabereihenfolge als Seed 1..n).
-  - `Losowo wymieszaj pierwszą rundę KO = ON` -> `open_draw` (deterministisch gemischte Seed-Reihenfolge).
-- Bye-Verteilung ist PDC/DRA-konform für gesetzte Draws:
-  - Bei nicht voller 2er-Potenz erhalten Top-Seeds Freilose.
-  - Beispiel mit 9 Spielern im 16er-Baum: Nur Seed 8 vs Seed 9 spielt in Runde 1.
-- KO-Matches werden pro Turnierast freigeschaltet:
-  - Ein Match ist spielbar, sobald beide Uczestnicy feststehen.
-  - Bei Runde > 1 müssen die direkten Vorgänger-Matches abgeschlossen sein.
-- Nur Runde-1-Byes dürfen automatisch als abgeschlossen gesetzt werden.
-- Freilose werden im Tab `Spiele` explizit als `Freilos (Bye)` markiert.
+  - `Losowo wymieszaj pierwszą rundę KO = OFF` → `seeded` (kolejność wpisania = seedy 1..n)
+  - `Losowo wymieszaj pierwszą rundę KO = ON` → `open_draw` (deterministycznie wymieszane seedy)
+- Rozdawanie wolnych losów (Bye) zgodne z PDC/DRA:
+  - Jeśli liczba graczy nie jest potęgą 2, najwyższe seedy otrzymują wolne losy.
+  - Przykład: 9 graczy w drabince 16 — tylko Seed 8 vs Seed 9 gra w rundzie 1.
+- Mecze KO są odblokowywane zgodnie z przebiegiem drabinki:
+  - Mecz można rozegrać, gdy obaj uczestnicy są już znani.
+  - W rundach > 1 wymagane jest zakończenie poprzednich meczów.
+- Tylko wolne losy z rundy 1 mogą być automatycznie oznaczone jako zakończone.
+- W zakładce `Mecze` mecze są oznaczane jako `Wolny los`.
 
 ### Liga (`league`)
-- Vollständiger Round-Robin-Spielplan.
-- Tabelle basiert auf:
-  - Punkte
-  - Direktvergleich (bei 2 Punktgleichen, DRA strict)
-  - Teilgruppen-Leg-Differenz (bei 3+ Punktgleichen, DRA strict)
-  - Leg-Differenz gesamt
-  - Legs For gesamt
-  - Bei weiterem Gleichstand: `Playoff erforderlich`
+- Pełny harmonogram Round Robin.
+- Tabela opiera się na:
+  - punktach
+  - bezpośrednim pojedynku (przy 2 równych punktowo, zgodnie z DRA)
+  - różnicy legów w podgrupie (przy 3+ równych punktowo, zgodnie z DRA)
+  - różnicy legów ogólnej
+  - liczbie wygranych legów
+  - przy dalszym remisie: `Wymagany playoff`
 
 ### Faza grupowa + KO (`groups_ko`)
-- Zwei Gruppen (`A`, `B`).
-- Top-2 jeder Gruppe qualifizieren sich für KO.
-- Kreuz-Halbfinale:
+- Dwie grupy (`A`, `B`).
+- Top-2 z każdej grupy awansuje do fazy KO.
+- Półfinały krzyżowe:
   - `A1 vs B2`
   - `B1 vs A2`
-- Das Finale folgt nach den Halbfinals.
+- Po półfinałach rozgrywany jest finał.
 
 ## Utwórz turniej
-Tab: `Turnier`
+Zakładka: `Turniej`
+
 
 ![Utwórz nowy turniej](assets/ss_Turnier_anlage-neu.png)
 
-### Pflichtfelder
-- Turniername
-- Modus
+### Pola obowiązkowe
+- Nazwa turnieju
+- Tryb
 - Uczestnicy (jedna linia na osobę)
 
-### Feld- und Auswahlinhalte (inkl. Warum)
-| Feld | Optionen / Eingaben | Was es steuert | Warum das wichtig ist |
+### Pola i opcje formularza (wraz z wyjaśnieniem)
+| Pole | Opcje / wartości | Co kontroluje | Dlaczego to ważne |
 |---|---|---|---|
-| `Turniername` | Freitext | Name für aktive Sitzung/Export | Erleichtert Zuordnung bei mehreren lokalen Events |
-| `Modus` | `KO`, `Liga`, `Faza grupowa + KO` | Spielplanlogik, Tabellenlogik, KO-Pfade | Falscher Modus führt zu falscher Matchanzahl/Fortschrittslogik |
-| `Best of Legs` | Ungerade `1..21` | Matchlänge; intern `First to N` | Definiert Siegbedingung pro Match und Turnierdauer |
-| `Punkty startowe` | `121`, `170`, `301`, `501`, `701`, `901` | X01-Basis für jedes Match | Beeinflusst Matchdauer und Schwierigkeitsprofil |
-| `In mode` | `Straight`, `Double`, `Master` | Wie ein Leg gestartet wird | Regelt Einstiegsanforderung je Spielstil/Regelwerk |
-| `Out mode` | `Straight`, `Double`, `Master` | Wie ein Leg beendet wird | Zentrale Regel für Checkout-Strenge |
-| `Bull-off` | `Off`, `Normal`, `Official` | Startreihenfolge-/Bull-off-Verhalten für Lobby | Legt fest, wie Anstöße entschieden werden |
-| `Tryb bulla` | `25/50`, `50/50` | Wertung der Bull-Segmente | Muss mit Hausregeln/Turnierkontext konsistent sein |
-| `Max Rund` | `15`, `20`, `50`, `80` | Upper bound für Matchdauer in der Lobby | Verhindert hängende/zu lange Matches |
-| `Tryb gry` | fix `Legs (First to N (na podstawie Best of))` | Nicht umstellbar in der UI | Verhindert inkonsistente Kombinationen im lokalen Flow |
-| `Lobby` | fix `Prywatny` | Sichtbarkeit der API-Lobby | Lokalny Turniej bleibt bewusst privat/sicher |
-| `Preset` | Auswahlfeld + Button `Zastosuj preset` | Setzt alle Preset-relevanten Turnierfelder konsistent | Offizielle und kompatible Profile bleiben klar getrennt |
-| `Losowo wymieszaj pierwszą rundę KO` | Checkbox `ON/OFF` | `open_draw` oder `seeded` in Runde 1 | Transparente Entscheidung zwischen Zufall und Setzlogik |
-| `Uczestnicy` | Je Spieler eine Zeile | Uczestnicyliste inkl. Reihenfolge | Reihenfolge ist bei `seeded` zugleich Seed-Reihenfolge |
-| `Uczestnicy losowo` | Button | Mischt Uczestnicytextliste | Praktisch für spontane Auslosung vor Start |
+| `Nazwa turnieju` | Dowolny tekst | Nazwa aktywnej sesji / eksportu | Ułatwia rozróżnianie wielu lokalnych turniejów |
+| `Tryb` | `KO`, `Liga`, `Faza grupowa + KO` | Logika harmonogramu, tabel, ścieżek KO | Zły tryb = zła liczba meczów i błędny przebieg turnieju |
+| `Best of Legs` | Nieparzyste `1..21` | Długość meczu; wewnętrznie `First to N` | Określa warunek zwycięstwa i wpływa na czas trwania turnieju |
+| `Punkty startowe` | `121`, `170`, `301`, `501`, `701`, `901` | Bazowy tryb X01 dla każdego meczu | Wpływa na czas meczu i poziom trudności |
+| `In mode` | `Straight`, `Double`, `Master` | Jak rozpoczyna się leg | Określa wymagania startowe zgodnie z zasadami gry |
+| `Out mode` | `Straight`, `Double`, `Master` | Jak kończy się leg | Kluczowa zasada dotycząca checkoutu |
+| `Bull-off` | `Off`, `Normal`, `Official` | Zachowanie bull-off / ustalanie kto zaczyna | Definiuje sposób wyboru rozpoczynającego |
+| `Tryb bulla` | `25/50`, `50/50` | Punktacja segmentów bull | Musi być zgodna z zasadami lokalnymi / formatem turnieju |
+| `Max Rund` | `15`, `20`, `50`, `80` | Górny limit długości meczu w lobby | Zapobiega zaciętym lub zbyt długim meczom |
+| `Tryb gry` | stałe `Legs (First to N na podstawie Best of)` | Nie można zmienić w UI | Chroni przed niespójnymi kombinacjami ustawień |
+| `Lobby` | stałe `Prywatny` | Widoczność lobby API | Lokalny turniej pozostaje prywatny i bezpieczny |
+| `Preset` | Lista + przycisk `Zastosuj preset` | Ustawia wszystkie pola zgodne z presetem | Oddziela oficjalne profile od kompatybilnych i własnych |
+| `Losowo wymieszaj pierwszą rundę KO` | Checkbox `ON/OFF` | `open_draw` lub `seeded` w rundzie 1 | Jasny wybór między losowaniem a rozstawieniem |
+| `Uczestnicy` | Jedna osoba na linię | Lista uczestników + kolejność | Przy `seeded` kolejność = seedy |
+| `Uczestnicy losowo` | Przycisk | Miesza listę uczestników | Przydatne przy spontanicznym losowaniu |
 
-### Preset-Katalog
-- Bei Neuanlage ist standardmäßig `PDC European Tour (Official)` aktiv.
-- Das Preset wird über Auswahlfeld + Button `Zastosuj preset` auf alle relevanten Turnierfelder angewendet.
-- Der Tryb gry bleibt immer `Legs`; `Best-of Legs` ist führend für die Matchlänge und wird API-seitig als `First to N Legs` umgesetzt.
+### Katalog presetów
+- Przy tworzeniu nowego turnieju domyślnie aktywny jest preset `PDC European Tour (Official)`.
+- Preset stosuje się przez wybór + przycisk `Zastosuj preset`, który ustawia wszystkie powiązane pola.
+- Tryb gry zawsze pozostaje `Legs`; `Best of Legs` definiuje długość meczu i jest w API odwzorowane jako `First to N Legs`.
 
-| Preset | Parameter | Hinweise |
+| Preset | Parametry | Uwagi |
 |---|---|---|
-| `PDC European Tour (Official)` | `KO`, `Best of 11`, `501`, `Straight In`, `Double Out`, `Bull 25/50`, `Bull-off Normal`, `Max Rund 50`, `Lobby privat` | Offizielles Default-Rundenformat. `Bull-off Normal` und `Max Rund 50` sind AutoDarts-/Technikwerte; `Max Rund` ist **keine** PDC-Fachregel. |
-| `PDC 501 / Double Out (Basic)` | `KO`, `Best of 5`, `501`, `Straight In`, `Double Out`, `Bull 25/50`, `Bull-off Normal`, `Max Rund 50`, `Lobby privat` | Ehrlich benanntes Kompatibilitätsprofil für das frühere irreführende `PDC Standard`. **Kein** offizielles PDC-Eventformat. |
-| `Indywidualny / Manuell` | aktuelle Formularwerte | Status nach manuellen Änderungen an Preset-Feldern. |
+| `PDC European Tour (Official)` | `KO`, `Best of 11`, `501`, `Straight In`, `Double Out`, `Bull 25/50`, `Bull-off Normal`, `Max Rund 50`, `Lobby prywatne` | Oficjalny domyślny format rund. `Bull-off Normal` i `Max Rund 50` to wartości techniczne Autodarts; `Max Rund` **nie** jest oficjalną zasadą PDC. |
+| `PDC 501 / Double Out (Basic)` | `KO`, `Best of 5`, `501`, `Straight In`, `Double Out`, `Bull 25/50`, `Bull-off Normal`, `Max Rund 50`, `Lobby prywatne` | Uczciwie nazwany profil kompatybilności dla wcześniejszego, mylącego `PDC Standard`. **Nie** jest to oficjalny format turniejów PDC. |
+| `Indywidualny / Manuell` | aktualne wartości formularza | Status po ręcznej zmianie pól powiązanych z presetem. |
 
-### Nicht enthaltene PDC-Formate
-- `PDC World Championship` wird bewusst **nicht** als offizielles Preset ausgeliefert.
-- Grund:
-  - Das Format arbeitet mit `Sets` (Best of Sets; ein Set besteht aus `Best of 5 Legs`).
-  - Die AutoDarts-/ATA-Integration kann hier nur `Legs / First to N` abbilden.
-- Deshalb behauptet die App an dieser Stelle **kein** echtes WM-Format.
+### Niewłączone formaty PDC
+- `PDC World Championship` **nie** jest dostarczany jako oficjalny preset.
+- Powód:
+  - Format opiera się na `Setach` (Best of Sets; jeden set = `Best of 5 Legs`).
+  - Integracja AutoDarts/ATA obsługuje tylko `Legs / First to N`.
+- Dlatego aplikacja **nie udaje** pełnego formatu Mistrzostw Świata.
 
-### Verhalten beim Formular
-- Das Eingabeformular speichert einen Entwurf.
-- Dadurch bleiben Eingaben erhalten, auch wenn:
-  - der Modus gewechselt wird
-  - die UI neu gerendert wird
-- Wenn `Bull-off = Off`, wird `Bull mode` automatisch read-only deaktiviert.
-- Bei manuellen Änderungen an Preset-relevanten Feldern springt der Preset-Status auf `Indywidualny`.
-- Legacy-Drafts und Legacy-Turniere mit der alten Preset-ID `pdc_standard` werden automatisch auf `PDC 501 / Double Out (Basic)` abgebildet, damit gespeicherte `Best of 5`-Turniere nicht still auf `Best of 11` umspringen.
+### Zachowanie formularza
+- Formularz zapisuje szkic (draft).
+- Dzięki temu dane pozostają zachowane nawet gdy:
+  - zmienisz tryb turnieju
+  - UI zostanie ponownie wyrenderowane
+- Jeśli `Bull-off = Off`, pole `Tryb bulla` staje się automatycznie tylko do odczytu.
+- Po ręcznej zmianie pól powiązanych z presetem status zmienia się na `Indywidualny`.
+- Starsze szkice i turnieje z presetem `pdc_standard` są automatycznie mapowane na `PDC 501 / Double Out (Basic)`, aby zapisane turnieje `Best of 5` nie zmieniały się po cichu na `Best of 11`.
 
 ### Przewidywany czas trwania turnieju
-- Details zur Formel, zu den Faktoren und zur Benchmark-Basis: [docs/tournament-duration.md](docs/tournament-duration.md)
-- In der rechten Spalte unter `Uczestnicy` wird eine Live-Prognose angezeigt.
-- Die Berechnung aktualisiert sich bei jeder Änderung im Formular:
-  - Uczestnicyzahl und Modus
+- Szczegóły dotyczące formuły, czynników i podstaw benchmarku: [docs/tournament-duration.md](docs/tournament-duration.md)
+- W prawej kolumnie, pod sekcją `Uczestnicy`, wyświetlana jest prognoza w czasie rzeczywistym.
+- Obliczenia aktualizują się przy każdej zmianie w formularzu:
+  - liczba uczestników i tryb
   - `Best of Legs`
   - `Punkty startowe`
   - `In mode`, `Out mode`
   - `Bull-off`, `Tryb bulla`
   - `Max Rund`
-- Die Schätzung zeigt:
-  - Hauptwert `ok. Xh Ym`
-  - Realistyczniee Spannweite
-  - Anzahl geplanter Spiele
-  - Średnialiche Matchdauer
-- Annahme:
-  - Single-Board-Flow auf einem Board
-- Die globale Kalibrierung erfolgt über das Zeitprofil im Tab `Einstellungen`.
+- Prognoza pokazuje:
+  - wartość główną `ok. Xh Ym`
+  - realistyczny przedział czasowy
+  - liczbę zaplanowanych meczów
+  - średni czas jednego meczu
+- Założenie:
+  - turniej rozgrywany na jednym boardzie (Single-Board-Flow)
+- Globalna kalibracja odbywa się przez profil czasowy w zakładce `Ustawienia`.
 
-Beispiel der Live-Zeitprognose im Turnierformular:
+Przykład prognozy czasu w formularzu turnieju:
 
 ![Live-Zeitprognose für ein Turnier](assets/ss_Turnier_Zeitprognose.png)
 
-Die Anzeige bündelt Uczestnicyzahl, geplante Spielanzahl, Średnialiche Matchdauer, aktives Zeitprofil und eine Realistyczniee Spannweite in einem kompakten Überblick.
+Widok łączy liczbę uczestników, liczbę meczów, średni czas meczu, aktywny profil czasowy oraz realistyczny przedział — wszystko w jednym, kompaktowym podsumowaniu.
 
-### Nach dem Anlegen
-Im aktiven Turnier siehst du die wichtigsten Tags sofort:
+### Po utworzeniu turnieju
+W aktywnym turnieju od razu zobaczysz najważniejsze informacje:
 - Format (`KO`, `Liga`, `Faza grupowa + KO`)
 - `Best of`, `First to`, `Punkty startowe`
-- Bei KO: `Open Draw`/`Losowanie z rozstawieniem`, `Draw-Lock aktiv/aus`
-- X01-Zusammenfassung und Uczestnicychips
+- W KO: `Open Draw` / `Losowanie z rozstawieniem`, `Draw-Lock aktywny/wyłączony`
+- Podsumowanie X01 oraz „chipsy” uczestników
 
 ![Aktives Turnier nach Anlage](assets/ss_Turnier_angelegt.png)
 
-## API-Halbautomatik
-Tab: `Spiele`
+## Półautomatyka API
+Zakładka: `Spiele` (Gry)
 
-### Voraussetzungen
-- Gültiger Autodarts-Login (Auth-Token)
-- Aktives Board in Autodarts
-- Feature-Flag `Automatyczny start lobby + synchronizacja API` aktiv
+### Wymagania
+- Ważny login Autodarts (Auth-Token)
+- Aktywny board w Autodarts
+- Włączona opcja `Automatyczny start lobby + synchronizacja API`
 
-### Ablauf
-1. Match in `Spiele` über `Uruchom mecz` auslösen.
-2. Eine Lobby wird mit den Turnier-Settings erstellt (X01-Felder + Legs aus `Best of Legs`), immer als private Lobby.
-3. Spieler werden hinzugefügt und das Match wird gestartet.
-4. Ergebnis wird per API geholt und lokal gespeichert.
-5. Auf der Statistikseite (`/history/matches/{id}`) steht zusätzlich ein direkter Import-Button zur Verfügung.
+### Przebieg
+1. Uruchom mecz w zakładce `Spiele` przyciskiem `Uruchom mecz`.
+2. Tworzona jest lobby z ustawieniami turnieju (pola X01 + Legs z `Best of Legs`), zawsze jako lobby prywatne.
+3. Gracze są dodawani, a mecz zostaje automatycznie rozpoczęty.
+4. Wynik jest pobierany przez API i zapisywany lokalnie.
+5. Na stronie statystyk (`/history/matches/{id}`) dostępny jest dodatkowy przycisk do bezpośredniego importu wyniku.
 
-### Ergebnisführung: Sortierung und Status verstehen
-Sortiersegmente im Tab `Spiele`:
-- `Rozgrywane jako pierwsze`: priorisiert live/spielbare Paarungen für schnellen Ablauf.
-- `Runda/Mecz`: strikte Reihenfolge nach Turnierstruktur.
-- `Status`: gruppiert nach offen/abgeschlossen/Freilos.
+### Sortowanie wyników i statusy
+W zakładce `Spiele` (Gry) mecze są grupowane i sortowane według logiki turniejowej:
 
-Wichtige Markierungen:
-- `Nächstes Match`: empfohlene nächste Paarung (PDC: Next Match).
-- `Freilos (Bye)`: automatischer Weiterzug ohne Spiel.
-- `Finale`: letzte KO-Paarung.
-- `Champion`: finaler Gewinner inklusive Leg-Ergebnis.
+Segmenty sortowania:
+- `Rozgrywane jako pierwsze` — priorytet dla meczów, które można rozpocząć od razu (najbardziej praktyczne w realnym przebiegu turnieju).
+- `Runda/Mecz` — ścisła kolejność zgodna ze strukturą turnieju.
+- `Status` — grupowanie według: otwarte / zakończone / wolny los.
+
+Ważne oznaczenia:
+- `Nächstes Match` — sugerowany kolejny mecz do rozegrania (odpowiednik PDC „Next Match”).
+- `Freilos (Bye)` — automatyczny awans bez gry.
+- `Finale` — mecz finałowy.
+- `Champion` — zwycięzca turnieju wraz z wynikiem legów.
 
 ![Spiele direkt nach Turnierstart](assets/ss_Spiele_Neu-gestartet.png)
 ![Spiele mit automatischer Matchdaten-Übernahme](assets/ss_Spiele_automatische_uebernahme_der_matchdaten.png)
 ![Spiele nach Finale mit Champion-Markierung](assets/ss_Spiele_Finale.png)
 
-### Statistik-Import auf der Match-Historie
-Auf `/history/matches/{id}` kann das Tool ein Ergebnis direkt aus der Statistik übernehmen:
-- Button: `Ergebnis aus Statistik übernehmen & Turnier öffnen`
-- Mit Statushinweis (`Import bereit`, letzter Sync-Status, Fehlerhinweis)
-- Öffnet danach direkt den Assistant-Tab `Spiele`
+### Import statystyk z historii meczów
+Na stronie `/history/matches/{id}` dostępny jest przycisk umożliwiający bezpośrednie przejęcie wyniku:
+
+- Przycisk: `Ergebnis aus Statistik übernehmen & Turnier öffnen`
+- Wyświetlany jest status (gotowość importu, ostatnia synchronizacja, ewentualne błędy)
+- Po imporcie otwierana jest zakładka `Spiele`
 
 ![Inline-Matchimport auf der Statistikseite](assets/ss_uebernahme-der-matchdaten_matchimport.png)
 
-### Schutzmechanismen
-- Nur ein aktives API-Match gleichzeitig (Single-Board-Flow).
-- Duplikatnamen werden für API-Sync blockiert.
-- Ungültige Ergebnisse werden abgewiesen.
-- Bei mehrdeutigen Zuordnungen wird absichtlich nicht automatisch übernommen.
+### Mechanizmy ochronne
+- Tylko jeden aktywny mecz API jednocześnie (Single-Board-Flow).
+- Zduplikowane nazwy graczy blokują synchronizację API.
+- Nieprawidłowe wyniki są odrzucane.
+- Przy niejednoznacznych dopasowaniach wynik **nie** jest przejmowany automatycznie — celowo, aby uniknąć błędów.
 
-## Turnierbaum
-Tab: `Turnierbaum`
+## Drabinka turniejowa
+Zakładka: `Turnierbaum`
 
-- KO-Baum wird im iframe über `brackets-viewer` gerendert.
-- Bei CDN-Problemen zeigt die App einen HTML-Fallback.
-- Freilose, abgeschlossene Spiele und Finale sind visuell markiert.
-- Je nach Modus zeigt der Tab unterschiedliche Ansichten:
-  - `KO`: klassischer Turnierbaum mit offenen Slots, Freilosen und Finale.
-  - `Liga`: Tabelle und vollständiger Spielplan in einer gemeinsamen Ansicht.
-  - `Faza grupowa + KO`: Gruppentabellen oben, KO-Turnierbaum darunter.
+- Drabinka KO renderowana jest w iframe za pomocą `brackets-viewer`.
+- W przypadku problemów z CDN wyświetlany jest fallback HTML.
+- Wolne losy, zakończone mecze i finał są odpowiednio oznaczone.
+- W zależności od trybu zakładka pokazuje różne widoki:
+  - `KO`: klasyczna drabinka z otwartymi slotami, wolnymi losami i finałem.
+  - `Liga`: tabela + pełny harmonogram meczów.
+  - `Faza grupowa + KO`: tabele grupowe u góry, drabinka KO poniżej.
 
 ![Turnierbaum direkt nach dem Start](assets/ss_Turnierbaum_neu-gestartet.png)
 ![Turnierbaum nach übernommenen Matchdaten](assets/Turnierbaum_aktualisierter-turnierbaum-nach-uebernahme-der-matchdaten.png)
 ![Turnierbaum mit abgeschlossenem Finale](assets/ss_Turnierbaum_Finale.png)
 
-Liga-Ansicht mit Tabelle und Spielplan:
+Widok ligi (tabela + harmonogram):
 
 ![Liga-Ansicht im Turnierbaum](assets/ss_Turnierbaum_Liga.png)
 
-Faza grupowa + KO mit Gruppentabellen und KO-Turnierbaum:
+Faza grupowa + KO:
 
 ![Gruppenphase plus KO im Turnierbaum](assets/ss_Turnierbaum_Gruppenphaseplusko.png)
 
-## Import und Export
-Tab: `Import/Export`
+## Import i eksport
+Zakładka: `Import/Export`
 
 ![Import-Export-Ansicht](assets/ss_Import-Export.png)
 
-### Export
+### Eksport
 - `Pobierz JSON`
 - `Kopiuj JSON do schowka`
 
 ### Import
-- Dateiimport (`.json`)
-- JSON-Text direkt einfügen
+- Import z pliku (`.json`)
+- Wklejenie JSON-a jako tekst
 
-### Daten- und Migrationshinweise
-- Persistenzschema: `schemaVersion: 4`
-- Beim Import werden Daten defensiv normalisiert.
-- Legacy-KO-Turniere werden auf KO-Engine v3 migriert.
-- Vor KO-Migration wird ein Backup unter `ata:tournament:ko-migration-backups:v2` abgelegt.
-- Bestehende Turniere werden auf
-  `tournament.rules.tieBreakProfile = promoter_h2h_minitable` normalisiert.
+### Uwagi dotyczące danych i migracji
+- Wersja schematu persystencji: `schemaVersion: 4`
+- Podczas importu dane są defensywnie normalizowane.
+- Starsze turnieje KO są migrowane do silnika KO v3.
+- Przed migracją KO tworzona jest kopia zapasowa pod kluczem  
+  `ata:tournament:ko-migration-backups:v2`.
+- Istniejące turnieje są normalizowane do:
+  `tournament.rules.tieBreakProfile = promoter_h2h_minitable`.
 
-## Einstellungen
-Tab: `Einstellungen`
+## Ustawienia
+Zakładka: `Einstellungen`
 
 ![Einstellungen und Feature-Flags](assets/ss_Einstellungen.png)
 
-### Info-Symbole
-Legende für die eingeblendeten Hilfelinks:
+### Ikony informacyjne
+Legenda dla wyświetlanych ikon pomocy:
 
-| Symbol | Bedeutung | Typischer Inhalt |
+| Symbol | Znaczenie | Typowa treść |
 |---|---|---|
-| ![Info-Symbol](assets/ss_info.png) | `Info-Icon` = technische Information | Bedienung, Implementierung, README-Kontext |
-| ![Regel-Symbol](assets/ss_regeln.png) | `Regel-Icon` = Regelwerk | DRA-Bezug, Kapitel/Punkt/Seite, Hintergründe |
+| ![Info-Symbol](assets/ss_info.png) | `Info-Icon` = informacja techniczna | Obsługa, implementacja, kontekst README |
+| ![Regel-Symbol](assets/ss_regeln.png) | `Regel-Icon` = zasady | Odniesienia do DRA, punkty, strony, wyjaśnienia |
 
-- Das `Info-Icon` verweist auf Bedienung, Implementierung und interne Projektdokumentation.
-- Das `Regel-Icon` verweist auf die zentrale Regelerklärung in [docs/dra-regeln-gui.md](docs/dra-regeln-gui.md).
+- `Info-Icon` prowadzi do informacji technicznych i dokumentacji projektu.
+- `Regel-Icon` prowadzi do głównego wyjaśnienia zasad w  
+  [docs/dra-regeln-gui.md](docs/dra-regeln-gui.md).
 
-### Debug-Mode
-- Aktiviert ausführliche Logs in der Browser-Konsole.
-- Prefix z. B. `[ATA][api]`, `[ATA][bracket]`, `[ATA][storage]`.
-- Sinnvoll für Fehlersuche bei API oder Renderproblemen.
+### Tryb debugowania
+- Włącza szczegółowe logi w konsoli przeglądarki.
+- Prefiksy np. `[ATA][api]`, `[ATA][bracket]`, `[ATA][storage]`.
+- Przydatne przy diagnozowaniu API lub problemów z renderowaniem.
 
 ### Automatyczny start lobby + synchronizacja API
-- Standard: `AUS`.
-- Wenn aktiv:
-  - `Uruchom mecz` erstellt Lobby, fügt Spieler hinzu, startet Match.
-  - Ergebnis wird automatisch aus der API übernommen.
-- Warum: weniger manuelle Schritte, geringeres Risiko für Übertragungsfehler.
+- Domyślnie: `WYŁ`.
+- Po włączeniu:
+  - `Uruchom mecz` tworzy lobby, dodaje graczy i startuje mecz.
+  - Wynik jest automatycznie pobierany z API.
+- Dlaczego: mniej ręcznych kroków, mniejsze ryzyko błędów w wynikach.
 
-### Losowo wymieszaj pierwszą rundę KO (Standard) 
-- Standard: `EIN`.
-- Gilt für neu erstellte KO-Turniere.
-- `EIN` -> `open_draw` (zufällige Reihenfolge in Runde 1).
-- `AUS` -> `seeded` (Eingabereihenfolge als Seed-Rang).
-- Warum: Turnierleitung kann zwischen offener Auslosung und Setzlogik wählen.
+### Losowe mieszanie pierwszej rundy KO (domyślnie)
+- Domyślnie: `WŁ`.
+- Dotyczy nowo tworzonych turniejów KO.
+- `WŁ` → `open_draw` (losowa kolejność w rundzie 1).
+- `WYŁ` → `seeded` (kolejność wpisania = seedy).
+- Dlaczego: organizator może wybrać między losowaniem a rozstawieniem.
 
-### KO Blokada Losowania (Standard)
-- Standard: `EIN`.
-- Neue KO-Turniere übernehmen den Initial-Draw unverändert (`drawLocked = true`).
-- Bezug: DRA `6.12.1` (veröffentlichter Draw bleibt bestehen).
-- Im Tab `Einstellungen` kann das aktive KO-Turnier bei Bedarf explizit entsperrt werden.
-- Warum: Verhindert unfaire oder versehentliche Nachauslosung während laufendem Turnier.
+### Blokada drabinki KO (Draw-Lock)
+- Domyślnie: `WŁ`.
+- Nowe turnieje KO zachowują pierwotną drabinkę (`drawLocked = true`).
+- Odniesienie: DRA `6.12.1` — opublikowany draw nie powinien być zmieniany.
+- W zakładce `Ustawienia` można odblokować drabinkę dla aktywnego turnieju.
+- Dlaczego: zapobiega nieuczciwym lub przypadkowym zmianom drabinki.
 
-### Prognoza czasu trwania turnieju
-- Details zur Berechnungsgrundlage: [docs/tournament-duration.md](docs/tournament-duration.md)
-- Das Profil kalibriert sowohl die Leg-Geschwindigkeit als auch die Zeit zwischen Matches und Turnierphasen.
-- Zeitprofil:
-  - `Schnell`
-  - `Normal` (empfohlen)
-  - `Langsam`
-- Das Profil wirkt als globaler Kalibrierungsfaktor für die Live-Prognose im Tab `Turnier`.
-- Unabhängig vom Profil bleiben die fachlichen Einflussgrößen erhalten:
-  - Modus und Uczestnicyzahl
+### Profil czasu trwania turnieju
+- Szczegóły: [docs/tournament-duration.md](docs/tournament-duration.md)
+- Profil wpływa na szybkość legów oraz przerwy między meczami.
+- Dostępne profile:
+  - `Szybki`
+  - `Normalny` (zalecany)
+  - `Wolny`
+- Profil działa jako globalny mnożnik dla prognozy czasu w zakładce `Turnier`.
+- Niezależnie od profilu wpływ mają:
+  - tryb i liczba uczestników
   - `Best of Legs`
   - `Punkty startowe`
   - `In` / `Out`
   - `Bull-off` / `Tryb bulla`
   - `Max Rund`
-- Warum: lokale Felder spielen unterschiedlich schnell; das Profil erlaubt eine saubere Anpassung, ohne die eigentliche Turnierlogik zu verändern.
 
-### Profil Tie-Break promotora
-- `Promoter H2H + Mini-Tabelle` (empfohlen):
-  - Punkte (`2` Sieg, `1` Unentschieden, `0` Niederlage)
-  - Direktvergleich bei genau 2 Punktgleichen
-  - Teilgruppen-Leg-Differenz bei 3+ Punktgleichen
-  - danach Gesamt-Leg-Differenz und Legs gewonnen
-  - bei weiterem Gleichstand: `Playoff erforderlich`
+### Profil tie-break promotora
+- `Promoter H2H + Mini-tabela` (zalecany):
+  - Punkty (`2` wygrana, `1` remis, `0` porażka)
+  - Bezpośredni pojedynek przy 2 równych punktowo
+  - Mini-tabela (różnica legów w podgrupie) przy 3+ równych
+  - Następnie różnica legów ogólna i liczba wygranych legów
+  - Przy dalszym remisie: `Wymagany playoff`
 - `Promotor: punkty + różnica legów`:
-  - vereinfachte, legacy-kompatible Sortierung
-  - Reihenfolge: Punkte -> Gesamt-Leg-Differenz -> Legs gewonnen
+  - uproszczona, kompatybilna wersja
+  - kolejność: punkty → różnica legów → wygrane legi
 
-Warum dieses Feld wichtig ist:
-- DRA `6.16.1` erlaubt Tie-Breaks nach Ermessen des Veranstalters.
-- Das Profil erzwingt eine klare, reproduzierbare Reihenfolge statt Ad-hoc-Entscheidung.
+Dlaczego to ważne:
+- DRA `6.16.1` pozwala organizatorowi ustalić własne tie-breaki.
+- Profil zapewnia spójność i przewidywalność tabeli.
 
 ## Podstawa zasad i limity
-Priorisierung für Limits in diesem Projekt:
-1. Offizielle Darts-Regeln
-2. Mathematische Turnierlogik
-3. Technische Machbarkeit im Userscript
 
-### Offizielle Regelquellen
-- DRA-Rulebook-Seite: https://www.thedra.co.uk/dra-rulebook
-- DRA-Rulebook-PDF (Projektkopie): [docs/DRA-RULE_BOOK.pdf](docs/DRA-RULE_BOOK.pdf)
-- DRA-Referenzen:
-  - Definition Bye: Abschnitt `2` (Seite 4):
-    [DRA-RULE_BOOK.pdf#page=4](docs/DRA-RULE_BOOK.pdf#page=4)
-  - Turnierformat KO / Round Robin: `6.8.1`, `6.8.2` (Seite 17):
-    [DRA-RULE_BOOK.pdf#page=17](docs/DRA-RULE_BOOK.pdf#page=17)
-  - Uczestnicy und Veranstalter-Ermessen: `6.10.1`, `6.10.5.2` (Seiten 17-18):
-    [DRA-RULE_BOOK.pdf#page=18](docs/DRA-RULE_BOOK.pdf#page=18)
-  - Draw bleibt bestehen: `6.12.1` (Seite 18):
-    [DRA-RULE_BOOK.pdf#page=18](docs/DRA-RULE_BOOK.pdf#page=18)
-  - Tie-Break im Ermessen des Veranstalters: `6.16.1` (Seite 20):
-    [DRA-RULE_BOOK.pdf#page=20](docs/DRA-RULE_BOOK.pdf#page=20)
+Priorytety przy ustalaniu limitów w tym projekcie:
+1. Oficjalne zasady gry w darta
+2. Logika matematyczna turniejów
+3. Techniczna wykonalność w Userscript
 
-### Umgesetzte Limits (mit Hintergrund)
-| Modus | Limit | Warum |
+### Oficjalne źródła zasad
+- Strona DRA Rulebook: https://www.thedra.co.uk/dra-rulebook
+- Kopia PDF w projekcie: [docs/DRA-RULE_BOOK.pdf](docs/DRA-RULE_BOOK.pdf)
+- Odniesienia DRA:
+  - Definicja „Bye”: sekcja `2` (strona 4)
+  - Format KO / Round Robin: `6.8.1`, `6.8.2` (strona 17)
+  - Uczestnicy i decyzje organizatora: `6.10.1`, `6.10.5.2` (strony 17–18)
+  - Niezmienność drabinki: `6.12.1` (strona 18)
+  - Tie‑break według uznania organizatora: `6.16.1` (strona 20)
+
+### Zaimplementowane limity (z uzasadnieniem)
+| Tryb | Limit | Dlaczego |
 |---|---|---|
-| `ko` | `2..128` | Regelkonform ohne kleines Kunstlimit; 128 als technischer Stabilitätsdeckel für Bracket/UI. |
-| `league` | `2..16` | Round Robin wächst quadratisch (`n*(n-1)/2`); oberhalb 16 wird Dauer und Bedienung für lokale Events schnell unpraktisch. |
-| `groups_ko` | `4..16` | Mindestens 4 für zwei Gruppen mit anschliessender KO-Phase; Obergrenze aus Spielanzahl/Bedienbarkeit. |
+| `ko` | `2..128` | Zgodne z zasadami, bez sztucznych ograniczeń; 128 to techniczny limit stabilności UI. |
+| `league` | `2..16` | Round Robin rośnie kwadratowo (`n*(n-1)/2`); powyżej 16 robi się zbyt długie i niepraktyczne lokalnie. |
+| `groups_ko` | `4..16` | Minimum 4 dla dwóch grup + KO; maksimum wynika z liczby meczów i ergonomii. |
 
-Hinweise:
-- Zusätzliches technisches Hard-Cap: `128` Uczestnicy.
-- Die GUI verlinkt Regelhintergründe über das `Regel-Icon` auf [docs/dra-regeln-gui.md](docs/dra-regeln-gui.md).
+Dodatkowe uwagi:
+- Techniczny twardy limit: `128` uczestników.
+- GUI podlinkowuje wyjaśnienia zasad przez ikonę reguł do pliku  
+  [docs/dra-regeln-gui.md](docs/dra-regeln-gui.md).
 
-### Warum diese Regeln für Spieler relevant sind
-- **Transparenz:** Jeder sieht, warum ein Match gesperrt/freigeschaltet ist.
-- **Fairness:** Draw-Lock und Bye-Handling verhindern spätere Strukturmanipulation.
-- **Nachvollziehbarkeit:** Tie-Break-Profil macht Tabellenentscheidungen reproduzierbar.
-- **Planbarkeit:** Limits schützen vor Turnierformaten, die lokal kaum sauber durchführbar sind.
+### Dlaczego te zasady są ważne dla graczy
+- **Przejrzystość:** każdy widzi, dlaczego mecz jest zablokowany lub odblokowany.
+- **Fair play:** blokada drabinki i obsługa wolnych losów zapobiegają manipulacjom.
+- **Zrozumiałość:** profil tie‑break zapewnia powtarzalne i jasne wyniki tabeli.
+- **Praktyczność:** limity chronią przed formatami, których nie da się sensownie przeprowadzić lokalnie.
 
-## Troubleshooting
-### "Match ist abgeschlossen", obwohl neu
-- Ursache ist meist ein inkonsistenter Altzustand.
-- Lösung:
-  1. Seite neu laden.
-  2. Falls nötig Turnier neu anlegen.
-  3. Prüfen, ob `Freilos` in Runde 1 automatisch weitergeleitet wurde (das ist korrekt).
+## Rozwiązywanie problemów (Troubleshooting)
 
-### "Board-ID ungültig (manual)"
-- Einmal in Autodarts manuell eine Lobby öffnen und ein Board setzen.
-- Danach Seite neu laden.
+### „Mecz jest zakończony”, mimo że dopiero zaczynam
+- Najczęściej powodem jest stary, niespójny stan danych.
+- Rozwiązanie:
+  1. Odśwież stronę.
+  2. Jeśli trzeba — utwórz turniej ponownie.
+  3. Sprawdź, czy `Freilos` w rundzie 1 nie został automatycznie oznaczony jako zakończony (to prawidłowe).
 
-### API-Start/Sync funktioniert nicht
-- Login prüfen (Token vorhanden?).
-- Feature-Flag aktiv?
-- Eindeutige Uczestnicynamen verwenden.
-- Bei mehreren offenen Matches mit derselben Paarung wird absichtlich nicht automatisch übernommen (`Mehrdeutige Zuordnung`), um falsche Ergebnisse zu vermeiden.
+### „Board-ID ungültig (manual)”
+- Otwórz ręcznie dowolne lobby w Autodarts i ustaw board.
+- Następnie odśwież stronę.
 
-### Bracket wird nicht gerendert
-- CDN kann temporär nicht erreichbar sein.
-- Der HTML-Fallback wird dann angezeigt.
+### API nie startuje / nie synchronizuje
+- Sprawdź login (czy token jest aktywny).
+- Czy funkcja automatyczna jest włączona?
+- Upewnij się, że nazwy graczy są unikalne.
+- Jeśli istnieje kilka otwartych meczów z tą samą parą — wynik **nie** zostanie przejęty (celowo, aby uniknąć błędów).
 
-## Entwicklung
-### Repo-Struktur
+### Drabinka się nie renderuje
+- CDN może być chwilowo niedostępny.
+- Wtedy wyświetlany jest fallback HTML.
+
+## Rozwój (Development)
+
+### Struktura repozytorium
 ```text
 autodarts_local_tournament/
 |- src/
@@ -498,22 +504,24 @@ autodarts_local_tournament/
 |- LICENSE
 ```
 
-Die vollständige Datei- und Verbindungsdoku steht in [docs/codebase-map.md](docs/codebase-map.md).
 
-### Hauptdateien
-- Quellcode: `src/*`
-- Build-Metadaten: `build/manifest.json`, `build/version.json`
+Pełna dokumentacja plików i powiązań znajduje się w  
+[docs/codebase-map.md](docs/codebase-map.md).
+
+### Najważniejsze pliki
+- Kod źródłowy: `src/*`
+- Metadane builda: `build/manifest.json`, `build/version.json`
 - Build/QA: `scripts/*.ps1`
-- Runtime-Script: `dist/autodarts-turnieje-asystent.user.js`
-- Loader-Script: `installer/Autodarts Turnieje Zasadinho Instalacja.user.js`
+- Skrypt runtime: `dist/autodarts-turnieje-asystent.user.js`
+- Loader: `installer/Autodarts Turnieje Zasadinho Instalacja.user.js`
 
-### Build und QA
+### Build i QA
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/build.ps1
 powershell -ExecutionPolicy Bypass -File scripts/qa.ps1
 ```
 
-Gezielte Checks:
+Testy szczegółowe:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/qa-architecture.ps1
@@ -521,42 +529,43 @@ powershell -ExecutionPolicy Bypass -File scripts/test-domain.ps1
 powershell -ExecutionPolicy Bypass -File scripts/test-runtime-contract.ps1
 ```
 
-### Architektur
-- Shadow DOM für gekapselte UI
-- `src/app/*` als Orchestrierungsgrenze zwischen Domain, Persistenz und UI
-- SPA-Routing-Hooks für stabile Einbindung in Autodarts
-- Defensive Persistenz-Normalisierung
-- Bracket-Rendering in sandboxed iframe
-- `src/runtime/*` nur noch für Bootstrap-/Wiring
 
-## Limitationen
-- Limity trybu:
+### Architektura
+- Shadow DOM dla izolowanego UI
+- `src/app/*` jako warstwa pośrednia między domeną, persystencją i UI
+- Hooki SPA do stabilnej integracji z Autodarts
+- Defensywna normalizacja danych
+- Renderowanie drabinki w sandboxowanym iframe
+- `src/runtime/*` tylko do bootstrapu i łączenia modułów
+
+## Ograniczenia
+- Limity trybów:
   - `ko`: `2..128`
   - `league`: `2..16`
   - `groups_ko`: `4..16`
-- Technisches Hard-Cap: `128` Uczestnicy
-- API-Halbautomatik basiert auf in der Praxis verwendeten Endpunkten (Inference)
-- DOM-Autodetect bleibt best-effort
+- Techniczny limit twardy: `128` uczestników
+- Półautomatyka API opiera się na praktycznie używanych endpointach (inferencja)
+- DOM‑Autodetect działa na zasadzie best‑effort
 
-## Quellen
-- Turnierdauer-Benchmarks:
+## Źródła
+- Benchmarki czasu trwania turniejów:
   - https://www.aboutthedarts.com/how-to/calculate-the-time-required-for-your-darts-tournament/
   - https://www.bognorregis.com/darts/
   - https://gameandentertain.com/how-long-does-a-game-of-darts-last/
-- DRA (offizielle Regelbasis):
+- DRA (oficjalne zasady):
   - https://www.thedra.co.uk/dra-rulebook
   - [docs/DRA-RULE_BOOK.pdf](docs/DRA-RULE_BOOK.pdf)
-- PDC (Open Draw Kontext, Eventregeln):
+- PDC (open draw, zasady eventów):
   - https://www.pdc.tv/news/2013/01/16/rules-challenge-youth-tours
-- JS-Modularisierung:
+- Modularizacja JS:
   - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
-- Tampermonkey Dokumentation:
+- Dokumentacja Tampermonkey:
   - https://www.tampermonkey.net/documentation.php?locale=en
-- Tampermonkey FAQ (Injection):
+- FAQ Tampermonkey (injection):
   - https://www.tampermonkey.net/faq.php#Q209
-- Referenz-Extension:
+- Referencyjne rozszerzenie:
   - https://chromewebstore.google.com/detail/autodarts-local-tournamen/algfbicoennnolleogigbefngpkkmcng
 - Bracket Viewer:
   - https://github.com/Drarig29/brackets-viewer.js
-- Autodarts Themes/Pattern Inspiration:
+- Inspiracje z motywów Autodarts:
   - https://github.com/thomasasen/autodarts-tampermonkey-themes
