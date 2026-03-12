@@ -6625,19 +6625,19 @@
 
 function getAuthTokenFromCookie() {
   try {
-    // const cookies = document.cookie.split(";").map(c => c.trim());
+    const cookies = document.cookie.split(";").map(c => c.trim());
 
     // 1. Stary format (dla kompatybilności)
-   //  const oldAuth = cookies.find(c => c.startsWith("Authorization="));
-   //  if (oldAuth) {
-   //   let token = oldAuth.replace("Authorization=", "");
-    //   token = token.replace(/^Bearer\s+/i, "");
-    //   try {
-    //     return decodeURIComponent(token);
-    //   } catch {
-    //     return token;
-   //   }
-   //  }
+    const oldAuth = cookies.find(c => c.startsWith("Authorization="));
+    if (oldAuth) {
+      let token = oldAuth.replace("Authorization=", "");
+      token = token.replace(/^Bearer\s+/i, "");
+      try {
+        return decodeURIComponent(token);
+      } catch {
+        return token;
+      }
+    }
 
     // 2. Nowy format Keycloak (obecny system Autodarts)
     const kc = cookies.find(c => c.startsWith("KEYCLOAK_IDENTITY="));
@@ -6656,7 +6656,6 @@ function getAuthTokenFromCookie() {
     return "";
   }
 }
-
 
 
 

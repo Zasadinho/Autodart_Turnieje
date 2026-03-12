@@ -9,25 +9,39 @@
   }
 
 
-  function getAuthTokenFromCookie() {
-    try {
-      const value = `; ${document.cookie || ""}`;
-      const parts = value.split("; Authorization=");
-      if (parts.length !== 2) {
-        return "";
+function getAuthTokenFromCookie() {
+  try {
+    const cookies = document.cookie.split(";").map(c => c.trim());
+
+    // 1. Stary format (dla kompatybilności)
+    const oldAuth = cookies.find(c => c.startsWith("Authorization="));
+    if (oldAuth) {
+      let token = oldAuth.replace("Authorization=", "");
+      token = token.replace(/^Bearer\s+/i, "");
+      try {
+        return decodeURIComponent(token);
+      } catch {
+        return token;
       }
-      let token = parts.pop().split(";").shift() || "";
+    }
+
+    // 2. Nowy format Keycloak (obecny system Autodarts)
+    const kc = cookies.find(c => c.startsWith("KEYCLOAK_IDENTITY="));
+    if (kc) {
+      let token = kc.replace("KEYCLOAK_IDENTITY=", "");
       try {
         token = decodeURIComponent(token);
-      } catch (_) {
-        // Keep raw token if decoding fails.
+      } catch {
+        // jeśli nie da się zdekodować, używamy surowego
       }
-      token = String(token).trim().replace(/^Bearer\s+/i, "");
       return token;
-    } catch (_) {
-      return "";
     }
+
+    return "";
+  } catch {
+    return "";
   }
+}
 
 
   function getBoardId() {
