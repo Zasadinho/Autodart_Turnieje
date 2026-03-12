@@ -203,7 +203,7 @@
 
 ## 0.2.0
 - API-Halbautomatik umgesetzt:
-  - Matchstart per Button im Tab `Spiele` (`Uruchom mecz` / `Zum Match`)
+  - Matchstart per Button im Tab `Spiele` (`Uruchom mecz` / `Do meczu`)
   - automatische Ergebnissynchronisierung über Autodarts-API für gestartete Matches
   - Single-active-match-Regel (ein aktives gestartetes Match gleichzeitig).
 - Persistenter Automationsstatus pro Match in `match.meta.auto` (abwärtskompatibel).

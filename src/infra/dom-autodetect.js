@@ -136,7 +136,7 @@
         const match = getOpenMatchByPlayers(tournament, candidateIds[i], candidateIds[j]);
         if (match && (winnerId === candidateIds[i] || winnerId === candidateIds[j])) {
           if (targetMatch) {
-            logDebug("autodetect", "Multiple possible matches found, skipping auto close.");
+            logDebug("autodetect", "Znaleziono wiele możliwych meczów, pomijam automatyczne zamknięcie.");
             return;
           }
           targetMatch = match;

@@ -7700,9 +7700,9 @@
     const auto = ensureMatchAutoMeta(match);
     if (auto.lobbyId) {
       return {
-        label: "Zum Match",
+        label: "Do meczu",
         disabled: false,
-        title: "\u00d6ffnet das bereits gestartete Match.",
+        title: "Otwiera już rozpoczęty mecz.",
       };
     }
 
@@ -7710,7 +7710,7 @@
       return {
         label: "Uruchom mecz",
         disabled: true,
-        title: "Feature-Flag in Einstellungen aktivieren.",
+        title: "Aktywuj tę funkcję w ustawieniach.",
       };
     }
 
@@ -7727,7 +7727,7 @@
       return {
         label: "Uruchom mecz",
         disabled: true,
-        title: "Kein Auth-Token vorhanden. Bitte einloggen.",
+        title: "Brak tokenu autoryzacji. Zaloguj się.",
       };
     }
 
@@ -7737,7 +7737,7 @@
         label: "Uruchom mecz",
         disabled: true,
         title: boardId
-          ? `Board-ID jest nieprawidłowe (${boardId}). Bitte Board in einer manuellen Lobby w\u00e4hlen.`
+          ? `Board-ID jest nieprawidłowe (${boardId}). Wybierz tablicę w lobby manualnym.`
           : "Brak aktywnej tablicy. Otwórz ręcznie lobby i wybierz board.",
       };
     }
@@ -7973,7 +7973,7 @@
     if (!token) {
       state.apiAutomation.authBackoffUntil = Date.now() + API_AUTH_NOTICE_THROTTLE_MS;
       if (shouldShowAuthNotice()) {
-        setNotice("error", "Auto-Sync pausiert: kein Auth-Token gefunden. Bitte neu einloggen.");
+        setNotice("error", "Auto-synchronizacja wstrzymana: nie znaleziono tokenu autoryzacji. Zaloguj się ponownie.");
       }
       return;
     }
@@ -7993,9 +7993,9 @@
         if (syncOutcome.authError) {
           state.apiAutomation.authBackoffUntil = Date.now() + API_AUTH_NOTICE_THROTTLE_MS;
           if (shouldShowAuthNotice()) {
-            setNotice("error", "Auto-Sync pausiert: Auth abgelaufen. Bitte neu einloggen.");
+            setNotice("error", "Auto-synchronizacja wstrzymana: autoryzacja wygasła. Zaloguj się ponownie.");
           }
-          logWarn("api", "Auto-sync auth error.");
+          logWarn("api", "Błąd autoryzacji auto-synchronizacji.");
           return;
         }
 
@@ -8004,7 +8004,7 @@
         }
 
         if (!syncOutcome.ok && syncOutcome.message && !syncOutcome.recoverable) {
-          logWarn("api", `Auto-sync failed for ${match.id}: ${syncOutcome.message}`);
+          logWarn("api", `Auto-synchronizacja nie powiodła się dla ${match.id}: ${syncOutcome.message}`);
         }
       }
     } finally {
@@ -8159,7 +8159,7 @@
         const match = getOpenMatchByPlayers(tournament, candidateIds[i], candidateIds[j]);
         if (match && (winnerId === candidateIds[i] || winnerId === candidateIds[j])) {
           if (targetMatch) {
-            logDebug("autodetect", "Multiple possible matches found, skipping auto close.");
+            logDebug("autodetect", "Znaleziono wiele możliwych meczów, pomijam automatyczne zamknięcie.");
             return;
           }
           targetMatch = match;
@@ -8699,7 +8699,7 @@
     }
     const parsed = parseHistoryStatsTable(hostInfo?.table);
     if (!parsed) {
-      logDebug("api", "History table import skipped: stats table not parsable.", {
+      logDebug("api", "Pominięto import tabeli historii: tabela statystyk jest nie do odczytania.", {
         lobbyId: targetLobbyId,
       });
       return null;
@@ -8716,14 +8716,14 @@
         ok: false,
         completed: false,
         reasonCode: "not_found",
-        message: "Kein offenes Turnier-Match aus Lobby-ID oder Statistik-Spielern gefunden.",
+        message: "Nie znaleziono otwartego meczu turniejowego na podstawie ID lobby lub graczy ze statystyk.",
       };
     } else if (matchCandidates.length > 1) {
       return {
         ok: false,
         completed: false,
         reasonCode: "ambiguous",
-        message: "Mehrdeutige Zuordnung: mehrere offene Turnier-Matches passen zu diesen Spielern.",
+        message: "Niejednoznaczne dopasowanie: kilka otwartych meczów turniejowych pasuje do tych graczy.",
       };
     } else {
       match = matchCandidates[0];
@@ -8749,7 +8749,7 @@
         ok: false,
         completed: false,
         reasonCode: "error",
-        message: "Sieger konnte aus der Statistik nicht eindeutig bestimmt werden.",
+        message: "Nie udało się jednoznacznie ustalić zwycięzcy na podstawie statystyk.",
       };
     }
 
@@ -8760,7 +8760,7 @@
         ok: false,
         completed: false,
         reasonCode: "error",
-        message: result.message || "Ergebnis konnte nicht aus der Statistik gespeichert werden.",
+        message: result.message || "Nie można było zapisać wyniku na podstawie statystyk.",
       };
     }
 
@@ -8779,7 +8779,7 @@
       schedulePersist();
     }
 
-    logDebug("api", "History table result imported.", {
+    logDebug("api", "Zaimportowano wynik z tabeli historii.", {
       lobbyId: targetLobbyId,
       matchId: match.id,
       winnerId,
@@ -8788,8 +8788,8 @@
       linkedByLobby: Boolean(linkedByLobby?.id),
     });
     const successMessage = normalizedLegs.adjusted
-      ? `Ergebnis übernommen. Legs wurden auf Turniermodus (First to ${normalizedLegs.legsToWin}) normalisiert.`
-      : "Ergebnis wurde aus der Match-Statistik übernommen.";
+      ? `Wynik został przejęty. Legi zostały dostosowane do trybu turniejowego (do ${normalizedLegs.legsToWin} wygranych legów).`
+      : "Wynik pobrano ze statystyk meczu.";
     return {
       ok: true,
       completed: true,

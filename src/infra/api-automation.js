@@ -735,9 +735,9 @@
     const auto = ensureMatchAutoMeta(match);
     if (auto.lobbyId) {
       return {
-        label: "Zum Match",
+        label: "Do meczu",
         disabled: false,
-        title: "\u00d6ffnet das bereits gestartete Match.",
+        title: "Otwiera już rozpoczęty mecz.",
       };
     }
 
@@ -745,7 +745,7 @@
       return {
         label: "Uruchom mecz",
         disabled: true,
-        title: "Feature-Flag in Einstellungen aktivieren.",
+        title: "Aktywuj tę funkcję w ustawieniach.",
       };
     }
 
@@ -762,7 +762,7 @@
       return {
         label: "Uruchom mecz",
         disabled: true,
-        title: "Kein Auth-Token vorhanden. Bitte einloggen.",
+        title: "Brak tokenu autoryzacji. Zaloguj się.",
       };
     }
 
@@ -772,7 +772,7 @@
         label: "Uruchom mecz",
         disabled: true,
         title: boardId
-          ? `Board-ID jest nieprawidłowe (${boardId}). Bitte Board in einer manuellen Lobby w\u00e4hlen.`
+          ? `Board-ID jest nieprawidłowe (${boardId}). Wybierz tablicę w lobby manualnym.`
           : "Brak aktywnej tablicy. Otwórz ręcznie lobby i wybierz board.",
       };
     }
@@ -1008,7 +1008,7 @@
     if (!token) {
       state.apiAutomation.authBackoffUntil = Date.now() + API_AUTH_NOTICE_THROTTLE_MS;
       if (shouldShowAuthNotice()) {
-        setNotice("error", "Auto-Sync pausiert: kein Auth-Token gefunden. Bitte neu einloggen.");
+        setNotice("error", "Auto-synchronizacja wstrzymana: nie znaleziono tokenu autoryzacji. Zaloguj się ponownie.");
       }
       return;
     }
@@ -1028,9 +1028,9 @@
         if (syncOutcome.authError) {
           state.apiAutomation.authBackoffUntil = Date.now() + API_AUTH_NOTICE_THROTTLE_MS;
           if (shouldShowAuthNotice()) {
-            setNotice("error", "Auto-Sync pausiert: Auth abgelaufen. Bitte neu einloggen.");
+            setNotice("error", "Auto-synchronizacja wstrzymana: autoryzacja wygasła. Zaloguj się ponownie.");
           }
-          logWarn("api", "Auto-sync auth error.");
+          logWarn("api", "Błąd autoryzacji auto-synchronizacji.");
           return;
         }
 
@@ -1039,7 +1039,7 @@
         }
 
         if (!syncOutcome.ok && syncOutcome.message && !syncOutcome.recoverable) {
-          logWarn("api", `Auto-sync failed for ${match.id}: ${syncOutcome.message}`);
+          logWarn("api", `Auto-synchronizacja nie powiodła się dla ${match.id}: ${syncOutcome.message}`);
         }
       }
     } finally {

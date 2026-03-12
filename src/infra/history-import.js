@@ -460,7 +460,7 @@
     }
     const parsed = parseHistoryStatsTable(hostInfo?.table);
     if (!parsed) {
-      logDebug("api", "History table import skipped: stats table not parsable.", {
+      logDebug("api", "Pominięto import tabeli historii: tabela statystyk jest nie do odczytania.", {
         lobbyId: targetLobbyId,
       });
       return null;
@@ -477,14 +477,14 @@
         ok: false,
         completed: false,
         reasonCode: "not_found",
-        message: "Kein offenes Turnier-Match aus Lobby-ID oder Statistik-Spielern gefunden.",
+        message: "Nie znaleziono otwartego meczu turniejowego na podstawie ID lobby lub graczy ze statystyk.",
       };
     } else if (matchCandidates.length > 1) {
       return {
         ok: false,
         completed: false,
         reasonCode: "ambiguous",
-        message: "Mehrdeutige Zuordnung: mehrere offene Turnier-Matches passen zu diesen Spielern.",
+        message: "Niejednoznaczne dopasowanie: kilka otwartych meczów turniejowych pasuje do tych graczy.",
       };
     } else {
       match = matchCandidates[0];
@@ -510,7 +510,7 @@
         ok: false,
         completed: false,
         reasonCode: "error",
-        message: "Sieger konnte aus der Statistik nicht eindeutig bestimmt werden.",
+        message: "Nie udało się jednoznacznie ustalić zwycięzcy na podstawie statystyk.",
       };
     }
 
@@ -521,7 +521,7 @@
         ok: false,
         completed: false,
         reasonCode: "error",
-        message: result.message || "Ergebnis konnte nicht aus der Statistik gespeichert werden.",
+        message: result.message || "Nie można było zapisać wyniku na podstawie statystyk.",
       };
     }
 
@@ -540,7 +540,7 @@
       schedulePersist();
     }
 
-    logDebug("api", "History table result imported.", {
+    logDebug("api", "Zaimportowano wynik z tabeli historii.", {
       lobbyId: targetLobbyId,
       matchId: match.id,
       winnerId,
@@ -549,8 +549,8 @@
       linkedByLobby: Boolean(linkedByLobby?.id),
     });
     const successMessage = normalizedLegs.adjusted
-      ? `Ergebnis übernommen. Legs wurden auf Turniermodus (First to ${normalizedLegs.legsToWin}) normalisiert.`
-      : "Ergebnis wurde aus der Match-Statistik übernommen.";
+      ? `Wynik został przejęty. Legi zostały dostosowane do trybu turniejowego (do ${normalizedLegs.legsToWin} wygranych legów).`
+      : "Wynik pobrano ze statystyk meczu.";
     return {
       ok: true,
       completed: true,
