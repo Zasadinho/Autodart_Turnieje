@@ -320,7 +320,7 @@
       ...syncOutcome,
       reasonCode: syncOutcome.reasonCode || (syncOutcome.completed ? "completed" : (syncOutcome.pending ? "pending" : "error")),
     };
-    logDebug("api", "Lobby sync finished.", {
+    logDebug("api", "Synchronizacja lobby zakończona.", {
       trigger,
       lobbyId: targetLobbyId,
       reasonCode: normalizedOutcome.reasonCode,
@@ -865,7 +865,7 @@
     const activeMatch = findActiveStartedMatch(tournament, match.id);
     if (activeMatch) {
       const activeAuto = ensureMatchAutoMeta(activeMatch);
-      setNotice("info", "Mecz jest już w toku. Weiterleitung dorthin.");
+      setNotice("info", "Mecz jest już w toku. Przekierowanie");
       if (activeAuto.lobbyId) {
         openMatchPage(activeAuto.lobbyId);
       }
@@ -874,24 +874,24 @@
 
     const token = getAuthTokenFromCookie();
     if (!token) {
-      setNotice("error", "Kein Autodarts-Token gefunden. Bitte einloggen und Seite neu laden.");
+      setNotice("error", "Nie znaleziono tokenu Autodarts. Zaloguj się i odśwież stronę");
       return;
     }
 
     const boardId = getBoardId();
     if (!boardId) {
-      setNotice("error", "Board-ID fehlt. Bitte einmal manuell eine Lobby \u00f6ffnen und Board ausw\u00e4hlen.");
+      setNotice("error", "Brakuje ID boarda. Otwórz ręcznie lobby i wybierz board");
       return;
     }
     if (!isValidBoardId(boardId)) {
-      setNotice("error", `Board-ID ist ung\u00fcltig (${boardId}). Bitte in einer manuellen Lobby ein echtes Board ausw\u00e4hlen.`);
+      setNotice("error", `ID boarda jest nieprawidłowe (${boardId}). Wybierz prawdziwy board w ręcznie otwartym lobby.`);
       return;
     }
 
     const participant1 = participantById(tournament, match.player1Id);
     const participant2 = participantById(tournament, match.player2Id);
     if (!participant1 || !participant2) {
-      setNotice("error", "Teilnehmerzuordnung im Match ist unvollst\u00e4ndig.");
+      setNotice("error", "Przypisanie uczestników w meczu jest niekompletne.");
       return;
     }
 
@@ -903,7 +903,7 @@
       let lobbyPayload = buildLobbyCreatePayload(tournament);
       let lobby = null;
       try {
-        logDebug("api", "Creating lobby with tournament payload.", {
+        logDebug("api", "Tworzę lobby na podstawie danych turnieju.", {
           matchId: match.id,
           legs: lobbyPayload.legs,
           settings: lobbyPayload.settings,
@@ -923,7 +923,7 @@
           lobbyPayload.settings = {};
         }
         lobbyPayload.settings.bullMode = "25/50";
-        logWarn("api", "Retrying lobby create with bullMode fallback 25/50.", {
+        logWarn("api", "Ponawianie tworzenia lobby z trybem bullMode 25/50.", {
           matchId: match.id,
           legs: lobbyPayload.legs,
           settings: lobbyPayload.settings,
@@ -932,7 +932,7 @@
       }
       createdLobbyId = normalizeText(lobby?.id || lobby?.uuid || "");
       if (!createdLobbyId) {
-        throw createApiError(0, "Lobby konnte nicht erstellt werden (keine Lobby-ID).", lobby);
+        throw createApiError(0, "Nie udało się utworzyć lobby (brak ID lobby).", lobby);
       }
 
       await addLobbyPlayer(createdLobbyId, participant1.name, boardId, token);
