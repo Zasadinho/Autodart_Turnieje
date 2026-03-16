@@ -20,6 +20,7 @@
 (function () {
   "use strict";
 
+  const TOKEN_INTERCEPT_KEY = "ata:auth:intercepted-token";
   const RUNTIME_GUARD_KEY = "__ATA_RUNTIME_BOOTSTRAPPED";
   const RUNTIME_GLOBAL_KEY = "__ATA_RUNTIME";
   const APP_VERSION = "__ATA_APP_VERSION__";

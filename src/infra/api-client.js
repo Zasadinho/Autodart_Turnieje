@@ -11,6 +11,13 @@
 
   function getAuthTokenFromCookie() {
     try {
+      // 1. Token intercepted from the Autodarts app's own API calls (always fresh)
+      const intercepted = sessionStorage.getItem(TOKEN_INTERCEPT_KEY);
+      if (intercepted) {
+        return intercepted;
+      }
+
+      // 2. Authorization= cookie on play.autodarts.io (fallback, may be stale)
       const value = `; ${document.cookie || ""}`;
       const parts = value.split("; Authorization=");
       if (parts.length !== 2) {

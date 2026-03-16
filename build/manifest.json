@@ -29,6 +29,7 @@
                   "src/app/browser-lifecycle.js",
                   "src/app/diagnostics.js",
                   "src/app/public-api.js",
+                  "src/infra/token-interceptor.js",
                   "src/infra/api-client.js",
                   "src/infra/api-automation.js",
                   "src/infra/dom-autodetect.js",

@@ -30,6 +30,7 @@
     logDebug("runtime", "Środowisko wykonawcze ATA zostało zainicjalizowane.");
   }
 
+  installTokenInterceptor();
   init().catch((error) => {
     logError("runtime", "Inicjalizacja nie powiodła się.", error);
   });

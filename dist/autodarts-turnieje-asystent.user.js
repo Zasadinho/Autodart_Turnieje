@@ -19,6 +19,7 @@
 (function () {
   "use strict";
 
+  const TOKEN_INTERCEPT_KEY = "ata:auth:intercepted-token";
   const RUNTIME_GUARD_KEY = "__ATA_RUNTIME_BOOTSTRAPPED";
   const RUNTIME_GLOBAL_KEY = "__ATA_RUNTIME";
   const APP_VERSION = "0.3.3";
@@ -6623,8 +6624,51 @@
   }
 
 
+  function installTokenInterceptor() {
+    try {
+      const _nativeFetch = window.fetch;
+      if (typeof _nativeFetch !== "function" || window.__ataFetchPatched) {
+        return;
+      }
+      window.__ataFetchPatched = true;
+
+      window.fetch = function ataPatchedFetch(input, init) {
+        try {
+          const url = input instanceof Request ? input.url : String(input || "");
+          if (url.includes(API_PROVIDER)) {
+            let auth = null;
+            if (init && init.headers) {
+              if (init.headers instanceof Headers) {
+                auth = init.headers.get("Authorization");
+              } else if (typeof init.headers === "object") {
+                auth = init.headers["Authorization"] || init.headers["authorization"] || null;
+              }
+            }
+            if (!auth && input instanceof Request) {
+              try { auth = input.headers.get("Authorization"); } catch (_) {}
+            }
+            if (auth && /^Bearer\s+\S+/i.test(auth)) {
+              const token = auth.replace(/^Bearer\s+/i, "");
+              try {
+                sessionStorage.setItem(TOKEN_INTERCEPT_KEY, token);
+              } catch (_) {}
+            }
+          }
+        } catch (_) {}
+        return _nativeFetch.apply(this, arguments);
+      };
+    } catch (_) {}
+  }
+
   function getAuthTokenFromCookie() {
     try {
+      // 1. Token intercepted from the Autodarts app's own API calls (always fresh)
+      const intercepted = sessionStorage.getItem(TOKEN_INTERCEPT_KEY);
+      if (intercepted) {
+        return intercepted;
+      }
+
+      // 2. Authorization= cookie on play.autodarts.io (fallback, may be stale)
       const value = `; ${document.cookie || ""}`;
       const parts = value.split("; Authorization=");
       if (parts.length !== 2) {
@@ -10796,6 +10840,7 @@ reader.onerror = () => {
     logDebug("runtime", "Środowisko wykonawcze ATA zostało zainicjalizowane.");
   }
 
+  installTokenInterceptor();
   init().catch((error) => {
     logError("runtime", "Inicjalizacja nie powiodła się.", error);
   });
